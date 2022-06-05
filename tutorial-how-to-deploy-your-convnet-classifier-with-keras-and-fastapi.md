@@ -198,7 +198,7 @@ Now, we'll define the main route - that is, when people navigate to your web API
 # Define the main route
 @app.get('/')
 def root_route():
-  return { 'error': 'Use GET /prediction instead of the root route!' }
+  return { 'error': 'Use POST /prediction instead of the root route!' }
 ```
 
 It simply tells people to use the correct route.
