@@ -93,7 +93,7 @@ Source: [Introduction to Transformers in Machine Learning](https://www.machinecu
 
 ## What are Autoregressive models?
 
-Sequence-to-Sequence models are traditionally used to convert entire sequences from a target format into a source format. It's a performed transformation at the sequence level, and it applies to each and individual token.
+Sequence-to-Sequence models are traditionally used to convert entire sequences from a source format into a target format. It's a performed transformation at the sequence level, and it applies to each and individual token.
 
 There are however more tasks within Natural Language Processing. One of these tasks is the generation of language, or in more formal terms Natural Language Generation (NLG). It is quite difficult to generate text with a model that is capable of converting sequences, as we simply don't know the full sequence yet. That's why a different approach is necessary.
 
