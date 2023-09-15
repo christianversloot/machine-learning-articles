@@ -1,10 +1,10 @@
 ---
 title: "How to use ELU with Keras?"
 date: "2019-12-09"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "activation-function"
   - "activation-functions"
   - "deep-learning"

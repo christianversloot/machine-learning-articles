@@ -1,11 +1,11 @@
 ---
 title: "Easy Speech Recognition with Machine Learning and HuggingFace Transformers"
 date: "2021-02-17"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "huggingface"
   - "speech-recognition"
   - "speech-to-text"

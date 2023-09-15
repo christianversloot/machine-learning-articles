@@ -1,9 +1,9 @@
 ---
 title: "3 Variants of Classification Problems in Machine Learning"
 date: "2020-10-19"
-categories: 
+categories:
   - "deep-learning"
-tags: 
+tags:
   - "classification"
   - "classifier"
   - "deep-learning"
@@ -57,7 +57,7 @@ This process - distinguishing between object types or _classes_ by automatically
 The first variant of classification problems is called **binary classification**. If you know the binary system of numbers, you'll know that it's related to the number _two_:
 
 > In mathematics and digital electronics, a binary number is a number expressed in the base-2 numeral system or binary numeral system, which uses only two symbols: typically "0" (zero) and "1" (one).
-> 
+>
 > Wikipedia (2003)
 
 Binary classification, here, equals the assembly line scenario that we already covered and will repeat now:

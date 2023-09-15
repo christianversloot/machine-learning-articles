@@ -1,10 +1,10 @@
 ---
 title: "How to use TensorBoard with PyTorch"
 date: "2021-11-10"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "machine-learning"
   - "model-visualization"
@@ -35,7 +35,7 @@ Are you ready? Let's take a look! 😎
 People who create stuff can usually know best how to describe what they created - and the same is true for the creators of TensorBoard:
 
 > _In machine learning, to improve something you often need to be able to measure it. TensorBoard is a tool for providing the measurements and visualizations needed during the machine learning workflow. It enables tracking experiment metrics like_ [loss](https://www.machinecurve.com/index.php/2019/10/04/about-loss-and-loss-functions/) _and accuracy, visualizing the model graph, projecting embeddings to a lower dimensional space, and much more._
-> 
+>
 > [TensorBoard – Get Started](https://www.tensorflow.org/tensorboard/get_started)
 
 In other words, it's a tool for visualizing the machine learning experiments you performed in a variety of ways.
@@ -59,7 +59,7 @@ Installing TensorBoard must be done separately to your PyTorch install. Doing so
 TensorBoard was originally developed for TensorFlow. As you saw above, it is also available for PyTorch! But how? Through the `SummaryWriter`:
 
 > The SummaryWriter class provides a high-level API to create an event file in a given directory and add summaries and events to it. The class updates the file contents asynchronously. This allows a training program to call methods to add data to the file directly from the training loop, without slowing down training.
-> 
+>
 > PyTorch (n.d.)
 
 Great!

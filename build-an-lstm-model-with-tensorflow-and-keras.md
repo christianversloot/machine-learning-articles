@@ -1,10 +1,10 @@
 ---
 title: "Build an LSTM Model with TensorFlow 2.0 and Keras"
 date: "2021-01-07"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "deep-neural-network"
   - "long-short-term-memory"
@@ -132,7 +132,7 @@ This makes them a lot faster than vanilla RNNs.
 Now that we understand how LSTMs work in theory, let's take a look at constructing them in TensorFlow and Keras. Of course, we must take a look at how they are represented first. In TensorFlow and Keras, this happens through the `tf.keras.layers.LSTM` class, and it is described as:
 
 > Long Short-Term Memory layer - Hochreiter 1997.
-> 
+>
 > TensorFlow (n.d.)
 
 Indeed, that's the LSTM we want, although it might not have all the gates yet - gates were changed in another paper that was a follow-up to the Hochreiter paper. Nevertheless, understanding the LSTM with all the gates is a good idea, because that's what most of them look like today.

@@ -1,10 +1,10 @@
 ---
 title: "How to use FTSwish with Keras?"
 date: "2020-01-06"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "activation-function"
   - "activation-functions"
   - "ftswish"

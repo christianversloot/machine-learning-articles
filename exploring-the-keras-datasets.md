@@ -1,10 +1,10 @@
 ---
 title: "Exploring the Keras Datasets"
 date: "2019-12-30"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "dataset"
   - "deep-learning"
   - "keras"
@@ -475,7 +475,7 @@ Knowing all this, it shouldn't be too hard for you to build a sentiment classifi
 Another dataset for text classification is the **Reuters newswire topics dataset** (Keras, n.d.). It's preprocessed in the same way as the IMDB dataset before and can be used for classifying texts into one of 46 topics:
 
 > Dataset of 11,228 newswires from Reuters, labeled over 46 topics. As with the IMDB dataset, each wire is encoded as a sequence of word indexes (same conventions).
-> 
+>
 > Keras (n.d.)
 
 The simplest way of loading this dataset goes as follows:

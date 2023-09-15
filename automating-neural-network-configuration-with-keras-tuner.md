@@ -1,10 +1,10 @@
 ---
 title: "Automating neural network configuration with Keras Tuner"
 date: "2020-06-09"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-neural-network"
   - "hyperparameter-tuning"
   - "hyperparameters"
@@ -74,7 +74,7 @@ model.add(Dense(no_classes, activation='softmax'))
 Here, the architectural choices you make (such as the number of filters for a `Conv2D` layer, kernel size, or the number of output nodes for your `Dense` layer) determine what are known as the _parameters_ of your neural network - the weights (and by consequence biases) of your neural network:[](https://datascience.stackexchange.com/posts/17643/timeline)
 
 > The parameters of a neural network are typically the weights of the connections. In this case, these parameters are learned during the training stage. So, the algorithm itself (and the input data) tunes these parameters.
-> 
+>
 > [Robin, at StackExchange](https://datascience.stackexchange.com/questions/17635/model-parameters-hyper-parameters-of-neural-network-their-tuning-in-training#:~:text=The%20parameters%20of%20a%20neural,or%20the%20number%20of%20epochs.)
 
 ### Tuning hyperparameters in your neural network
@@ -89,7 +89,7 @@ However, things don't end there. Rather, in step (2), you'll _configure_ the mod
 Here's why they are called _hyper_parameters:
 
 > The hyper parameters are typically the learning rate, the batch size or the number of epochs. The are so called "hyper" because they influence how your parameters will be learned. You optimize these hyper parameters as you want (depends on your possibilities): grid search, random search, by hand, using visualisations… The validation stage help you to both know if your parameters have been learned enough and know if your hyper parameters are good.
-> 
+>
 > [Robin, at StackExchange](https://datascience.stackexchange.com/questions/17635/model-parameters-hyper-parameters-of-neural-network-their-tuning-in-training#:~:text=The%20parameters%20of%20a%20neural,or%20the%20number%20of%20epochs.)
 
 As Robin suggests, hyperparameters can be selected (and optimized) in multiple ways. The easiest way of doing so is by hand: you, as a deep learning engineer, select a set of hyperparameters that you will subsequently alter in an attempt to make the model better.
@@ -103,7 +103,7 @@ However, can't we do this in a better way when training a Keras model?
 As you would have expected: yes, we can! :) Let's introduce Keras Tuner to the scene. As you would expect from engineers, the description as to what it does is really short but provides all the details:
 
 > A hyperparameter tuner for Keras, specifically for tf.keras with TensorFlow 2.0.
-> 
+>
 > [Keras-tuner on GitHub](https://github.com/keras-team/keras-tuner)
 
 If you already want to look around, you could visit their website, and if not, let's take a look at what it does.

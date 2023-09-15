@@ -1,10 +1,10 @@
 ---
 title: "How to use Dropout with Keras?"
 date: "2019-12-18"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "convolutional-neural-networks"
   - "deep-learning"
   - "deep-neural-network"

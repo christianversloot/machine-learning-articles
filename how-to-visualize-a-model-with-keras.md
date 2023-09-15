@@ -1,10 +1,10 @@
 ---
 title: "How to visualize a model with TensorFlow 2 and Keras?"
 date: "2019-10-07"
-categories: 
+categories:
   - "buffer"
   - "frameworks"
-tags: 
+tags:
   - "architecture"
   - "deep-learning"
   - "keras"
@@ -80,7 +80,7 @@ sample_shape = input_train[0].shape
 img_width, img_height = sample_shape[0], sample_shape[1]
 input_shape = (img_width, img_height, 1)
 
-# Reshape data 
+# Reshape data
 input_train = input_train.reshape(len(input_train), input_shape[0], input_shape[1], input_shape[2])
 input_test  = input_test.reshape(len(input_test), input_shape[0], input_shape[1], input_shape[2])
 
@@ -218,7 +218,7 @@ input_shape = (img_width, img_height, 1)
 # Number of classes
 no_classes = 10
 
-# Reshape data 
+# Reshape data
 input_train = input_train.reshape(len(input_train), input_shape[0], input_shape[1], input_shape[2])
 input_test  = input_test.reshape(len(input_test), input_shape[0], input_shape[1], input_shape[2])
 

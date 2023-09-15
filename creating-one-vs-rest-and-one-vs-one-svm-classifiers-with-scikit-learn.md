@@ -1,10 +1,10 @@
 ---
 title: "Creating One-vs-Rest and One-vs-One SVM Classifiers with Scikit-learn"
 date: "2020-11-11"
-categories: 
+categories:
   - "frameworks"
   - "svms"
-tags: 
+tags:
   - "classification"
   - "multiclass-classification"
   - "scikit-learn"
@@ -37,7 +37,7 @@ Classification can be visualized as an automated system that categorizes items t
 There are [3 variants of classification](https://www.machinecurve.com/index.php/2020/10/19/3-variants-of-classification-problems-in-machine-learning/). In the _binary_ case, there are only two buckets - and hence two categories. This can be implemented with most machine learning algorithms. The other two cases - _multiclass_ and _multilabel_ classification, are different. In the multiclass case, we can assignitems into one of multiple (> 2) buckets; in the multilabel case, we can assign multiple labels to one instance.
 
 > Multiclass classification can therefore be used in the setting where your classification dataset has more than two classes.
-> 
+>
 > [3 Variants of Classification Problems in Machine Learning](https://www.machinecurve.com/index.php/2020/10/19/3-variants-of-classification-problems-in-machine-learning/)
 
 Multiclass classification is reflected in the figure above. We clearly have no binary classifier: there are three buckets. We neither have a multilabel classifier: we assign items into buckets, rather than attaching multiple labels onto each item and then moving them into _one_ bucket.
@@ -55,7 +55,7 @@ But which one is best if you are training a Support Vector Machine?
 Spoiler alert: it's \[latex\]H\_3\[/latex\]. The reason why is because SVMs are **maximum-margin classifiers**, which means that they attempt to generate a decision boundary that is _equidistant_ from the two classes of data.
 
 > A point is said to be **equidistant** from a set of objects if the distances between that point and each object in the set are equal.
-> 
+>
 > Wikipedia (2005)
 
 To be more precise, it will not take into account the whole class - but rather the samples closest to the decision boundary, the so-called [support vectors](https://www.machinecurve.com/index.php/2020/05/05/how-to-visualize-support-vectors-of-your-svm-classifier/).

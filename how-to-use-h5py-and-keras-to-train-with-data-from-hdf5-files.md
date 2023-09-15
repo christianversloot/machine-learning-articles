@@ -1,10 +1,10 @@
 ---
 title: "How to use H5Py and Keras to train with data from HDF5 files?"
 date: "2020-04-13"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "dataset"
   - "deep-learning"
   - "h5py"
@@ -35,7 +35,7 @@ Are you ready? Let's go! 😊
 You see them every now and then: HDF5 files. Let's see what such a file is before we actually start working with them. If we go to Wikipedia, we see that...
 
 > Hierarchical Data Format (HDF) is a set of file formats (HDF4, HDF5) designed to store and organize large amounts of data.
-> 
+>
 > Wikipedia (2004)
 
 It's a file format that is specifically designed for large datasets. That might be what we need sometimes for our machine learning projects!
@@ -96,7 +96,7 @@ This is what H5py does:
 
 > **HDF5 for Python**  
 > The h5py package is a Pythonic interface to the HDF5 binary data format.
-> 
+>
 > H5py (n.d.)
 
 We can thus use it to access the data, which we'll do now.

@@ -1,10 +1,10 @@
 ---
 title: "Cropping layers with PyTorch"
 date: "2021-11-10"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "cropping"
   - "cropping-layer"
   - "deep-learning"

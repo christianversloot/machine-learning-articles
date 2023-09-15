@@ -1,10 +1,10 @@
 ---
 title: "Greedy layer-wise training of deep networks, a TensorFlow/Keras example"
 date: "2022-01-09"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "greedy-layer-wise-training"
   - "keras"
@@ -130,7 +130,7 @@ def get_dataset():
     # Load cifar10 dataset
     (input_train, target_train), (input_test, target_test) = cifar10.load_data()
 
-    # Reshape data 
+    # Reshape data
     input_train = input_train.reshape(input_train.shape[0], img_width, img_height, 3)
     input_test = input_test.reshape(input_test.shape[0], img_width, img_height, 3)
     input_shape = (img_width, img_height, 3) 
@@ -319,7 +319,7 @@ def get_dataset():
     # Load cifar10 dataset
     (input_train, target_train), (input_test, target_test) = cifar10.load_data()
 
-    # Reshape data 
+    # Reshape data
     input_train = input_train.reshape(input_train.shape[0], img_width, img_height, 3)
     input_test = input_test.reshape(input_test.shape[0], img_width, img_height, 3)
     input_shape = (img_width, img_height, 3) 

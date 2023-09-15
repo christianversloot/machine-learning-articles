@@ -1,10 +1,10 @@
 ---
 title: "How to save and load a model with Keras?"
 date: "2020-02-14"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "keras"
   - "load-model"
@@ -53,7 +53,7 @@ verbosity = 1
 # Load MNIST dataset
 (input_train, target_train), (input_test, target_test) = mnist.load_data()
 
-# Reshape data    
+# Reshape data
 input_train = input_train.reshape((input_train.shape[0], img_width, img_height, 1))
 input_test = input_test.reshape((input_test.shape[0], img_width, img_height, 1))
 input_shape = (img_width, img_height, 1)
@@ -208,7 +208,7 @@ Et voila, you've loaded your model :)
 Now, while `filepath` is pretty clear, what do `custom_objects` and `compile` mean?
 
 > If the model you want to load includes custom layers or other custom classes or functions, you can pass them to the loading mechanism via the `custom_objects` argument.
-> 
+>
 > Keras (n.d.; FAQ)
 
 Indeed - by default, custom objects are not saved with the model. You can however specify them with the `custom_objects` attribute upon loading it, like this (Keras, n.d.):

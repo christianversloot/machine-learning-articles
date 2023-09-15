@@ -1,10 +1,10 @@
 ---
 title: "Finding optimal learning rates with the Learning Rate Range Test"
 date: "2020-02-20"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "keras"
   - "learning-rate"

@@ -1,10 +1,10 @@
 ---
 title: "About loss and loss functions"
 date: "2019-10-04"
-categories: 
+categories:
   - "deep-learning"
   - "svms"
-tags: 
+tags:
   - "classifier"
   - "deep-learning"
   - "loss-function"
@@ -156,7 +156,7 @@ Remember the MSE?
 
 ![](images/image-14-1024x296.png)
 
-There's also something called the RMSE, or the **Root Mean Squared Error** or Root Mean Squared Deviation (RMSD). It goes like this:  
+There's also something called the RMSE, or the **Root Mean Squared Error** or Root Mean Squared Deviation (RMSD). It goes like this:
 
 ![](images/image.png)
 
@@ -254,18 +254,18 @@ Because the benefit of the \[latex\]\\delta\[/latex\] is also becoming your bott
 Loss functions are also applied in classifiers. I already discussed in another post what classification is all about, so I'm going to repeat it here:
 
 > Suppose that you work in the field of separating non-ripe tomatoes from the ripe ones. It’s an important job, one can argue, because we don’t want to sell customers tomatoes they can’t process into dinner. It’s the perfect job to illustrate what a human classifier would do.  
->   
-> Humans have a perfect eye to spot tomatoes that are not ripe or that have any other defect, such as being rotten. They derive certain characteristics for those tomatoes, e.g. based on color, smell and shape:  
->   
+>
+> Humans have a perfect eye to spot tomatoes that are not ripe or that have any other defect, such as being rotten. They derive certain characteristics for those tomatoes, e.g. based on color, smell and shape:
+>
 > \- If it’s green, it’s likely to be unripe (or: not sellable);  
 > \- If it smells, it is likely to be unsellable;  
 > \- The same goes for when it’s white or when fungus is visible on top of it.  
->   
+>
 > If none of those occur, it’s likely that the tomato can be sold. We now have _two classes_: sellable tomatoes and non-sellable tomatoes. Human classifiers _decide about which class an object (a tomato) belongs to._  
->   
+>
 > The same principle occurs again in machine learning and deep learning.  
 > Only then, we replace the human with a machine learning model. We’re then using machine learning for _classification_, or for deciding about some “model input” to “which class” it belongs.
-> 
+>
 > Source: [How to create a CNN classifier with Keras?](https://www.machinecurve.com/index.php/2019/09/17/how-to-create-a-cnn-classifier-with-keras/)
 
 We'll now cover loss functions that are used for classification.

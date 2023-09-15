@@ -1,11 +1,11 @@
 ---
 title: "Creating depthwise separable convolutions with TensorFlow 2 and Keras"
 date: "2019-09-24"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "convolutional-neural-networks"
   - "deep-learning"
   - "keras"
@@ -267,13 +267,13 @@ Let's go & train our model to see how it performs!
 
 I quote my usual advice about software dependencies from another blog -
 
->   
-> We always start with listing certain dependencies that you'll need to install before you can run the model on your machine. Those are for today:  
->   
+>
+> We always start with listing certain dependencies that you'll need to install before you can run the model on your machine. Those are for today:
+>
 > A version of **Python** that can run `tensorflow.keras` (e.g. 3.8+).  
 > **TensorFlow 2.0**, e.g. 2.4+.  
 > If you wish to generate plots, it's also wise to install **Numpy** (if it's not a peer dependency of the previous ones) and **Matplotlib**.  
->   
+>
 > Preferably, you'll install these in an Anaconda environment. [Read here how to do that.](https://towardsdatascience.com/installing-keras-tensorflow-using-anaconda-for-machine-learning-44ab28ff39cb)
 
 ### Running your model
@@ -400,7 +400,7 @@ What's more interesting is that _despite the many fewer multiplications_ the dep
 - **Update 08/Feb/2021:** it seems to be the case that the issue remains unresolved.
 
 > Also experiencing that SeparableConv2d is slower than Conv2d in Keras. The number of input\_channels does not seem to matter, I tested 32-2048 and in all cases the Conv2d is faster. Interestingly, in the SeparableConv2d-model the number parameters is lower as well as the FLOPS. Still this does not seem to have the wanted affect on the inference.
-> 
+>
 > Source: gitman88 (2019), [https://github.com/tensorflow/tensorflow/issues/12132#issuecomment-471880273](https://github.com/tensorflow/tensorflow/issues/12132#issuecomment-471880273)
 
 * * *

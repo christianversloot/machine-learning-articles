@@ -1,10 +1,10 @@
 ---
 title: "How to use PReLU with Keras?"
 date: "2019-12-05"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "activation-function"
   - "activation-functions"
   - "convolutional-neural-networks"

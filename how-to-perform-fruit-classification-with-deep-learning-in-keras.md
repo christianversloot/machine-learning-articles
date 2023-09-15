@@ -1,10 +1,10 @@
 ---
 title: "How to Perform Fruit Classification with Deep Learning in Keras"
 date: "2020-04-08"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "classifier"
   - "dataset"
   - "deep-learning"

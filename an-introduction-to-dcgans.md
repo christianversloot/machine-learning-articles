@@ -1,10 +1,10 @@
 ---
 title: "An introduction to DCGANs"
 date: "2021-03-24"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
-tags: 
+tags:
   - "convolutional-neural-networks"
   - "dcgan"
   - "deep-learning"

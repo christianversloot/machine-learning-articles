@@ -1,10 +1,10 @@
 ---
 title: "Greedy layer-wise training of deep networks, a PyTorch example"
 date: "2022-01-24"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "exploding-gradients"
   - "greedy-layer-wise-training"
@@ -165,7 +165,7 @@ The **model configuration** is a bit more complex - it specifies all the setting
 For example, through the `width`, `height` and `channels`, the shape of your image Tensor is represented. Indeed, a CIFAR-10 sample is a 32 x 32 pixels image with 3 channels. The number of classes in the output is 10, and we use a 250-sample batch size when training. We also specify (but not initialize!) the loss function and optimizer. We use `CrossEntropyLoss` for [computing how poorly the model performs.](https://www.machinecurve.com/index.php/2019/10/04/about-loss-and-loss-functions/#loss)
 
 > This criterion combines [`nn.LogSoftmax()`](https://pytorch.org/docs/stable/nn.html#logsoftmax) and [`nn.NLLLoss()`](https://pytorch.org/docs/stable/nn.html#nllloss) in one single class.
-> 
+>
 > PyTorch docs
 
 Using `CrossEntropyLoss` is also why we don't use Softmax activation in our layer structure! This [PyTorch loss function](https://www.machinecurve.com/index.php/2021/07/19/how-to-use-pytorch-loss-functions/) combines both softmax and NLL loss and hence pushes Softmax computation to the loss function, which is more stable numerically.

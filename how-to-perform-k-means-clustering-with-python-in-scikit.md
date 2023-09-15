@@ -1,10 +1,10 @@
 ---
 title: "K-means Clustering tutorial: example with Scikit-learn"
 date: "2020-04-16"
-categories: 
+categories:
   - "frameworks"
   - "svms"
-tags: 
+tags:
   - "clustering"
   - "k-means"
   - "k-means-clustering"
@@ -106,7 +106,7 @@ Now, while this is a very simple example, K-means clustering can be applied to p
 For this, we turn to our good old friend Wikipedia - and cherry pick the most important aspects of a relatively abstract definition:
 
 > k-means clustering is a method (...) that aims to partition n observations into k clusters in which each observation belongs to the cluster with the nearest mean (cluster centers or cluster centroid), serving as a prototype of the cluster.
-> 
+>
 > Wikipedia (2020)
 
 Let's break that one apart into pieces that we can understand atomically:
@@ -247,7 +247,7 @@ kmeans.fit(X)
 Here, we choose an initialization strategy (which is either `random` or `k-means++`, of which the latter will likely save us computation time so we choose it), the number of clusters, and `n_init`, which does this:
 
 > Number of time the k-means algorithm will be run with different centroid seeds. The final results will be the best output of n\_init consecutive runs in terms of inertia.
-> 
+>
 > [Sklearn.cluster.KMeans (n.d.)](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html)
 
 Once we did this, it's time to actually _fit the data_ and generate the cluster predictions:

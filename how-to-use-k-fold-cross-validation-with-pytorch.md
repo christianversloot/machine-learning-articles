@@ -1,11 +1,11 @@
 ---
 title: "How to use K-fold Cross Validation with PyTorch?"
 date: "2021-02-02"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "k-fold-cross-validation"
   - "machine-learning"

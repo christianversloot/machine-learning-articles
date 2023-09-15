@@ -1,10 +1,10 @@
 ---
 title: "Conv2DTranspose: using 2D transposed convolutions with Keras"
 date: "2019-12-10"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "autoencoder"
   - "conv2d"
   - "conv2dtranspose"

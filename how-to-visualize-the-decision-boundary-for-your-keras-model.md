@@ -1,10 +1,10 @@
 ---
 title: "Visualizing the decision boundary of your TensorFlow 2 / Keras model"
 date: "2019-10-11"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
-tags: 
+tags:
   - "classifier"
   - "decision-boundary"
   - "keras"

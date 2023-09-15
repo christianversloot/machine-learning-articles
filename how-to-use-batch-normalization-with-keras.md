@@ -1,10 +1,10 @@
 ---
 title: "How to use Batch Normalization with Keras?"
 date: "2020-01-15"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "batch-normalization"
   - "deep-learning"
   - "keras"
@@ -225,7 +225,7 @@ Subsequent processing of the data so that it is prepared for training is a bit m
 ```python
 # Shape of the input sets
 input_train_shape = input_train.shape
-input_test_shape = input_test.shape 
+input_test_shape = input_test.shape
 ```
 
 With this step, we obtain the shape of our `input_train` and `input_test` datasets, i.e. our _features_. We'll use the first to set the shape of our Keras input data next - which are image height (shape dim 1), image width (shape dim 2) and the number of channels (just one):
@@ -355,7 +355,7 @@ verbosity = 1
 
 # Shape of the input sets
 input_train_shape = input_train.shape
-input_test_shape = input_test.shape 
+input_test_shape = input_test.shape
 
 # Keras layer input shape
 input_shape = (input_train_shape[1], input_train_shape[2], 1)

@@ -1,10 +1,10 @@
 ---
 title: "How to create a variational autoencoder with Keras?"
 date: "2019-12-30"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "autoencoder"
   - "deep-learning"
   - "keras"

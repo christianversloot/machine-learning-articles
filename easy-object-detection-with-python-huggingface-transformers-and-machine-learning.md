@@ -1,10 +1,10 @@
 ---
 title: "Easy Object Detection with Python, HuggingFace Transformers and Machine Learning"
 date: "2022-01-04"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "detection-transformer"
   - "huggingface-transformers"
   - "object-detection"
@@ -97,7 +97,7 @@ Unsurprisingly, an `ObjectDetectionPipeline` instance is used, which is tailored
 As you learned, by default, the `facebook/detr-resnet-50` [model](https://huggingface.co/facebook/detr-resnet-50) is used for deriving image features:
 
 > DEtection TRansformer (DETR) model trained end-to-end on COCO 2017 object detection (118k annotated images). It was introduced in the paper [End-to-End Object Detection with Transformers](https://arxiv.org/abs/2005.12872) by Carion et al.
-> 
+>
 > HuggingFace (n.d.)
 
 The COCO dataset (Common Objects in Context) is one of the standard datasets used for object detection models and was used for training this model. Don't worry, you can obviously also train your own DeTr based model!

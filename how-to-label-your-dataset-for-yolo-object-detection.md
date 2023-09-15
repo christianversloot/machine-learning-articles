@@ -1,10 +1,10 @@
 ---
 title: "How to label your dataset for YOLO Object Detection"
 date: "2021-03-30"
-categories: 
+categories:
   - "buffer"
   - "frameworks"
-tags: 
+tags:
   - "object-detection"
   - "yolo"
   - "yololabel"

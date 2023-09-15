@@ -1,9 +1,9 @@
 ---
 title: "Can neural networks approximate mathematical functions?"
 date: "2019-07-18"
-categories: 
+categories:
   - "svms"
-tags: 
+tags:
   - "function"
   - "mathematics"
   - "neural-network"

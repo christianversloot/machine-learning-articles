@@ -1,10 +1,10 @@
 ---
 title: "Creating a simple binary SVM classifier with Python and Scikit-learn"
 date: "2020-05-03"
-categories: 
+categories:
   - "frameworks"
   - "svms"
-tags: 
+tags:
   - "classification"
   - "classifier"
   - "python"
@@ -193,7 +193,7 @@ Now, if you run the code once, then uncomment `np.save` (and possibly the genera
 Finally, we can generate that visualization from above:
 
 ```python
-# Generate scatter plot for training data 
+# Generate scatter plot for training data
 plt.scatter(X_train[:,0], X_train[:,1])
 plt.title('Linearly separable data')
 plt.xlabel('X1')
@@ -232,7 +232,7 @@ X_train, X_test, y_train, y_test = train_test_split(inputs, targets, test_size=f
 np.save('./data.npy', (X_train, X_test, y_train, y_test))
 X_train, X_test, y_train, y_test = np.load('./data.npy', allow_pickle=True)
 
-# Generate scatter plot for training data 
+# Generate scatter plot for training data
 plt.scatter(X_train[:,0], X_train[:,1])
 plt.title('Linearly separable data')
 plt.xlabel('X1')
@@ -348,7 +348,7 @@ X_train, X_test, y_train, y_test = train_test_split(inputs, targets, test_size=f
 np.save('./data.npy', (X_train, X_test, y_train, y_test))
 X_train, X_test, y_train, y_test = np.load('./data.npy', allow_pickle=True)
 
-# Generate scatter plot for training data 
+# Generate scatter plot for training data
 plt.scatter(X_train[:,0], X_train[:,1])
 plt.title('Linearly separable data')
 plt.xlabel('X1')
@@ -436,7 +436,7 @@ X_train, X_test, y_train, y_test = train_test_split(inputs, targets, test_size=f
 # np.save('./data.npy', (X_train, X_test, y_train, y_test))
 X_train, X_test, y_train, y_test = np.load('./data.npy', allow_pickle=True)
 
-# Generate scatter plot for training data 
+# Generate scatter plot for training data
 plt.scatter(X_train[:,0], X_train[:,1])
 plt.title('Linearly separable data')
 plt.xlabel('X1')
@@ -517,7 +517,7 @@ X_train, X_test, y_train, y_test = train_test_split(inputs, targets, test_size=f
 # np.save('./data.npy', (X_train, X_test, y_train, y_test))
 X_train, X_test, y_train, y_test = np.load('./data.npy', allow_pickle=True)
 
-# Generate scatter plot for training data 
+# Generate scatter plot for training data
 plt.scatter(X_train[:,0], X_train[:,1])
 plt.title('Linearly separable data')
 plt.xlabel('X1')
@@ -610,7 +610,7 @@ X_train, X_test, y_train, y_test = train_test_split(inputs, targets, test_size=f
 # np.save('./data.npy', (X_train, X_test, y_train, y_test))
 X_train, X_test, y_train, y_test = np.load('./data.npy', allow_pickle=True)
 
-# Generate scatter plot for training data 
+# Generate scatter plot for training data
 plt.scatter(X_train[:,0], X_train[:,1])
 plt.title('Linearly separable data')
 plt.xlabel('X1')

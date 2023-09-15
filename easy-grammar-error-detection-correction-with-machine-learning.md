@@ -1,10 +1,10 @@
 ---
 title: "Easy grammar error detection & correction with Machine Learning"
 date: "2021-07-14"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "gramformer"
   - "grammar-correction"
@@ -62,7 +62,7 @@ The original Transformer architecture, as proposed by Vaswani et al. (2017)
 [Gramformer](https://github.com/PrithivirajDamodaran/Gramformer/) is an _open source_ tool for the **detection** and **correction** of grammatical errors in English text:
 
 > Gramformer is a library that exposes 3 seperate interfaces to a family of algorithms to detect, highlight and correct grammar errors. To make sure the corrections and highlights recommended are of high quality, it comes with a quality estimator.
-> 
+>
 > GitHub (n.d.)
 
 * * *

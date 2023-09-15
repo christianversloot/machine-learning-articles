@@ -1,10 +1,10 @@
 ---
 title: "DialoGPT: Transformers for Dialogues"
 date: "2021-03-16"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
-tags: 
+tags:
   - "dialogpt"
   - "dialogue"
   - "machine-learning"

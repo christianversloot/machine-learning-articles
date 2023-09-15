@@ -1,10 +1,10 @@
 ---
 title: "How to find the value for Keras input_shape/input_dim?"
 date: "2020-04-05"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "dataset"
   - "deep-learning"
   - "input-shape"

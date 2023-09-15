@@ -1,10 +1,10 @@
 ---
 title: "How to build a ConvNet for CIFAR-10 and CIFAR-100 classification with Keras?"
 date: "2020-02-09"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "cifar10"
   - "cifar100"
   - "classifier"

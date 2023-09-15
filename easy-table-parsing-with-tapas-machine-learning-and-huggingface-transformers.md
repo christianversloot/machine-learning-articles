@@ -1,11 +1,11 @@
 ---
 title: "Easy Table Parsing with TAPAS, Machine Learning and HuggingFace Transformers"
 date: "2021-03-10"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "huggingface"
   - "language-model"

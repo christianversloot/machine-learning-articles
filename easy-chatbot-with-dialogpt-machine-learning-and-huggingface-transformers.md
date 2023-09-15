@@ -1,11 +1,11 @@
 ---
 title: "Easy Chatbot with DialoGPT, Machine Learning and HuggingFace Transformers"
 date: "2021-03-16"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "chatbot"
   - "deep-learning"
   - "dialogpt"

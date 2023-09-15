@@ -1,10 +1,10 @@
 ---
 title: "How to perform Mean Shift clustering with Python in Scikit?"
 date: "2020-04-23"
-categories: 
+categories:
   - "frameworks"
   - "svms"
-tags: 
+tags:
   - "clustering"
   - "mean-shift"
   - "scikit-learn"

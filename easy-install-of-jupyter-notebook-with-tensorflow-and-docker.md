@@ -1,9 +1,9 @@
 ---
 title: "Easy install of Jupyter Notebook with TensorFlow 2.0 and Docker"
 date: "2020-10-07"
-categories: 
+categories:
   - "frameworks"
-tags: 
+tags:
   - "docker"
   - "jupyter-notebook"
   - "machine-learning"

@@ -1,10 +1,10 @@
 ---
 title: "Binary Crossentropy Loss with PyTorch, Ignite and Lightning"
 date: "2021-01-20"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "binary-crossentropy"
   - "crossentropy"
   - "deep-learning"

@@ -1,10 +1,10 @@
 ---
 title: "Building an Image Denoiser with a Keras autoencoder neural network"
 date: "2019-12-20"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "autoencoder"
   - "conv2dtranspose"
   - "convolutional-neural-networks"

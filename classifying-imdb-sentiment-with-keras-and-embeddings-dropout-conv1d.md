@@ -1,10 +1,10 @@
 ---
 title: "Classifying IMDB sentiment with Keras and Embeddings, Dropout & Conv1D"
 date: "2020-03-03"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "dataset"
   - "deep-learning"
   - "imdb-dataset"
@@ -51,7 +51,7 @@ We'll begin with _sentiment_. What is it? What does it represent? Likely, you al
 Sentiment is a term that we see a lot in terms of Tweets, as much machine learning research has focused on building models with Twitter data given its enormous size. However, more generally, using the Oxford Learner's Dictionaries (n.d.), we arrive at this definition for _sentiment_:
 
 > \[countable, uncountable\] _(formal)_ a feeling or an opinion, especially one based on emotions
-> 
+>
 > Oxford Learner's Dictionaries (n.d.)
 
 We were close with our initial guess.
@@ -63,7 +63,7 @@ If you express sentiment about something, such as a movie, you express the feeli
 In the `keras.datasets` module, we find the IMDB dataset:
 
 > Dataset of 25,000 movies reviews from IMDB, labeled by sentiment (positive/negative). Reviews have been preprocessed, and each review is encoded as a [sequence](https://keras.io/preprocessing/sequence/) of word indexes (integers). For convenience, words are indexed by overall frequency in the dataset, so that for instance the integer "3" encodes the 3rd most frequent word in the data. This allows for quick filtering operations such as: "only consider the top 10,000 most common words, but eliminate the top 20 most common words".
-> 
+>
 > Keras (n.d.)
 
 When processing the reviews into [readable format](https://www.machinecurve.com/index.php/2019/12/31/exploring-the-keras-datasets/#imdb-movie-reviews-sentiment-classification), this is an example:
@@ -136,7 +136,7 @@ As you will see later in this blog post, a Keras sentiment classifier can be cre
 Now, while this will likely work, it's a naïve approach according to Chollet (2017):
 
 > \[Note\] that merely flattening the embedded sequences and training a single Dense layer on top leads to a model that treats each word in the input sequence separately, without considering inter-word relationships and sentence structure (for example, this model would likely treat both “this movie is a bomb” and “this movie is the bomb” as being negative reviews). It’s much better to add recurrent layers or 1D convolutional layers on top of the embedded sequences to learn features that take into account each sequence as a whole.
-> 
+>
 > Chollet (2017, p. 187)
 
 Hence, we could also use one-dimensional convolutional layers. But what are they?

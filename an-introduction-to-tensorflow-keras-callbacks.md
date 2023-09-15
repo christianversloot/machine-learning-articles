@@ -1,9 +1,9 @@
 ---
 title: "An introduction to TensorFlow.Keras callbacks"
 date: "2020-11-10"
-categories: 
+categories:
   - "frameworks"
-tags: 
+tags:
   - "callbacks"
   - "keras"
   - "tensorflow"
@@ -43,7 +43,7 @@ In Machine Learning terms, each iteration is also called an **epoch**. Hence, tr
 Now, it can be the case that you want to get insights from the training process while it is running. Or you want to provide automated steering in order to avoid wasting resources. In those cases, you might want to add a **callback** to your Keras model.
 
 > A callback is an object that can perform actions at various stages of training (e.g. at the start or end of an epoch, before or after a single batch, etc).
-> 
+>
 > Keras Team (n.d.)
 
 As we shall see later in this article, among others, there are [callbacks for monitoring](https://www.machinecurve.com/index.php/2019/11/13/how-to-use-tensorboard-with-keras/) and for stopping the training process [when it no longer makes the model better](https://www.machinecurve.com/index.php/2019/05/30/avoid-wasting-resources-with-earlystopping-and-modelcheckpoint-in-keras/). This is possible because with callbacks, we can 'capture' the training process while it is happening. They essentially 'hook' into the training process by allowing the training process to invoke certain callback definitions. In Keras, each callback implements at least one, but possibly multiple of the following definitions (Keras Team, n.d.).
@@ -116,7 +116,7 @@ model.fit(train_generator,
 If you want to periodically save your Keras model - or the model weights - to some file, the `ModelCheckpoint` callback is what you need.
 
 > Callback to save the Keras model or model weights at some frequency.
-> 
+>
 > TensorFlow (n.d.)
 
 It is available as follows:
@@ -162,7 +162,7 @@ Did you know that you can visualize the training process realtime [with TensorBo
 With the `TensorBoard` callback, you can link TensorBoard with your Keras model.
 
 > Enable visualizations for TensorBoard.
-> 
+>
 > TensorFlow (n.d.)
 
 The callback logs a range of items from the training process into your TensorBoard log location:
@@ -211,7 +211,7 @@ Optimizing your neural network involves applying [gradient descent](https://www.
 During this process, you want to find a model that performs well in terms of predictions (i.e., it is not underfit) but that is not too rigid with respect to the dataset it is trained on (i.e., it is neither overfit). That's why the `EarlyStopping` callback can be useful if you are dealing with a situation like this.
 
 > Stop training when a monitored metric has stopped improving.
-> 
+>
 > TensorBoard (n.d.)
 
 It is implemented as follows:
@@ -252,7 +252,7 @@ During the optimization process, a so called _weight update_ is computed. Howeve
 Preferably being relatively large during the early iterations and lower in the later stages, we must adapt the learning rate during the training process. This is called [learning rate decay](https://www.machinecurve.com/index.php/2019/11/11/problems-with-fixed-and-decaying-learning-rates/) and shows what a _learning rate scheduler_ can be useful for. The `LearningRateScheduler` callback implements this functionality.
 
 > At the beginning of every epoch, this callback gets the updated learning rate value from `schedule` function provided at `__init__`, with the current epoch and current learning rate, and applies the updated learning rate on the optimizer.
-> 
+>
 > TensorFlow (n.d.)
 
 Its implementation is really simple:
@@ -294,7 +294,7 @@ Keeping your learning rate equal when close to a plateau means that your model w
 With the `ReduceLROnPlateau` callback, the optimization process can be instructed to _reduce_ the learning rate (and hence the step) when a plateau is encountered.
 
 > Models often benefit from reducing the learning rate by a factor of 2-10 once learning stagnates. This callback monitors a quantity and if no improvement is seen for a 'patience' number of epochs, the learning rate is reduced.
-> 
+>
 > TensorFlow (n.d.)
 
 The callback is implemented as follows:
@@ -333,7 +333,7 @@ Above, we saw that training logs can be distributed to [TensorBoard](https://www
 In those cases, you might wish to send the training logs there instead. The `RemoteMonitor` callback can help you do this.
 
 > Callback used to stream events to a server.
-> 
+>
 > TensorFlow (n.d.)
 
 It is implemented as follows:
@@ -369,7 +369,7 @@ model.fit(train_generator,
 Say that you want a certain function to fire after every batch or every epoch - a simple function, nothing special. However, it's not provided in the collection of callbacks presented with the `tensorflow.keras.callbacks` API. In this case, you might want to use the `LambdaCallback`.
 
 > Callback for creating simple, custom callbacks on-the-fly. This callback is constructed with anonymous functions that will be called at the appropriate time. Te
-> 
+>
 > TensorFlow (n.d.)
 
 It can thus be used to provide anonymous (i.e. `lambda` functions without a name) functions to the training process. The callback looks as follows:
@@ -401,7 +401,7 @@ model.fit(train_generator,
 In some cases (e.g. when you did not apply min-max normalization to your input data), the loss value can be very strange - outputting values close to Infinity or values that are Not a Number (`NaN`). In those cases, you don't want to pursue further training. The `TerminateOnNaN` callback can help here.
 
 > Callback that terminates training when a NaN loss is encountered.
-> 
+>
 > TensorFlow (n.d.)
 
 It is implemented as follows:
@@ -428,7 +428,7 @@ model.fit(train_generator,
 CSV files can be very useful when you need to exchange data. If you want to flush your training logs into a CSV file, the `CSVLogger` callback can be useful to you.
 
 > Callback that streams epoch results to a CSV file.
-> 
+>
 > TensorFlow (n.d.)
 
 It is implemented as follows:
@@ -461,7 +461,7 @@ model.fit(train_generator,
 When you are training a Keras model with verbosity set to `True`, you will see a progress bar in your terminal. With the `ProgbarLogger` callback, you can change what is displayed there.
 
 > Callback that prints metrics to stdout.
-> 
+>
 > TensorFlow (n.d.)
 
 It is implemented as follows:
@@ -493,7 +493,7 @@ model.fit(train_generator,
 When you are training a neural network, especially in a [distributed setting](https://www.machinecurve.com/index.php/2020/10/16/tensorflow-cloud-easy-cloud-based-training-of-your-keras-model/), it would be problematic if your training process suddenly stops - e.g. due to machine failure. Every iteration passed so far will be gone. With the experimental `BackupAndRestore` callback, you can instruct Keras to create temporary checkpoint files after each epoch, to which you can restore later.
 
 > `BackupAndRestore` callback is intended to recover from interruptions that happened in the middle of a model.fit execution by backing up the training states in a temporary checkpoint file (based on TF CheckpointManager) at the end of each epoch.
-> 
+>
 > TensorFlow (n.d.)
 
 It is implemented as follows:

@@ -1,11 +1,11 @@
 ---
 title: "How to create an MLP classifier with TensorFlow 2 and Keras"
 date: "2019-07-27"
-categories: 
+categories:
   - "buffer"
   - "frameworks"
   - "svms"
-tags: 
+tags:
   - "classifier"
   - "keras"
   - "mlp"
@@ -113,7 +113,7 @@ The other stream of thought had a radically different point of view. In this str
 When Rosenblatt demonstrated his perceptron in the late 1950s, he made it quite clear what he thought it would be capable of in many years:
 
 > The Navy revealed the embryo of an electronic computer today that it expects will be able to walk, talk, see, write, reproduce itself and be conscious of its existence.
-> 
+>
 > A summary of Rosenblatt's remarks (The New York Times, 1958).
 
 Minsky and other people who thought symbolic AI was the way forward got furious about these claims. With strong rhetoric, they argued that Rosenblatt only introduced a hype and did not stress upon the limitations of the Perceptron enough (Olazaran, 1996).

@@ -1,11 +1,11 @@
 ---
 title: "How to create a neural network for regression with PyTorch"
 date: "2021-07-20"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "mlp"
   - "multilayer-perceptron"
@@ -69,43 +69,43 @@ The **[Boston House Prices Regression dataset](https://www.machinecurve.com/inde
 Some observations about this data (from [this article](https://www.machinecurve.com/index.php/2019/12/31/exploring-the-keras-datasets/#boston-housing-price-regression-dataset)):
 
 > The minimum house price is $5000, while the maximum house price is $50.000. This may sound weird, but it’s not: house prices have risen over the decades, and the study that produced this data is from 1978 (Harrison & Rubinfeld, 1978). Actually, around 1978 prices of ≈$50.000 were quite the median value, so this dataset seems to contain relatively cheaper houses (or the Boston area was cheaper back then – I don’t know; Martin, 2017).
-> 
+>
 > The mean house price was $22.533.
-> 
+>
 > Variance in house prices is $84.587.
-> 
+>
 > MachineCurve (2020)
 
 These are variables available in the dataset:
 
 > **CRIM** per capita crime rate by town
-> 
+>
 > **ZN** proportion of residential land zoned for lots over 25,000 sq.ft.
-> 
+>
 > **INDUS** proportion of non-retail business acres per town
-> 
+>
 > **CHAS** Charles River dummy variable (= 1 if tract bounds river; 0 otherwise)
-> 
+>
 > **NOX** nitric oxides concentration (parts per 10 million)
-> 
+>
 > **RM** average number of rooms per dwelling
-> 
+>
 > **AGE** proportion of owner-occupied units built prior to 1940
-> 
+>
 > **DIS** weighted distances to five Boston employment centres
-> 
+>
 > **RAD** index of accessibility to radial highways
-> 
+>
 > **TAX** full-value property-tax rate per $10,000
-> 
+>
 > **PTRATIO** pupil-teacher ratio by town
-> 
+>
 > **B** 1000(Bk – 0.63)^2 where Bk is the proportion of blacks by town
-> 
+>
 > **LSTAT** % lower status of the population
-> 
+>
 > **MEDV** Median value of owner-occupied homes in $1000’s
-> 
+>
 > MachineCurve (2020)
 
 Obviously, **MEDV** is the median value and hence the target variable.

@@ -1,11 +1,11 @@
 ---
 title: "How to use PyTorch loss functions"
 date: "2021-07-19"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "bceloss"
   - "bcewithlogitsloss"
   - "binary-crossentropy"
@@ -179,7 +179,7 @@ Simple binary cross-entropy loss (represented by `nn.BCELoss` in PyTorch) comput
 However, it is possible to generate more numerically stable variant of binary cross-entropy loss by _combining_ the Sigmoid and the BCE Loss into one loss function:
 
 > This version is more numerically stable than using a plain Sigmoid followed by a BCELoss as, by combining the operations into one layer, we take advantage of the log-sum-exp trick for numerical stability.
-> 
+>
 > PyTorch (n.d.)
 
 This trick is summarized [here](https://en.wikipedia.org/wiki/LogSumExp#log-sum-exp_trick_for_log-domain_calculations).
@@ -1008,7 +1008,7 @@ class MLP(nn.Module):
   def forward(self, x):
     '''
       Forward pass
-      Note that 
+      Note that
     '''
     fp = self.layers(x)
     return fp
@@ -1121,7 +1121,7 @@ class MLP(nn.Module):
   def forward(self, x):
     '''
       Forward pass
-      Note that 
+      Note that
     '''
     fp = self.layers(x)
     return fp
@@ -1250,7 +1250,7 @@ class MLP(nn.Module):
   def forward(self, x):
     '''
       Forward pass
-      Note that 
+      Note that
     '''
     fp = self.layers(x)
     return fp
@@ -1375,7 +1375,7 @@ class MLP(nn.Module):
   def forward(self, x):
     '''
       Forward pass
-      Note that 
+      Note that
     '''
     fp = self.layers(x)
     return fp
@@ -1500,7 +1500,7 @@ class MLP(nn.Module):
   def forward(self, x):
     '''
       Forward pass
-      Note that 
+      Note that
     '''
     fp = self.layers(x)
     return fp
@@ -1631,7 +1631,7 @@ class MLP(nn.Module):
   def forward(self, x):
     '''
       Forward pass
-      Note that 
+      Note that
     '''
     fp = self.layers(x)
     return fp

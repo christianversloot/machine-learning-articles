@@ -1,10 +1,10 @@
 ---
 title: "How to use Conv2D with Keras?"
 date: "2020-03-30"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "conv2d"
   - "convolutional-neural-networks"
   - "deep-learning"

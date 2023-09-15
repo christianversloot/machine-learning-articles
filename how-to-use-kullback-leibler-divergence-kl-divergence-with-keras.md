@@ -1,10 +1,10 @@
 ---
 title: "How to use Kullback-Leibler divergence (KL divergence) with Keras?"
 date: "2019-12-21"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "autoencoder"
   - "deep-learning"
   - "keras"

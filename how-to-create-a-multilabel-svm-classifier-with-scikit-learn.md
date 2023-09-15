@@ -1,10 +1,10 @@
 ---
 title: "How to create a Multilabel SVM classifier with Scikit-learn"
 date: "2020-11-12"
-categories: 
+categories:
   - "frameworks"
   - "svms"
-tags: 
+tags:
   - "classification"
   - "confusion-matrix"
   - "multilabel-classification"

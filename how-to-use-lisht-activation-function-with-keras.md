@@ -1,11 +1,11 @@
 ---
 title: "How to use LiSHT activation function with TensorFlow 2 based Keras?"
 date: "2019-11-17"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "activation-function"
   - "deep-learning"
   - "keras"

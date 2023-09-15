@@ -1,11 +1,11 @@
 ---
 title: "How to use TensorBoard with TensorFlow 2 and Keras?"
 date: "2019-11-13"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "keras"
   - "machine-learning"
@@ -84,7 +84,7 @@ model.fit(input_train, target_train,
 Let's turn to the TensorFlow docs for a more elaborate description, as they can describe it best:
 
 > In machine learning, to improve something you often need to be able to measure it. TensorBoard is a tool for providing the measurements and visualizations needed during the machine learning workflow. It enables tracking experiment metrics like loss and accuracy, visualizing the model graph, projecting embeddings to a lower dimensional space, and much more.
-> 
+>
 > [TensorBoard - Get Started](https://www.tensorflow.org/tensorboard/get_started)
 
 In short, TensorBoard helps you better understand your machine learning model that you generated with TensorFlow. It allows you to measure various aspects - such as the [weights](https://www.machinecurve.com/index.php/2019/08/22/what-is-weight-initialization/), biases, gradients of your model - as well as how they progressed during training (i.e., across epochs). Additionally, you can [visualize model performance](https://www.machinecurve.com/index.php/2019/12/03/visualize-keras-models-overview-of-visualization-methods-tools/) over time, visualize classes in a multidimensional space, and so on.

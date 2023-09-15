@@ -1,11 +1,11 @@
 ---
 title: "Creating Interactive Visualizations of TensorFlow Keras datasets"
 date: "2021-03-25"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "datasets"
   - "keras"
   - "keras-datasets"

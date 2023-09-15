@@ -1,11 +1,11 @@
 ---
 title: "Easy Named Entity Recognition with Machine Learning and HuggingFace Transformers"
 date: "2021-02-11"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "huggingface"
   - "machine-learning"
@@ -60,7 +60,7 @@ print(ner_result)
 If we are to build a model for **Named Entity Recognition** (NER), we will need to understand what it does, don't we?
 
 > \[Named Entity Recognition is used\] to locate and classify named entities mentioned in unstructured text into pre-defined categories such as person names, organizations, locations, medical codes, time expressions, quantities, monetary values, percentages, etc.
-> 
+>
 > Wikipedia (2005)
 
 As with any technical definition, it is quite a difficult one for beginners, so let's take a look at it in a bit more detail :-)
@@ -68,7 +68,7 @@ As with any technical definition, it is quite a difficult one for beginners, so 
 Now, what is a "named entity", for example?
 
 > A named entity is a real-world object, such as persons, locations, organizations, products, etc., that can be denoted with a proper name. It can be abstract or have a physical existence.
-> 
+>
 > Wikipedia (2007)
 
 I see - so NER models can be used to detect real-world objects in text. For example, for the following text:
@@ -118,7 +118,7 @@ We are using the `BERTlarge` type of BERT which is pretrained with 24 encoder se
 Finetuning happens with the CoNLL-2003 dataset:
 
 > The shared task of CoNLL-2003 concerns language-independent named entity recognition. We will concentrate on four types of named entities: persons, locations, organizations and names of miscellaneous entities that do not belong to the previous three groups.
-> 
+>
 > UAntwerpen (n.d.)
 
 * * *

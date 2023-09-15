@@ -1,10 +1,10 @@
 ---
 title: "Feature Scaling with Python and Sparse Data"
 date: "2020-11-23"
-categories: 
+categories:
   - "frameworks"
   - "svms"
-tags: 
+tags:
   - "feature-scaling"
   - "normalization"
   - "scikit-learn"
@@ -46,7 +46,7 @@ In other words, we can create a classifier that helps us determine what class a 
 3. Sometimes, especially when we are using traditional Machine Learning algorithms, we don't want too many variables in our feature space - because of the _[curse of dimensionality](https://www.machinecurve.com/index.php/2020/11/19/how-to-normalize-or-standardize-a-dataset-in-python/)._ In those cases, we want to select the variables that contribute most first. Algorithms we can use for this purpose, such as Principal Component Analysis, rely on the _variance_ of the variables for picking the most important ones.
 
 > _Variance is the expectation of the squared deviation of a random variable from its mean. Informally, it measures how far a set of numbers is spread out from their average value._
-> 
+>
 > Wikipedia (2001)
 
 Given the three points mentioned above and the dataset displayed above, we can intuitively say the following:
@@ -85,7 +85,7 @@ This is what such a table can look like:
 This is an example of **sparse data**:
 
 > A variable with sparse data is one in which a relatively high percentage of the variable's cells do not contain actual data. Such "empty," or NA, values take up storage space in the file.
-> 
+>
 > Oracle (n.d.)
 
 Having sparse data is common when you are creating Machine Learning models related to time series. As we shall see, Feature Scaling can be quite problematic in that case.
@@ -134,7 +134,7 @@ If your Machine Learning setting depends on sparse data, e.g. when it needs to f
 Fortunately, there is a way in which Feature Scaling can be applied to Sparse Data. We can do so using Scikit-learn's `MaxAbsScaler`.
 
 > Scale each feature by its maximum absolute value. This estimator scales and translates each feature individually such that the maximal absolute value of each feature in the training set will be 1.0. It does not shift/center the data, and thus does not destroy any sparsity.
-> 
+>
 > Scikit-learn (n.d.)
 
 As we can see, it uses the maximum absolute value to perform the scaling - and it therefore works in a similar way compared to regular min-max normalization, except then that we use absolute values here. The MaxAbsScaler does not center the data, but rather scales the range. This is why it works perfectly with sparse data. In fact, it is the recommenmded

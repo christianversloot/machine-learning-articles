@@ -1,11 +1,11 @@
 ---
 title: "Creating a Multilayer Perceptron with PyTorch and Lightning"
 date: "2021-01-26"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "lightning"
   - "machine-learning"

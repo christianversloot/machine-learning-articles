@@ -1,11 +1,11 @@
 ---
 title: "How to predict new samples with your TensorFlow / Keras model?"
 date: "2020-02-21"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "keras"
   - "machine-learning"
   - "model"

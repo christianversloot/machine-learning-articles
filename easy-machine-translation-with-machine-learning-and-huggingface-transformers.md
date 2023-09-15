@@ -1,11 +1,11 @@
 ---
 title: "Easy Machine Translation with Machine Learning and HuggingFace Transformers"
 date: "2021-02-15"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "huggingface"
   - "machine-translation"
   - "seq2seq"

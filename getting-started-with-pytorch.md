@@ -1,9 +1,9 @@
 ---
 title: "Getting started with PyTorch"
 date: "2021-01-13"
-categories: 
+categories:
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "getting-started"
   - "introduction"
@@ -106,7 +106,7 @@ Native PyTorch models can be a bit disorganized, to say it nicely. They are esse
 With **[PyTorch Lightning](https://www.pytorchlightning.ai/)**, this is no longer the case. It is a layer on top of native [PyTorch](https://pytorch.org/) and is hence compatible with all your original code - which can in fact be re-organized into Lightning code, to improve reusability. This is what makes Lightning different:
 
 > Lightning makes coding complex networks simple.
-> 
+>
 > PyTorch Lightning (2021)
 
 ### Benefits of PyTorch Lightning over classic PyTorch
@@ -185,7 +185,7 @@ In classic PyTorch, in the training loop, you have to write a lot of custom code
 With PyTorch Lightning, this is no longer necessary either. The second benefit is that it **comes with a** **`Trainer` object** **that automates all the steps mentioned above, without forbidding control.**
 
 > Once you’ve organized your PyTorch code into a LightningModule, the Trainer automates everything else.
-> 
+>
 > PyTorch Lightning (n.d.)
 
 Yes: the `Trainer` automates training mode and gradient flow, automates the training loop, performs optimization, and allows you to tell PyTorch easily on what devices it must run and with what strategy.
@@ -257,7 +257,7 @@ That's why we'll use Lightning in our PyTorch oriented tutorials as the library 
 Okay, so now we know why PyTorch Lightning improves PyTorch and that it can be used for constructing PyTorch models. Let's now take a look at the _what_, i.e. the `LightningModule` with which we'll work during the construction of our PyTorch models.
 
 > A `LightningModule` is a [`torch.nn.Module`](https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module) but with added functionality
-> 
+>
 > PyTorch Lightning (n.d.)
 
 Here, the `torch.nn.Module` is the base class for all PyTorch based neural networks. In other words, a `LightningModule` is a layer on top of the basic way in which neural networks are constructed with PyTorch. It allows us to achieve the benefits that were outlined above, and in particular the benefit related to the organization of your machine learning model.

@@ -1,10 +1,10 @@
 ---
 title: "Visualizing training performance with TensorFlow 2 and Keras"
 date: "2019-10-08"
-categories: 
+categories:
   - "buffer"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "keras"
   - "neural-network"
@@ -132,7 +132,7 @@ The history object is the output of the `fit` operation. Hence, it can be access
 In the Keras docs, we find:
 
 > The `History.history` attribute is a dictionary recording training loss values and metrics values at successive epochs, as well as validation loss values and validation metrics values (if applicable).
-> 
+>
 > [Keras docs on model visualization](https://keras.io/visualization/#model-visualization)
 
 Also add `print(history)` so that we can inspect the history before we visualize it, to get a feel for its structure.

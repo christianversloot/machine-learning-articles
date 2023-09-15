@@ -1,9 +1,9 @@
 ---
 title: "CNNs and feature extraction? The curse of data sparsity."
 date: "2019-07-19"
-categories: 
+categories:
   - "deep-learning"
-tags: 
+tags:
   - "computer-vision"
   - "convolutional-neural-networks"
   - "deep-learning"

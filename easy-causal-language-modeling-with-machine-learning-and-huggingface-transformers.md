@@ -1,11 +1,11 @@
 ---
 title: "Easy Causal Language Modeling with Machine Learning and HuggingFace Transformers"
 date: "2021-03-03"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "causal-language-model"
   - "causal-language-modeling"
   - "deep-learning"

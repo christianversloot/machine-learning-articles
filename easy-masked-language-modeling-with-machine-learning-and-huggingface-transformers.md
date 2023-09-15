@@ -1,11 +1,11 @@
 ---
 title: "Easy Masked Language Modeling with Machine Learning and HuggingFace Transformers"
 date: "2021-03-02"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "bert"
   - "distilbert"
   - "distilroberta"
@@ -143,7 +143,7 @@ That's where **RoBERTa** steps in, which stands for **Ro**bust **BERT** pretrain
 But RoBERTa is still big. That's why we use a distilled variant called **Distil**RoBERTa. According to HuggingFace (n.d.), it's faster because it is smaller - with 82 million parameters instead of 125 million. That's still too many for many real-time uses, but hey, I think that we will see edge oriented Transformer like approaches only in the years to come. We haven't even seen the start yet!
 
 > This model is a distilled version of the RoBERTa-base model. It follows the same training procedure as DistilBERT. The code for the distillation process can be found here. This model is case-sensitive: it makes a difference between english and English. The model has 6 layers, 768 dimension and 12 heads, totalizing 82M parameters (compared to 125M parameters for RoBERTa-base). On average DistilRoBERTa is twice as fast as Roberta-base.
-> 
+>
 > HuggingFace (n.d.)
 
 * * *

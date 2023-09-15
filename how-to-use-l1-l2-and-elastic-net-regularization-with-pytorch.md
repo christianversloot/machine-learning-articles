@@ -1,11 +1,11 @@
 ---
 title: "How to use L1, L2 and Elastic Net regularization with PyTorch?"
 date: "2021-07-21"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "elastic-net-regularization"
   - "l1-regularization"
@@ -288,7 +288,7 @@ if __name__ == '__main__':
 L2 based weight decay can also be implemented by setting a delta value for `weight_decay` in the optimizer.
 
 > **weight\_decay** ([_float_](https://docs.python.org/3/library/functions.html#float)_, optional_) – weight decay (L2 penalty) (default: 0)
-> 
+>
 > PyTorch (n.d.)
 
 For example:

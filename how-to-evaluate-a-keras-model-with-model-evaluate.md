@@ -1,11 +1,11 @@
 ---
 title: "How to evaluate a TensorFlow 2.0 Keras model with model.evaluate"
 date: "2020-11-03"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "generalization"
   - "keras"
   - "model-evaluation"

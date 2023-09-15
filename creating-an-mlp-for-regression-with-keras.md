@@ -1,11 +1,11 @@
 ---
 title: "MLP for regression with TensorFlow 2 and Keras"
 date: "2019-07-30"
-categories: 
+categories:
   - "buffer"
   - "frameworks"
   - "svms"
-tags: 
+tags:
   - "keras"
   - "mlp"
   - "multilayer-perceptron"
@@ -112,9 +112,9 @@ Let's next first get used to our dataset :)
 In this blog, we use the Chennai Water Management Dataset. It is a CC0 Public Domain dataset that is available at [Kaggle](https://www.kaggle.com/sudalairajkumar/chennai-water-management/version/3). It is about the city of Chennai in India and especially its water management. Particularly:
 
 > Chennai also known as Madras is the capital of the Indian state of Tamil Nadu. Located on the Coromandel Coast off the Bay of Bengal, it is the biggest cultural, economic and educational centre of south India.
-> 
+>
 > Being my second home, the city is facing an acute water shortage now (June 2019). Chennai is entirely dependent on ground water resources to meet its water needs. There are four reservoirs in the city, namely, Red Hills, Cholavaram, Poondi and Chembarambakkam, with a combined capacity of 11,057 mcft. These are the major sources of fresh water for the city.
-> 
+>
 > Source: [Sudalai Rajkumar](https://www.kaggle.com/sudalairajkumar/chennai-water-management/version/3), the author of the dataset
 
 It was uploaded with the goal of inspiring people to come up with solutions that will help Chennai face its water shortage.
@@ -398,7 +398,7 @@ It crossed my mind that we're indeed using timeseries data, albeit not in a time
 However, precisely that may still be problematic. We split the data into training and validation data - and this is how Keras splits the data:
 
 > The validation data is selected from the last samples in the x and y data provided, before shuffling.
-> 
+>
 > Source: [Keras (n.d.)](https://keras.io/models/sequential/)
 
 Ah, okay. That's like taking the last 20 percent off this graph for validation while training with the rest:

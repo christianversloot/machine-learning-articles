@@ -1,10 +1,10 @@
 ---
 title: "How to use L1, L2 and Elastic Net Regularization with TensorFlow 2.0 and Keras?"
 date: "2020-01-23"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "elastic-net-regularization"
   - "keras"
   - "l1-regularization"

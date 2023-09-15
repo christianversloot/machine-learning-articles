@@ -1,10 +1,10 @@
 ---
 title: "He/Xavier initialization & activation functions: choose wisely"
 date: "2019-09-16"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
-tags: 
+tags:
   - "activation-functions"
   - "deep-learning"
   - "initializers"

@@ -1,10 +1,10 @@
 ---
 title: "How to visualize the encoded state of an autoencoder with Keras?"
 date: "2019-12-26"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "autoencoder"
   - "deep-learning"
   - "encoded-state"

@@ -1,10 +1,10 @@
 ---
 title: "How to generate a summary of your Keras model?"
 date: "2020-04-01"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "keras"
   - "model-summary"

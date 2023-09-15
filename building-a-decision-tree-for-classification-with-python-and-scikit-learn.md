@@ -1,9 +1,9 @@
 ---
 title: "Building a Decision Tree for classification with Python and Scikit-learn"
 date: "2022-01-23"
-categories: 
+categories:
   - "geen-categorie"
-tags: 
+tags:
   - "decision-tree"
   - "decision-trees"
   - "machine-learning"
@@ -74,7 +74,7 @@ The first - and default - split evaluation metric available in Scikit's decision
 The metric is defined in the following way:
 
 > Gini impurity (named after Italian mathematician Corrado Gini) is a measure of how often a randomly chosen element from the set would be incorrectly labeled if it was randomly labeled according to the distribution of labels in the subset.
-> 
+>
 > Wikipedia (2004)
 
 Suppose that we...
@@ -181,7 +181,7 @@ That's very simple - although in the real world data is _key_ to success, these 
 For that reason, today, you will be using one of the datasets that comes with Scikit-learn out of the box: the **wine dataset**.
 
 > The wine dataset is a classic and very easy multi-class classification dataset.
-> 
+>
 > Scikit-learn
 
 It is a dataset with 178 samples and 13 attributes that assigns each sample to a wine variety (indeed, we're using a dataset similar to what you have read about before!). The dataset has 3 wine varieties. These are the attributes that are part of the wine dataset:

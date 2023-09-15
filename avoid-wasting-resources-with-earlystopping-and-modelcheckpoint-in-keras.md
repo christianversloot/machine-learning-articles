@@ -1,11 +1,11 @@
 ---
 title: "Using EarlyStopping and ModelCheckpoint with TensorFlow 2 and Keras"
 date: "2019-05-30"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "ai"
   - "callbacks"
   - "deep-learning"

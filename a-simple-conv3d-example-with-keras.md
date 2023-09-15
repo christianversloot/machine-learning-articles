@@ -1,11 +1,11 @@
 ---
 title: "A simple Conv3D example with TensorFlow 2 and Keras"
 date: "2019-10-18"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "conv3d"
   - "convolutional-neural-networks"
   - "deep-learning"
@@ -208,7 +208,7 @@ We can next import and prepare the data:
 ```python
 # -- Process code --
 # Load the HDF5 data file
-with h5py.File("./full_dataset_vectors.h5", "r") as hf:    
+with h5py.File("./full_dataset_vectors.h5", "r") as hf:
 
     # Split the data into training/test features/targets
     X_train = hf["X_train"][:]
@@ -352,7 +352,7 @@ def rgb_data_transform(data):
 
 # -- Process code --
 # Load the HDF5 data file
-with h5py.File("./full_dataset_vectors.h5", "r") as hf:    
+with h5py.File("./full_dataset_vectors.h5", "r") as hf:
 
     # Split the data into training/test features/targets
     X_train = hf["X_train"][:]

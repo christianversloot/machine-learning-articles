@@ -1,10 +1,10 @@
 ---
 title: "Best Machine Learning & Artificial Intelligence Books Available in 2021"
 date: "2020-06-08"
-categories: 
+categories:
   - "books-about-ai"
   - "deep-learning"
-tags: 
+tags:
   - "artificial-intelligence"
   - "books"
   - "learning-machine-learning"
@@ -42,9 +42,9 @@ In this table of contents, you can see **all categories** of Machine Learning bo
 
 _If you want to learn building Deep Learning models from scratch using Python._
 
-**Author:** Andrew Trask, Senior Research Scientist at DeepMind  
+**Author:** Andrew Trask, Senior Research Scientist at DeepMind
 **Publishing date:** January 25, 2019  
-**Price/quality:** 🟡🟢 Acceptable to good  
+**Price/quality:** 🟡🟢 Acceptable to good
 **What it covers:**
 
 - Grokking Deep Learning teaches deep learning from a conceptual and a programming perspective. It teaches building deep learning models from scratch.
@@ -72,7 +72,7 @@ _If you have some interest in technology and want to understand how Machine Lear
 
 **Author:** John Paul Mueller (freelance author and technical editor, 100+ books) & Luca Massaron (data scientist)  
 **Publishing date:** May 10, 2016  
-**Price/quality:** 🟢 Good  
+**Price/quality:** 🟢 Good
 **What it covers:**
 
 - Why machine learning is playing such a prominent role in today's list of technologies promising change.
@@ -97,7 +97,7 @@ _If you have a background in business, are non-technical but want to understand 
 
 **Author:** John Paul Mueller (freelance author and technical editor, 100+ books) & Luca Massaron (data scientist)  
 **Publishing date:** March 16, 2018  
-**Price/quality:** 🟢 Really good  
+**Price/quality:** 🟢 Really good
 **What it covers:**
 
 - Some history about Artificial Intelligence
@@ -130,9 +130,9 @@ I really like the book. I do. It helps bridge the gap between business and techn
 
 _If you want to understand what happens inside a neural network in great detail - as a learning by doing experience._
 
-**Author:** Tariq Rashid  
+**Author:** Tariq Rashid
 **Publishing date:** March 31, 2016  
-**Price/quality:** 🟢 Really good  
+**Price/quality:** 🟢 Really good
 **What it covers:**
 
 - The mathematics of neural networks, but in a comprehensive way - secondary school mathematics will suffice.
@@ -157,9 +157,9 @@ In my point of view, the author really does his best to make neural networks com
 
 _If you want a quick-lookup reference manual for when you're undecided about what to do when Machine Learning engineering._
 
-**Author:** Matt Harrison  
+**Author:** Matt Harrison
 **Publishing date:** August 27, 2019  
-**Price/quality:** 🟢 Really good  
+**Price/quality:** 🟢 Really good
 **What it covers:**
 
 - Data preprocessing: cleaning your dataset and what to do when data goes missing.
@@ -189,9 +189,9 @@ When solving a problem with machine learning, time is often your greatest ally _
 
 _If you want a holistic perspective on AI: where it comes from, what it is now and where it is heading._
 
-**Author:** Melanie Mitchell  
+**Author:** Melanie Mitchell
 **Publishing date:** October 15, 2019  
-**Price/quality:** 🟢 Really good  
+**Price/quality:** 🟢 Really good
 **What it covers:**
 
 - Understanding the intelligence of AI programs and how they work
@@ -218,9 +218,9 @@ In my opinion, the book [Artificial Intelligence: A Guide for Thinking Humans](h
 
 _If_ _you want to get a conceptual and hands-on introduction to Reinforcement Learning._
 
-**Author:** Hadelin de Ponteves  
+**Author:** Hadelin de Ponteves
 **Publishing date:** November 29, 2019  
-**Price/quality:** 🟢 Really good  
+**Price/quality:** 🟢 Really good
 **What it covers:**
 
 - Learning about the basics of Reinforcement Learning
@@ -247,9 +247,9 @@ The book is good. You'll definitely feel as if you achieved something after comp
 
 _If you have no experience with Machine Learning yet and want to understand the basic concepts._
 
-**Author:** Oliver Theobald  
+**Author:** Oliver Theobald
 **Publishing date:** 2017  
-**Price/quality:** 🟢 Really good  
+**Price/quality:** 🟢 Really good
 **What it covers:**
 
 - Teaching you the basic concepts of machine learning, which means that it is suitable to absolute beginners
@@ -274,9 +274,9 @@ I think the book [Machine Learning for Absolute Beginners](https://www.amazon.co
 
 _If_ _you want to start gaining hands-on experience with neural networks, without losing track of the concepts._
 
-**Author:** James Loy  
+**Author:** James Loy
 **Publishing date:** February 28, 2019  
-**Price/quality:** 🟢 Really good  
+**Price/quality:** 🟢 Really good
 **What it covers:**
 
 - Architectures of neural networks: Convolutional Neural Networks (CNNs/ConvNets) and Recurrent Neural Networks (LSTMs)
@@ -299,9 +299,9 @@ As mentioned, I do think that this book is a good introduction to neural network
 
 _If_ _you're a beginner to ML and want to start building models rather than being botered with maths._
 
-**Author:** Mark Fenner  
+**Author:** Mark Fenner
 **Publishing date:** July 30, 2019  
-**Price/quality:** 🟢 Good  
+**Price/quality:** 🟢 Good
 **What it covers:**
 
 - Understanding machine learning algorithms and concepts
@@ -331,9 +331,9 @@ That's it! In fewer than 600 pages, Mark Fenner covers the width and depth of th
 
 _If you want to understand Machine Learning at a high level._
 
-**Author:** Steven Samelson  
+**Author:** Steven Samelson
 **Publishing date:** 2019  
-**Price/quality:** 🟠🟡 Moderate to acceptable  
+**Price/quality:** 🟠🟡 Moderate to acceptable
 **What it covers:**
 
 - A high-level coverage of the field of machine learning.
@@ -352,9 +352,9 @@ For this reason, some people feel a bit disappointed upon reading the book, as t
 
 _If you want to grasp the ML model lifecycle: from training a model to deploying it while measuring its success_ - _focused on product development rather than theory._
 
-**Author:** Emmanuel Ameisen  
+**Author:** Emmanuel Ameisen
 **Publishing date:** January 2020  
-**Price/quality:** 🟢 Really good  
+**Price/quality:** 🟢 Really good
 **What it covers:**
 
 - Developing machine learning driven products rather than models only
@@ -390,9 +390,9 @@ In sum: definitely a unique book that I would love to have on my book shelf :)
 
 _If you want to get a more in-depth introduction with a great balance between theory and practice._
 
-**Author:** John Krohn, Grant Beyleveld and Aglaé Bassens  
+**Author:** John Krohn, Grant Beyleveld and Aglaé Bassens
 **Publishing date:** August 5, 2019  
-**Price/quality:** 🟢 Really good  
+**Price/quality:** 🟢 Really good
 **What it covers:**
 
 - Finding out why deep learning is different and how it can benefit practice
@@ -428,9 +428,9 @@ In my point of view, this book is a great introduction to the field of Deep Lear
 
 _If you want to start with machine learning as a software engineer_
 
-**Author:** Paolo Perrotta  
+**Author:** Paolo Perrotta
 **Publishing date:** March 31, 2020  
-**Price/quality:** 🟢 Good  
+**Price/quality:** 🟢 Good
 **What it covers:**
 
 - Creating machine learning models from a developer perspective
@@ -460,9 +460,9 @@ The book [Programming Machine Learning](https://amzn.to/3mZh9cV) (_affiliate lin
 
 _If you want to grasp the basics of machine learning, and start with Python based ML development._
 
-**Author:** William Gray  
+**Author:** William Gray
 **Publishing date:** July 26, 2019  
-**Price/quality:** 🟡 Acceptable  
+**Price/quality:** 🟡 Acceptable
 **What it covers:**
 
 - The fundamental concepts and applications of machine learning
@@ -497,9 +497,9 @@ This is also reflected in the reviews on [Amazon](https://amzn.to/3jeiEBJ) (_aff
 
 _If you want to start with structured machine learning._
 
-**Author:** Matt Harrison  
+**Author:** Matt Harrison
 **Publishing date:** August 27, 2019  
-**Price/quality:** 🟢 Really good  
+**Price/quality:** 🟢 Really good
 **What it covers:**
 
 - Exploring your dataset, performing analyses for finding how to proceed;
@@ -541,9 +541,9 @@ In sum, I think that this is a very useful book that is packed with useful code.
 
 _If you have a background in Python and want to get started with Deep Learning._
 
-**Author:** François Chollet  
+**Author:** François Chollet
 **Publishing date:** 2017  
-**Price/quality:** 🟡🟢 Acceptable to good  
+**Price/quality:** 🟡🟢 Acceptable to good
 **What it covers:**
 
 - An introduction to deep learning. What is it? How does it differ from previous approaches?
@@ -572,9 +572,9 @@ If you're a fan of Chollet and his style, go for the [book](https://www.amazon.c
 
 _If you have a background in R and want to start with Deep Learning._
 
-**Author:** François Chollet and J.J. Allaire  
+**Author:** François Chollet and J.J. Allaire
 **Publishing date:** February 9, 2018  
-**Price/quality:** 🟡🟢 Acceptable to good  
+**Price/quality:** 🟡🟢 Acceptable to good
 **What it covers:**
 
 - An introduction to deep learning. What is it? How does it differ from previous approaches?
@@ -601,9 +601,9 @@ As with the Python book, I think it's a great book for those who wish to underst
 
 _If you want to get a broad introduction to Machine Learning and Deep Learning, followed by Python examples with the Scikit-learn and TensorFlow 2.0 frameworks._
 
-**Author:** Sebastian Raschka  
+**Author:** Sebastian Raschka
 **Publishing date:** December 9, 2019  
-**Price/quality:** 🟢 Really good  
+**Price/quality:** 🟢 Really good
 **What it covers:**
 
 - Learn to use the Scikit-learn and TensorFlow frameworks for machine learning and deep learning.
@@ -630,9 +630,9 @@ If you have some experience writing Python code and want to start with machine l
 
 _If you want to understand pragmatically what needs to be done to make Edge AI possible with TensorFlow._
 
-**Author:** Pete Warden and Daniel Situnayake  
+**Author:** Pete Warden and Daniel Situnayake
 **Publishing date:** December 16, 2019  
-**Price/quality:** 🟢 Really good  
+**Price/quality:** 🟢 Really good
 **What it covers:**
 
 - Various applications: speech recognition, image recognition, gesture responder
@@ -662,9 +662,9 @@ This is a pretty recent book about a topic within Machine Learning that in my op
 
 _If you want to learn more about the TensorFlow 2.0 and Keras APIs, and get some real coding experience._
 
-**Author:** Antonio Gulli, Amita Kapoor and Sujit Pal  
+**Author:** Antonio Gulli, Amita Kapoor and Sujit Pal
 **Publishing date:** December 20, 2019  
-**Price/quality:** 🟢 Good  
+**Price/quality:** 🟢 Good
 **What it covers:**
 
 - Learn creating deep neural networks with TensorFlow 2.0 and Keras
@@ -693,9 +693,9 @@ Coming back to the original statement about this book: if you already have some 
 
 _If you want to learn using TensorFlow, Keras and TensorFlow lite focused on Edge-based Computer Vision._
 
-**Author:** Anirudh Koul, Siddha Ganju, and Meher Kasam  
+**Author:** Anirudh Koul, Siddha Ganju, and Meher Kasam
 **Publishing date:** October 14, 2019  
-**Price/quality:** 🟢 Really good  
+**Price/quality:** 🟢 Really good
 **What it covers:**
 
 - Using Keras, TensorFlow, Core ML, and TensorFlow Lite
@@ -735,9 +735,9 @@ Having studied this [book](https://amzn.to/372fYUr) (_affiliate link_) for a whi
 
 _If_ _you want to get to know the PyTorch API in a learning by doing fashion._
 
-**Author:** Ian Pointer  
+**Author:** Ian Pointer
 **Publishing date:** September 20, 2019  
-**Price/quality:** 🟢 Really good  
+**Price/quality:** 🟢 Really good
 **What it covers:**
 
 - Deploying deep learning models into production
@@ -762,9 +762,9 @@ Overall, this is a good book and is like François Chollet's Deep Learning with 
 
 _If_ _you're looking for a book that teaches you PyTorch for computer vision._
 
-**Author:** Michael Avendi  
+**Author:** Michael Avendi
 **Publishing date:** March 20, 2020  
-**Price/quality:** 🟢 Really good  
+**Price/quality:** 🟢 Really good
 **What it covers:**
 
 - Developing, training and finetuning deep learning models with PyTorch.
@@ -792,9 +792,9 @@ The [PyTorch Computer Vision Cookbook](https://www.amazon.com/gp/product/B0862CX
 
 _If_ _you're looking for a book that teaches PyTorch for reinforcement learning._
 
-**Author:** Michael Avendi  
+**Author:** Michael Avendi
 **Publishing date:** October 31, 2019  
-**Price/quality:** 🟢 Good  
+**Price/quality:** 🟢 Good
 **What it covers:**
 
 - Learning about Reinforcement Learning algorithms
@@ -825,9 +825,9 @@ It's not a book for beginners - in the sense that if you have no prior experienc
 
 _If you're looking for a book that introduces you to Deep Learning concepts and allows you to write code in the process._
 
-**Author:** Laura Mitchell, Sri. Yogesh K. and Vishnu Subramanian  
+**Author:** Laura Mitchell, Sri. Yogesh K. and Vishnu Subramanian
 **Publishing date:** November 29, 2019  
-**Price/quality:** 🟢 Really good  
+**Price/quality:** 🟢 Really good
 **What it covers:**
 
 - Learning to work with the PyTorch framework
@@ -854,9 +854,9 @@ A book like François Chollet's Deep Learning with Python for Keras, I think thi
 
 <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&amp;OneJS=1&amp;Operation=GetAdHtml&amp;MarketPlace=US&amp;source=ac&amp;ref=qf_sp_asin_til&amp;ad_type=product_link&amp;tracking_id=webn3rd02-20&amp;marketplace=amazon&amp;region=US&amp;placement=1092562222&amp;asins=1092562222&amp;linkId=1c2860149946841a285f2f523051d83a&amp;show_border=true&amp;link_opens_in_new_window=true&amp;price_color=333333&amp;title_color=0066c0&amp;bg_color=ffffff"></iframe>
 
-**Author:** Samuel Burns  
+**Author:** Samuel Burns
 **Publishing date:** April 3, 2019  
-**Price/quality:** 🟠 Moderate  
+**Price/quality:** 🟠 Moderate
 **What it covers:**
 
 - Understanding Deep Learning in detail
@@ -882,9 +882,9 @@ Once the Keras basics have been introduced, the book moves forward to PyTorch ba
 
 _If you want to get a broad introduction to Machine Learning and Deep Learning, followed by Python examples with the Scikit-learn and TensorFlow 2.0 frameworks._
 
-**Author:** Sebastian Raschka  
+**Author:** Sebastian Raschka
 **Publishing date:** December 9, 2019  
-**Price/quality:** 🟢 Really good  
+**Price/quality:** 🟢 Really good
 **What it covers:**
 
 - Learn to use the Scikit-learn and TensorFlow frameworks for machine learning and deep learning.
@@ -901,9 +901,9 @@ We already covered [Python Machine Learning](https://www.amazon.com/gp/product/B
 
 _If_ _you want to discover the breadth of machine learning algorithms including getting practical experience._
 
-**Author:** Andreas C. Müller and Sarah Guido  
+**Author:** Andreas C. Müller and Sarah Guido
 **Publishing date:** October 2016  
-**Price/quality:** 🟢 Really good  
+**Price/quality:** 🟢 Really good
 **What it covers:**
 
 - Diving into machine learning concepts before you start coding
@@ -927,9 +927,9 @@ Altogether, this book allows you to get a very broad and yet in-depth understand
 
 _If you're looking for a book about unsupervised machine learning with Python._
 
-**Author:** Ankur A. Patel  
+**Author:** Ankur A. Patel
 **Publishing date:** February 21, 2019  
-**Price/quality:** 🟡 Acceptable  
+**Price/quality:** 🟡 Acceptable
 **What it covers:**
 
 - Comparing unsupervised learning to the other two approaches, supervised and reinforcement learning
@@ -955,9 +955,9 @@ The reviews of [Hands-On Unsupervised Learning](https://www.amazon.com/gp/produc
 
 _If_ _you want to get broad practical machine learning experience while understanding the concepts._
 
-**Author:** Aurélien Géron  
+**Author:** Aurélien Géron
 **Publishing date:** March 13, 2017  
-**Price/quality:** 🟢 Really good  
+**Price/quality:** 🟢 Really good
 **What it covers:**
 
 - Exploring what's out there in the machine learning field: support vector machines, decision trees, random forests, ensemble methods, and neural networks.
@@ -990,9 +990,9 @@ I agree with the reviews. [Hands-On Machine Learning with Scikit-Learn, Keras, a
 
 _If you want a practitioner's guide to the machine learning process - as well as applying the ML stack within R._
 
-**Author:** Brad Boehmke and Brandon M. Greenwell  
+**Author:** Brad Boehmke and Brandon M. Greenwell
 **Publishing date:** 2019  
-**Price/quality:** 🟢 Really good  
+**Price/quality:** 🟢 Really good
 **What it covers:**
 
 - It takes a developer perspective to machine learning using R, by using a variety of R packages such as glmnet, h2o, ranger, xgboost, and keras;

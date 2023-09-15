@@ -1,10 +1,10 @@
 ---
 title: "How to Normalize or Standardize a Dataset in Python?"
 date: "2020-11-19"
-categories: 
+categories:
   - "frameworks"
   - "svms"
-tags: 
+tags:
   - "data-preprocessing"
   - "dataset"
   - "deep-learning"
@@ -53,13 +53,13 @@ Suppose that we given a dataset of a **runner's diary** and that our goal is to 
 2. **We don't want to use features that contribute insignificantly.** Some features (columns) contribute to the output less significantly than others. It could be that when removed, the model will still be able to perform, but at a significantly lower computational cost. We therefore want to be able to select the features that contribute most significantly.
 
 > In machine learning problems that involve learning a "state-of-nature" from a finite number of data samples in a high-dimensional feature space with each feature having a range of possible values, typically an enormous amount of training data is required to ensure that there are several samples with each combination of values.
-> 
+>
 > Wikipedia (n.d.) about the curse of dimensionality
 
 We would e.g. apply algorithms such as [_Principal Component Analysis_ (PCA)](https://www.machinecurve.com/index.php/2020/12/07/introducing-pca-with-python-and-scikit-learn-for-machine-learning/) to help us determine which features are most important. If we look at how these algorithms work, we see that e.g. PCA extracts new features based on the _principal directions_ in the dataset, i.e. the directions in your data where variance is largest (Scikit-learn, n.d.).
 
 > Variance is the expectation of the squared deviation of a random variable from its mean. Informally, it measures how far a set of numbers is spread out from their average value.
-> 
+>
 > Wikipedia (2001)
 
 Let's keep this in mind when looking at the following dataset:
@@ -77,7 +77,7 @@ However, this does not necessarily mean that it _is_ in fact more important - be
 And, to be speaking most generally, that method is called **feature scaling** - and it is applied during the data preprocessing step.
 
 > Feature scaling is a method used to normalize the range of independent variables or features of data. In data processing, it is also known as data normalization and is generally performed during the data preprocessing step.
-> 
+>
 > Wikipedia (2011)
 
 There are two primary ways for feature scaling which we will cover in the remainder of this article:

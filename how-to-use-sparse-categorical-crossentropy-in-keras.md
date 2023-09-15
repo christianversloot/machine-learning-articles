@@ -1,10 +1,10 @@
 ---
 title: "How to use sparse categorical crossentropy with TensorFlow 2 and Keras?"
 date: "2019-10-06"
-categories: 
+categories:
   - "buffer"
   - "frameworks"
-tags: 
+tags:
   - "categorical-crossentropy"
   - "loss-function"
   - "sparse-categorical-crossentropy"

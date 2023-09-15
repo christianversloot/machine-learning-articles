@@ -1,10 +1,10 @@
 ---
 title: "Getting out of Loss Plateaus by adjusting Learning Rates"
 date: "2020-02-26"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "deep-neural-network"
   - "learning-rate"
@@ -135,14 +135,14 @@ This test, which effectively starts a training process starting at a very small,
 Now, we - and by _we_ I mean Jonathan Mackenzie with his `keras_find_lr_on_plateau` [repository on GitHub](https://github.com/JonnoFTW/keras_find_lr_on_plateau) ([mirror](https://github.com/christianversloot/keras_find_lr_on_plateau)) - could invent an algorithm which both ensures that the model trains and uses the Learning Rate Range Test to find new learning rates when loss plateaus:
 
 > Train a model for a large number of epochs. If the model's loss fails to improve for `n` epochs:
-> 
-> 1\. Take a snapshot of the model  
-> 2\. Set training rate to min\_lr and train for a batch  
+>
+> 1\. Take a snapshot of the model
+> 2\. Set training rate to min\_lr and train for a batch
 > 3\. Increase the learning rate exponentially toward max\_lr after every batch.  
 > 4\. Once candidate learning rates have been exhausted, select new\_lr as the learning rate that gave the steepest negative gradient in loss.  
-> 5\. Reload weights from the snapshot  
+> 5\. Reload weights from the snapshot
 > 6\. Set model's learning rate to new\_lr and continue training as normal
-> 
+>
 > Mackenzie (n.d.)
 
 Interesting! :)

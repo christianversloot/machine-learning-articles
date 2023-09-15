@@ -1,11 +1,11 @@
 ---
 title: "How to check if your Deep Learning model is underfitting or overfitting?"
 date: "2020-12-01"
-categories: 
+categories:
   - "deep-learning"
   - "geen-categorie"
   - "svms"
-tags: 
+tags:
   - "deep-learning"
   - "fit"
   - "keras"
@@ -88,7 +88,7 @@ Time to take a look at the two in more detail.
 Sometimes, your Deep Learning model is not able to capture the relationship between your independent variables and your dependent variable(s). In other words, we have then **underfit** our model.
 
 > Underfitting occurs when a statistical model cannot adequately capture the underlying structure of the data. An under-fitted model is a model where some parameters or terms that would appear in a correctly specified model are missing.
-> 
+>
 > Wikipedia (2003)
 
 In the case of our Deep Learning model, the relationship between \[latex\]\\text{X} \\rightarrow \\text{y}\[/latex\] cannot be captured properly if the model is underfit, and a plot of the fit would look like this:
@@ -107,7 +107,7 @@ In other words, underfitting occurs when the model shows [high bias and low vari
 Above, we looked at one side of the balance between a good fit and a poor one. Let's now take a look at the other one, i.e., what happens when your model is **overfit**.
 
 > The essence of overfitting is to have unknowingly extracted some of the residual variation (i.e. the noise) as if that variation represented underlying model structure.
-> 
+>
 > Wikipedia (2003)
 
 In each dataset, noise is present, besides the patterns that actually describe the relationship. If we train our model in such a way that it captures these patterns in great detail, we are training a model that is _overfit_. In other words, it will work very well for the data that it is trained on, but does it also work with data that comes from the real world? After all, the noise may not be present there?

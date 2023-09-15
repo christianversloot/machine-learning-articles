@@ -1,11 +1,11 @@
 ---
 title: "How to save and load a PyTorch model?"
 date: "2021-02-03"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "load-model"
   - "machine-learning"

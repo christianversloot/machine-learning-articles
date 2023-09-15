@@ -1,11 +1,11 @@
 ---
 title: "How to use categorical / multiclass hinge with TensorFlow 2 and Keras?"
 date: "2019-10-17"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "categorical-hinge-loss"
   - "deep-learning"
   - "hinge-loss"

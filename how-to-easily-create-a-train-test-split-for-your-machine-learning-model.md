@@ -1,10 +1,10 @@
 ---
 title: "How to create a train/test split for your Machine Learning model?"
 date: "2020-11-16"
-categories: 
+categories:
   - "frameworks"
   - "svms"
-tags: 
+tags:
   - "machine-learning"
   - "testing-data"
   - "train-test-split"
@@ -175,7 +175,7 @@ from tensorflow.keras.datasets import cifar10
 This loads the CIFAR10 dataset, which can be used with Computer Vision models and contains a variety of images, which look as follows.
 
 > The CIFAR-10 dataset consists of 60000 32x32 colour images in 10 classes, with 6000 images per class.
-> 
+>
 > University of Toronto (n.d.)
 
 ![](images/cifar10_visualized.png)

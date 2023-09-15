@@ -1,10 +1,10 @@
 ---
 title: "Creating DCGAN with PyTorch"
 date: "2021-07-15"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "dcgan"
   - "deep-learning"
   - "gan"

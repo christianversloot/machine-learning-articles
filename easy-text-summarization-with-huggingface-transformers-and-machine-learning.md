@@ -1,11 +1,11 @@
 ---
 title: "How to perform Text Summarization with Python, HuggingFace Transformers and Machine Learning"
 date: "2020-12-21"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "bart"
   - "bert"
   - "gpt"
@@ -167,7 +167,7 @@ The dataset is available with [TensorFlow](https://www.tensorflow.org/datasets/c
 Now that we understand many aspects of the summarizer that we will create, we can take a look at how we can easily implement the CNN/DailyMail pretrained summarizer with [HuggingFace Transformers](https://www.machinecurve.com/index.php/getting-started-with-huggingface-transformers/):
 
 > 🤗 Transformers (formerly known as pytorch-transformers and pytorch-pretrained-bert) provides general-purpose architectures (BERT, GPT-2, RoBERTa, XLM, DistilBert, XLNet…) for Natural Language Understanding (NLU) and Natural Language Generation (NLG) with over 32+ pretrained models in 100+ languages and deep interoperability between TensorFlow 2.0 and PyTorch.
-> 
+>
 > HuggingFace (n.d.)
 
 Implementing such a summarizer involves multiple steps:

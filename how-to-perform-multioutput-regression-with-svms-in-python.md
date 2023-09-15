@@ -1,10 +1,10 @@
 ---
 title: "How to perform Multioutput Regression with SVMs in Python"
 date: "2020-11-17"
-categories: 
+categories:
   - "frameworks"
   - "svms"
-tags: 
+tags:
   - "machine-learning"
   - "multioutput-regression"
   - "regression"
@@ -70,7 +70,7 @@ There are in fact two types of Support Vector Regression: epsilon-based SVR (\[l
 - When using **epsilon-SVR**, you have control over the _error_ _that is acceptable_ but not necessarily over the number of support vectors used (often yielding better but large models).
 
 > Depending of what I want, I choose between the two. If I am really desperate for a small solution (fewer support vectors) I choose \[latex\]\\nu\[/latex\]-SVR and **hope** to obtain a decent model. But if I really want to control the amount of error in my model and go for the best performance, I choose \[latex\]\\epsilon\[/latex\]-SVR and **hope** that the model is not too complex (lots of support vectors).
-> 
+>
 > StackExchange, n.d.
 
 * * *

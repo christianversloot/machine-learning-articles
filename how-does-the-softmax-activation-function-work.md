@@ -1,10 +1,10 @@
 ---
 title: "How does the Softmax activation function work?"
 date: "2020-01-08"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "activation-function"
   - "deep-learning"
   - "machine-learning"
@@ -84,13 +84,13 @@ To deepen our understanding of the problem above, we'll have to take a look at t
 According to Wikipedia (2001), this is a discrete probability distribution:
 
 > A **discrete probability distribution** is a probability distribution that can take on a countable number of values.
-> 
+>
 > Wikipedia (2001): Discrete probability distribution
 
 A continuous one, on the other hand:
 
 > A **continuous probability distribution** is a probability distribution with a cumulative distribution function that is [absolutely continuous](https://en.wikipedia.org/wiki/Absolute_continuity).
-> 
+>
 > Wikipedia (2001): Continuous probability distribution
 
 So, while a discrete distribution can take a certain amount of values - four, perhaps ;-) - and is therefore rather 'blocky' with one probability per value, a continuous distribution can take _any_ value, and probabilities are expressed as being in a range.

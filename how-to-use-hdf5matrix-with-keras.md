@@ -1,10 +1,10 @@
 ---
 title: "How to use HDF5Matrix with Keras?"
 date: "2020-04-26"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "h5py"
   - "hdf5"
@@ -44,7 +44,7 @@ Well, let's take a look at the HDF5 file format first - because we must know wha
 Here we go:
 
 > _Hierarchical Data Format (HDF) is a set of file formats (HDF4, HDF5) designed to store and organize large amounts of data._
-> 
+>
 > Wikipedia (2004)
 
 As we can read in [our other blog post on HDF5](https://www.machinecurve.com/index.php/2020/04/13/how-to-use-h5py-and-keras-to-train-with-data-from-hdf5-files/), it is characterized as follows:
@@ -64,7 +64,7 @@ https://www.youtube.com/watch?v=q14F3WRwSck&feature=emb\_title
 Time to study the HDF5Matrix util. Well, it's not too exciting - haha :) In fact, this is what it is:
 
 > Representation of HDF5 dataset which can be used instead of a Numpy array.
-> 
+>
 > Keras (n.d.)
 
 It's as simple as that.

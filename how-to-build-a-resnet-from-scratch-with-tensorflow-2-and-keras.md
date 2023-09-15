@@ -1,10 +1,10 @@
 ---
 title: "How to build a ResNet from scratch with TensorFlow 2 and Keras"
 date: "2022-01-20"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "keras"
   - "machine-learning"
@@ -65,7 +65,7 @@ In creating the ResNet (more technically, the ResNet-20 model) we will follow th
 The CIFAR-10 dataset is a widely known dataset in the world of computer vision.
 
 > The CIFAR-10 dataset consists of 60000 32x32 colour images in 10 classes, with 6000 images per class. There are 50000 training images and 10000 test images.
-> 
+>
 > Krizhevsky (n.d.)
 
 It is a slightly more complex dataset compared to MNIST and hence neural networks will have a bit more difficulty to achieve good performance on the dataset. As you can see in the image below, CIFAR-10 contains a broad range of common objects - like frog, truck, deer, automobile, and so forth.
@@ -257,7 +257,7 @@ def load_dataset():
 Let's now take a look at what must be done for image preprocessing.
 
 > The network inputs are 32×32 images, with the per-pixel mean subtracted.
-> 
+>
 > He et al. (2016)
 
 Image _preprocessing wise_, there's only a small amount of preprocessing necessary - subtracting the per-pixel mean from each input image.
@@ -268,7 +268,7 @@ Then, He et al. also apply data augmentation to the input data:
 - Randomly sampling a 32 x 32 pixel crop from the padded image or its horizontal flip.
 
 > We follow the simple data augmentation in \[24\] for training: 4 pixels are padded on each side, and a 32×32 crop is randomly sampled from the padded image or its horizontal flip.
-> 
+>
 > He et al. (2016)
 
 Let's now implement this in a definition called `preprocessed_dataset`. In the def, we'll be using `ImageDataGenerator`s for flowing the data, allowing us to specify a variety of data augmentation options.
@@ -315,7 +315,7 @@ We can implement them in our `preprocessed_dataset` def.
     - Finally, you'll use TensorFlow's default ResNet preprocessing for doing the rest of your preprocessing work.
 
 > The images are converted from RGB to BGR, then each color channel is zero-centered with respect to the ImageNet dataset, without scaling.
-> 
+>
 > TensorFlow (n.d.)
 
 - From this `train_generator`, you'll generate the training and validation batches. Using `.flow`, you'll flow the training data to the data generator, taking only the training or validation part depending on the subset configuration. Then, you'll use `crop_generator` to convert the batches (which are 40x40 padded and possibly flipped images) to 32x32 format again, i.e., the "random crop".
@@ -323,7 +323,7 @@ We can implement them in our `preprocessed_dataset` def.
 - Finally, you return the training, validation and test batches.
 
 > For testing, we only evaluate the single view of the original 32×32 image.
-> 
+>
 > He et al. (2016)
 
 ```python
@@ -388,7 +388,7 @@ Then, you create the skip connection - `x_skip` - based on the input `x`. You wi
 Next up is performing the original mapping. Per the He et al. paper, each residual block is composed of 2 convolutional layers with a 3x3 kernel size. Depending on whether you'll need to match the size of your first `Conv2D` layer with the output filter maps (which is a lower amount), you'll be using a different stride.
 
 > Then we use a stack of 6n layers with 3×3 convolutions on the feature maps of sizes {32, 16, 8} respectively, with 2n layers for each feature map size.
-> 
+>
 > He et al. paper
 
 Each layer is followed by Batch Normalization and a ReLU activation function.
@@ -398,7 +398,7 @@ Then it's time to add the skip connection. You will do this by means of `Add()`.
 There are multiple ways of overcoming this issue:
 
 > (A) zero-padding shortcuts are used for increasing dimensions, and all shortcuts are parameter free (the same as Table 2 and Fig. 4 right); (B) projection shortcuts are used for increasing dimensions, and other shortcuts are identity; and (C) all shortcuts are projections.
-> 
+>
 > He et al. paper
 
 We can implement these so-called _identity_ shortcuts by padding zeros to the left and right side of your channel dimension, using the `Lambda` layer. This layer type essentially allows us to manipulate our Tensors in any way, returning the result. It works as follows:
@@ -472,7 +472,7 @@ def ResidualBlocks(x):
 	"""
 		Set up the residual blocks.
 	"""
-	# Retrieve values 
+	# Retrieve values
 	config = model_configuration()
 
 	# Set initial filter size
@@ -509,7 +509,7 @@ Then, after creating the structure for the residual blocks, it's time to finaliz
 From the paper:
 
 > The first layer is 3×3 convolutions (...) The network ends with a global average pooling, a 10-way fully-connected layer, and softmax.
-> 
+>
 > He et al.
 
 Let's add them:
@@ -929,7 +929,7 @@ def ResidualBlocks(x):
 	"""
 		Set up the residual blocks.
 	"""
-	# Retrieve values 
+	# Retrieve values
 	config = model_configuration()
 
 	# Set initial filter size

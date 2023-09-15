@@ -1,11 +1,11 @@
 ---
 title: "How to use binary & categorical crossentropy with TensorFlow 2 and Keras?"
 date: "2019-10-22"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "binary-crossentropy"
   - "categorical-crossentropy"
   - "crossentropy"

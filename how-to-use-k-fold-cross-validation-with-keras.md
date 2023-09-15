@@ -1,11 +1,11 @@
 ---
 title: "How to use K-fold Cross Validation with TensorFlow 2 and Keras?"
 date: "2020-02-18"
-categories: 
+categories:
   - "buffer"
   - "frameworks"
   - "svms"
-tags: 
+tags:
   - "dataset"
   - "k-fold-cross-validation"
   - "split"
@@ -347,7 +347,7 @@ import numpy as np
 Which...
 
 > Provides train/test indices to split data in train/test sets. Split dataset into k consecutive folds (without shuffling by default).
-> 
+>
 > Scikit-learn (n.d.) [sklearn.model\_selection.KFold](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html)
 
 Precisely what we want!

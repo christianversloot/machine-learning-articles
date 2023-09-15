@@ -1,11 +1,11 @@
 ---
 title: "Building a simple vanilla GAN with PyTorch"
 date: "2021-07-17"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "computer-vision"
   - "deep-learning"
   - "discriminator"

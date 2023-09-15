@@ -1,11 +1,11 @@
 ---
 title: "Creating DCGAN with TensorFlow 2 and Keras"
 date: "2021-07-15"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "gan"
   - "generative-adversarial-networks"

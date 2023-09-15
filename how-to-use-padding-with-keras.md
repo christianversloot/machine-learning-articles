@@ -1,10 +1,10 @@
 ---
 title: "How to use padding with Keras?"
 date: "2020-02-08"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "keras"
   - "machine-learning"

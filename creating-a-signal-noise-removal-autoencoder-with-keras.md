@@ -1,10 +1,10 @@
 ---
 title: "Creating a Signal Noise Removal Autoencoder with Keras"
 date: "2019-12-19"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "autoencoder"
   - "convolutional-neural-networks"
   - "deep-learning"

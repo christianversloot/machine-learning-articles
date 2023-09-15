@@ -1,10 +1,10 @@
 ---
 title: "Convolutional Neural Networks with PyTorch"
 date: "2021-07-08"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "convnet"
   - "deep-learning"
   - "machine-learning"
@@ -59,7 +59,7 @@ The presence of Convolutional layers (hello, captain obvious).
 On the left, we can see so-called **Convolution** layers followed by **[(Max) pooling](https://www.machinecurve.com/index.php/2020/01/30/what-are-max-pooling-average-pooling-global-max-pooling-and-global-average-pooling/)** layers. A _convolution_ can be defined as follows:
 
 > In [mathematics](https://en.wikipedia.org/wiki/Mathematics) (in particular, [functional analysis](https://en.wikipedia.org/wiki/Functional_analysis)), **convolution** is a [mathematical operation](https://en.wikipedia.org/wiki/Operation_(mathematics)) on two [functions](https://en.wikipedia.org/wiki/Function_(mathematics)) (_f_ and _g_) that produces a third function ({\\displaystyle f\*g}![f*g](https://wikimedia.org/api/rest_v1/media/math/render/svg/de088e4a3777d3b5d2787fdec81acd91e78a719e)) that expresses how the shape of one is modified by the other.
-> 
+>
 > Wikipedia (2001)
 
 In other words, a Convolutional layer combines two parts and generates a function that expresses how one alters the other. Recall, if you are familiar with neural networks, that they have _inputs_ which are fed through a layer that has _weights_. If you take a look at this from a Convolution perspective, such a layer will have weights - and it evaluates how much inputs "alter", or "trigger" these weights.

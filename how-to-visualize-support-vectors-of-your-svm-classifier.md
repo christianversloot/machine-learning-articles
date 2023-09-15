@@ -1,10 +1,10 @@
 ---
 title: "How to visualize support vectors of your SVM classifier?"
 date: "2020-05-05"
-categories: 
+categories:
   - "frameworks"
   - "svms"
-tags: 
+tags:
   - "machine-learning"
   - "scikit-learn"
   - "support-vector-machine"
@@ -82,7 +82,7 @@ X_train, X_test, y_train, y_test = train_test_split(inputs, targets, test_size=f
 np.save('./datasv.npy', (X_train, X_test, y_train, y_test))
 X_train, X_test, y_train, y_test = np.load('./datasv.npy', allow_pickle=True)
 
-# Generate scatter plot for training data 
+# Generate scatter plot for training data
 plt.scatter(X_train[:,0], X_train[:,1])
 plt.title('Linearly separable data')
 plt.xlabel('X1')

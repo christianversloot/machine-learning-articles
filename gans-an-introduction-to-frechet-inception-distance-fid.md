@@ -1,9 +1,9 @@
 ---
 title: "GANs: an Introduction to Fréchet Inception Distance (FID)"
 date: "2021-11-09"
-categories: 
+categories:
   - "deep-learning"
-tags: 
+tags:
   - "deep-learning"
   - "fid"
   - "frechet-inception-distance"

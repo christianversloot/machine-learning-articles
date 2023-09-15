@@ -1,10 +1,10 @@
 ---
 title: "How to use Cropping layers with TensorFlow and Keras?"
 date: "2020-02-04"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "conv2d"
   - "convolutional-neural-networks"
   - "cropping"

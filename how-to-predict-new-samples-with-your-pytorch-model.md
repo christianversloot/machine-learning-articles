@@ -1,7 +1,7 @@
 ---
 title: "How to predict new samples with your PyTorch model?"
 date: "2021-02-10"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"

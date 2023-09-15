@@ -1,10 +1,10 @@
 ---
 title: "Grouped convolutions with TensorFlow 2 and Keras"
 date: "2022-01-29"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "computer-vision"
   - "convolutional-neural-networks"
   - "convolutions"
@@ -37,7 +37,7 @@ Making the neural network wider, by increasing the number of feature maps learne
 However, in their work, they state that there is another way: by increasing the cardinality
 
 > Experiments demonstrate that in- creasing cardinality is a more effective way of gaining accu- racy than going deeper or wider, especially when depth and width starts to give diminishing returns for existing models.
-> 
+>
 > Xie et al. (2017)
 
 Cardinality, here, is defined as "the size of the set of transformations". Because things may still be a bit vague now, let's make things visual for better understanding.
@@ -65,7 +65,7 @@ Now, getting to the point of this article, another approach is to use **grouped 
 Now, what is a grouped convolution?
 
 > \[A\] group is convolved separately with filters / groups filters. The output is the concatenation of all the groups results along the channel axis.
-> 
+>
 > TensorFlow (n.d.)
 
 Normally, in a regular convolution, we have filters (which slide or convolve over the input feature maps). For example, we can have 32 filters that slide over the input feature maps. These 32 filters are convolved at the same time, over the whole input.
@@ -93,7 +93,7 @@ Using grouped convolution breaks down the filters into separate and disjoint gro
 Using grouped convolutions with TensorFlow 2 and Keras is actually really easy. The only thing that you will need to do is using the `groups` attribute in specifying your convolutional layer (whether that is a `Conv1D`, `Conv2D` or `Conv3D` layer).
 
 > A positive integer specifying the number of groups in which the input is split along the channel axis. Each group is convolved separately with filters / groups filters. The output is the concatenation of all the groups results along the channel axis. Input channels and filters must both be divisible by groups.
-> 
+>
 > TensorFlow (n.d.)
 
 For example, if you have a two-dimensional convolutional layer that outputs 64 feature maps, you can turn it into a grouped convolution that outputs 4x16 feature maps by simply specifying this in layer initialization:

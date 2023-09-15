@@ -1,10 +1,10 @@
 ---
 title: "How to create a CNN with TensorFlow 2.0 and Keras?"
 date: "2019-09-17"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "classifier"
   - "convolutional-neural-networks"
   - "deep-learning"
@@ -65,7 +65,7 @@ verbosity = 1
 # Load MNIST dataset
 (input_train, target_train), (input_test, target_test) = mnist.load_data()
 
-# Reshape data 
+# Reshape data
 input_train = input_train.reshape(input_train.shape[0], img_width, img_height, 1)
 input_test = input_test.reshape(input_test.shape[0], img_width, img_height, 1)
 input_shape = (img_width, img_height, 1) 
@@ -274,11 +274,11 @@ target_test = tensorflow.keras.utils.to_categorical(target_test, no_classes)
 
 In a different post explaining [how to create MLPs with Keras](https://machinecurve.com/index.php/2019/07/27/how-to-create-a-basic-mlp-classifier-with-the-keras-sequential-api/), I explained the need for categorical data as being dependent on the loss function (the means of computing the difference between actual targets and generated predictions during passing the data forward):
 
->   
+>
 > For those problems, we need a loss function that is called _categorical crossentropy._ In plain English, I always compare it with a purple elephant 🐘.  
->   
+>
 > Suppose that the relationships in the real world (which are captured by your training date) together compose a purple elephant (a.k.a. distribution). We next train a machine learning model that attempts to be as accurate as the original data; hence attempting to classify data as that purple elephant. How well the model is capable of doing that is what is called a _loss_, and the loss function allows one to compare one distribution (elephant) with the other (hopefully the same elephant). Cross entropy allows one to compare those. We can't use the binary variant (it only compares two elephants), but need the _categorical_ one (which can compare multiple elephants). This however requires us to 'lock' the set of elephants first, to avoid that another one is added somehow. This is called _categorical data_: it belongs to a fixed set of categories (Chollet, 2017).
-> 
+>
 > [How to create a basic MLP classifier with the Keras Sequential API](https://machinecurve.com/index.php/2019/07/27/how-to-create-a-basic-mlp-classifier-with-the-keras-sequential-api/)
 
 I suggest to click the link above if you wish to understand `to_categorical` at a deeper level. We'll need it again here, since we have 10 categories of data - the numbers 0 to 10, and don't ever include an 11th category in this scenario. Hence, we apply it in our model.
@@ -376,7 +376,7 @@ verbosity = 1
 # Load MNIST dataset
 (input_train, target_train), (input_test, target_test) = mnist.load_data()
 
-# Reshape data 
+# Reshape data
 input_train = input_train.reshape(input_train.shape[0], img_width, img_height, 1)
 input_test = input_test.reshape(input_test.shape[0], img_width, img_height, 1)
 input_shape = (img_width, img_height, 1) 

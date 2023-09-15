@@ -1,9 +1,9 @@
 ---
 title: "How to create a confusion matrix with Scikit-learn?"
 date: "2020-05-05"
-categories: 
+categories:
   - "frameworks"
-tags: 
+tags:
   - "confusion-matrix"
   - "machine-learning"
   - "model-evaluation"
@@ -159,7 +159,7 @@ X_train, X_test, y_train, y_test = np.load('./data_cf.npy', allow_pickle=True)
 Should you wish to visualize the data, this is of course possible:
 
 ```python
-# Generate scatter plot for training data 
+# Generate scatter plot for training data
 plt.scatter(X_train[:,0], X_train[:,1])
 plt.title('Linearly separable data')
 plt.xlabel('X1')
@@ -303,7 +303,7 @@ X_train, X_test, y_train, y_test = train_test_split(inputs, targets, test_size=f
 np.save('./data_cf.npy', (X_train, X_test, y_train, y_test))
 X_train, X_test, y_train, y_test = np.load('./data_cf.npy', allow_pickle=True)
 
-# Generate scatter plot for training data 
+# Generate scatter plot for training data
 plt.scatter(X_train[:,0], X_train[:,1])
 plt.title('Linearly separable data')
 plt.xlabel('X1')

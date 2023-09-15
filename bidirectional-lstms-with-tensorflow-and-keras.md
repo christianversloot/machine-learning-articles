@@ -1,10 +1,10 @@
 ---
 title: "Bidirectional LSTMs with TensorFlow 2.0 and Keras"
 date: "2021-01-11"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "bidirectional"
   - "deep-learning"
   - "lstm"

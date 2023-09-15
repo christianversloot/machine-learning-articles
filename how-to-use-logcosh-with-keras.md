@@ -1,11 +1,11 @@
 ---
 title: "How to use Logcosh with TensorFlow 2 and Keras?"
 date: "2019-10-23"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "keras"
   - "logcosh"
@@ -77,7 +77,7 @@ As you can see, Logcosh loss for some target value (in this case, target = 0), i
 The [TensorFlow docs](https://www.tensorflow.org/api_docs/python/tf/keras/losses/logcosh) write this about Logcosh loss:
 
 > `log(cosh(x))` is approximately equal to `(x ** 2) / 2` for small `x` and to `abs(x) - log(2)` for large `x`. This means that 'logcosh' works mostly like the mean squared error, but will not be so strongly affected by the occasional wildly incorrect prediction.
-> 
+>
 > Source: [TensorFlow docs](https://www.tensorflow.org/api_docs/python/tf/keras/losses/logcosh), taken from [About loss and loss functions](https://www.machinecurve.com/index.php/2019/10/04/about-loss-and-loss-functions/#logcosh)
 
 It is therefore something like the MSE when you're training a regression model, but then with a degree of built-in protection against "wildly incorrect predictions" that are likely caused by outlier samples.
@@ -93,7 +93,7 @@ But first, the dataset.
 We will be using the **[Boston Housing Prices Regression](https://keras.io/datasets/#boston-housing-price-regression-dataset)** [dataset](https://keras.io/datasets/#boston-housing-price-regression-dataset), which is one of the datasets that is available in the Keras API by default. It allows us to focus on the Logcosh loss aspects of the implementation rather than importing and cleaning the data, and hence ease of use.
 
 > The Boston house-price data of Harrison, D. and Rubinfeld, D.L. 'Hedonic prices and the demand for clean air', J. Environ. Economics & Management, vol.5, 81-102, 1978. Used in Belsley, Kuh & Welsch, 'Regression diagnostics ...', Wiley, 1980.
-> 
+>
 > [StatLib Datasets Archive](http://lib.stat.cmu.edu/datasets/)
 
 What does it look like?

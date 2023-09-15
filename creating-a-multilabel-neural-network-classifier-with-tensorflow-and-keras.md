@@ -1,10 +1,10 @@
 ---
 title: "Creating a Multilabel Neural Network Classifier with Tensorflow 2.0 and Keras"
 date: "2020-11-16"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "classification"
   - "deep-learning"
   - "deep-neural-network"
@@ -37,11 +37,11 @@ Suppose that we are observing someone who is working in a factory. It's their ta
 This is _classification,_ and to be more precise it is an instance of **multilabel classification**.
 
 > In machine learning, **multi-label classification** and the strongly related problem of **multi-output classification** are variants of the classification problem where multiple labels may be assigned to each instance.
-> 
+>
 > Wikipedia (2006)
 
 > Formally, multi-label classification is the problem of finding a model that maps inputs x to binary vectors y (assigning a value of 0 or 1 for each element (label) in y).
-> 
+>
 > Wikipedia (2006)
 
 Visually, this looks as follows:

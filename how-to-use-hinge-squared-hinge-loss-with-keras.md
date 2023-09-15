@@ -1,11 +1,11 @@
 ---
 title: "How to use hinge & squared hinge loss with TensorFlow 2 and Keras?"
 date: "2019-10-15"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "hinge"
   - "hinge-loss"

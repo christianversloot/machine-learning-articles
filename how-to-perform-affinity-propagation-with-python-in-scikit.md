@@ -1,10 +1,10 @@
 ---
 title: "Affinity Propagation Tutorial: Example with Scikit-learn"
 date: "2020-04-18"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "affinity-propagation"
   - "clustering"
   - "machine-learning"
