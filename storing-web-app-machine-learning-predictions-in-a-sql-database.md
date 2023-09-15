@@ -52,7 +52,7 @@ The third and final stage will be the new one: **inserting the predictions into 
 
 Now, you might wonder, what is SQL? It's a _language_ (Wikipedia, 2001). In more detail, it's a language for _querying_ relational databases - and it stands for Structured Query Language. It allows you to insert, update, delete and select values to or from the database. For example, if we wanted to add a new bus:
 
-```
+```sql
 INSERT INTO buses (bus_no) VALUES ('9302');
 ```
 
@@ -109,7 +109,7 @@ Source: [Creating a PostgreSQL database with pgAdmin and logging into it - Denys
 
 Once you're logged in, it's time to execute the SQL queries for generating the database:
 
-```
+```sql
 CREATE TABLE Inputs (
   id serial PRIMARY KEY,
   image text
@@ -183,7 +183,7 @@ Let's now extend the previous FastAPI code with some PostgreSQL based calls!
 
 Before we extend our code, I think it might be nice to take a look at what we have so far. Here it is - we'll discuss it below the code:
 
-```
+```python
 # Imports
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from PIL import Image
@@ -274,7 +274,7 @@ In short, this code...
 
 Let's first extend this code with storing the prediction. For this to work, we'll need to add a few more imports at the top:
 
-```
+```python
 import psycopg2
 import base64
 from io import BytesIO
@@ -285,7 +285,7 @@ Well, for the first, we know what it does. We need the second and third in order
 
 Then, directly below the `app = FastAPI()` statement, we make the connection to our database:
 
-```
+```python
 # Make a connection to the database
 conn = psycopg2.connect("dbname=mcsample user=postgres password=postgres")
 ```
@@ -294,7 +294,7 @@ You can specify any [database parameter](https://www.postgresqltutorial.com/post
 
 We then specify two new definitions - `store_input` and `store_prediction`:
 
-```
+```python
 # Store an input image
 def store_input(image):
   # Convert input into Base64
@@ -342,10 +342,10 @@ The flow is relatively equal in both cases: we take the input, create what is kn
 
 Just before the return statement in our `POST /prediction` call, we add these lines of code:
 
-```
+```python
 # Store the input
 input_id = store_input(pil_image)
-    
+
 # Store the prediction
 prediction_id = store_prediction(prediction, input_id)
 ```
@@ -356,7 +356,7 @@ Now, all predictions should be stored to the database. But let's extend it a lit
 
 The next thing we'll specify is a _new call_ - `GET /predictions`. It simply retrieves all predictions from the database:
 
-```
+```python
 # Get all predictions
 @app.get('/predictions/')
 def get_predictions():
@@ -379,7 +379,7 @@ def get_predictions():
 
 Sometimes, though, you only want to retrieve _just one_ prediction, instead of all of them. In that case, we should also add some code for that.
 
-```
+```python
 # Get all predictions
 @app.get('/prediction/{prediction_id}')
 def get_prediction(prediction_id: str):
@@ -410,7 +410,7 @@ def get_prediction(prediction_id: str):
 
 In total, this yields the following code:
 
-```
+```python
 # Imports
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from PIL import Image
@@ -595,7 +595,7 @@ def get_prediction(prediction_id: str):
 
 Let's now see if we can run it :) As with the [FastAPI tutorial](https://www.machinecurve.com/index.php/2020/03/19/tutorial-how-to-deploy-your-convnet-classifier-with-keras-and-fastapi/), we [run it with uvicorn](https://www.machinecurve.com/index.php/2020/03/19/tutorial-how-to-deploy-your-convnet-classifier-with-keras-and-fastapi/#running-the-deployed-model). Open up a terminal, `cd` to the directory where your `main.py` file is stored (it's the file we created with the FastAPI instance, so if you don't have it yet because you started here, create one with your code) and execute `uvicorn main:app --reload`. Then, the app should start:
 
-```
+```shell
 uvicorn main:app --reload
 [32mINFO[0m:     Uvicorn running on [1mhttp://127.0.0.1:8000[0m (Press CTRL+C to quit)
 [32mINFO[0m:     Started reloader process [[36m[1m20780[0m]
@@ -633,7 +633,7 @@ Generating a new prediction is not done differently than [previously](https://ww
 
 Yielding the correct prediction indeed:
 
-```
+```json
 {
     "filename": "mnist_sample.png",
     "contenttype": "image/png",

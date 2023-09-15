@@ -109,7 +109,7 @@ We next import the dependencies - note that they are available as `sklearn` rath
 - After generating the dataset with `make_regression`, we must split it into [train/test sets](https://www.machinecurve.com/index.php/2020/11/16/how-to-easily-create-a-train-test-split-for-your-machine-learning-model/). We can do so using `sklearn.model_selection`'s `train_test_split`.
 - Finally, we import `mean_squared_error` and `mean_absolute_error` from `sklearn.metrics` for evaluating our model. Those are default [error functions for regression problems](https://www.machinecurve.com/index.php/2019/10/04/about-loss-and-loss-functions/#loss-functions-for-regression).
 
-```
+```python
 from sklearn.datasets import make_regression
 from sklearn.multioutput import MultiOutputRegressor
 from sklearn.svm import SVR
@@ -127,7 +127,7 @@ After the imports, it's time to make a dataset:
 - The output part of the input-target-pairs has 2 targets, or values to be regressed; we therefore set `n_targets` to 2. Note that our multioutput regressor will therefore be a two-output regressor.
 - Using `random_state`, we seed our regression problem by using the same random number initialization.
 
-```
+```python
 
 # Generate dataset
 X, y = make_regression(n_samples=25000, n_features=3, n_targets=2, random_state=33)
@@ -135,7 +135,7 @@ X, y = make_regression(n_samples=25000, n_features=3, n_targets=2, random_state=
 
 After generating the dataset, we must process it by [splitting it into a training and testing dataset](https://www.machinecurve.com/index.php/2020/11/16/how-to-easily-create-a-train-test-split-for-your-machine-learning-model/):
 
-```
+```python
 
 # Train/test split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=33)
@@ -148,7 +148,7 @@ We can then move forward and construct the SVR regressor:
 - Here, we set the value for \[latex\]\\epsilon\[/latex\] (epsilon) to `0.2`. It specifies the width of the 'error tube' where no penalty is assigned to mispredictions, effectively allowing us to take values close to the edges of the error tube as support vectors.
 - If we want to apply regularization, we can also apply values for `C` - more information [here](https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVR.html).
 
-```
+```python
 # Create the SVR regressor
 svr = SVR(epsilon=0.2)
 ```
@@ -157,7 +157,7 @@ svr = SVR(epsilon=0.2)
 
 We can then easily wrap the SVR into our imported `MultiOutputRegressor`:
 
-```
+```python
 # Create the Multioutput Regressor
 mor = MultiOutputRegressor(svr)
 ```
@@ -166,7 +166,7 @@ mor = MultiOutputRegressor(svr)
 
 Finally, we can fit the training data (`X_train`) and `y_train`) to our `MultiOutputRegressor`. This starts the training process. Once fitting the data is complete, we can generate `y_pred` prediction values for our testing inputs `X_test`. Using the [mean squared error and mean absolute error](https://www.machinecurve.com/index.php/2019/10/04/about-loss-and-loss-functions/#loss-functions-for-regression), we can then evaluate model performance:
 
-```
+```python
 # Train the regressor
 mor = mor.fit(X_train, y_train)
 
@@ -186,7 +186,7 @@ print(f'MAE for first regressor: {mae_one} - second regressor: {mae_two}')
 
 Should you wish to obtain the full code just at once, that's of course also possible. In that case, here you go :)
 
-```
+```python
 from sklearn.datasets import make_regression
 from sklearn.multioutput import MultiOutputRegressor
 from sklearn.svm import SVR

@@ -42,7 +42,7 @@ Let's take a look! 🚀
 
 Here's a [quick answer](https://www.machinecurve.com/index.php/2020/04/16/how-to-perform-k-means-clustering-with-python-in-scikit/#full-model-code) to performing K-means clustering with Python and Scikit-learn. Make sure to read the full article if you wish to understand what happens in full detail!
 
-```
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.datasets import make_blobs
@@ -192,7 +192,7 @@ Ah, so that's what you meant is what you'll likely think now 😂 Oops :)
 
 For this to work, we'll first have to state our imports:
 
-```
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.datasets import make_blobs
@@ -203,7 +203,7 @@ Those are _all_ the imports for today, not just those for generating the blobs (
 
 Now that we have specified our imports, it's time to set a few configuration options:
 
-```
+```python
 # Configuration options
 num_samples_total = 1000
 cluster_centers = [(20,20), (4,4)]
@@ -218,7 +218,7 @@ Those are really simple:
 
 We then generate the data:
 
-```
+```python
 # Generate data
 X, targets = make_blobs(n_samples = num_samples_total, centers = cluster_centers, n_features = num_classes, center_box=(0, 1), cluster_std = 2)
 ```
@@ -227,7 +227,7 @@ Generating the data simply equates calling the `make_blobs` definition from Scik
 
 Should you wish to save the data so that you can reuse the _exact_ positions later (e.g. in the cases where you want to generate different visualizations), you might add this code - which simply saves the data and reloads it immediately, for you to apply accordingly. It's not necessary though.
 
-```
+```python
 np.save('./clusters.npy', X)
 X = np.load('./clusters.npy')
 ```
@@ -238,7 +238,7 @@ Time for applying K-means clustering!
 
 First, we instantiate the algorithm:
 
-```
+```python
 # Fit K-means with Scikit
 kmeans = KMeans(init='k-means++', n_clusters=num_classes, n_init=10)
 kmeans.fit(X)
@@ -252,14 +252,14 @@ Here, we choose an initialization strategy (which is either `random` or `k-means
 
 Once we did this, it's time to actually _fit the data_ and generate the cluster predictions:
 
-```
+```python
 # Predict the cluster for all the samples
 P = kmeans.predict(X)
 ```
 
 That's it already - K-means clustering is complete! If you wish to generate that visualization with the two classes colored differently, you might also want to add this:
 
-```
+```python
 # Generate scatter plot for training data
 colors = list(map(lambda x: '#3b4cc0' if x == 1 else '#b40426', P))
 plt.scatter(X[:,0], X[:,1], c=colors, marker="o", picker=True)
@@ -273,7 +273,7 @@ plt.show()
 
 Should you wish to obtain the full model code at once immediately - that's possible too, of course. Here you go:
 
-```
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.datasets import make_blobs

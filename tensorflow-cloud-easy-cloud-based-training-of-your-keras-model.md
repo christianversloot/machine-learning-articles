@@ -110,7 +110,7 @@ Within the `tensorflow_cloud` module that will be available upon installing Tens
 
 Here is the arguments list of the `def` - we'll describe the arguments soon, and show an example later in this article:
 
-```
+```python
 def run(
     entry_point=None,
     requirements_txt=None,
@@ -144,7 +144,7 @@ Those are the arguments:
 
 For `worker_config` and `chief_config`, there are many out-the-box machine configurations available within [TensorFlow Cloud](https://github.com/tensorflow/cloud/blob/master/src/python/tensorflow_cloud/core/machine_config.py):
 
-```
+```python
 COMMON_MACHINE_CONFIGS = {
     "CPU": MachineConfig(
         cpu_cores=4,
@@ -246,7 +246,7 @@ Below, we'll cover those strategies in more detail. The code samples come from t
 
 If you choose to train `some_model.py` in the cloud without any distribution strategy, TensorFlow Cloud will interpret your choice as "I don't want any GPUs to train with". In this case, it will spawn a CPU-based machine - i.e. one chief that runs on a CPU - and trains your model there. This could be an interesting choice from a cost perspective or getting used to using TensorFlow cloud, but it's not the best choice in terms of training a model at scale.
 
-```
+```python
 tfc.run(entry_point='some_model.py',
         chief_config=tfc.COMMON_MACHINE_CONFIGS['CPU'])
 ```
@@ -255,7 +255,7 @@ tfc.run(entry_point='some_model.py',
 
 If you choose for a `OneDeviceStrategy`, TensorFlow Cloud will spawn a chief in Google Cloud Platform with one GPU attached. More specifically, it will spawn a `T4_1X` strategy, which means a machine having 8 cpu cores, 30GB memory, and 1 Nvidia Tesla T4. This will already give your training process a significant boost. Remember that by means of `chief_config`, you can choose to use another machine type, e.g. if you want a more powerful GPU.
 
-```
+```python
 tfc.run(entry_point='some_model.py')
 ```
 
@@ -263,7 +263,7 @@ tfc.run(entry_point='some_model.py')
 
 Choosing a `MirroredStrategy` will equal a mirrored strategy in local distributed training - that is, it will benefit from multiple GPUs on one machine. In this case, a machine will be spawned with 4 V100 GPUs, which will give your training process an enormous boost:
 
-```
+```python
 tfc.run(entry_point='some_model.py',
         chief_config=tfc.COMMON_MACHINE_CONFIGS['V100_4X'])
 ```
@@ -274,7 +274,7 @@ If that's still not enough, you can also deploy a `MultiWorkerMirroredStrategy`.
 
 This will result in an extremely fast training process, but will also result in significant cost if you still have a substantial training operation. However, so do the other GPU-based and cloud strategies, so choose wisely!
 
-```
+```python
 tfc.run(entry_point='some_model.py',
         chief_config=tfc.COMMON_MACHINE_CONFIGS['V100_1X'],
         worker_count=2,
@@ -285,7 +285,7 @@ tfc.run(entry_point='some_model.py',
 
 If, however, you don't want to train your model with a GPU but with a TPU (a processing unit specifically tailored to Tensors and hence a good choice for training TensorFlow models), you can do so by employing a `TPUStrategy`:
 
-```
+```python
 tfc.run(entry_point="some_model.py",
         chief_config=tfc.COMMON_MACHINE_CONFIGS["CPU"],
         worker_count=1,
@@ -298,7 +298,7 @@ Here, the chief runs with a CPU, while you have one TPU-based worker. At the tim
 
 Sometimes, all the strategies mentioned before do not meet your requirements. In this case, it becomes possible to define a custom distribution strategy - but you must do so within your model code, as with regular distributed TensorFlow. In order not to have TensorFlow cloud interfere with your custom distribution strategy, you must turn it off in the TF Cloud code:
 
-```
+```python
 tfc.run(entry_point='some_model.py',
         distribution_strategy=None,
         worker_count=2)
@@ -368,7 +368,7 @@ The next step is ensuring that you created what is called a Service Account for 
 
 Now that you have enabled the necessary Google Cloud APIs and have become cloud ready for training your model, it's time to install TensorFlow Cloud. While the steps 1 and 2 looked a bit complex, installing TensorFlow Cloud is really easy and can be done with `pip`:
 
-```
+```shell
 pip install -U tensorflow-cloud
 ```
 
@@ -380,7 +380,7 @@ If you don't want to build the Docker container in which your training job runs 
 
 If you want to train in the cloud from a Jupyter Notebook, you must convert it into a workable format first. [Nbconvert](https://nbconvert.readthedocs.io/en/latest/) can be us ed for this purpose. Hence, if you want to run cloud-based training from a Jupyter Notebook - which is entirely optional, as it can be ran from `.py` files as well - then `nbconvert` must be installed as follows:
 
-```
+```shell
 pip install nbconvert
 ```
 
@@ -403,7 +403,7 @@ For training our Keras model in the cloud, we need - well, a Keras model. The mo
 
 Open up your code editor, create a file called `model.py`, and add the following code.
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
@@ -489,13 +489,13 @@ Create another file called `cloud.py`, and open it in your code editor.
 
 First of all, make sure to add TensorFlow Cloud into your new file:
 
-```
+```python
 import tensorflow_cloud as tfc
 ```
 
 Then add the `run` call for TensorFlow Cloud:
 
-```
+```python
 # Add TensorFlow cloud
 tfc.run(
     entry_point='model.py',
@@ -515,7 +515,7 @@ Time to run it! Open up your terminal, navigate to the folder where your `cloud.
 
 The first time I ran my `cloud.py`, I got this error:
 
-```
+```shell
 >>> from google.auth.transport import mtls
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
@@ -524,7 +524,7 @@ ImportError: cannot import name 'mtls' from 'google.auth.transport'
 
 Strange! For some reason, it seemed that an old version of `google-auth` was installed or came installed with TensorFlow Cloud. I'm not sure, but if you're running into this issue, the fix is as follows: install version 1.17.2 or newer, like this.
 
-```
+```shell
 pip install google-auth==1.17.2
 ```
 
@@ -573,7 +573,7 @@ This is in fact _good_, because it is actually sending your built image into the
 
 If you're getting this error, you might wish to update `google-auth` with `pip`:
 
-```
+```shell
 pip install --upgrade google-auth
 ```
 

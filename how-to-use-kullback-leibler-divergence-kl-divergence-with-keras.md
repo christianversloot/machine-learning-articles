@@ -93,7 +93,7 @@ Based on some Googling, I found that there are some use cases when Kullback-Leib
 
 The Keras API defines the KL divergence as follows (Keras, n.d.):
 
-```
+```python
 keras.losses.kullback_leibler_divergence(y_true, y_pred)
 ```
 
@@ -111,7 +111,7 @@ We'll therefore slightly adapt a [ConvNet created in another blog post](https://
 
 And it's simple, actually. It just involves specifying it as the used `loss` function during the model compilation step:
 
-```
+```python
 # Compile the model
 model.compile(loss=keras.losses.kullback_leibler_divergence,
               optimizer=keras.optimizers.Adam(),
@@ -124,7 +124,7 @@ That's it!
 
 Here's the full ConvNet code, including KL divergence:
 
-```
+```python
 import keras
 from keras.datasets import cifar10
 from keras.models import Sequential

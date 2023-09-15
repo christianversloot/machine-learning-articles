@@ -37,7 +37,7 @@ If you run into questions during the read, or if you have any comments, please f
 
 Some people just want to start with code before they read further. That's why in this section, you'll find a **fully functional example** of the Rosenblatt Perceptron, created with Python. It shows a class that is initialized, that has a training loop (`train` definition) and which can generate predictions once trained (through `predict`). If you want to understand the Perceptron in more detail, make sure to read the rest of this tutorial too!
 
-```
+```python
 import numpy as np
 
 # Basic Rosenblatt Perceptron implementation
@@ -186,7 +186,7 @@ This process may be repeated until some criterion is reached, such as a specific
 
 Now let's see if we can code a Perceptron in Python. Create a new folder and add a file named `p.py`. In it, let's first import numpy, which we'll need for some number crunching:
 
-```
+```python
 import numpy as np
 ```
 
@@ -196,7 +196,7 @@ We'll create a class that is named `RBPerceptron`, or Rosenblatt's Perceptron. C
 
 So let's code the class:
 
-```
+```python
 # Basic Rosenblatt Perceptron implementation
 class RBPerceptron:
 ```
@@ -208,7 +208,7 @@ Next, we want to allow the engineer using our Perceptron to configure it before 
 
 We'll do that as follows:
 
-```
+```python
   # Constructor
   def __init__(self, number_of_epochs = 100, learning_rate = 0.1):
     self.number_of_epochs = number_of_epochs
@@ -225,7 +225,7 @@ However, since the user can manually provide those, they must also be set. We ne
 
 All right, the next part - the training definition:
 
-```
+```python
   # Train perceptron
   def train(self, X, D):
     # Initialize weights vector with zeroes
@@ -261,7 +261,7 @@ Finally, the model must also be capable of generating predictions, i.e. computin
 
 We do this relatively elegantly, thanks to another example of the Perceptron algorithm provided by [Sebastian Raschka](https://sebastianraschka.com/Articles/2015_singlelayer_neurons.html#artificial-neurons-and-the-mcculloch-pitts-model): we first compute the dot product for all weights except \[latex\]w\_0\[/latex\] and subsequently add this one as the bias weight. Most elegantly, however, is how the prediction is generated: with `np.where`. This allows an engineer to generate predictions for a batch of samples \[latex\]x\_i\[/latex\] at once. It looks as follows:
 
-```
+```python
   # Generate prediction
   def predict(self, sample):
     outcome = np.dot(sample, self.w[1:]) + self.w[0]
@@ -274,7 +274,7 @@ All right - when integrated, this is our final code.
 
 You can also check it out on [GitHub](https://github.com/christianversloot/rosenblatts-perceptron).
 
-```
+```python
 import numpy as np
 
 # Basic Rosenblatt Perceptron implementation
@@ -325,7 +325,7 @@ We'll then use the normal distribution to generate two samples that do not overl
 
 Finally, we concatenate the samples into the list of input vectors `X` and set the desired targets `D` to the targets generated before.
 
-```
+```python
 # Import libraries
 import numpy as np
 
@@ -347,7 +347,7 @@ D = targets
 
 It's always nice to get a feeling for the data you're working with, so let's first visualize the dataset:
 
-```
+```python
 import matplotlib.pyplot as plt
 plt.scatter(small[:,0], small[:,1], color='blue')
 plt.scatter(large[:,0], large[:,1], color='red')
@@ -364,14 +364,14 @@ Let's next train our Perceptron with the entire [training set](https://www.machi
 
 We must first initialize our Perceptron for this purpose:
 
-```
+```python
 from p import RBPerceptron
 rbp = RBPerceptron(600, 0.1)
 ```
 
 Note that we use 600 epochs and set a learning rate of 0.1. Let's now train our model:
 
-```
+```python
 trained_model = rbp.train(X, D)
 ```
 
@@ -381,7 +381,7 @@ If you don't have it already, install it first by means of `pip install mlxtend`
 
 Subsequently, add this code:
 
-```
+```python
 from mlxtend.plotting import plot_decision_regions
 plot_decision_regions(X, D.astype(np.integer), clf=trained_model)
 plt.title('Perceptron')

@@ -106,7 +106,7 @@ I can certainly imagine that you want some kind of evidence in favor of this sta
 
 Let's first construct a nonlinear dataset using [Scikit-learn](https://scikit-learn.org/) - also make sure that you have `matplotlib` and `numpy` on your system:
 
-```
+```python
 # Imports
 import matplotlib.pyplot as plt
 import numpy as np
@@ -150,7 +150,7 @@ We now show you that it doesn't work by generating a linear TensorFlow model. Le
 - We perform light model evaluation activities to see how well it performs on a testing dataset.
 - We use Mlxtend to [visualize the decision boundary](https://www.machinecurve.com/index.php/2019/10/11/how-to-visualize-the-decision-boundary-for-your-keras-model/) of our model.
 
-```
+```python
 # Imports
 import tensorflow.keras
 from tensorflow.keras.models import Sequential
@@ -221,7 +221,7 @@ Let's now replace the model creation part of the code above with the code that f
 - Replace the `activation` function with ReLU, a.k.a. \[latex\]max(x, 0)\[/latex\].
 - Add a few extra layers with more neurons per layer in the upstream layers, increasing the detail with which the model will learn a decision boundary (in fact, we're explicitly adding sensitivity to overfitting here, but for the demonstration purpose that is precisely what we want to happen).
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Dense(200, input_shape=input_shape, activation='relu', kernel_initializer='he_uniform'))

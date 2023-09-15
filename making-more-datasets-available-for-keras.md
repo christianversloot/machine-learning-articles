@@ -57,7 +57,7 @@ Before we continue with exploring the datasets themselves, let's take a look at 
 
 The installation process is fairly straight-forward:
 
-```
+```shell
 pip install extra-keras-datasets
 ```
 
@@ -84,7 +84,7 @@ Let's now take a look at these datasets in a bit more detail.
 
 The `balanced` dataset contains digits as well as uppercase and lower handwritten letters. It contains 131.600 characters across 47 balanced classes.
 
-```
+```python
 from extra-keras-datasets import emnist
 (input_train, target_train), (input_test, target_test) = emnist.load_data(type='balanced')
 ```
@@ -97,7 +97,7 @@ from extra-keras-datasets import emnist
 
 The `byClass` dataset also contains digits as well as upper case and lowercase letters, but it's unbalanced. Hence, the dataset is substantially larger, with 814.255 characters across 62 unbalanced classes. The classes for this dataset are \[0-9\], \[a-z\] and \[A-Z\] (Cohen et al., 2017).
 
-```
+```python
 from extra-keras-datasets import emnist
 (input_train, target_train), (input_test, target_test) = emnist.load_data(type='byclass')
 ```
@@ -110,7 +110,7 @@ from extra-keras-datasets import emnist
 
 The same is true for `byMerge`, but it's built up slightly differently. It also contains 814.255 characters, but has 47 unbalanced classes only. It merges classes where similarity between uppercase and lowercase letters is too large, possibly confusing your model. The merged classes are C, I, J, K, L, M, O, P, S, U, V, W, X, Y and Z, resulting in 47 insteaad of 62 classes (Cohen et al., 2017).
 
-```
+```python
 from extra-keras-datasets import emnist
 (input_train, target_train), (input_test, target_test) = emnist.load_data(type='bymerge')
 ```
@@ -123,7 +123,7 @@ from extra-keras-datasets import emnist
 
 The `digits` dataset contains 280.000 characters across 10 balanced classes; these are the digits only.
 
-```
+```python
 from extra-keras-datasets import emnist
 (input_train, target_train), (input_test, target_test) = emnist.load_data(type='digits')
 ```
@@ -136,7 +136,7 @@ from extra-keras-datasets import emnist
 
 The `letters` dataset contains 145.600 characters across 26 balanced classes; these are the handwritten letters only.
 
-```
+```python
 from extra-keras-datasets import emnist
 (input_train, target_train), (input_test, target_test) = emnist.load_data(type='letters')
 ```
@@ -149,7 +149,7 @@ from extra-keras-datasets import emnist
 
 The `mnist` dataset is actually the same as traditional MNIST, with 70.000 characters across 10 balanced classes, equaling `tensorflow.keras.datasets.mnist`.
 
-```
+```python
 from extra-keras-datasets import emnist
 (input_train, target_train), (input_test, target_test) = emnist.load_data(type='mnist')
 ```
@@ -164,7 +164,7 @@ from extra-keras-datasets import emnist
 
 This is a drop-in replacement for MNIST, but then with 70.000 28x28 images of Japanese Kuzushiji characters. These are considered to be slightly more difficult than the digits of the MNIST dataset.
 
-```
+```python
 from extra-keras-datasets import kmnist
 (input_train, target_train), (input_test, target_test) = kmnist.load_data(type='kmnist')
 ```
@@ -177,7 +177,7 @@ from extra-keras-datasets import kmnist
 
 This is an extension of the Kuzishiji-MNIST dataset, offering 270.912 images across 49 classes.
 
-```
+```python
 from extra-keras-datasets import kmnist
 (input_train, target_train), (input_test, target_test) = kmnist.load_data(type='k49')
 ```
@@ -194,7 +194,7 @@ The Street View House Numbers dataset (SVHN) contains 32x32 cropped images of ho
 
 The `normal` variant contains 73.257 digits for training and 26.032 for testing.
 
-```
+```python
 from extra-keras-datasets import svhn
 (input_train, target_train), (input_test, target_test) = svhn.load_data(type='normal')
 ```
@@ -207,7 +207,7 @@ from extra-keras-datasets import svhn
 
 The `extra` dataset extends the `normal` one with 531.131 extra samples, which are less difficult (Netzer et al., 2011). The dataset then totals 604.388 digits for training and 26.032 digits for testing.
 
-```
+```python
 from extra-keras-datasets import svhn
 (input_train, target_train), (input_test, target_test) = svhn.load_data(type='extra')
 ```
@@ -220,7 +220,7 @@ from extra-keras-datasets import svhn
 
 The STL-10 dataset is an image recognition dataset for developing unsupervised feature learning, deep learning, self-taught learning algorithms. It contains 5.000 training images and 8.000 testing images, and represents 10 classes in total (airplane, bird, car, cat, deer, dog, horse, monkey, ship, truck).
 
-```
+```python
 from extra-keras-datasets import stl10
 (input_train, target_train), (input_test, target_test) = stl10.load_data()
 ```

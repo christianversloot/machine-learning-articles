@@ -99,7 +99,7 @@ A regular Keras model cannot be weight clustered as it lacks certain functionali
 
 Applying `cluster_weights(...)` works as follows (source: [TensorFlow](https://www.tensorflow.org/model_optimization/api_docs/python/tfmot/clustering/keras/cluster_weights), license: [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), no changes):
 
-```
+```python
 clustering_params = {
   'number_of_clusters': 8,
   'cluster_centroids_init':
@@ -132,7 +132,7 @@ We know that we had to apply `cluster_weights(...)` in order to wrap the model w
 
 That's why it's best, and even required, to remove the clustering wrappers if you wish to see the benefits from clustering in terms of reduction of model size when compressed. `strip_clustering(...)` can be used for this purpose. Applying it is really simple: you pass the clustered model, and get a stripped model, like this:
 
-```
+```python
 model = tensorflow.keras.Model(...)
 wrapped_model = cluster_weights(model)
 stripped_model = strip_clustering(wrapped_model)
@@ -142,7 +142,7 @@ stripped_model = strip_clustering(wrapped_model)
 
 Sometimes, however, you [save a model](https://www.machinecurve.com/index.php/2020/02/14/how-to-save-and-load-a-model-with-keras/) when it is wrapped with clustering functionality:
 
-```
+```python
 model = tf.Keras.Model(...)
 wrapped_model = cluster_weights(model)
 tensorflow.keras.models.save_model(wrapped_model, './some_path')
@@ -152,7 +152,7 @@ If you then [load the model](https://www.machinecurve.com/index.php/2020/02/14/h
 
 Fortunately, TFMOT provides functionality to put the loading operation to `cluster_scope` which means that it takes into account the fact that it is loading a model that has been wrapped with clustering functionality:
 
-```
+```python
 model = tf.Keras.Model(...)
 wrapped_model = cluster_weights(model)
 file_path = './some_path'
@@ -205,7 +205,7 @@ The first step is relatively simple, and we'll skip the explanations for this pa
 
 Now, open up some file editor, create a file - e.g. `clustering.py`. It's also possible to use a Jupyter Notebook for this purpose. Then, add this code, which imports the necessary functionality, defines the architecture for our neural network, compiles it and subsequently fits it i.e. starts the training process:
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential, save_model
@@ -279,7 +279,7 @@ Instead, in the code above, we have split off a part of the dataset (in fact, Ke
 
 With Keras, you can easily evaluate model performance:
 
-```
+```python
 # Generate generalization metrics for original model
 score = model.evaluate(input_test, target_test, verbose=0)
 ```
@@ -288,7 +288,7 @@ score = model.evaluate(input_test, target_test, verbose=0)
 
 Later in this article, we're going to compare the size of a compressed-and-saved model that was optimized with weights clustering to the size of a compressed-and-saved original model. If we want to do this, we must save the original model to a temporary file. Here's how we do that, so let's add this code next:
 
-```
+```python
 # Store file 
 _, keras_file = tempfile.mkstemp('.h5')
 save_model(model, keras_file, include_optimizer=False)
@@ -301,7 +301,7 @@ Now that we have trained, evaluated and saved the original ConvNet, we can move 
 
 For this reason, we're going to create a dictionary with the `number_of_clusters` we want the clustering algorithm to find and how the cluster centroids are initialized:
 
-```
+```python
 # Define clustering parameters
 clustering_params = {
   'number_of_clusters': 14,
@@ -315,21 +315,21 @@ We want 14 clusters. In line with the tips from above, we're using a `CentroidIn
 
 Then, it's time to wrap our trained `model` with clustering functionality configured according to our `clustering_params`:
 
-```
+```python
 # Cluster the model
 wrapped_model = tfmot.clustering.keras.cluster_weights(model, **clustering_params)
 ```
 
 We're now almost ready to finetune our model with clustered weights. However, recall from the tips mentioned above that it is important to decrease the learning rate when doing so. That's why we're redefining our [Adam optimizer](https://www.machinecurve.com/index.php/2019/11/03/extensions-to-gradient-descent-from-momentum-to-adabound/) with a lower learning rate (`1e-4` by default):
 
-```
+```python
 # Decrease learning rate (see tips in article!)
 decreased_lr_optimizer = tensorflow.keras.optimizers.Adam(lr=1e-5)
 ```
 
 We then recompile the model and finetune _for just one epoch_:
 
-```
+```python
 # Compile wrapped model
 wrapped_model.compile(
   loss=tensorflow.keras.losses.categorical_crossentropy,
@@ -348,7 +348,7 @@ wrapped_model.fit(input_train, target_train,
 
 Here, too, we must investigate how well the clustered model generalizes. We add the same metrics _and also print the outcomes of the previous evaluation step:_
 
-```
+```python
 # Generate generalization metrics for clustered model
 clustered_score = model.evaluate(input_test, target_test, verbose=0)
 print(f'Regular CNN - Test loss: {score[0]} / Test accuracy: {score[1]}')
@@ -365,7 +365,7 @@ For comparing the clustered and original models, we must do a few things:
 
 First of all, we strip the wrappers and store our file:
 
-```
+```python
 # Strip clustering
 final_model = tfmot.clustering.keras.strip_clustering(wrapped_model)
 
@@ -377,7 +377,7 @@ print(f'Clustered model saved: {keras_file_clustered}')
 
 Then, we're using a Python definition provided by TensorFlow (Apache 2.0 licensed) to get the size of our gzipped model:
 
-```
+```python
 # Measuring the size of your pruned model
 # (source: https://www.tensorflow.org/model_optimization/guide/pruning/pruning_with_keras#fine-tune_pre-trained_model_with_pruning)
 
@@ -395,7 +395,7 @@ def get_gzipped_model_size(file):
 
 The last thing is comparing the sizes of both models when compressed:
 
-```
+```python
 print("Size of gzipped original Keras model: %.2f bytes" % (get_gzipped_model_size(keras_file)))
 print("Size of gzipped clustered Keras model: %.2f bytes" % (get_gzipped_model_size(keras_file_clustered)))
 ```
@@ -414,7 +414,7 @@ Open up your Python example, such as your terminal or your Notebook, and run the
 
 In my case, this produced the following numbers:
 
-```
+```python
 Regular CNN - Test loss: 0.02783038549570483 / Test accuracy: 0.9919999837875366
 Clustered CNN - Test loss: 0.027621763848347473 / Test accuracy: 0.9919000267982483
 Size of gzipped original Keras model: 1602422.00 bytes

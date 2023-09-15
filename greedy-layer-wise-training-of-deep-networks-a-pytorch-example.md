@@ -63,7 +63,7 @@ Implementing greedy layer-wise training with PyTorch involves multiple steps:
 
 Let's begin writing some code. Open up a Python supporting IDE, create a file - say, `greedy.py` - or a Jupyter Notebook, and add the following imports:
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -90,7 +90,7 @@ Samples from the CIFAR-10 dataset, which is what you will use for training today
 
 Now that you know what you will use, it's time to actually define your neural network. Here's the full code, which you'll learn more about after the code segment:
 
-```
+```python
 class LayerConfigurableMLP(nn.Module):
   '''
     Layer-wise configurable Multilayer Perceptron.
@@ -145,7 +145,7 @@ Let's break this class apart by its definitions - `__init__`, `forward` and `set
 
 First, however, let's create a definition with **global settings**.
 
-```
+```python
 def get_global_configuration():
     """ Retrieve configuration of the training process. """
 
@@ -176,7 +176,7 @@ For educational purposes, we set `num_epochs` to 1 - to allow you to walk throug
 
 Finally, you set the `layer_dim` to 256. This is the dimensionality of all hidden layers. Obviously, if you want to have a varying layer dimensionality or a different approach, you can alter layer construction and have it your way - but for today's example, having hidden layers with equal dimensionality is the simplest choice :)
 
-```
+```python
 def get_model_configuration():
     """ Retrieve configuration for the model. """
 
@@ -201,7 +201,7 @@ Now that you have specified global and model configurations, it's time to retrie
 
 Its functionality is pretty simple - it initializes the `CIFAR10` dataset with a simple `ToTensor()` transform applied, and inits a `DataLoader` which constructs _shuffled_ batches per your batch size configuration.
 
-```
+```python
 def get_dataset():
   """ Load and convert dataset into inputs and targets """
   config = get_model_configuration()
@@ -232,7 +232,7 @@ When these have been added, a brand new hidden layer that respects the `layer_di
 
 Finally, after restructuring your model, you simply return it for later usage.
 
-```
+```python
 def add_layer(model):
   """ Add a new layer to a model, setting all others to nontrainable. """
   config = get_model_configuration()
@@ -287,7 +287,7 @@ Do note that you're using the HuggingFace Accelerate way of optimization: you fi
 
 In the end, you return the trained `model` as well as the loss value at the end of training, so that you can compare it with the loss value of the next set of epochs, with yet another layer added. This allows you to see whether adding layers yields better performance or whether you've reached layer saturation for your training scenario.
 
-```
+```python
 def train_model(model):
   """ Train a model. """
   config = get_model_configuration()
@@ -352,7 +352,7 @@ In the `greedy_layerwise_training` def, you load the global config, initialize y
 
 When you run your Python script, you call `greedy_layerwise_training()` for training your neural network in a greedy layer-wise fashion.
 
-```
+```python
 def greedy_layerwise_training():
   """ Perform greedy layer-wise training. """
   global_config = get_global_configuration()
@@ -404,7 +404,7 @@ if __name__ == '__main__':
 
 If you want to get started immediately, this is the full code for **greedy layer-wise training with PyTorch:**
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -644,7 +644,7 @@ When you run your script, you should see a base model being trained first (given
 
 Hopefully, this allows you to get a feeling for empirically finding the number of layers that is likely adequate for your PyTorch neural network! :)
 
-```
+```shell
 ====================================================================================================
 >>> TRAINING THE BASE MODEL:
 Files already downloaded and verified

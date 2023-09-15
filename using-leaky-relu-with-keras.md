@@ -78,7 +78,7 @@ Let's see what the Keras API tells us about Leaky ReLU:
 
 It is defined as follows:
 
-```
+```python
 tf.keras.layers.LeakyReLU(alpha=0.3)
 ```
 
@@ -92,13 +92,13 @@ Alpha _is the slope of the curve for all \[latex\]x < 0\[/latex\]._
 
 With traditional ReLU, you directly apply it to a layer, say a `Dense` layer or a `Conv2D` layer, like this:
 
-```
+```python
 model.add(Conv2D(64, kernel_size=(3, 3), activation='relu', kernel_initializer='he_uniform'))
 ```
 
 You don't do this with Leaky ReLU. Instead, you have to apply it as an additional layer, and import it as such:
 
-```
+```python
 # In your imports
 from tensorflow.keras.layers import LeakyReLU
 # In your model
@@ -140,7 +140,7 @@ It is trained with the MNIST dataset and therefore becomes capable of classifyin
 
 Now, open your Explorer, navigate to some folder, and create a Python file - such as `model_leaky_relu.py`. Open a code editor, open the file in your edit, and we can start adding the imports!
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
@@ -154,7 +154,7 @@ import matplotlib.pyplot as plt
 
 We can next specify some configuration variables:
 
-```
+```python
 # Model configuration
 img_width, img_height = 28, 28
 batch_size = 250
@@ -175,7 +175,7 @@ We will use a [minibatch approach](https://www.machinecurve.com/index.php/2019/1
 
 We can next proceed with data preparation:
 
-```
+```python
 # Load MNIST dataset
 (input_train, target_train), (input_test, target_test) = mnist.load_data()
 
@@ -204,7 +204,7 @@ This essentially resolves to these steps:
 
 We can next define our model's architecture.
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3), input_shape=input_shape))
@@ -235,7 +235,7 @@ A few important observations:
 
 Next, we can specify our hyperparameters and start the training process:
 
-```
+```python
 # Compile the model
 model.compile(loss=tensorflow.keras.losses.categorical_crossentropy,
               optimizer=tensorflow.keras.optimizers.Adam(),
@@ -255,7 +255,7 @@ We assign the results of fitting the data to the configured model to the `histor
 
 Finally, we can add code for performance testing and visualization:
 
-```
+```python
 # Generate generalization metrics
 score = model.evaluate(input_test, target_test, verbose=0)
 print(f'Test loss for Keras Leaky ReLU CNN: {score[0]} / Test accuracy: {score[1]}')
@@ -286,7 +286,7 @@ The second and third block simply use Matplotlib to visualize the accuracy and l
 
 If you are interested, you can also copy the full model code here:
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential

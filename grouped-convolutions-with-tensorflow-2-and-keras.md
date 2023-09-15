@@ -98,7 +98,7 @@ Using grouped convolutions with TensorFlow 2 and Keras is actually really easy. 
 
 For example, if you have a two-dimensional convolutional layer that outputs 64 feature maps, you can turn it into a grouped convolution that outputs 4x16 feature maps by simply specifying this in layer initialization:
 
-```
+```python
 Conv2D(64, (3, 3), groups=4)
 ```
 

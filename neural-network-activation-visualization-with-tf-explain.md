@@ -145,7 +145,7 @@ As you can see, it is an image clasification dataset with 32x32 pixel RGB images
 
 Here's the full model code from the ["How to use Conv2D with Keras?"](https://www.machinecurve.com/index.php/2020/03/30/how-to-use-conv2d-with-keras/) post:
 
-```
+```python
 from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D
@@ -217,13 +217,13 @@ The first thing to do when we want to visualize the activations during the train
 
 The first thing we have to do is adding the `ActivationsVisualizationCallback` to the imports we already have:
 
-```
+```python
 from tf_explain.callbacks.activations_visualization import ActivationsVisualizationCallback
 ```
 
 ...so that they become:
 
-```
+```python
 from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D
@@ -238,7 +238,7 @@ As you could have guessed by now, using `tf-explain` during training works by me
 
 So, in order to make this work, define a new callback just below the `model.compile` step:
 
-```
+```python
 # Define the Activation Visualization callback
 output_dir = './visualizations'
 callbacks = [
@@ -264,7 +264,7 @@ Now, wait a second! Layers name? What is this?
 
 Well, in Keras, every layer gets assigned a name. Take a look at the [model summaries we can generate](https://www.machinecurve.com/index.php/2020/04/01/how-to-generate-a-summary-of-your-keras-model/), to give just one example. You'll see names like `conv2d_1` - but you can also provide your own. Let's do this, and replace the second `model.add` with:
 
-```
+```python
 model.add(Conv2D(64, kernel_size=(3, 3), activation='relu', name='visualization_layer'))
 ```
 
@@ -274,7 +274,7 @@ Now, `tf-explain` will understand what layer must be visualized.
 
 Now that we have prepared our callback, it's time to use it. This is really as simple as adding the callbacks to the training process, i.e., to `model.fit`:
 
-```
+```python
 # Fit data to model
 history = model.fit(input_train, target_train,
             batch_size=batch_size,
@@ -290,7 +290,7 @@ I.e.: `callbacks=callbacks`.
 
 Time to run the model! Save your code as `activation-visualization-training.py` (or some other Python file), open up a terminal / environment where the dependencies are installed (being Tensorflow 2.x and `tf-explain`), and run the model:
 
-```
+```shell
 python activation-visualization-training.py
 ```
 
@@ -309,7 +309,7 @@ Contrary to what you are used to, time between epochs will be a little bit longe
 
 Now, for those who wish to obtain the full model code at once - for example, to start playing with the code straight away - here you go :)
 
-```
+```python
 from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D
@@ -388,7 +388,7 @@ This could be odd, but it isn't. Recall from the introduction that _visualizatio
 
 So let's do that. Open up your terminal again (possibly the same one as you trained your model in), `cd` to the folder where your `.py` file is located, and start TensorBoard:
 
-```
+```shell
 tensorboard --logdir=./visualizations
 ```
 
@@ -421,13 +421,13 @@ Of course, the first thing that must be done is adding `tf-explain` to the impor
 
 That's why this must be added to the imports:
 
-```
+```python
 from tf_explain.core.activations import ExtractActivations
 ```
 
 So that they become:
 
-```
+```python
 from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D
@@ -440,7 +440,7 @@ from tf_explain.core.activations import ExtractActivations
 
 Now that we have imported the `tf-explain` functionality that we need, we can instantiate the explainer directly below `model.fit`:
 
-```
+```python
 # Define the Activation Visualization explainer
 index = 250
 image = input_test[index].reshape((1, 32, 32, 3))
@@ -463,7 +463,7 @@ Lets take a look at this code line by line:
 
 As with the _during training explanation_, we must specify the layer name here as well - so replace the second `model.add` in your code with:
 
-```
+```python
 model.add(Conv2D(64, kernel_size=(3, 3), activation='relu', name='visualization_layer'))
 ```
 

@@ -130,7 +130,7 @@ Here it is, the full model code for our Question Answering Pipeline with Hugging
 - We initialize the `question-answering` Pipeline allowing us to easily create the Question Answering pipeline, because it utilizes the [DistilBERT model](https://huggingface.co/distilbert-base-cased) fine-tuned to [SQuAD](https://huggingface.co/distilbert-base-cased-distilled-squad).
 - We then generate the answer from the context-based question, and print it on screen.
 
-```
+```python
 from transformers import pipeline
 
 # Open and read the article
@@ -148,13 +148,13 @@ print(f"Answer: '{answer['answer']}' with score {answer['score']}")
 
 With one of the recent versions of HuggingFace Transformers, you might run into this issue:
 
-```
+```shell
 RuntimeError: Expected tensor for argument #1 'indices' to have scalar type Long; but got torch.IntTensor instead (while checking arguments for embedding)
 ```
 
 The fix so far is to install the most recent `master` branch with `pip`:
 
-```
+```bash
 pip install git+https://github.com/huggingface/transformers
 ```
 

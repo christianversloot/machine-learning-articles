@@ -71,7 +71,7 @@ As you likely understand by now, **applying valid padding** happens during the m
 
 So, for example, a simple model with three convolutional layers using the Keras Sequential API always starts with the `Sequential` instantiation:
 
-```
+```python
 # Create the model
 model = Sequential()
 ```
@@ -82,7 +82,7 @@ Subsequently, the three `Conv` layers can be added. In our case, they are two-di
 
 The value for `input_shape = (28, 28, 1)`.
 
-```
+```python
 model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape, padding='valid'))
 model.add(Conv2D(64, kernel_size=(3, 3), activation='relu'))
 model.add(Conv2D(128, kernel_size=(3, 3), activation='relu', padding='valid'))
@@ -90,7 +90,7 @@ model.add(Conv2D(128, kernel_size=(3, 3), activation='relu', padding='valid'))
 
 Next, we can add a `Flatten` layer - which flattens the multidimensional outputs of the last `Conv2D` layer into one-dimensional format - and two `Dense` layers, [which generate a multiclass probability distribution using Softmax](https://www.machinecurve.com/index.php/2020/01/08/how-does-the-softmax-activation-function-work/). This is perfect for classification 😎
 
-```
+```python
 model.add(Flatten())
 model.add(Dense(256, activation='relu'))
 model.add(Dense(no_classes, activation='softmax'))
@@ -100,7 +100,7 @@ model.add(Dense(no_classes, activation='softmax'))
 
 The full stack of layers:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape, padding='valid'))
@@ -152,14 +152,14 @@ Let's now take a look at "same" or "zero" padding - which _doesn't reduce the fe
 
 Models that have same or zero padding are not too different from the ones using valid padding. Equally to those, such models - when using the `Sequential` API - are initialized first:
 
-```
+```python
 # Create the model
 model = Sequential()
 ```
 
 After which the `Conv` layers are added. In our case, they are `Conv2D` again, with 'same' as the value for `padding` for all three layers:
 
-```
+```python
 model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape, padding='same'))
 model.add(Conv2D(64, kernel_size=(3, 3), activation='relu', padding='same'))
 model.add(Conv2D(128, kernel_size=(3, 3), activation='relu', padding='same'))
@@ -167,7 +167,7 @@ model.add(Conv2D(128, kernel_size=(3, 3), activation='relu', padding='same'))
 
 Then, like the "valid" padding scenario, we add a Flatten layer and two Dense ones, ending with a Softmax activated output:
 
-```
+```python
 model.add(Flatten())
 model.add(Dense(256, activation='relu'))
 model.add(Dense(no_classes, activation='softmax'))
@@ -179,7 +179,7 @@ Now, we've got our model :)
 
 Here too, you can obtain the full model code at once if you wish:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape, padding='same'))
@@ -227,7 +227,7 @@ Indeed, as we can now observe, the _shape_ of our feature maps has stayed the sa
 
 Applying causal padding is simple: just apply `causal` to your `Conv1D` model to pad zeroes to the front of your inputs.
 
-```
+```python
 model.add(Conv1D(32, kernel_size=4, activation='relu', input_shape=input_shape, padding='causal'))
 ```
 

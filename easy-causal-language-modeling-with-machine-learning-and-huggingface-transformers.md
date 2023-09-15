@@ -44,7 +44,7 @@ This **fully working code example** shows how you can create a generative langua
 
 Make sure to read the rest of the article to understand everything in more detail, but here you go 🚀
 
-```
+```python
 from transformers import AutoModelForCausalLM, AutoTokenizer, top_k_top_p_filtering
 import torch
 from torch.nn import functional as F
@@ -155,7 +155,7 @@ Here's what happens under the hood:
 - We pass the tokenized phrase through the model and take the [logits](https://www.machinecurve.com/index.php/2020/01/08/how-does-the-softmax-activation-function-work/#logits-layer-and-logits) from the last layer. We then keep the top `30` contributing logits, unless we get a cumulative probability of `>= 1.0` with fewer logits. We [Softmax](https://www.machinecurve.com/index.php/2020/01/08/how-does-the-softmax-activation-function-work) the outcome to generate pseudoprobabilities, generate the next token based on this outcome, and generate the result.
 - Finally, we show the result on screen.
 
-```
+```python
 from transformers import AutoModelForCausalLM, AutoTokenizer, top_k_top_p_filtering
 import torch
 from torch.nn import functional as F
@@ -192,7 +192,7 @@ print(result_string)
 
 Running the code for the first time indeed ensures that the model is downloaded:
 
-```
+```shell
 Downloading: 100%|█████████████████████████████████████████████████████████████████████| 665/665 [00:00<00:00, 333kB/s]
 Downloading: 100%|████████████████████████████████████████████████████████████████| 1.04M/1.04M [00:00<00:00, 1.41MB/s]
 Downloading: 100%|███████████████████████████████████████████████████████████████████| 456k/456k [00:00<00:00, 650kB/s]

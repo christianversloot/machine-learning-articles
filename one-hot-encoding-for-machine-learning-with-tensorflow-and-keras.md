@@ -120,7 +120,7 @@ It is one of the most widely used datasets in Machine Learning education because
 
 Loading data from the MNIST dataset is really easy. Let's open up a code editor, create a Python file and specify some imports - as well as a call to `load_data()`, with which we can load the MNIST dataset:
 
-```
+```python
 from tensorflow.keras.datasets import mnist
 (X_train, y_train), (X_test, y_test) = mnist.load_data()
 
@@ -132,7 +132,7 @@ print(y_test.shape)
 
 If we run it, we see this text appear on screen after a while:
 
-```
+```python
 (60000, 28, 28)
 (60000,)
 (10000, 28, 28)
@@ -145,7 +145,7 @@ In other words, we can see that our [training set](https://www.machinecurve.com/
 
 Let's now inspect one sample in more detail.
 
-```
+```python
 index = 128
 print(y_train[index])
 print(y_train[index].shape)
@@ -153,7 +153,7 @@ print(y_train[index].shape)
 
 The output is as follows:
 
-```
+```python
 1
 ()
 ```
@@ -170,13 +170,13 @@ And if the library that you are using for building your Neural Network offers a 
 
 Now, let's add to the imports:
 
-```
+```python
 from tensorflow.keras.utils import to_categorical
 ```
 
 And to the end of our code:
 
-```
+```python
 y_train = to_categorical(y_train)
 y_test = to_categorical(y_test)
 
@@ -186,7 +186,7 @@ print(y_train[index].shape)
 
 The output for this part is now as follows:
 
-```
+```python
 [0. 1. 0. 0. 0. 0. 0. 0. 0. 0.]
 (10,)
 ```
@@ -201,7 +201,7 @@ Let's now clean up our code a bit. Make sure that it looks as follows:
 - Load the MNIST dataset.
 - Convert targets into one-hot encoded format.
 
-```
+```python
 # Imports
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.utils import to_categorical
@@ -216,7 +216,7 @@ y_test = to_categorical(y_test)
 
 We can now continue and add more code for constructing the actual ConvNet. Read [here](https://www.machinecurve.com/index.php/2019/09/17/how-to-create-a-cnn-classifier-with-keras/) if you wish to receive more instructions about doing this; we'll simply show the code next.
 
-```
+```python
 # Imports
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.utils import to_categorical, normalize

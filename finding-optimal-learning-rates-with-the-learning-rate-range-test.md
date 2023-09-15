@@ -59,7 +59,7 @@ Now, if we wish to understand the concept of the Learning Rate Range Test in mor
 
 When specifying an optimizer, it's possible to configure the learning rate most of the times. For example, the Adam optimizer in Keras (Keras, n.d.):
 
-```
+```python
 keras.optimizers.Adam(learning_rate=0.001, beta_1=0.9, beta_2=0.999, amsgrad=False)
 ```
 
@@ -132,7 +132,7 @@ Let's now take a look at two ways of setting a learning rate:
 
 Let's take a look at the Adam optimizer implementation for Keras again (Keras, n.d.):
 
-```
+```python
 keras.optimizers.Adam(learning_rate=0.001, beta_1=0.9, beta_2=0.999, amsgrad=False)
 ```
 
@@ -276,7 +276,7 @@ The first thing I always do is to import everything we need:
 - [Sparse categorical crossentropy](https://www.machinecurve.com/index.php/2019/10/06/how-to-use-sparse-categorical-crossentropy-in-keras/), which is our loss function for today;
 - The [SGD](https://www.machinecurve.com/index.php/2019/10/24/gradient-descent-and-its-variants/) and [Adam](https://www.machinecurve.com/index.php/2019/11/03/extensions-to-gradient-descent-from-momentum-to-adabound/) optimizers, for which we'll compute the optimum learning rates.
 
-```
+```python
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D, MaxPooling2D
@@ -290,7 +290,7 @@ from keras_lr_finder import LRFinder
 
 Next, we set the configuration for our test scenario. We'll use batches of 250 samples for testing. Our images are 28 x 28 pixels and are one-channeled, as the MNIST dataset is grayscale. The number of classes equals 10, while we'll test for 5 epochs (unless one of the abort conditions, such as a loss value that goes out of the roof, occurs before then). Our estimated start learning rate is \[latex\]10^{-4}\[/latex\] while we stop at \[latex\]10^0\[/latex\]. When generating a plot of our test results, we use a moving average of 20 loss values for smoothing the line, to make our results more interpretable.
 
-```
+```python
 # Model configuration
 batch_size = 250
 img_width, img_height, img_num_channels = 28, 28, 1
@@ -311,7 +311,7 @@ The next things we do are related to the dataset:
 - This is followed by casting the data into `float32` format (presumably speeding up training, especially when using GPU based TensorFlow) and reshaping the data into the `input_shape` we specified.
 - Finally, we scale the data.
 
-```
+```python
 # Load MNIST data
 (input_train, target_train), (input_test, target_test) = mnist.load_data()
 
@@ -331,7 +331,7 @@ input_test = input_test / 255
 
 Then, we specify the model architecture. It's not the most important thing for today, but here it is. It's a simple [ConvNet](https://www.machinecurve.com/index.php/2018/12/07/convolutional-neural-networks-and-their-components-for-computer-vision/) using [Max Pooling](https://www.machinecurve.com/index.php/2020/01/30/what-are-max-pooling-average-pooling-global-max-pooling-and-global-average-pooling/):
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
@@ -348,7 +348,7 @@ model.add(Dense(no_classes, activation='softmax'))
 
 Now, here's the interesting part. We specified the model architecture in our previous step, so we can now decide about which tests we want to perform. For the sake of simplicity, we specify only two, but you can test as much as you'd like:
 
-```
+```python
 # Determine tests you want to perform
 tests = [
   (SGD(), 'SGD optimizer'),
@@ -362,7 +362,7 @@ As you can see, the tests that we will perform today will find the best learning
 
 Now that we have specified the tests, let's perform them! 😎 In preparation for this, let's specify three 'containers' for data - one for the learning rates per step, one for the corresponding losses per step, one for the loss changes (a.k.a. deltas) and one for the labels of the tests.
 
-```
+```python
 # Set containers for tests
 test_learning_rates = []
 test_losses = []
@@ -376,7 +376,7 @@ Once the test has finished - this may either be the case because we have complet
 
 After smoothing, we store the learning rates per step, as well as the test losses and the labels, to the containers we specified before. This iteration will ensure that all tests are performed in line with how we want them to perform.
 
-```
+```python
 # Perform each test
 for test_optimizer, label in tests:
 
@@ -414,7 +414,7 @@ Now that we have the outcomes, we can visualize them! :) We'll use Matplotlib fo
 
 For each, the first thing we do is iterate over the containers, and generate a plot for each test with `plt.plot`. In our case, this generates two plots, both on top of each other. This is followed by plot configuration - for example, we set the x axis to logarithmic scale, and finally by a popup that visualizes the end result.
 
-```
+```python
 # Generate plot for Loss Deltas
 for i in range(0, len(test_learning_rates)):
   plt.plot(test_learning_rates[i][moving_average:], test_loss_changes[i], label=labels[i])
@@ -457,7 +457,7 @@ If you wish, it's also possible to obtain the full model code at once :)
 
 Here you go:
 
-```
+```python
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D, MaxPooling2D

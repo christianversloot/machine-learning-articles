@@ -93,7 +93,7 @@ Your first lines of code will cover the imports that you will need in the rest o
 - Recall that TensorFlow has a variety of callbacks that make your modelling life easier. An example of these callbacks is the TensorBoard callback, which allows you to have your training progress exported to a great tool for visualization. Finally, you will import a Keras `util` called `plot_model` for plotting the structure of your model.
 - What rests are other imports. Our dataset is represented in `tensorflow_datasets` and finally you will also need Matplotlib's `pyplot` librari for visualization purposes.
 
-```
+```python
 import os
 import tensorflow
 from tensorflow.keras.layers import Conv2D,\
@@ -113,7 +113,7 @@ import matplotlib.pyplot as plt
 
 In my view, it's bad practice to scatter a variety of configuration options throughout your model. Rather, I prefer to define them in one definition, allowing me to reuse them across the model (and should I ever need to deploy my model into a production setting, I can for example provide my configuration through a JSON environment variable which can be easily read into Python as a `dict`). Here's what the configuration definition looks like. Below, we'll discuss the components:
 
-```
+```python
 '''
 	U-NET CONFIGURATION
 '''
@@ -171,7 +171,7 @@ You will start with building a convolutional block and creating many of them in 
 
 Here's the structure of your `conv_block`:
 
-```
+```python
 '''
 	U-NET BUILDING BLOCKS
 '''
@@ -241,7 +241,7 @@ Then, if it's not the last block, you'll add the `skip_input` to the `skip_input
 
 Finally, you return both `x` (which now has passed through the entire contracting path) and the `skip_inputs` skip connection Tensors produced when doing so.
 
-```
+```python
 def contracting_path(x):
 	'''
 		U-Net contracting path.
@@ -277,7 +277,7 @@ In the `contracting_path` definition, you were using `compute_number_of_filters`
 
 This utility function is actually really simple: you take the number of filters in your first convolutional block (which, per your model configuration is 64) and multiply it with \[latex\]2^{\\text{level}}\[/latex\]. For example, at the third level (with index = 2) your convolutional block has \[latex\]64 \\times 2^2 = 256\[/latex\] filters.
 
-```
+```python
 def compute_number_of_filters(block_number):
 	'''
 		Compute the number of filters for a specific
@@ -325,7 +325,7 @@ Finally, at the last layer, you apply an 1x1 convolution (preserving the width a
 
 Here's the code for creating your upsampling block:
 
-```
+```python
 def upconv_block(x, filters, skip_input, last_block = False):
 	'''
 		U-Net upsampling block.
@@ -373,7 +373,7 @@ Then, you iterate over the number of filters, compute whether it's the last bloc
 
 Now, should you feed your Tensor to all the blocks if they were composed, they would make a complete pass through the contracting path and the expansive path. Time to stitch together your U-Net components!
 
-```
+```python
 def expansive_path(x, skip_inputs):
 	'''
 		U-Net expansive path.
@@ -404,7 +404,7 @@ Your inputs are then passed through the `contracting_path`, which yields the con
 
 These are then fed to the `expansive_path` which produces the expanded data. Note that we choose to explicitly _not_ model a Softmax activation function, because we push it to the loss function, [as prescribed by TensorFlow](https://datascience.stackexchange.com/questions/73093/what-does-from-logits-true-do-in-sparsecategoricalcrossentropy-loss-function). Finally, we initialize the `Model` class with our input data as our starting point and the expanded data as our ending point. The model is named `U-Net`.
 
-```
+```python
 def build_unet():
 	''' Construct U-Net. '''
 	config = configuration()
@@ -452,7 +452,7 @@ The following happens within this definition:
 - Some utilities will now describe your model - both [visually](https://www.machinecurve.com/index.php/2019/10/07/how-to-visualize-a-model-with-keras/) and by means of a [summary](https://www.machinecurve.com/index.php/2020/04/01/how-to-generate-a-summary-of-your-keras-model/).
 - Finally, you return the initialized `model`.
 
-```
+```python
 '''
 	U-NET TRAINING PROCESS BUILDING BLOCKS
 '''
@@ -509,7 +509,7 @@ Source: Parkhi et al. (2012); TensorFlow Datasets.
 
 Loading the dataset is quite simple. Because the TensorFlow dataset contains training and testing data _only_, and because you will need three splits (train, val and test), you will _redefine_ the split per your model configuration, and pass it to `tfds.load`. By returning info (`with_info=True`), you will be able to read some metadata interesting later.
 
-```
+```python
 def load_dataset():
 	'''	Return dataset with info. '''
 	config = configuration()
@@ -542,7 +542,7 @@ Let's now write code for each of these bullet points.
 
 Performing **image normalization** simply involves casting your Tensors to `float32` format and division by `255.0`. In addition to this, you subtract 1 from the mask's class, because they range from 1-3 and we want them to range from 0-2:
 
-```
+```python
 def normalize_sample(input_image, input_mask):
 	''' Normalize input image and mask class. '''
 	# Cast image to float32 and divide by 255
@@ -556,7 +556,7 @@ def normalize_sample(input_image, input_mask):
 
 Next, you implement this in your definition for **sample-level preprocessing**. The input image is resized to the size specified in your model configuration, and the same is true for your mask. Finally, both the input image and mask are normalized, and returned.
 
-```
+```python
 def preprocess_sample(data_sample):
 	''' Resize and normalize dataset samples. '''
 	config = configuration()
@@ -577,7 +577,7 @@ def preprocess_sample(data_sample):
 
 **Data augmentation** allows TensorFlow to perform arbitrary image manipulations on your input Tensors. In today's tutorial, you will implement data augmentation by having the sammples flipped horizontally and vertically at random. We use the same seed across the calls to ensure that your inputs and labels are manipulated in the same way.
 
-```
+```python
 def data_augmentation(inputs, labels):
 	''' Perform data augmentation. '''
 	# Use the same seed for deterministic randomness over both inputs and labels.
@@ -594,7 +594,7 @@ def data_augmentation(inputs, labels):
 
 Next up is computing **sample weights**. Given the weights for each class, you compute the relative power of these class weights by means of `reduce_sum`. Subsequently, you compute the sample weights for each class, and return this as an extra array to be used in `model.fit`.
 
-```
+```python
 def compute_sample_weights(image, mask):
 	''' Compute sample weights for the image given class. '''
 	# Compute relative weight of class
@@ -614,7 +614,7 @@ Finally, you can combine all the definitions above in **dataset-level preprocess
 - When preprocessing your **training data** or **validation data**, preprocessing, data augmentation and class weighting is performed, including some utility processing to improve the training process.
 - The utility functions and class weighting is left out when preprocessing your **testing data**, because they are not necessary as during testing the model is not trained.
 
-```
+```python
 def preprocess_dataset(data, dataset_type, dataset_info):
 	''' Fully preprocess dataset given dataset type. '''
 	config = configuration()
@@ -654,7 +654,7 @@ What's left is writing some utility functions. If you're familiar with TensorFlo
 
 Today, we're using these callbacks to integrate TensorBoard logging into your model. This way, you'll be able to evaluate progress and model training during and after your training process.
 
-```
+```python
 def training_callbacks():
 	''' Retrieve initialized callbacks for model.fit '''
 	return [
@@ -670,7 +670,7 @@ def training_callbacks():
 
 The last utility function is related to data visualization. We want to understand what the performance of our model will be, so we're going to construct a visualization util that displays the **source image**, the **actual mask**, the **predicted mask** and the **predicted mask overlayed on top of the source image**. For doing so, we'll need to create a function that generates a mask from the model prediction:
 
-```
+```python
 def probs_to_mask(probs):
 	''' Convert Softmax output into mask. '''
 	pred_mask = tensorflow.argmax(probs, axis=2)
@@ -681,7 +681,7 @@ Across the third dimension, it simply takes the class index with the maximum val
 
 You integrate this in `generate_plot`, which uses Matplotlib to generate four plots with the source image, actual mask, predicted mask and the overlay:
 
-```
+```python
 def generate_plot(img_input, mask_truth, mask_probs):
 	''' Generate a plot of input, truthy mask and probability mask. '''
 	fig, axs = plt.subplots(1, 4)
@@ -715,7 +715,7 @@ def generate_plot(img_input, mask_truth, mask_probs):
 
 The final step is merging everything together into an example that works:
 
-```
+```python
 def main():
 	''' Run full training procedure. '''
 
@@ -773,7 +773,7 @@ if __name__ == '__main__':
 
 If you want to get started immediately, that is possible too :) Here is the full model code:
 
-```
+```python
 import os
 import tensorflow
 from tensorflow.keras.layers import Conv2D,\

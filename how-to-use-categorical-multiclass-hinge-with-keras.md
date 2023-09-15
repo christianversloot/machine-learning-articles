@@ -41,7 +41,7 @@ Let's go! 😎
 
 This code example demonstrates quickly **how to use categorical (multiclass) hinge loss with TensorFlow 2 based Keras**. You can use this in your model straight away. If you want to understand the background details for multiclass hinge, make sure to read the rest of this tutorial as well 🚀
 
-```
+```python
 loss_function_used = 'categorical_hinge'
 model.compile(loss=loss_function_used, optimizer=optimizer_used, metrics=additional_metrics)
 ```
@@ -104,7 +104,7 @@ Next, open a development environment as well as the file, and you can start codi
 
 First, we add the imports:
 
-```
+```python
 '''
   Keras model discussing Categorical (multiclass) Hinge loss.
 '''
@@ -129,7 +129,7 @@ We also need **Matplotlib** for generating visualizations of our dataset, **Nump
 
 We next add some configuration options:
 
-```
+```python
 # Configuration options
 num_samples_total = 3000
 training_split = 1000
@@ -155,7 +155,7 @@ The model will train for 30 epochs with a batch size of 5 samples per forward pa
 
 Next, we can generate the data:
 
-```
+```python
 # Generate data
 X, targets = make_blobs(n_samples = num_samples_total, centers = [(0,0), (15,15), (0,15)], n_features = num_classes, center_box=(0, 1), cluster_std = 1.5)
 categorical_targets = to_categorical(targets)
@@ -181,7 +181,7 @@ Finally, we set the `input_shape` based on the length of our feature vector, whi
 
 We can finally visualize the data we generated:
 
-```
+```python
 # Generate scatter plot for training data
 plt.scatter(X_training[:,0], X_training[:,1])
 plt.title('Three clusters ')
@@ -212,7 +212,7 @@ Another package, which can also be installed with `pip`, is Sebastian Raschka's 
 
 We will create a very simple model today, a four-layered (two hidden layers, one input layer and one output layer) MLP:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Dense(4, input_shape=input_shape, activation='relu', kernel_initializer='he_uniform'))
@@ -226,7 +226,7 @@ More specifically, we use the Keras Sequential API which allows us to stack mult
 
 Next, we configure the model and start the training process:
 
-```
+```python
 # Configure the model and start training
 model.compile(loss=loss_function_used, optimizer=optimizer_used, metrics=additional_metrics)
 history = model.fit(X_training, Targets_training, epochs=num_epochs, batch_size=batch_size, verbose=1, validation_split=validation_split)
@@ -244,7 +244,7 @@ Next, we must add some more code for testing the model's ability to generalize t
 
 In order to test model performance, we add some code that evaluates the model with the testing set:
 
-```
+```python
 # Test the model after training
 test_results = model.evaluate(X_testing, Targets_testing, verbose=1)
 print(f'Test results - Loss: {test_results[0]} - Accuracy: {test_results[1]*100}%')
@@ -258,7 +258,7 @@ What it will do is this: it takes the testing data (both features and targets) a
 
 I must admit, I had a little help from dr. Sebastian Raschka here, the creator of Mlxtend (also see [https://github.com/rasbt/mlxtend/issues/607](https://github.com/rasbt/mlxtend/issues/607)). As noted before, we had to convert our targets into categorical format, or e.g. \[latex\]target = 2\[/latex\] into \[latex\]target = \[0, 0, 1\]\[/latex\]. Mlxtend does not natively support this, but fortunately, Raschka helped out by creating a helper class that embeds the model yet converts the way it makes predictions (back into non-categorical format). This looks as follows:
 
-```
+```python
 '''
   The Onehot2Int class is used to adapt the model so that it generates non-categorical data.
   This is required by the `plot_decision_regions` function.
@@ -291,7 +291,7 @@ plt.show()
 
 Finally, we can [visualize the training process](https://www.machinecurve.com/index.php/2019/10/08/how-to-visualize-the-training-process-in-keras/) itself by adding some extra code - which essentially plots the Keras `history` object with Matplotlib:
 
-```
+```python
 # Visualize training process
 plt.plot(history.history['loss'], label='Categorical Hinge loss (training data)')
 plt.plot(history.history['val_loss'], label='Categorical Hinge loss (validation data)')
@@ -397,7 +397,7 @@ All in all, we've got a working model using categorical hinge in Keras!
 
 When merging all code together, we get this:
 
-```
+```python
 '''
   Keras model discussing Categorical (multiclass) Hinge loss.
 '''

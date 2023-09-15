@@ -130,7 +130,7 @@ That's all!
 
 In today's model, we're setting up a pipeline with HuggingFace's DistilBERT-pretrained and SST-2-fine-tuned Sentiment Analysis model. This is really easy, because it belongs to HuggingFace's out-of-the-box pipelines:
 
-```
+```python
     "sentiment-analysis": {
         "impl": TextClassificationPipeline,
         "tf": TFAutoModelForSequenceClassification if is_tf_available() else None,
@@ -155,7 +155,7 @@ Implementing the pipeline is really easy:
 - We import the `pipeline` class from `transformers` and initialize it with a `sentiment-analysis` task. This ensures that the PyTorch and TensorFlow models are initialized following the SST-2-fine-tuned model above.
 - We can then easily call the Sentiment Analyzer and print the results.
 
-```
+```python
 from transformers import pipeline
 sentimentanalyzer = pipeline("sentiment-analysis")
 

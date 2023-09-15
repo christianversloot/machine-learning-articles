@@ -96,7 +96,7 @@ Having sparse data is common when you are creating Machine Learning models relat
 
 Suppose that we take the first feature and use standardization to rescale it:
 
-```
+```python
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 samples_feature = np.array([0, 0, 1.26, 0, 2.12, 0, 0, 0, 0, 0, 0, 0]).reshape(-1, 1)
@@ -108,7 +108,7 @@ print(standardized_dataset)
 
 This would be the output:
 
-```
+```python
 [[-0.43079317]
  [-0.43079317]
  [ 1.49630526]
@@ -139,7 +139,7 @@ Fortunately, there is a way in which Feature Scaling can be applied to Sparse Da
 
 As we can see, it uses the maximum absolute value to perform the scaling - and it therefore works in a similar way compared to regular min-max normalization, except then that we use absolute values here. The MaxAbsScaler does not center the data, but rather scales the range. This is why it works perfectly with sparse data. In fact, it is the recommenmded
 
-```
+```python
 
 import numpy as np
 from sklearn.preprocessing import MaxAbsScaler
@@ -152,7 +152,7 @@ print(standardized_dataset)
 
 ...indeed gives the sparsity and scaling that we were looking for:
 
-```
+```python
 [[0. ]
  [0. ]
  [0.59433962]
@@ -173,7 +173,7 @@ Great, I thought, but why use the `MaxAbsScaler` - and why cannot we use simple 
 
 Especially because the output would be the same if we applied the `MinMaxScaler`, which is Scikit-learn's implementation of min-max normalization, to the dataset we used above:
 
-```
+```python
 [[0. ]
  [0. ]
  [0.59433962]
@@ -192,13 +192,13 @@ Now, here's the catch - all values in the original input array to the scaler wer
 
 What if we used a dataset where negative values are present?
 
-```
+```python
 samples_feature = np.array([-2.40, -6.13, 0.24, 0, 0, 0, 0, 0, 0, 2.13]).reshape(-1, 1)
 ```
 
 Min-max normalization would produce this:
 
-```
+```python
 [[0.45157385]
  [0. ]
  [0.77118644]
@@ -215,7 +215,7 @@ Bye bye sparsity!
 
 The output of our `MaxAbsScaler` is good, as we would expect:
 
-```
+```python
 [[-0.39151713]
  [-1. ]
  [ 0.03915171]

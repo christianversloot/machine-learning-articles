@@ -44,19 +44,19 @@ With these code examples, you can immediately apply L1, L2 and Elastic Net Regul
 
 ### L1 Regularization example
 
-```
+```python
 model.add(Conv2D(64, kernel_size=(3, 3), activation='relu', kernel_regularizer=tensorflow.keras.regularizers.l1(0.01)))
 ```
 
 ### L2 Regularization example
 
-```
+```python
 model.add(Conv2D(64, kernel_size=(3, 3), activation='relu', kernel_regularizer=tensorflow.keras.regularizers.l2(0.01)))
 ```
 
 ### Elastic Net (L1+L2) Regularization example
 
-```
+```python
 model.add(Conv2D(64, kernel_size=(3, 3), activation='relu', kernel_regularizer=tensorflow.keras.regularizers.l1_l2(l1=0.01, l2=0.01)))
 ```
 
@@ -168,7 +168,7 @@ Secondly, for each layer, regularization can be performed on one (or all) of thr
 
 To each three, an instance of the `tensorflow.keras.regularizers.Regularizer` class can be supplied in order for regularization to work (TensorFlow, 2021). Soon, we'll cover the L1, L2 and Elastic Net instances of this class by means of an example, which are represented as follows (TensorFlow, 2021):
 
-```
+```python
 tensorflow.keras.regularizers.l1(0.)
 tensorflow.keras.regularizers.l2(0.)
 tensorflow.keras.regularizers.l1_l2(l1=0.01, l2=0.01)
@@ -214,7 +214,7 @@ The steps for creating today's model are as follows:
 
 For today's model, we'll be using TensorFlow 2.0 and the corresponding built-in facilities for Keras. From them, we import the Sequential API, and the layers specified above. Besides Keras, we'll also use Numpy for numbers processing and [extra-keras-datasets](https://pypi.org/project/extra-keras-datasets/) for loading the data. Finally, Matplotlib is used for visualizing the model history. Make sure to have these dependencies installed before you run the model.
 
-```
+```python
 import tensorflow.keras
 from extra_keras_datasets import emnist
 import numpy as np
@@ -230,7 +230,7 @@ The next step is to define the configuration for our model. First, we set the ch
 
 We also specify batch size, the number of epochs, and the number of classes (47, because we now have capitalized and lowercase letters as well as digits!). The validation split i.e. how much training data will be set apart for model validation is set to 20% and through verbosity mode, we output everything on screen.
 
-```
+```python
 # Model configuration
 img_width, img_height, num_channels = 28, 28, 1
 input_shape = (img_height, img_width, num_channels)
@@ -245,14 +245,14 @@ verbosity = 1
 
 The first step in loading the data is to use the [Extra Keras Datasets](https://www.machinecurve.com/index.php/2020/01/10/making-more-datasets-available-for-keras/) module and call `load_data()`:
 
-```
+```python
 # Load EMNIST dataset
 (input_train, target_train), (input_test, target_test) = emnist.load_data()
 ```
 
 Next, we add the number of channels to the EMNIST dataset through a `reshape` operation, as they are traditionally not present:
 
-```
+```python
 # Add number of channels to EMNIST data
 input_train = input_train.reshape((len(input_train), img_height, img_width, num_channels))
 input_test  = input_test.reshape((len(input_test), img_height, img_width, num_channels))
@@ -260,7 +260,7 @@ input_test  = input_test.reshape((len(input_test), img_height, img_width, num_ch
 
 We then convert the data types into `float32` format, which presumably speeds up training:
 
-```
+```python
 # Parse numbers as floats
 input_train = input_train.astype('float32')
 input_test = input_test.astype('float32')
@@ -268,7 +268,7 @@ input_test = input_test.astype('float32')
 
 We then normalize the data:
 
-```
+```python
 # Normalize data
 input_train = input_train / 255
 input_test = input_test / 255
@@ -276,7 +276,7 @@ input_test = input_test / 255
 
 Finally, we convert the targets into categorical format, which allows us to use [categorical crossentropy loss](https://www.machinecurve.com/index.php/2019/10/22/how-to-use-binary-categorical-crossentropy-with-keras/):
 
-```
+```python
 # Convert target vectors to categorical targets
 target_train = tensorflow.keras.utils.to_categorical(target_train, no_classes)
 target_test = tensorflow.keras.utils.to_categorical(target_test, no_classes)
@@ -299,7 +299,7 @@ Obviously, you're free to mix and match if desired :)
 
 Applying L1 regularization to the kernel and bias values goes as follows:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape, kernel_regularizer=regularizers.l1(0.01), bias_regularizer=regularizers.l1(0.01)))
@@ -317,7 +317,7 @@ model.add(Dense(no_classes, activation='softmax', kernel_regularizer=regularizer
 
 Regularizing activity instead is also simple:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape, activity_regularizer=regularizers.l1(0.01)))
@@ -335,7 +335,7 @@ model.add(Dense(no_classes, activation='softmax', activity_regularizer=regulariz
 
 Switching from L1 to L2 regularization for your kernel and bias values is simply replacing L1 for L2:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape, kernel_regularizer=regularizers.l2(0.01), bias_regularizer=regularizers.l2(0.01)))
@@ -353,7 +353,7 @@ model.add(Dense(no_classes, activation='softmax', kernel_regularizer=regularizer
 
 The same goes for activity regularization:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape, activity_regularizer=regularizers.l2(0.01)))
@@ -371,7 +371,7 @@ model.add(Dense(no_classes, activation='softmax', activity_regularizer=regulariz
 
 Elastic net, or L1 + L2 regularization, can also be added easily to regularize kernels and biases:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape, kernel_regularizer=regularizers.l1_l2(l1=0.01, l2=0.01), bias_regularizer=regularizers.l1_l2(l1=0.01, l2=0.01)))
@@ -389,7 +389,7 @@ model.add(Dense(no_classes, activation='softmax', kernel_regularizer=regularizer
 
 Once again, the same is true for activity regularization:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape, activity_regularizer=regularizers.l1_l2(l1=0.01, l2=0.01)))
@@ -407,7 +407,7 @@ model.add(Dense(no_classes, activation='softmax', activity_regularizer=regulariz
 
 We then `compile` the model to use categorical crossentropy loss and the [Adam optimizer](https://www.machinecurve.com/index.php/2019/11/03/extensions-to-gradient-descent-from-momentum-to-adabound/#adam). Accuracy is added as an additional metric, which is more understandable to humans:
 
-```
+```python
 model.compile(loss=tensorflow.keras.losses.categorical_crossentropy,
               optimizer=tensorflow.keras.optimizers.Adam(),
               metrics=['accuracy'])
@@ -417,7 +417,7 @@ model.compile(loss=tensorflow.keras.losses.categorical_crossentropy,
 
 Then, we `fit` the data to the model. Here, we set the configuration options that we defined earlier. It starts the training process:
 
-```
+```python
 # Fit data to model
 history = model.fit(input_train, target_train,
             batch_size=batch_size,
@@ -430,7 +430,7 @@ history = model.fit(input_train, target_train,
 
 Once the model has finished training, you'll want to test it with data that the model has never seen before. This is the `input_test` and `target_test` data available to us. By calling `model.evaluate` with this data, we get the results of testing it with the test data:
 
-```
+```python
 # Generate generalization metrics
 score = model.evaluate(input_test, target_test, verbose=0)
 print(f'Test loss: {score[0]} / Test accuracy: {score[1]}')
@@ -438,7 +438,7 @@ print(f'Test loss: {score[0]} / Test accuracy: {score[1]}')
 
 By means of the `history` object to which we assigned the output of `model.fit`, we can [visualize the training process](https://www.machinecurve.com/index.php/2019/10/08/how-to-visualize-the-training-process-in-keras/). This way, you can find out how the loss value and/or accuracy value has evolved over time, for both training and validation data. Here is the code that generates a plot for training/validation loss and training/validation accuracy values:
 
-```
+```python
 # Plot history: Loss
 plt.plot(history.history['loss'], label='Training data')
 plt.plot(history.history['val_loss'], label='Validation data')
@@ -462,7 +462,7 @@ plt.show()
 
 It may be that you just want the model, in order to start playing around. For this purpose, here you've got the full model code at once - just replace the regularizers with the ones you need, possibly guided by the examples from above) ;)
 
-```
+```python
 import tensorflow.keras
 from extra_keras_datasets import emnist
 import numpy as np

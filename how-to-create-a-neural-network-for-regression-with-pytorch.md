@@ -116,7 +116,7 @@ The first thing that we have to do is specifying the imports that will be used f
 
 Next to PyTorch, we will also import two parts (the `load_boston` and `StandardScaler` components) from Scikit-learn. We will need them for loading and preparing the data; they represent as the source and [a preparation mechanism](https://www.machinecurve.com/index.php/2020/11/19/how-to-normalize-or-standardize-a-dataset-in-python/), respectively.
 
-```
+```python
 import torch
 from torch import nn
 from torch.utils.data import DataLoader
@@ -132,7 +132,7 @@ A PyTorch dataset simply is a class that extends the `Dataset` class; in our cas
 
 In the constructor, we receive `X` and `y` representing inputs and targets and possibly a `scale_data` variable for [standardization](https://www.machinecurve.com/index.php/2020/11/19/how-to-normalize-or-standardize-a-dataset-in-python/), being `True` by default. We then check whether the data already has Tensor format - it really needs to be non-Tensor format to be processed. Subsequently, depending on whether we want our data to be [standardized](https://www.machinecurve.com/index.php/2020/11/19/how-to-normalize-or-standardize-a-dataset-in-python/) (which is smart), we apply the `StandardScaler` and immediately transform the data after fitting the scaler to the data. Next, we represent the inputs (`X`) and targets (`y`) as instance variables of each `BostonDataset` object.
 
-```
+```python
 class BostonDataset(torch.utils.data.Dataset):
   '''
   Prepare the Boston dataset for regression
@@ -175,7 +175,7 @@ Yep, that one output value is precisely the target variable that should be learn
 
 In the `forward` pass, we simply feed the input data (`x`) through the model (`self.layers`) and return the result.
 
-```
+```python
 class MLP(nn.Module):
   '''
     Multilayer Perceptron for regression.
@@ -202,7 +202,7 @@ class MLP(nn.Module):
 
 Now that we have specified a representation of the dataset and the model, it is time that we start using them.
 
-```
+```python
 if __name__ == '__main__':
   
   # Set fixed random number seed
@@ -220,7 +220,7 @@ We can next actually prepare our dataset in PyTorch format by creating a `Boston
 
 Now that we have a PyTorch-compatible dataset, it still cannot be used directly. We will need to batch and shuffle the dataset first. This essentially means changing the order of the inputs and targets randomly, so that no hidden patterns in data collection can disturb model training. Following this, we generate _batches_ of data - so that we can feed them through the model batched, given possible hardware constraints. We config the model to use 10 samples per batch, but this can be configured depending on your own hardware.
 
-```
+```python
   # Prepare Boston dataset
   dataset = BostonDataset(X, y)
   trainloader = torch.utils.data.DataLoader(dataset, batch_size=10, shuffle=True, num_workers=1)
@@ -236,7 +236,7 @@ Picking a [loss function](https://www.machinecurve.com/index.php/2021/07/19/how-
 
 For the sake of simplicity, we will be using MAE loss (i.e., `nn.L1Loss`) today. Now that we have defined the MLP and prepared the data, we can initialize the `MLP` and the `loss_function`. We also initialize the optimizer, which adapts the weights of our model (i.e. makes it better) after the error (loss) was computed backwards. We will be using Adam, which is quite a standard optimizer, with a relatively default learning rate of `1e-4`.
 
-```
+```python
   # Initialize the MLP
   mlp = MLP()
   
@@ -258,7 +258,7 @@ You can see that in this loop, the following happens:
 - We then zero the gradients in the optimizer. This means that knowledge of previous improvements (especially important in batch > 0 for every epoch) is no longer available. This is followed by the **forward pass**, the error computation using our loss function, the **backward pass**, and finally the **optimization**.
 - Found loss is added to the loss value for the current epoch. In addition, after every tenth batch, some statistics about the current state of affairs are printed.
 
-```
+```python
   # Run the training loop
   for epoch in range(0, 5): # 5 epochs at maximum
     
@@ -306,7 +306,7 @@ You can see that in this loop, the following happens:
 
 It may be the case that you want to use all the code immediately.. In that case, here you go! :)
 
-```
+```python
 import torch
 from torch import nn
 from torch.utils.data import DataLoader

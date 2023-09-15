@@ -108,7 +108,7 @@ Now, the model. It looks as follows:
 
 To provide more details, this is the model summary:
 
-```
+```shell
 Model: "sequential"
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #
@@ -147,7 +147,7 @@ Generating pure waveforms consists of the following steps, in order to generate 
 
 First, the imports - it's a simple list:
 
-```
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 ```
@@ -158,14 +158,14 @@ We use Numpy for data generation & processing and Matplotlib for visualizing som
 
 Generator configuration consists of three steps: sample-wide configuration, intra-sample configuration and other settings. First, sample-wide configuration, which is just the number of samples to generate:
 
-```
+```python
 # Sample configuration
 num_samples = 100000
 ```
 
 Followed by intra-sample configuration:
 
-```
+```python
 # Intrasample configuration
 num_elements = 1
 interval_per_element = 0.01
@@ -179,7 +179,7 @@ The starting point determines where to start the generation process.
 
 Finally, you can set the number of samples that you want visualized in the `other configuration` settings:
 
-```
+```python
 # Other configuration
 num_samples_visualize = 1
 ```
@@ -190,7 +190,7 @@ Next step, creating some data! 😁
 
 We'll first specify the lists that contain our data and the sub-sample data (one sample in `samples` contains multiple `xs` and `ys`; when \[latex\]totalnumelements = 100\[/latex\], that will be 100 of them each):
 
-```
+```python
 # Containers for samples and subsamples
 samples = []
 xs = []
@@ -199,7 +199,7 @@ ys = []
 
 Next, the actual data generation part:
 
-```
+```python
 # Generate samples
 for j in range(0, num_samples):
   # Report progress
@@ -228,7 +228,7 @@ Subsequently, we append the entire wave to the `samples` list, and clear the sub
 
 The next step is to save the data. We do so by using Numpy's `save` call, and save `samples` to a file called `./signal_waves_medium.py`.
 
-```
+```python
 # Input shape
 print(np.shape(np.array(samples[0][0])))
   
@@ -252,7 +252,7 @@ Run your code with `python signal_generator.py` (ensure that you have Numpy and 
 
 If you wish to obtain the entire signal generator at once, here you go:
 
-```
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -327,7 +327,7 @@ Create an additional file, e.g. `signal_apply_noise.py`, and let's add the follo
 
 Our imports are the same as we used in the signal generator:
 
-```
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 ```
@@ -336,7 +336,7 @@ import numpy as np
 
 Our noising configuration is also a lot simpler:
 
-```
+```python
 # Sample configuration
 num_samples_visualize = 1
 noise_factor = 0.05
@@ -348,7 +348,7 @@ noise_factor = 0.05
 
 Next, we load the data and assign the samples to the correct variables, being `x_val` and `y_val`.
 
-```
+```python
 # Load data
 data = np.load('./signal_waves_medium.npy')
 x_val, y_val = data[:,0], data[:,1]
@@ -358,7 +358,7 @@ x_val, y_val = data[:,0], data[:,1]
 
 Next, we add the noise to our samples.
 
-```
+```python
 # Add noise to data
 noisy_samples = []
 for i in range(0, len(x_val)):
@@ -381,7 +381,7 @@ First, we define a new list that will contain our noisy samples. Subsequently, w
 
 Next, we - and this is no different than with the generator before - save the data into a `.npy` file (this time, with a different name 😃) and visualize a few random samples based on the number you configured earlier.
 
-```
+```python
 # Save data to file for re-use
 np.save('./signal_waves_noisy_medium.npy', noisy_samples)
 
@@ -400,7 +400,7 @@ If you would now run `signal_apply_noise.py`, you'd get 100k noisy samples, with
 
 If you're interested in the full code of the noising script, here you go:
 
-```
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -459,7 +459,7 @@ Let's create a third (and final 😋) file: `python signal_autoencoder.py`.
 
 First, let's specify the imports:
 
-```
+```python
 import tensorflow.keras
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv1D, Conv1DTranspose
@@ -475,7 +475,7 @@ From Keras, we import the Sequential API (which we use to stack the layers on to
 
 Next, we set some configuration options for the model:
 
-```
+```python
 # Model configuration
 input_shape = (150, 1)
 batch_size = 150
@@ -500,7 +500,7 @@ Here are some insights about the model configuration:
 
 The next thing to do is to load the data. We load both the noisy and the pure samples into their respective variables:
 
-```
+```python
 # Load data
 data_noisy = np.load('./signal_waves_noisy_medium.npy')
 x_val_noisy, y_val_noisy = data_noisy[:,0], data_noisy[:,1]
@@ -517,7 +517,7 @@ _Binary crossentropy loss values for target = 1, in the prediction range \[0, 1\
 - First, given the way how [binary crossentropy loss works](https://www.machinecurve.com/index.php/2019/10/04/about-loss-and-loss-functions/#binary-crossentropy), we normalize our samples to fall in the range \[latex\]\[0, 1\]\[/latex\]. Without this normalization step, odd loss values (extremely negative ones, impossible with BCE loss) start popping up (Quetzalcohuatl, n.d.).
 - We subsequently add the noisy and pure samples to the specific `*_r` arrays.
 
-```
+```python
 # Reshape data
 y_val_noisy_r = []
 y_val_pure_r = []
@@ -538,7 +538,7 @@ Once each sample is resampled, we convert the _entire_ array for both the resamp
 
 Finally, we perform the split into training and testing data (30k test, 56+14 = 70k train):
 
-```
+```python
 # Train/test split
 percentage_training = math.floor((1 - train_test_split) * len(noisy_input))
 noisy_input, noisy_input_test = noisy_input[:percentage_training], noisy_input[percentage_training:]
@@ -549,7 +549,7 @@ pure_input, pure_input_test = pure_input[:percentage_training], pure_input[perce
 
 This is the architecture of our autoencoder:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv1D(128, kernel_size=3, kernel_constraint=max_norm(max_norm_value), activation='relu', kernel_initializer='he_uniform', input_shape=input_shape))
@@ -569,7 +569,7 @@ model.summary()
 
 Generating a model summary, i.e. calling `model.summary()`, results in this summary, which also shows the number of parameters that is trained:
 
-```
+```shell
 Model: "sequential"
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #
@@ -596,7 +596,7 @@ The next thing to do is to compile the model (i.e., specify the optimizer and lo
 
 Fitting the data shows that we're going from `noisy_input` (features) to `pure_input` (targets). The number of epochs, the batch size and the validation split are as configured earlier.
 
-```
+```python
 # Compile and fit data
 model.compile(optimizer='adam', loss='binary_crossentropy')
 model.fit(noisy_input, pure_input,
@@ -609,7 +609,7 @@ model.fit(noisy_input, pure_input,
 
 Once the training process finishes, it's time to find out whether our model actually works. We do so by generating a few reconstructions: we add a noisy sample from the test set (which is data the model has never seen before!) and visualize whether it outputs the noise-free shape. This is the code
 
-```
+```python
 # Generate reconstructions
 num_reconstructions = 4
 samples = noisy_input_test[:num_reconstructions]
@@ -641,7 +641,7 @@ Open up your terminal again, and run `python signal_autoencoder.py`. Now, the tr
 
 If you're interested in the full code, here you go:
 
-```
+```python
 import tensorflow.keras
 from tensorflow.keras.models import Sequential, save_model
 from tensorflow.keras.layers import Conv1D, Conv1DTranspose

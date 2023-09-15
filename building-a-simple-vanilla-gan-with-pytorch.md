@@ -73,7 +73,7 @@ When you want to run the code that you're going to create, you will need to ensu
 
 Now, create a Python file or Python-based Notebook, with the following imports:
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -100,7 +100,7 @@ Now that you have specified the imports, it's time to pin down the configurable 
 - The **optimizer learning rate** and **optimizer betas**. The optimizer for the Generator and Discriminator will be initialized with a learning rate and Beta values. We set them to values that are deemed to produce acceptable results given previous research.
 - The **output shape of the generator output** will be used to initialize the last layer of the Generator and the first layer of the Discriminator. It must be a multiplication of all shape dimensions of an individual image. In our case, the MNIST dataset has `28x28x1` images.
 
-```
+```python
 # Configurable variables
 NUM_EPOCHS = 50
 NOISE_DIMENSION = 50
@@ -117,7 +117,7 @@ GENERATOR_OUTPUT_IMAGE_SHAPE = 28 * 28 * 1
 
 There are some ways that you can use to make your PyTorch code [run faster](https://betterprogramming.pub/how-to-make-your-pytorch-code-run-faster-93079f3c1f7b): that's why you'll write these speedups next.
 
-```
+```python
 # Speed ups
 torch.autograd.set_detect_anomaly(False)
 torch.autograd.profiler.profile(False)
@@ -129,7 +129,7 @@ torch.backends.cudnn.benchmark = True
 
 Now that we have written some preparatory code, it's time to build the actual Generator! Contrary to the [Deep Convolutional GAN](https://www.machinecurve.com/index.php/2021/07/15/creating-dcgan-with-pytorch/), which essentially follows the _vanilla GAN_ that you will create today, this Generator does not use [Convolutional layers](https://www.machinecurve.com/index.php/2018/12/07/convolutional-neural-networks-and-their-components-for-computer-vision/). Here's the code for the Generator:
 
-```
+```python
 class Generator(nn.Module):
   """
     Vanilla GAN Generator
@@ -167,7 +167,7 @@ The final upsampling layer converts the intermediate amount of neurons of alread
 
 The Discriminator is even simpler than the Generator. It is a separate neural network, as you can see by its `nn.Module` class definition. It simply composes a fully-connected neural network that accepts an input of dimensionality `GENERATOR_OUTPUT_IMAGE_SHAPE` (i.e., a Generator output) and converts it into a `[0, 1]` Sigmoid-normalized prediction as to whether the image is real or fake.
 
-```
+```python
 class Discriminator(nn.Module):
   """
     Vanilla GAN Discriminator
@@ -204,7 +204,7 @@ Recall that you read before that intermediate models would be saved in a folder,
 4. **Saving the models** saves the current state of the Generator and Discriminator to disk.
 5. **Printing training progress** prints the current loss values on screen.
 
-```
+```python
 def get_device():
   """ Retrieve device based on settings and availability. """
   return torch.device("cuda:0" if torch.cuda.is_available() and TRAIN_ON_GPU else "cpu")
@@ -258,7 +258,7 @@ Okay, after housekeeping it's time to start writing functionality for preparing 
 
 However, after loading all the data, we still need to batch it - recall that you will not feed all the images to the network at once, but will do so in a batched fashion. You will also shuffle the images. For the sake of PyTorch efficiency, the number of workers will be 4, and `pin_memory` is set to True. Once complete, the `DataLoader` is returned, so that it can be used.
 
-```
+```python
 def prepare_dataset():
   """ Prepare dataset through DataLoader """
   # Prepare MNIST dataset
@@ -278,7 +278,7 @@ Some other defs that you will need are related to the models, loss functions and
 
 In `initialize_models`, youll initialize the Generator and Discriminator, move them to the device that was configured, and return it. Initializing binary cross-entropy loss will be performed in `initialize_loss`, and finally, the optimizers for both Generator and Discriminator will be initialized in `initialize_optimizers`. Once again, you will use these later.
 
-```
+```python
 def initialize_models(device = get_device()):
   """ Initialize Generator and Discriminator models """
   generator = Generator()
@@ -308,7 +308,7 @@ Using the initialized models, you will perform a forward and a backward pass. Fo
 
 Efficiently zeroing the gradients must be done at the start of each training step and will be done by calling `efficient_zero_grad()`. Finally, using `forward_and_backward`, a forward _and_backward pass will be computed using some model, loss function, data and corresponding targets. The numeric value for loss is then returned.
 
-```
+```python
 def generate_noise(number_of_images = 1, noise_dimension = NOISE_DIMENSION, device=None):
   """ Generate noise for number_of_images images, with a specific noise_dimension """
   return torch.randn(number_of_images, noise_dimension, device=device)
@@ -341,7 +341,7 @@ Recall that a training step for a GAN involves multiple forward and backward pas
 
 Below, you will code this process into four intermediate steps. First of all, you'll prepare a few things, such as setting label values for real and fake data. In the second step, the Discriminator is trained, followed by the Generator in the third. Finally, you'll merge together some loss values, and return them, in the fourth step.
 
-```
+```python
 def perform_train_step(generator, discriminator, real_data, \
   loss_function, generator_optimizer, discriminator_optimizer, device = get_device()):
   """ Perform a single training step. """
@@ -392,7 +392,7 @@ Recall that training the GAN consists of multiple epochs which themselves consis
 
 After every epoch, the models are saved, and CUDA memory is cleared.
 
-```
+```python
 def perform_epoch(dataloader, generator, discriminator, loss_function, \
     generator_optimizer, discriminator_optimizer, epoch):
   """ Perform a single epoch. """
@@ -421,7 +421,7 @@ First of all, you'll ensure that a new directory is created for this unique run.
 
 To ensure that your script starts running, you'll call `train_dcgan()` as the last part of your code.
 
-```
+```python
 def train_dcgan():
   """ Train the DCGAN. """
   # Make directory for unique run
@@ -450,7 +450,7 @@ if __name__ == '__main__':
 
 ### Python GAN - full code example
 
-```
+```python
 import os
 import torch
 from torch import nn

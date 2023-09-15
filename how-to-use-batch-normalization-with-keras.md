@@ -79,7 +79,7 @@ By _scaling_ the value with some \[latex\]\\gamma\[/latex\] and _shifting_ the v
 
 In the Keras API (TensorFlow, n.d.), Batch Normalization is defined as follows:
 
-```
+```python
 keras.layers.BatchNormalization(axis=-1, momentum=0.99, epsilon=0.001, center=True, scale=True, beta_initializer='zeros', gamma_initializer='ones', moving_mean_initializer='zeros', moving_variance_initializer='ones', beta_regularizer=None, gamma_regularizer=None, beta_constraint=None, gamma_constraint=None)
 ```
 
@@ -127,19 +127,19 @@ We use the `extra-keras-datasets` module to load our dataset. This module, which
 
 Installing this module is required if you wish to run the model (if you don't, you may also replace it with `keras.datasets.mnist`), and can be done very easily:
 
-```
+```shell
 pip install extra-keras-datasets
 ```
 
 With one line, a dataset can be imported into your model:
 
-```
+```python
 from extra_keras_datasets import kmnist
 ```
 
 And subsequently loading the data into the particular variables is also easy:
 
-```
+```python
 (input_train, target_train), (input_test, target_test) = kmnist.load_data(type='kmnist')
 ```
 
@@ -180,7 +180,7 @@ Let's go! Open your Explorer or Finder, navigate to some folder, and create a Py
 
 These are our model imports:
 
-```
+```python
 from extra_keras_datasets import kmnist
 import tensorflow
 from tensorflow.keras.models import Sequential
@@ -200,7 +200,7 @@ We can describe them as follows:
 
 We can then set the configuration for our model:
 
-```
+```python
 # Model configuration
 batch_size = 250
 no_epochs = 25
@@ -215,14 +215,14 @@ The batch size of our minibatches is set to 250, which balances well between gra
 
 The next step is loading the data. Given the simplicity with which `extra-keras-datasets` can be used, thanks to the original `keras.datasets` module, this is definitely easy:
 
-```
+```python
 # Load KMNIST dataset
 (input_train, target_train), (input_test, target_test) = kmnist.load_data(type='kmnist')
 ```
 
 Subsequent processing of the data so that it is prepared for training is a bit more complex, but it is neither very difficult:
 
-```
+```python
 # Shape of the input sets
 input_train_shape = input_train.shape
 input_test_shape = input_test.shape 
@@ -230,7 +230,7 @@ input_test_shape = input_test.shape
 
 With this step, we obtain the shape of our `input_train` and `input_test` datasets, i.e. our _features_. We'll use the first to set the shape of our Keras input data next - which are image height (shape dim 1), image width (shape dim 2) and the number of channels (just one):
 
-```
+```python
 # Keras layer input shape
 input_shape = (input_train_shape[1], input_train_shape[2], 1)
 ```
@@ -239,7 +239,7 @@ Channels have to be included because Keras expects them during training.
 
 Next, because the data does not have yet the channels property, we'll have to reshape our data to include it there as well:
 
-```
+```python
 # Reshape the training data to include channels
 input_train = input_train.reshape(input_train_shape[0], input_train_shape[1], input_train_shape[2], 1)
 input_test = input_test.reshape(input_test_shape[0], input_test_shape[1], input_test_shape[2], 1)
@@ -247,7 +247,7 @@ input_test = input_test.reshape(input_test_shape[0], input_test_shape[1], input_
 
 Now, the bulk of the work is done. We next convert the data to `float32` format which presumably speeds up training:
 
-```
+```python
 # Parse numbers as floats
 input_train = input_train.astype('float32')
 input_test = input_test.astype('float32')
@@ -255,7 +255,7 @@ input_test = input_test.astype('float32')
 
 And finally normalize the data:
 
-```
+```python
 # Normalize input data
 input_train = input_train / 255
 input_test = input_test / 255
@@ -267,7 +267,7 @@ We're now ready to define the architecture.
 
 Since we already discussed the architecture of our model above, its components won't be too surprising. However, what is still lacking is the actual _code_ for our architecture - so let's write it now and explain it afterwards:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
@@ -295,7 +295,7 @@ Some things we haven't included in the architectural discussion before:
 
 The next step is model compilation:
 
-```
+```python
 # Compile the model
 model.compile(loss=tensorflow.keras.losses.sparse_categorical_crossentropy,
               optimizer=tensorflow.keras.optimizers.Adam(),
@@ -306,7 +306,7 @@ As you can see, model compilation is essentially _instantiating_ the model archi
 
 Then, we fit the data to our model, a.k.a. starting the training process:
 
-```
+```python
 # Fit data to model
 history = model.fit(input_train, target_train,
             batch_size=batch_size,
@@ -323,7 +323,7 @@ Note that the `history` object can be used for [visualizing the training process
 
 The final step is generating evaluation metrics with our test set, to see whether our model generalizes to unseen data:
 
-```
+```python
 # Generate generalization metrics
 score = model.evaluate(input_test, target_test, verbose=0)
 print(f'Test loss: {score[0]} / Test accuracy: {score[1]}')
@@ -335,7 +335,7 @@ Now, we can start training! :)
 
 Should you wish instead to obtain the full code for the model at once, here you go :)
 
-```
+```python
 from extra_keras_datasets import kmnist
 import tensorflow
 from tensorflow.keras.models import Sequential

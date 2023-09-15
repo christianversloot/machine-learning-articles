@@ -214,7 +214,7 @@ Time to write some actual code! We'll start with the model imports. As our model
 
 ...you'll need to import these dependencies. You can do this as follows:
 
-```
+```python
 from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D, MaxPooling2D
@@ -227,7 +227,7 @@ import matplotlib.pyplot as plt
 
 Now, let's set some configuration options for our model:
 
-```
+```python
 # Model configuration
 batch_size = 50
 img_width, img_height, img_num_channels = 32, 32, 3
@@ -253,21 +253,21 @@ What do they mean is what you may wonder now. Let's find out:
 
 Now, let's load some CIFAR-100 data. We can do so easily because Keras provides intuitive access to the dataset by design:
 
-```
+```python
 # Load CIFAR-10 data
 (input_train, target_train), (input_test, target_test) = cifar10.load_data()
 ```
 
 The next step is to determine the shape of one sample. This is required by Keras to understand what data it can expect in the input layer of your neural network. You can do so as follows:
 
-```
+```python
 # Determine shape of the data
 input_shape = (img_width, img_height, img_num_channels)
 ```
 
 Next, two technical things. Firstly, we'll convert our data into `float32` format, which presumably speeds up training. Then, we normalize the data, into the \[latex\]\[-1, 1\]\[/latex\] range.
 
-```
+```python
 # Parse numbers as floats
 input_train = input_train.astype('float32')
 input_test = input_test.astype('float32')
@@ -287,7 +287,7 @@ After the convolutional blocks, we add a `Flatten` layer. The `Dense` layers, wh
 
 As said, the Dense layers ensure that classification is possible. As you can see, in terms of the number of outputs per layer, we create an information bottleneck that eventually converges in `no_classes` - thus 10 - outputs, exactly the number of unique classes in our dataset. As we're using the [Softmax activation function](https://www.machinecurve.com/index.php/2020/01/08/how-does-the-softmax-activation-function-work/), we'll get a discrete multiclass probability distribution as our output for any input. From this distribution, we can draw the one with the highest value, which is the most likely class for our input. There we go, our classifier is ready! Or isn't it? 😉
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
@@ -312,7 +312,7 @@ Here, it also becomes clear why we decided to use _sparse_ categorical crossentr
 
 Our data is not categorical by nature: our targets are integers in the range \[latex\]\[0, 9\]\[/latex\]. But why convert them, I'd argue, if there is a loss function which does the same as _true_ categorical crossentropy but works with integer targets? Indeed, [_sparse_ categorical crossentropy](https://www.machinecurve.com/index.php/2019/10/06/how-to-use-sparse-categorical-crossentropy-in-keras/) is this activation function. Hence, we choose it over the other one :)
 
-```
+```python
 # Compile the model
 model.compile(loss=loss_function,
               optimizer=optimizer,
@@ -330,7 +330,7 @@ history = model.fit(input_train, target_train,
 
 We're almost there. As you can see, we assigned the results of `model.fit` to a `history` object. This will allow us to see the _testing_ results as well as [generate nice plots of the training process](https://www.machinecurve.com/index.php/2019/10/08/how-to-visualize-the-training-process-in-keras/). Here's the code:
 
-```
+```python
 # Generate generalization metrics
 score = model.evaluate(input_test, target_test, verbose=0)
 print(f'Test loss: {score[0]} / Test accuracy: {score[1]}')
@@ -357,7 +357,7 @@ Ready! We have a functional Keras model now 😊 Open up a terminal which has th
 
 If you wish to obtain the full model code at once, here you go:
 
-```
+```python
 from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D, MaxPooling2D
@@ -438,7 +438,7 @@ plt.show()
 
 Once the training process finishes, it's time to look at some statistics. Firstly, the test results from `model.evaluate`:
 
-```
+```shell
 Test loss: 2.931418807697296 / Test accuracy: 0.6948000192642212
 ```
 
@@ -467,13 +467,13 @@ In order to ensure that this blog post stays within check in terms of length, we
 
 Essentially, moving from CIFAR-10 to CIFAR-100 is thus very easy! First, let's change the import so that it supports CIFAR-100:
 
-```
+```python
 from tensorflow.keras.datasets import cifar100
 ```
 
 Instead of `cifar10`, you'll import `cifar100`. Then, you change it in a similar way in the `load_data` part of your model:
 
-```
+```python
 # Load CIFAR-100 data
 (input_train, target_train), (input_test, target_test) = cifar100.load_data()
 ```
@@ -486,7 +486,7 @@ Ready to go! Open up a new terminal, or use your same terminal, `cd` to the fold
 
 Here's the full model for CIFAR-100, if you wish to use it directly:
 
-```
+```python
 from tensorflow.keras.datasets import cifar100
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D, MaxPooling2D

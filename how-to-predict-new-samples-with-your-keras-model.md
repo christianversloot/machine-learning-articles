@@ -38,7 +38,7 @@ Are you ready? Let's go! 😎
 
 With this example code, you can start using `model.predict()` straight away.
 
-```
+```python
 # File path
 filepath = './path_to_model'
 
@@ -77,7 +77,7 @@ Now, I won't cover all the steps describing _how_ this model is built - take a l
 
 Here's the code - add it to a file called e.g. `keras-predictions.py`:
 
-```
+```python
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, Flatten
 from tensorflow.keras.layers import Conv2D, MaxPooling2D
@@ -154,13 +154,13 @@ Now, let's add some extra code to your model so that we can save and load the mo
 
 First, add the `save_model` and `load_model` definitions to our imports - replace the line where you import `Sequential` with:
 
-```
+```python
 from tensorflow.keras.models import Sequential, save_model, load_model
 ```
 
 Then, create a folder in the folder where your `keras-predictions.py` file is stored. Make sure to name this folder `saved_model` or, if you name it differently, change the code accordingly - because you next add this at the end of your model file:
 
-```
+```python
 # Save the model
 filepath = './saved_model'
 save_model(model, filepath)
@@ -174,7 +174,7 @@ Hooray! We now saved our trained model 🎉
 
 Loading the model for future usage is really easy - it's a two-line addition:
 
-```
+```python
 # Load the model
 model = load_model(filepath, compile = True)
 ```
@@ -191,14 +191,14 @@ With a loaded model, it's time to show you how to generate predictions with your
 
 Firstly, let's add Matplotlib to our imports - which allows us to generate visualizations. Then, also add Numpy, for number processing:
 
-```
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 ```
 
 Then, we'll add some code for visualizing the samples that we'll be using in today's post:
 
-```
+```python
 # A few random samples
 use_samples = [5, 38, 3939, 27389]
 
@@ -223,7 +223,7 @@ Here they are:
 
 We then extend this code so that we can actually store the samples temporarily for prediction later:
 
-```
+```python
 # A few random samples
 use_samples = [5, 38, 3939, 27389]
 samples_to_predict = []
@@ -240,7 +240,7 @@ for sample in use_samples:
 
 Then, before feeding them to the model, we convert our list into a Numpy array. This allows us to compute shape and allows Keras to handle the data more smoothly:
 
-```
+```python
 # Convert into Numpy array
 samples_to_predict = np.array(samples_to_predict)
 print(samples_to_predict.shape)
@@ -252,7 +252,7 @@ Correct ✅ We indeed added 4 images of 28x28 pixels with one channel per image.
 
 The next step is to generate the predictions:
 
-```
+```python
 # Generate predictions for samples
 predictions = model.predict(samples_to_predict)
 print(predictions)
@@ -260,7 +260,7 @@ print(predictions)
 
 The output here seems to be a bit jibberish at first:
 
-```
+```python
 [[8.66183618e-05 1.06925681e-05 1.40683464e-04 4.31487868e-09
   7.31811961e-05 6.07917445e-06 9.99673367e-01 7.10965661e-11
   9.43153464e-06 1.98050812e-10]
@@ -281,7 +281,7 @@ Remember that we used the [Softmax activation function](https://www.machinecurve
 
 Now, we can finalize our work by _actually_ finding out what our predicted classes are - by taking the `argmax` values (or "maximum argument", index of the maximum value) for each element in the list with predictions:
 
-```
+```python
 # Generate arg maxes for predictions
 classes = np.argmax(predictions, axis = 1)
 print(classes)
@@ -304,7 +304,7 @@ _Note that the code above trains with and predicts with both the training data. 
 
 If you're interested, you can find the code as a whole here:
 
-```
+```python
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential, save_model, load_model
 from tensorflow.keras.layers import Dense, Dropout, Flatten

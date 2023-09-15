@@ -111,7 +111,7 @@ All right, the first step would be to download the dataset, so let's do that fir
 
 Now open `model.py` in a text editor or an IDE. First add the dependencies that you'll need:
 
-```
+```python
 # Load dependencies
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
@@ -120,7 +120,7 @@ import numpy as np
 
 Then load your data:
 
-```
+```python
 # Load data
 dataset = np.loadtxt('./pima_dataset.csv', delimiter=',')
 
@@ -152,7 +152,7 @@ There is however one value left: \[latex\]1\[/latex\]. This is actually the _des
 
 This also explains why you'll do this:
 
-```
+```python
 # Separate train and test data
 X = dataset[:, 0:8]
 Y = dataset[:, 8]
@@ -164,7 +164,7 @@ Obviously, it's now easy to understand what happens for the desired outcomes or 
 
 Next, create the model and add your Perceptron, which is a Dense layer:
 
-```
+```python
 # Create the Perceptron
 model = Sequential()
 model.add(Dense())
@@ -239,7 +239,7 @@ And fortunately, Keras [supports it](https://keras.io/activations/): `tensorflow
 
 Note that so far, we have this:
 
-```
+```python
 # Load dependencies
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
@@ -261,7 +261,7 @@ We can now add the activation function and the initializer. Since _zero initiali
 
 Let's add the `hard_sigmoid` activation function to the imports:
 
-```
+```python
 from tensorflow.keras.activations import hard_sigmoid
 ```
 
@@ -269,7 +269,7 @@ from tensorflow.keras.activations import hard_sigmoid
 
 Also define it, together with the initializer and the input shape (remember, 8 columns so 8 features):
 
-```
+```python
 model.add(Dense(1, input_shape=(8,), activation=hard_sigmoid, kernel_initializer='glorot_uniform'))
 ```
 
@@ -277,7 +277,7 @@ model.add(Dense(1, input_shape=(8,), activation=hard_sigmoid, kernel_initializer
 
 We next compile the model, i.e. initialize it. We do this as follows:
 
-```
+```python
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 ```
 
@@ -287,7 +287,7 @@ Binary cross entropy is the de facto standard loss function for binary classific
 
 We'll next fit the data to our pseudo Rosenblatt Perceptron. This essentially tells Keras to start the training process:
 
-```
+```python
 model.fit(X, Y, epochs=225, batch_size=25, verbose=1, validation_split=0.2)
 ```
 
@@ -330,7 +330,7 @@ However, inspecting the data at random ensures that the dataset seems to be dist
 
 All right, let's go! This is our code (it is also available on [GitHub](https://github.com/christianversloot/keras-pseudo-perceptron)):
 
-```
+```python
 # Load dependencies
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
@@ -359,7 +359,7 @@ model.fit(X, Y, epochs=225, batch_size=25, verbose=1, validation_split=0.2)
 
 Does it work?
 
-```
+```shell
 2019-07-24 18:44:55.155520: I T:\src\github\tensorflow\tensorflow\core\common_runtime\gpu\gpu_device.cc:1084] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 3026 MB memory) -> physical GPU (device: 0, name: GeForce GTX 1050 Ti with Max-Q Design, pci bus id: 0000:01:00.0, compute capability: 6.1)
 ```
 

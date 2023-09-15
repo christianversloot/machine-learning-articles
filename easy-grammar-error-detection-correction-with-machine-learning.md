@@ -75,7 +75,7 @@ Let's now take a look at using Gramformer to build a system for grammar detectio
 
 Installing Gramformer is really easy - you can do so using `pip` (preferably `pip3` because of Python 3.x) directly from the Gramformer GitHub repository:
 
-```
+```bash
 pip3 install -U git+https://github.com/PrithivirajDamodaran/Gramformer.git
 ```
 
@@ -98,7 +98,7 @@ Getting corrected text from Gramformer is quite easy and takes the following ste
 
 Let's begin with the imports. We import `Gramformer` and PyTorch, through `torch`.
 
-```
+```python
 # Imports
 from gramformer import Gramformer
 import torch
@@ -106,7 +106,7 @@ import torch
 
 Then, we fix the seed. This means that all random number generation is performed with the same initialization vector, and that any deviations can not be related to random number generation.
 
-```
+```python
 # Fix seed, also on GPU
 def fix_seed(value):
   torch.manual_seed(value)
@@ -118,14 +118,14 @@ fix_seed(42)
 
 Then, we initialize `Gramformer`. We set `models` to `1`, or correction mode, and we instruct it _not_ to use GPU. If you have a dedicated GPU, you can of course set it to `True`.
 
-```
+```python
 # Initialize Gramformer
 grammar_correction = Gramformer(models = 1, use_gpu=False)
 ```
 
 Let's then create a list with three gramatically incorrect phrases:
 
-```
+```python
 # Incorrect phrases
 phrases = [
   'How is you doing?',
@@ -136,7 +136,7 @@ phrases = [
 
 ...after which we can let Gramformer improve them. For each phrase, we let Gramformer perform a correction by suggesting two candidates, and then printing the incorrect phrase with suggested improvements.
 
-```
+```python
 # Improve each phrase
 for phrase in phrases:
   corrections = grammar_correction.correct(phrase, max_candidates=2)
@@ -148,7 +148,7 @@ for phrase in phrases:
 
 As a whole, this yields the following code:
 
-```
+```python
 # Imports
 from gramformer import Gramformer
 import torch
@@ -182,7 +182,7 @@ for phrase in phrases:
 
 And these are the results when running it:
 
-```
+```shell
 [Gramformer] Grammar error correct/highlight model loaded..
 [Incorrect phrase] How is you doing?
 [Suggestion #0] ('How are you doing?', -20.39444351196289)
@@ -203,7 +203,7 @@ Great! We just built a grammar issue checker & correction tool! :-D
 
 Instead of the corrected phrases, we can also print the _edits_ that Gramformer has performed:
 
-```
+```python
 # Print edits for each improved phrase
 for phrase in phrases:
   corrections = grammar_correction.correct(phrase, max_candidates=2)
@@ -216,7 +216,7 @@ for phrase in phrases:
 
 You can see that _is_ was improved into _are_ for the first phrase; that _We is on_ is turned into _We're in_ in the second phrase, and so forth.
 
-```
+```shell
 [Incorrect phrase] How is you doing?
 [Edits #0] [('VERB:SVA', 'is', 1, 2, 'are', 1, 2)]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -234,7 +234,7 @@ You can see that _is_ was improved into _are_ for the first phrase; that _We is 
 
 Simply changing `get_edits` into `highlight` will yield the original phrase where the errors are marked:
 
-```
+```python
 # Print highlights for each improved phrase
 for phrase in phrases:
   corrections = grammar_correction.correct(phrase, max_candidates=2)
@@ -247,7 +247,7 @@ for phrase in phrases:
 
 In other words:
 
-```
+```shell
 [Gramformer] Grammar error correct/highlight model loaded..
 [Incorrect phrase] How is you doing?
 [Highlights #0] How <c type='VERB:SVA' edit='are'>is</c> you doing?
@@ -268,7 +268,7 @@ In other words:
 
 According to the `setup.py` installation instructions, Gramformer is built on top of HuggingFace Transformers. This means that you can also construct Gramformer with HuggingFace Transformers, meaning that you don't need to install the Gramformer repository with `pip`. Here's an example that illustrates how you can use the `AutoTokenizer` and `AutoModelForSeq2SeqLM` with the pretrained Gramformer tokenizer/model for grammar checking:
 
-```
+```python
 # Imports
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
   
@@ -302,7 +302,7 @@ for i in range(len(corrections)):
 
 ...results:
 
-```
+```shell
 [Phrase] How is you doing?
 [Suggested phrase] How are you doing?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

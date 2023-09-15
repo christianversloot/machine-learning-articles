@@ -148,7 +148,7 @@ We'll therefore code a Keras model today 😀
 
 I won't explain the model here except its few ideosyncrasies, since it's the Keras CNN [we coded in another blog](https://www.machinecurve.com/index.php/2019/09/17/how-to-create-a-cnn-classifier-with-keras/). Hence, if you wish to understand the architectural components of this model in more detail, I'd recommend you take a look at the other blog post 😄
 
-```
+```python
 import keras
 from keras.datasets import mnist
 from keras.models import Sequential
@@ -252,7 +252,7 @@ These are the differences:
 
 Generating the evaluation metrics & visualizations is also in line with what we've seen in the blog about [visualizing the training process](https://www.machinecurve.com/index.php/2019/10/08/how-to-visualize-the-training-process-in-keras/):
 
-```
+```python
 # Generate generalization metrics
 score = model.evaluate(input_test, target_test, verbose=0)
 print(f'Test loss for Keras ELU CNN: {score[0]} / Test accuracy: {score[1]}')

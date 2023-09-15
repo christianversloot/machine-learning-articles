@@ -40,7 +40,7 @@ _Note that model code is also available [on GitHub](https://github.com/christian
 
 If you want to get started straight away, here is the code that you can use for visualizing your TensorFlow 2.0/Keras model with `plot_model`:
 
-```
+```python
 from tensorflow.keras.utils import plot_model
 plot_model(model, to_file='model.png')
 ```
@@ -57,7 +57,7 @@ Today, we will visualize the [Convolutional Neural Network](https://www.machinec
 
 This is the code of that model:
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
@@ -145,7 +145,7 @@ It allows you to create a visualization of your Keras neural network.
 
 More specifically, the Keras docs define it as follows:
 
-```
+```python
 from tensorflow.keras.utils import plot_model
 plot_model(model, to_file='model.png')
 ```
@@ -199,7 +199,7 @@ Sometimes, it helps to install `pydotplus` as well with `pip install pydotplus`.
 
 When adapting the code from my original CNN, scrapping away the elements I don't need for visualizing the model architecture, I end up with this:
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
@@ -261,7 +261,7 @@ Indeed, above we saw that we can use the `rankdir` attribute (which is set to `T
 
 Making a horizontal plot of your TensorFlow/Keras model simply involves adding the `rankdir='LR'` a.k.a. _horizontal_ attribute:
 
-```
+```python
 plot_model(model, to_file='model.png', rankdir='LR')
 ```
 

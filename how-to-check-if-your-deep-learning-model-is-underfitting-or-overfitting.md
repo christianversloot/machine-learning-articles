@@ -130,7 +130,7 @@ When you are training a Deep Learning model, for example with Keras, you specify
 
 During training, we always need to rely on validation data when estimating the performance of our model (relying on the training data for estimating model performance is like checking your own homework). That's why we specify a validation split in `model.fit`. Together, this can look as follows:
 
-```
+```python
 # Compile the model
 model.compile(loss=categorical_crossentropy,
               optimizer=Adam(),
@@ -146,7 +146,7 @@ model.fit(X_train, y_train,
 
 When we start the training process, we can now both see `loss` (loss based on training data) and `val_loss` (loss based on validation data) besides our epochs:
 
-```
+```shell
 Epoch 1/25
 5832/5832 [==============================] - 1s 203us/sample - loss: 2.2721 - accuracy: 0.1811 - val_loss: 2.2729 - val_accuracy: 0.1590
 Epoch 2/25

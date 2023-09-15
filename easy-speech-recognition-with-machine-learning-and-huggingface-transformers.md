@@ -34,7 +34,7 @@ This code example shows how you can create a **Speech Recognition pipeline with 
 
 If you wish to understand everything in a bit more detail, make sure to read the rest of this tutorial as well 🚀
 
-```
+```python
 from transformers import Wav2Vec2Tokenizer, Wav2Vec2ForCTC
 import librosa as lb
 import torch
@@ -114,7 +114,7 @@ Let's now get to work 🚀
 
 If you want to be able to run the code below, you must ensure that you have a recent version of HuggingFace Transformers on your system. You can easily check your current version by running `python` in your development environment, then importing `transformers`, and printing its version number:
 
-```
+```python
 >>> import transformers
 >>> print(transformers.__version__)
 3.4.0
@@ -124,7 +124,7 @@ This clearly suggests that I have to upgrade to a new version.
 
 `pip install transformers --upgrade` does the trick.
 
-```
+```python
 >>> import transformers
 >>> print(transformers.__version__)
 4.3.2
@@ -152,7 +152,7 @@ It's now time to implement the Python code for our pipeline. Creating a Speech R
 6. **Retrieve logits from the model**. We retrieve logits from the model, reflecting the whole probability distribution over all possible output tokens.
 7. **Take the argmax value and decode into transcription**. As with any logits, we can take `argmax` to find the most probable value(s) for the logits. We can batch decode these to find the text corresponding to the speech. Finally, we print this text.
 
-```
+```python
 from transformers import Wav2Vec2Tokenizer, Wav2Vec2ForCTC
 import librosa as lb
 import torch

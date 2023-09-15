@@ -47,7 +47,7 @@ Here is a **simple but complete example** that can be used for visualizing the p
 
 If you want to understand everything in more detail - such as how this History object works - then make sure to read the rest of this tutorial as well! :)
 
-```
+```python
 from tensorflow.keras.models import Sequential
 import matplotlib.pyplot as plt
 
@@ -84,7 +84,7 @@ Preferably, you run these in an Anaconda environment that isolates these package
 
 In this blog we want to visualize the training process of a Keras model. This requires that we'll work with an actual model. We use this simple one today:
 
-```
+```python
 # Load dependencies
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
@@ -139,13 +139,13 @@ Also add `print(history)` so that we can inspect the history before we visualize
 
 It indeed outputs the model history (note that for simplicity we trained with only 5 epochs):
 
-```
+```python
 {'val_loss': [281.05517045470464, 281.0461930366744, 282.3450624835175, 283.21272195725317, 278.22250578392925], 'val_mean_squared_error': [131946.00690089026, 131610.73269158995, 132186.26299269326, 133621.92045977595, 131213.40662287443], 'loss': [319.1303724563634, 279.54961594772305, 277.2224043372698, 276.19018290098035, 276.37119589065435], 'mean_squared_error': [210561.46019607811, 132310.933269216, 131070.35584168187, 131204.38709398077, 131249.8484192732]}
 ```
 
 Or, when nicely formatted:
 
-```
+```python
 {
    "val_loss":[
       281.05517045470464,
@@ -196,7 +196,7 @@ Next, ensure that the number of epochs is at 25 again.
 
 Let's now add a piece of code that visualizes the MAE:
 
-```
+```python
 # Plot history: MAE
 plt.plot(history.history['loss'], label='MAE (training data)')
 plt.plot(history.history['val_loss'], label='MAE (validation data)')
@@ -215,7 +215,7 @@ Note that since you defined MAE to be the official loss value (`loss='mean_absol
 
 Similarly, we can add a visualization of our MSE value - but here, we'll have to use `mean_squared_error` and `val_mean_squared_error` instead, because they are an additional metric (`metrics=['mean_squared_error']`).
 
-```
+```python
 # Plot history: MSE
 plt.plot(history.history['mean_squared_error'], label='MSE (training data)')
 plt.plot(history.history['val_mean_squared_error'], label='MSE (validation data)')

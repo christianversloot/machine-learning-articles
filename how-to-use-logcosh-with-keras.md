@@ -52,7 +52,7 @@ _Note that the full code for the models we create in this blog post is also avai
 
 Logcosh loss can be configured in the model compilation step, i.e. in `model.compile`. In this code example, you can easily find how Logcosh loss is used within TensorFlow. Make sure to read the rest of the article to understand the loss function and its use in more detail.
 
-```
+```python
 # Configure the model and start training
 model.compile(loss='logcosh', optimizer='adam', metrics=['mean_absolute_error'])
 history = model.fit(x_train, y_train, epochs=250, batch_size=1, verbose=1, validation_split=0.2)
@@ -146,7 +146,7 @@ Preferably, you have these installed in an Anaconda environment, but this is not
 
 We start our code by means of writing down the software imports we need to actually run and support the model:
 
-```
+```python
 '''
   Keras model demonstrating Logcosh loss
 '''
@@ -168,7 +168,7 @@ Numpy is used for numbers processing and Matplotlib is used for visualization pu
 
 Next, we load and prepare the dataset, which is as easy as writing this:
 
-```
+```python
 # Load data
 (x_train, y_train), (x_test, y_test) = boston_housing.load_data()
 
@@ -186,7 +186,7 @@ Subsequently, you'll set the `input_shape` which describes the structure of one 
 
 Next, we specify the architecture of our model:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Dense(16, input_shape=input_shape, activation='relu', kernel_initializer='he_uniform'))
@@ -200,7 +200,7 @@ It's really simple - we're using the Sequential API, which allows us to stack th
 
 We next specify code for _hyperparameter tuning_ (or model configuration) and starting the actual training process (or, in Keras terms, _fitting the data to your model architecture_):
 
-```
+```python
 # Configure the model and start training
 model.compile(loss='logcosh', optimizer='adam', metrics=['mean_absolute_error'])
 history = model.fit(x_train, y_train, epochs=250, batch_size=1, verbose=1, validation_split=0.2)
@@ -212,7 +212,7 @@ Here, we specify various configuration options such as the loss value (Logcosh),
 
 Next, we add code which evaluates the model against the _testing set_ to test whether it generalizes properly to data it has never seen before:
 
-```
+```python
 # Test the model after training
 test_results = model.evaluate(x_test, y_test, verbose=1)
 print(f'Test results - Loss: {test_results[0]} - MAE: {test_results[1]}')
@@ -220,7 +220,7 @@ print(f'Test results - Loss: {test_results[0]} - MAE: {test_results[1]}')
 
 Next, we visualize training history, for both the Logcosh loss value as the additional MAE metric:
 
-```
+```python
 # Plot history: Logcosh loss and MAE
 plt.plot(history.history['loss'], label='Logcosh loss (training data)')
 plt.plot(history.history['val_loss'], label='Logcosh loss (validation data)')
@@ -247,7 +247,7 @@ This concludes our implementation!
 
 If you're interested in the model as a whole - here you go:
 
-```
+```python
 '''
   Keras model demonstrating Logcosh loss
 '''

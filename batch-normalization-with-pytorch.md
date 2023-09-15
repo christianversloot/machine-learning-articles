@@ -34,7 +34,7 @@ Let's take a look! 🚀
 
 ## Full code example: Batch Normalization with PyTorch
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -234,7 +234,7 @@ Firstly, we're going to state our imports.
 - All `torch` based imports are required for PyTorch: `torch` itself, the `nn` (a.k.a. neural network) module and the `DataLoader` for loading the dataset we're going to use in today's neural network.
 - From `torchvision`, we load the `CIFAR10` dataset - as well as some `transforms` (primarily image normalization) that we will apply on the dataset before training the neural network.
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -251,7 +251,7 @@ As you can see, we're applying `BatchNorm1d` here because we use densely-connect
 
 It clearly shows how Batch Normalization must be applied with PyTorch.
 
-```
+```python
 class MLP(nn.Module):
   '''
     Multilayer Perceptron.
@@ -288,7 +288,7 @@ However, to summarize briefly what happens, here you go:
 - This is followed by iterating over the epochs, where we set current loss to 0.0 and start iterating over the data loader. We set the gradients to zero, perform the forward pass, compute the loss, and perform the backwards pass followed by optimization. Indeed this is what happens in the supervised ML process.
 - We print statistics per mini batch fed forward through the model.
 
-```
+```python
 if __name__ == '__main__':
   
   # Set fixed random number seed
@@ -356,7 +356,7 @@ I can imagine why you want to get started immediately. It's always more fun to p
 
 These are the results after training our MLP for 5 epochs on the CIFAR-10 dataset, _with_ Batch Normalization:
 
-```
+```shell
 Starting epoch 5
 Loss after mini-batch   500: 1.573
 Loss after mini-batch  1000: 1.570
@@ -372,7 +372,7 @@ Loss after mini-batch  5000: 1.584
 
 The same, but then _without_ Batch Normalization:
 
-```
+```shell
 Starting epoch 5
 Loss after mini-batch   500: 1.650
 Loss after mini-batch  1000: 1.656

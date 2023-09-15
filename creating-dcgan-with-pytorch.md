@@ -82,7 +82,7 @@ If you want to run this code, it is important that you have installed the follow
 
 The first step in building a DCGAN is creating a file. Let's call it `dcgan.py`. We start with specifying the imports:
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -100,7 +100,7 @@ Finally, we import `numpy` for some number processing, `plt` for visualizing the
 
 This is followed by a variety of configurable variables.
 
-```
+```python
 # Configurable variables
 NUM_EPOCHS = 50
 NOISE_DIMENSION = 50
@@ -124,7 +124,7 @@ OPTIMIZER_BETAS = (0.5, 0.999)
 
 PyTorch code can be made to run faster with [some simple tweaks](https://betterprogramming.pub/how-to-make-your-pytorch-code-run-faster-93079f3c1f7b). Some must be applied within the model (e.g. in the `DataLoader`), while others can be applied standalone. Here are some standalone training speedups.
 
-```
+```python
 # Speed ups
 torch.autograd.set_detect_anomaly(False)
 torch.autograd.profiler.profile(False)
@@ -146,7 +146,7 @@ Below, you'll see the code for the Generator.
     - More generally, `bias` is set to `False` in each layer that is followed by a Batch Normalization layer - possibly leading to a model that converges faster. Bias is nullified in a Batch Normalization layer; that's why it makes no sense to use it in the layers directly before BN.
 - The `forward` def simply performs a forward pass.
 
-```
+```python
 class Generator(nn.Module):
   """
     DCGan Generator
@@ -194,7 +194,7 @@ Like the Generator, the Discriminator is also a `nn.Module` based class with a c
 - Two-dimensional batch normalization (`BatchNorm2d`) is used to help speed up the training process, as suggested in general and for DCGANs specifically. This is also why, like in the Generator, the `bias` values for the preceding layers are set to `False`.
 - Leaky ReLU with an `alpha=0.2` is used instead of regular ReLU.
 
-```
+```python
 class Discriminator(nn.Module):
   """
     DCGan Discriminator
@@ -252,7 +252,7 @@ In this def, we'll construct the PyTorch device depending on configuration and a
 
 Note that this def is configured to run the GAN on one GPU only. You'll have to manually add a multi-GPU training strategy if necessary.
 
-```
+```python
 def get_device():
   """ Retrieve device based on settings and availability. """
   return torch.device("cuda:0" if torch.cuda.is_available() and TRAIN_ON_GPU else "cpu")
@@ -262,7 +262,7 @@ def get_device():
 
 The contents of `make_directory_for_run()`, the definition that makes a directory for the training run, are quite straight-forward. It checks whether a folder called `runs` exists in the current path, and creates it if it isn't available. Then, in `./runs`, a folder for the `UNIQUE_RUN_ID` is created.
 
-```
+```python
 def make_directory_for_run():
   """ Make a directory for this training run. """
   print(f'Preparing training run {UNIQUE_RUN_ID}')
@@ -273,7 +273,7 @@ def make_directory_for_run():
 
 In `generate_image`, an image with sub plots containing generated examples will be created. As you can see, noise is generated, fed to the generator, and is then added to a Matplotlib plot. It is saved to a folder `images` relative to `/.runs/{UNIQUE_RUN_ID}` which itself is created if it doesn't exist yet.
 
-```
+```python
 def generate_image(generator, epoch = 0, batch = 0, device=get_device()):
   """ Generate subplots with generated examples. """
   images = []
@@ -300,7 +300,7 @@ def generate_image(generator, epoch = 0, batch = 0, device=get_device()):
 
 Saving the models is also really straight-forward. Once again, they are saved relative to `./runs/{UNIQUE_RUN_ID}`, and both the `generator` and `discriminator` are saved. As they are saved after every epoch ends, the `epoch` is passed as well and included in the `*.pth` file.
 
-```
+```python
 def save_models(generator, discriminator, epoch):
   """ Save models at specific point in time. """
   torch.save(generator.state_dict(), f'./runs/{UNIQUE_RUN_ID}/generator_{epoch}.pth')
@@ -309,7 +309,7 @@ def save_models(generator, discriminator, epoch):
 
 Printing training progress during the training steps is done with a specific def called `print_training_progress`. It simply prints the batch number, generator loss and discriminator loss in a standardized way.
 
-```
+```python
 def print_training_progress(batch, generator_loss, discriminator_loss):
   """ Print training progress. """
   print('Losses after mini-batch %5d: generator %e, discriminator %e' %
@@ -320,7 +320,7 @@ def print_training_progress(batch, generator_loss, discriminator_loss):
 
 Recall that all previous definitions were preparatory in terms of house keeping, but that you will now create a definition for preparing the dataset. It is as follows:
 
-```
+```python
 def prepare_dataset():
   """ Prepare dataset through DataLoader """
   # Prepare MNIST dataset
@@ -348,7 +348,7 @@ Recall from the Radford et al. (2015) paper that weights must be initialized in 
 
 Next, we therefore write a definition that ensures this and which can be used later:
 
-```
+```python
 def weights_init(m):
   """ Normal weight initialization as suggested for DCGANs """
   classname = m.__class__.__name__
@@ -367,7 +367,7 @@ Now, we create three definitions:
 - Using `initialize_loss`, an instance of Binary cross-entropy loss is returned. BCELoss is used to compare an output between 0 and 1 with a corresponding target variable, which is either 0 or 1.
 - With `initialize_optimizers`, we init the optimizers for both the Generator and the Discriminator. Recall that each is an individual neural network and hence requires a separate optimizer. We use `AdamW`, which is Adam with weight decay - it is expected to make training faster. The learning rates and optimizer betas are configured in line with configuration options specified above.
 
-```
+```python
 def initialize_models(device = get_device()):
   """ Initialize Generator and Discriminator models """
   generator = Generator()
@@ -398,7 +398,7 @@ def initialize_optimizers(generator, discriminator):
 
 The definition for generating noise is also really straight-forward. Using `torch.rand`, noise for a specific amount of images with a specific dimension is generated into a specific device.
 
-```
+```python
 def generate_noise(number_of_images = 1, noise_dimension = NOISE_DIMENSION, device=None):
   """ Generate noise for number_of_images images, with a specific noise_dimension """
   return torch.randn(number_of_images, noise_dimension, 1, 1, device=device)
@@ -408,9 +408,9 @@ def generate_noise(number_of_images = 1, noise_dimension = NOISE_DIMENSION, devi
 
 In PyTorch, gradients must be zeroed during every training step because otherwise history can interfire with the current training step. PyTorch itself provides `zero_grad()` for this purpose, but it sets gradients to `0.0` - which is numeric rather than `None`. It was found that setting the gradients to `None` can make training faster. Hence, we create a definition for thus purpose, which can be used with any `model` and can be re-used multiple times later in this article.
 
-```
+```python
 def efficient_zero_grad(model):
-  """ 
+  """
     Apply zero_grad more efficiently
     Source: https://betterprogramming.pub/how-to-make-your-pytorch-code-run-faster-93079f3c1f7b
   """
@@ -422,7 +422,7 @@ def efficient_zero_grad(model):
 
 Recall that training a neural network involves a forward pass, where data is passed through the network returning predictions, and a backward pass, where the error is backpropagated through the network. Once this is done, the network can be optimized. In this definition, we ensure that for any `model` a batch of `data` can be fed forward through the model. Subsequently, using a `loss_function`, loss is computed and subsequently backpropagated through the network. The numeric value for loss is returned so that it can be printed with the print def created above.
 
-```
+```python
 def forward_and_backward(model, data, loss_function, targets):
   """
     Perform forward and backward pass in a generic way. Returns loss value.
@@ -446,7 +446,7 @@ A training step consists of four phrases:
 3. **Training the generator**. This involves a forward pass on the generated images for the _updated discriminator_, after which the generator is optimized with resulting loss. Here you can see the interplay between discriminator and generator: the discriminator is first updated based on images generated by the generator (using its current state), after which the generator is trained based on the _updated_ discriminator. In other words, they play the minimax game which is characteristic for a GAN.
 4. **Computing the results.** Finally, some results are computed, and loss values for the discriminator and generator are returned.
 
-```
+```python
 def perform_train_step(generator, discriminator, real_data, \
   loss_function, generator_optimizer, discriminator_optimizer, device = get_device()):
   """ Perform a single training step. """
@@ -496,7 +496,7 @@ Recall that an epoch consists of multiple training steps. With the `perform_epoc
 
 On epoch completion, the generator and discriminator are saved and CUDA memory is cleared as far as possible, speeding up the training process.
 
-```
+```python
 def perform_epoch(dataloader, generator, discriminator, loss_function, \
     generator_optimizer, discriminator_optimizer, epoch):
   """ Perform a single epoch. """
@@ -523,7 +523,7 @@ In the code below, you can see that a directory for the training run is created,
 
 Voila, this composes your DCGAN!
 
-```
+```python
 def train_dcgan():
   """ Train the DCGAN. """
   # Make directory for unique run
@@ -550,7 +550,7 @@ def train_dcgan():
 
 There is only one thing left now, and that is to instruct Python to call the `train_dcgan()` definition when you run the script:
 
-```
+```python
 if __name__ == '__main__':
   train_dcgan()
 ```
@@ -559,7 +559,7 @@ if __name__ == '__main__':
 
 Of course, it is also possible to copy and use the DCGAN code altogether. If that's what you want, here you go:
 
-```
+```python
 import os
 import torch
 from torch import nn

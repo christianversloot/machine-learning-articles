@@ -182,7 +182,7 @@ The model with which we'll be showing you how to use this callback is a slight a
 
 Now, open up your Explorer/Finder, create a file - say, `plateau_model.py` - and add this code. Ensure that TensorFlow 2.0 is installed, and that its Keras implementation works flawlessly (i.e., if you use the GPU version, this means that you'll also need to install other dependencies such as correct CUDA versions, and so on).
 
-```
+```python
 from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D, MaxPooling2D
@@ -247,13 +247,13 @@ print(f'Test loss: {score[0]} / Test accuracy: {score[1]}')
 
 Installing the code is easy - open a terminal, ensure that Git is installed, `cd` into the folder where your `plateau_model.py` file is stored, and clone the repository:
 
-```
+```shell
 git clone https://github.com/JonnoFTW/keras_find_lr_on_plateau.git
 ```
 
 (if the repository above doesn't work anymore, you could always use the mirrored i.e. forked version, but I can't guarantee that it's up to date - therefore, I'd advise to use Jonathan Mackenzie's one.)
 
-```
+```shell
 git clone https://github.com/christianversloot/keras_find_lr_on_plateau.git
 ```
 
@@ -263,33 +263,33 @@ Now, let's add the code for the callback :)
 
 First of all, we'll add an `ImageDataGenerator`. This is a built-in facility in Keras for processing your images and adding e.g. augmentation at the same time. Strictly speaking, we don't need it - our CIFAR-10 dataset is quite simple - but the LR Plateau Optimizer requires it. By consequence, we'll add it next - directly after `model.compile` and before `model.fit`:
 
-```
+```python
 # Define an ImageDataGenerator
 gen = ImageDataGenerator(validation_split=validation_split)
 ```
 
 Note that we do have to specify the validation split in the Image Data Generator rather than the `fit`, because - as we shall see - we'll be using it a little bit differently. Do note that we also have to add the generator to the imports:
 
-```
+```python
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 ```
 
 The same goes for the LR Plateau Optimizer:
 
-```
+```python
 from keras_find_lr_on_plateau.keras_lr_optimiser_callback.optimize_lr_on_plateau import LRFOnPlateau
 ```
 
 Next, we can instantiate it with the corresponding configuration - with a `max_lr` of 1, in order to provide a real "boost" during the testing phase:
 
-```
+```python
 # Define the LR Plateau Optimizer
 adjuster = LRFOnPlateau(max_lr=1e0, train_iterator=gen, train_samples=input_train, batch_size=batch_size, epochs=no_epochs)
 ```
 
 Finally, we fit the data to the generator - note the `adjuster` callback!
 
-```
+```python
 # Fit data to model
 history = model.fit_generator(gen.flow(input_train, target_train, batch_size=batch_size),
             epochs=no_epochs,
@@ -307,13 +307,13 @@ However, we can easily fix this by replacing two parts within the `optimize_lr_o
 
 First, we'll replace the `LRFinder` import with:
 
-```
+```python
 from .lr_finder import LRFinder
 ```
 
 This fixes the first issue. Now the second:
 
-```
+```shell
   File "C:\Users\chris\MachineCurve\Models\keras-k-fold\keras_find_lr_on_plateau\keras_lr_optimiser_callback\optimize_lr_on_plateau.py", line 24, in on_epoch_end
     if self.monitor_op(current, self.best):
   File "C:\Users\chris\AppData\Local\Programs\Python\Python36\lib\site-packages\keras\callbacks\callbacks.py", line 1023, in <lambda>
@@ -323,7 +323,7 @@ TypeError: '<' not supported between instances of 'NoneType' and 'float'
 
 When Googling around, this seems like a typical error. Now, after line 22 (which reads `self.wait = 0`), add this:
 
-```
+```python
 if current is None:
     current = 0.0
 ```

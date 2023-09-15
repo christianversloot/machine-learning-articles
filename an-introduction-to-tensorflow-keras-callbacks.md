@@ -87,14 +87,14 @@ With those three simple steps, you ensure that the callbacks are hooked into the
 
 For example, if we want to use both `ModelCheckpoint` and `EarlyStopping` - [as we do here](https://www.machinecurve.com/index.php/2019/05/30/avoid-wasting-resources-with-earlystopping-and-modelcheckpoint-in-keras/) - for step (1), we first **add the imports**:
 
-```
+```python
 
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 ```
 
 Then, for step (2), we **initialize the callbacks** in a list:
 
-```
+```python
 keras_callbacks = [
       EarlyStopping(monitor='val_loss', patience=5, mode='min', min_delta=0.01),
       ModelCheckpoint(checkpoint_path, monitor='val_loss', save_best_only=True, mode='min')
@@ -103,7 +103,7 @@ keras_callbacks = [
 
 And then, for step (3), we simply **add the callbacks** to `model.fit`:
 
-```
+```python
 model.fit(train_generator,
           epochs=50,
           verbose=1,
@@ -121,7 +121,7 @@ If you want to periodically save your Keras model - or the model weights - to so
 
 It is available as follows:
 
-```
+```python
 tf.keras.callbacks.ModelCheckpoint(
     filepath, monitor='val_loss', verbose=0, save_best_only=False,
     save_weights_only=False, mode='auto', save_freq='epoch', options=None, **kwargs
@@ -141,7 +141,7 @@ With the following arguments:
 
 Using `ModelCheckpoint` is easy - and here is an example based on a [generator](https://www.machinecurve.com/index.php/2020/04/06/using-simple-generators-to-flow-data-from-file-with-keras/):
 
-```
+```python
 checkpoint_path=f'{os.path.dirname(os.path.realpath(__file__))}/covid-convnet.h5'
 keras_callbacks = [
       ModelCheckpoint(checkpoint_path, monitor='val_loss', save_best_only=True, mode='min')
@@ -174,7 +174,7 @@ The callback logs a range of items from the training process into your TensorBoa
 
 It is implemented as follows:
 
-```
+```python
 tf.keras.callbacks.TensorBoard(
     log_dir='logs', histogram_freq=0, write_graph=True, write_images=False,
     update_freq='epoch', profile_batch=2, embeddings_freq=0,
@@ -193,7 +193,7 @@ tf.keras.callbacks.TensorBoard(
 
 Here is an example of using the `TensorBoard` callback within your Keras model:
 
-```
+```python
 keras_callbacks = [
       TensorBoard(log_dir="./logs")
 ]
@@ -216,7 +216,7 @@ During this process, you want to find a model that performs well in terms of pre
 
 It is implemented as follows:
 
-```
+```python
 tf.keras.callbacks.EarlyStopping(
     monitor='val_loss', min_delta=0, patience=0, verbose=0, mode='auto',
     baseline=None, restore_best_weights=False
@@ -233,7 +233,7 @@ tf.keras.callbacks.EarlyStopping(
 
 Here is an example of using `EarlyStopping` with Keras:
 
-```
+```python
 
 keras_callbacks = [
       EarlyStopping(monitor='val_loss', min_delta=0.001, restore_best_weights=True)
@@ -257,7 +257,7 @@ Preferably being relatively large during the early iterations and lower in the l
 
 Its implementation is really simple:
 
-```
+```python
 tf.keras.callbacks.LearningRateScheduler(
     schedule, verbose=0
 )
@@ -268,7 +268,7 @@ tf.keras.callbacks.LearningRateScheduler(
 
 Here is an example of using the `LearningRateScheduler` with Keras:
 
-```
+```python
 def scheduler(epoch, learning_rate):
   if epoch < 15:
     return learning_rate
@@ -299,7 +299,7 @@ With the `ReduceLROnPlateau` callback, the optimization process can be instructe
 
 The callback is implemented as follows:
 
-```
+```python
 tf.keras.callbacks.ReduceLROnPlateau(
     monitor='val_loss', factor=0.1, patience=10, verbose=0, mode='auto',
     min_delta=0.0001, cooldown=0, min_lr=0, **kwargs
@@ -315,7 +315,7 @@ tf.keras.callbacks.ReduceLROnPlateau(
 
 An example of using the `ReduceLROnPlateau` callback with Keras:
 
-```
+```python
 keras_callbacks = [
       ReduceLROnPlateau(monitor='val_loss', factor=0.25, patience=5, cooldown=5, min_lr=0.000000001)
 ]
@@ -338,7 +338,7 @@ In those cases, you might wish to send the training logs there instead. The `Rem
 
 It is implemented as follows:
 
-```
+```python
 tf.keras.callbacks.RemoteMonitor(
     root='http://localhost:9000', path='/publish/epoch/end/', field='data',
     headers=None, send_as_json=False
@@ -353,7 +353,7 @@ tf.keras.callbacks.RemoteMonitor(
 
 An example of using the `RemoteMonitor` callback with Keras:
 
-```
+```python
 keras_callbacks = [
       RemoteMonitor(root='https://some-domain.com', path='/statistics/keras')
 ]
@@ -374,7 +374,7 @@ Say that you want a certain function to fire after every batch or every epoch - 
 
 It can thus be used to provide anonymous (i.e. `lambda` functions without a name) functions to the training process. The callback looks as follows:
 
-```
+```python
 tf.keras.callbacks.LambdaCallback(
     on_epoch_begin=None, on_epoch_end=None, on_batch_begin=None, on_batch_end=None,
     on_train_begin=None, on_train_end=None, **kwargs
@@ -385,7 +385,7 @@ Here, the `on_epoch_begin`, `on_epoch_end`, `on_batch_begin`, `on_batch_end`, `o
 
 An example of a `LambdaCallback` added to your Keras model:
 
-```
+```python
 keras_callbacks = [
       LambdaCallback(on_batch_end=lambda batch, log_data: print(batch))
 ]
@@ -406,13 +406,13 @@ In some cases (e.g. when you did not apply min-max normalization to your input d
 
 It is implemented as follows:
 
-```
+```python
 tf.keras.callbacks.TerminateOnNaN()
 ```
 
 An example of using the `TerminateOnNaN` callback with your Keras model:
 
-```
+```python
 keras_callbacks = [
       TerminateOnNaN()
 ]
@@ -433,7 +433,7 @@ CSV files can be very useful when you need to exchange data. If you want to flus
 
 It is implemented as follows:
 
-```
+```python
 tf.keras.callbacks.CSVLogger(
     filename, separator=',', append=False
 )
@@ -445,7 +445,7 @@ tf.keras.callbacks.CSVLogger(
 
 This is an example of using the `CSVLogger` callback with Keras:
 
-```
+```python
 keras_callbacks = [
       CSVLogger('./logs.csv', separator=';', append=True)
 ]
@@ -466,7 +466,7 @@ When you are training a Keras model with verbosity set to `True`, you will see a
 
 It is implemented as follows:
 
-```
+```python
 tf.keras.callbacks.ProgbarLogger(
     count_mode='samples', stateful_metrics=None
 )
@@ -477,7 +477,7 @@ tf.keras.callbacks.ProgbarLogger(
 
 Here is an example of using the `ProgbarLogger` callback with Keras.
 
-```
+```python
 keras_callbacks = [
       ProgbarLogger(count_mode='samples')
 ]
@@ -498,7 +498,7 @@ When you are training a neural network, especially in a [distributed setting](ht
 
 It is implemented as follows:
 
-```
+```python
 tf.keras.callbacks.experimental.BackupAndRestore(
     backup_dir
 )
@@ -508,7 +508,7 @@ Here, the `backup_dir` attribute indicates the folder where checkpoints should b
 
 Here is an example of using the `BackupAndRestore` callback with Keras.
 
-```
+```python
 keras_callbacks = [
        BackupAndRestore('./checkpoints')
 ]
@@ -534,7 +534,7 @@ They are the `History` and `BaseLogger` callbacks.
 
 Sometimes, neither the default or the `lambda` callbacks can provide the functionality you need. In those cases, you can create your own callback, by using the Base callback class `tensorflow.keras.callbacks.Callback`. Creating one is very simple: you define a `class`, create the relevant definitions (you can choose from `on_epoch_begin`, `on_epoch_end`, `on_batch_begin`, `on_batch_end`, `on_train_begin` and `on_train_end` etc.), and then add the callback to your callbacks list. There you go!
 
-```
+```python
 class OwnCallback(tensorflow.keras.callbacks.Callback):
     def on_train_begin(self, logs=None):
         print('Training is now beginning!')

@@ -37,7 +37,7 @@ Let's take a look! 🚀
 
 The code below allows you to create a **simple but effective Named Entity Recognition pipeline** with HuggingFace Transformers. If you use it, ensure that the former is installed on your system, as well as TensorFlow or PyTorch. If you want to understand everything in a bit more detail, make sure to read the rest of the tutorial as well! 🔥
 
-```
+```python
 from transformers import pipeline
 
 # Initialize the NER pipeline
@@ -152,7 +152,7 @@ Below, you can find the entire code for the NER pipeline. As I said, it's going 
 - The next action you take is defining a phrase and feeding it through the `ner` pipeline.
 - That's it - you then print the outcome on screen.
 
-```
+```python
 from transformers import pipeline
 
 # Initialize the NER pipeline
@@ -170,7 +170,7 @@ print(ner_result)
 
 Here's what you will see for the phrase specified above:
 
-```
+```python
 [{'word': 'David', 'score': 0.9964208602905273, 'entity': 'I-PER', 'index': 1}, {'word': 'Peter', 'score': 0.9955975413322449, 'entity': 'I-PER', 'index': 3}]
 ```
 

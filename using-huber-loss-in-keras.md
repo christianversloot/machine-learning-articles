@@ -50,7 +50,7 @@ But sometimes, you don't know exactly which of these two is best. In that case, 
 
 In TensorFlow 2 and Keras, Huber loss can be added to the compile step of your model - i.e., to `model.compile`. Here, you'll see **an example of Huber loss with TF 2 and Keras**. If you want to understand the loss function in more detail, make sure to read the rest of this tutorial as well!
 
-```
+```python
 model.compile(loss=tensorflow.keras.losses.Huber(delta=1.5), optimizer='adam', metrics=['mean_absolute_error'])
 ```
 
@@ -127,7 +127,7 @@ The number of outliers helps us tell something about the value for d that we hav
 
 The sample, in our case, is the Boston housing dataset: it contains some mappings between feature variables and target prices, but obviously doesn't represent all homes in Boston, which would be the statistical population. Nevertheless, we can write some code to generate a box plot based on this dataset:
 
-```
+```python
 '''
   Generate a BoxPlot image to determine how many outliers are within the Boston Housing Pricing Dataset.
 '''
@@ -156,13 +156,13 @@ Note that we concatenated the _training data_ and the _testing data_ for this bo
 
 We can do that by simply adapting our code to:
 
-```
+```python
 y = y_train
 ```
 
 or
 
-```
+```python
 y = y_test
 ```
 
@@ -191,7 +191,7 @@ The primary dependency that you'll need is **[TensorFlow 2](https://tensorflow.o
 
 Now that we can start coding, let's import the Python dependencies that we need first:
 
-```
+```python
 '''
   Keras model demonstrating Huber loss
 '''
@@ -211,7 +211,7 @@ We also need `Huber` since that's the loss function we use. Numpy is used for nu
 
 We next load the data by calling the Keras `load_data()` function on the housing dataset and prepare the input layer shape, which we can add to the initial hidden layer later:
 
-```
+```python
 # Load data
 (x_train, y_train), (x_test, y_test) = boston_housing.load_data()
 
@@ -225,7 +225,7 @@ print(f'Feature shape: {input_shape}')
 
 Next, we do actually provide the model architecture and configuration:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Dense(16, input_shape=input_shape, activation='relu', kernel_initializer='he_uniform'))
@@ -247,7 +247,7 @@ Subsequently, we fit the training data to the model, complete 250 epochs with a 
 
 Finally, we add some code for performance testing and [visualization](https://www.machinecurve.com/index.php/2019/10/08/how-to-visualize-the-training-process-in-keras/):
 
-```
+```python
 # Test the model after training
 test_results = model.evaluate(x_test, y_test, verbose=1)
 print(f'Test results - Loss: {test_results[0]} - MAE: {test_results[1]}')

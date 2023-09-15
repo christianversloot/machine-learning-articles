@@ -91,7 +91,7 @@ Creating the code involves the following steps:
 6. **Getting the predictions**. Once we have tokenized our input and retrieved the atetntion mask, we can get the predictions.
 7. **Converting the predictions into the answer, and printing the answer on screen.** The seventh and final step is to actually convert the identifiers to tokens, which we then decode and print on our screen.
 
-```
+```python
 import torch
 from transformers import AutoTokenizer, AutoModelForQuestionAnswering
 
@@ -150,7 +150,7 @@ This is how we build the model
 - **Tokenization, summarization and conversion:** we feed the `article` into the tokenizer, return the input ids from the PyTorch based Tensors, and then generate the summary with our `model`. Once the summary is there, we use the `tokenizer` again for decoding the output identifiers into readable text. We skip special tokens.
 - **Printing the summary on screen:** to see if it works :)
 
-```
+```python
 from transformers import LongformerTokenizer, EncoderDecoderModel
 
 # Load model and tokenizer
@@ -196,7 +196,7 @@ That should be _country_, indeed, so let's see if we can get the model to produc
 3. **Masking the text:** we specify the text, but then apply `{mask}` to where `country` is written in the original text.
 4. **Perform MLM:** we then feed the `text` to our `mlm` pipeline to obtain the result, which we then print on screen.
 
-```
+```python
 from transformers import pipeline
 
 # Initialize MLM pipeline
@@ -215,7 +215,7 @@ print(result)
 
 When we observe the results (we cut off the text at the masked token; it continues in the real results), we can see that it is capable of predicting `country` indeed!
 
-```
+```python
 [{'sequence': "Germany (German: Deutschland, German pronunciation: [ˈdɔʏtʃlant]), officially the Federal Republic of Germany,[e] is a country
 ```
 

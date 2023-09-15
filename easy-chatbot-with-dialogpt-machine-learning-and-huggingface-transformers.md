@@ -83,7 +83,7 @@ Let's create a file or a [Notebook](https://www.machinecurve.com/index.php/2020/
 
 We should have a working chatbot now! 🤖 Let's see what it can do.
 
-```
+```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
 
@@ -151,7 +151,7 @@ Let's take a look at some conversations that I had with the bot :)
 
 #### A repetitive one
 
-```
+```shell
 (pytorch) C:\Users\chris\MachineCurve>python dialogpt.py
 Loading model...
 >> You:Good day!
@@ -168,7 +168,7 @@ DialoGPT: I think it's a Tuesday.
 
 #### Wikipedia, built by the people of the world
 
-```
+```shell
 (pytorch) C:\Users\chris\MachineCurve>python dialogpt.py
 Loading model...
 >> You:What is Wikipedia?
@@ -185,7 +185,7 @@ DialoGPT: I'm not sure either.
 
 #### Not sure if I'm human anymore
 
-```
+```shell
 (pytorch) C:\Users\chris\MachineCurve>python dialogpt.py
 Loading model...
 >> You:Are you a machine?

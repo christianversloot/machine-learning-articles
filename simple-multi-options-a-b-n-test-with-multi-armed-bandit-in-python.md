@@ -78,7 +78,7 @@ Building a MAB for A/b/n testing with Python involves the following steps:
 
 The first step would be to import our dependencies. For today's code, you'll only rely on `numpy` for numbers processing and `matplotlib` for visualizing the outcomes. Both can be installed with `pip`, through `pip install numpy`, for example.
 
-```
+```python
 import numpy as np
 import matplotlib.pyplot as plt
 ```
@@ -89,7 +89,7 @@ The next step is to represent the blueprint of an advertisement. If you look at 
 
 Recall that we generate clicks following a [Binomial distribution](https://en.wikipedia.org/wiki/Binomial_distribution) which returns 1 (success) with probability `p`. For that reason, we allow configurable `p`s to be passed in the constructor, which we then use to generate a reward when the advertisement is shown in `show`.
 
-```
+```python
 class SimpleAdvertisement():
     """ Representation of a simple advertisement."""
     
@@ -114,7 +114,7 @@ class SimpleAdvertisement():
 
 Let's now generate three ads and put them in a list. Note that each advertisement has a different parameter: `0.01` for ad 1, `0.024` for ad 2 and `0.03` for ad 3. Indeed, these are the CTRs that we saw above - or in other words, the `p values` which represent the probability that our binomial sample returns a `1` (click).
 
-```
+```python
 # Generate the advertisements
 advertisement_one = SimpleAdvertisement(0.01)
 advertisement_two = SimpleAdvertisement(0.024)
@@ -130,7 +130,7 @@ Number of ads is simply the number of advertisements created - three. The averag
 
 What's left is the `Q_values`. This is an important term in Reinforcement Learning problems and hence also in MAB problems. A **Q-value**, also called **action value**, represents a weighted average of all rewards over time, and is a measure of how well a certain choice performs. You'll see that our task involves picking the ad with the highest Q-value!
 
-```
+```python
 # Set the scenario's variables
 num_tests = 12500
 num_prod  = 50000
@@ -153,7 +153,7 @@ In the code below, this happens:
 - We then update the number of impressions for the advertisement and the Q value. As you can see with the Q value, we _add_ the difference between the reward and the current Q value, but in a _weighted_ way - as the number of impressions increases, the less important this Q value update is.
 - Finally, we increase the reward sum, compute the average reward over time and append it to all average rewards observed so far.
 
-```
+```python
 def a_b_n_test(num_test, ads):
     """ Run A/B/n testing phase. """
     global reward_sum
@@ -177,7 +177,7 @@ def a_b_n_test(num_test, ads):
 
 In the **exploitation phase**, we have selected an ad which we can now run in production. We'll actually pick the best ad from the exploration phase when merging everything together a bit more below, but let's take a look at the code for running the advertisement in production first.
 
-```
+```python
 def a_b_n_prod(num_prod, best_ad):
     """ Run the best ad in production. """
     global reward_sum
@@ -199,7 +199,7 @@ Before we merge everything together, there's only one thing left - and that is m
 
 As you can see below, using `matplotlib`, we plot the average rewards over time. Precisely at the cutoff point between the exploration and exploitation phases (which in our case is after `num_tests = 12500` iterations), we draw a vertical line and write some text, to indicate the change in behavior. Finally, we set a title.
 
-```
+```python
 def plot_phases(selected_ad, selected_ad_score):
     """
     Plot the reward for the exploration and exploitation phases.
@@ -222,7 +222,7 @@ Next up is merging everything together. In the `ad_scenario()` def, you'll actua
 4. The overall ad performance is printed on screen.
 5. And a plot is generated.
 
-```
+```python
 def ad_scenario():
     """
     Run an advertisement based A/B/n Multi-Armed Bandit scenario.

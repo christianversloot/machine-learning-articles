@@ -85,7 +85,7 @@ We look at four different settings:
 
 If you have an arbitrary dataset, e.g. one generated with Scikit's `make_blobs` function, you likely have feature vectors (a.k.a. input samples) and corresponding targets. Often, those are assigned to variables called `X` and `y`, or `inputs` and `targets`, et cetera. For example, this is how we can create blobs of data:
 
-```
+```python
 from sklearn.datasets import make_blobs
 
 # Configuration options
@@ -99,7 +99,7 @@ X, y = make_blobs(n_samples = num_samples_total, centers = cluster_centers, n_fe
 
 We can then easily create a train/test split:
 
-```
+```python
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=33)
 ```
@@ -110,7 +110,7 @@ Here, we split the input data (`X/y`) into training data (`X_train; y_train`) an
 
 Suppose that we have a [multilabel dataset](https://www.machinecurve.com/index.php/2020/11/12/how-to-create-a-multilabel-svm-classifier-with-scikit-learn/):
 
-```
+```python
 from sklearn.datasets import make_multilabel_classification
 
 # Configuration options
@@ -127,7 +127,7 @@ X, y = make_multilabel_classification(n_samples=n_samples, n_features=n_features
 
 It's then also really easy to split it into a train/test dataset:
 
-```
+```python
 
 from sklearn.model_selection import train_test_split
 # Split into training and testing data
@@ -140,7 +140,7 @@ Here, too, we apply a 80/20 train/test split.
 
 In many cases, training data is available in HDF5 files - and [we can then load it using H5Py](https://www.machinecurve.com/index.php/2020/04/13/how-to-use-h5py-and-keras-to-train-with-data-from-hdf5-files/), with an example here:
 
-```
+```python
 import h5py
 
 # Load data
@@ -152,7 +152,7 @@ f.close()
 
 We can also then generate a train/test split as follows:
 
-```
+```python
 
 from sklearn.model_selection import train_test_split
 # Split into training and testing data
@@ -165,7 +165,7 @@ Did you know that TensorFlow 2.x provides a variety of datasets by default, the 
 
 Loading a dataset is really easy:
 
-```
+```python
 from tensorflow.keras.datasets import cifar10
 
 # CIFAR-10
@@ -182,7 +182,7 @@ This loads the CIFAR10 dataset, which can be used with Computer Vision models an
 
 While Keras already loads data in a train/test split fashion, you could generate an additional split - e.g. a 50/50 one - in the following way:
 
-```
+```python
 from sklearn.model_selection import train_test_split
 # Split into training and testing data
 X_one, X_two, y_one, y_two = train_test_split(X_train, y_train, test_size=0.50, random_state=random_state)

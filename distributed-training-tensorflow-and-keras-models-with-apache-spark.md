@@ -215,7 +215,7 @@ Creating a model with Keras and Elephas is truly simple. [As per the docs on Git
 
 The steps are explained in more detailed [here](https://github.com/maxpumperla/elephas#basic-spark-integration), but here's a full code example of a simple Keras classifier - our [hot dog classifier made Spark-ready](https://www.machinecurve.com/index.php/2020/10/20/tutorial-building-a-hot-dog-not-hot-dog-classifier-with-tensorflow-and-keras/). Do note that we omitted some general parts, which can be retrieved in the linked article.
 
-```
+```python
 import tensorflow
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Conv2D, Flatten

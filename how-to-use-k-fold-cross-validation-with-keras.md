@@ -44,7 +44,7 @@ Are you ready? Let's go! 😎
 
 This quick code can be used to perform K-fold Cross Validation with your TensorFlow/Keras model straight away. If you want to understand it in more detail, make sure to read the rest of the article below!
 
-```
+```python
 from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D, MaxPooling2D
@@ -233,7 +233,7 @@ _(Do note that this is a small adaptation, where we removed the third convolutio
 
 Here is the full model code of the original CIFAR-10 CNN classifier, which we can use when adding K-fold Cross Validation:
 
-```
+```python
 from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D, MaxPooling2D
@@ -312,13 +312,13 @@ Now, let's slightly adapt the model in order to add K-fold Cross Validation.
 
 Firstly, we'll strip off some code that we no longer need:
 
-```
+```python
 import matplotlib.pyplot as plt
 ```
 
 We will no longer generate the visualizations, and besides the import we thus also remove the part generating them:
 
-```
+```python
 # Visualize history
 # Plot history: Loss
 plt.plot(history.history['val_loss'])
@@ -339,7 +339,7 @@ plt.show()
 
 Secondly, let's add the `KFold` code from `scikit-learn` to the imports - as well as `numpy`:
 
-```
+```python
 from sklearn.model_selection import KFold
 import numpy as np
 ```
@@ -354,7 +354,7 @@ Precisely what we want!
 
 We also add a new configuration value:
 
-```
+```python
 num_folds = 10
 ```
 
@@ -362,7 +362,7 @@ This will ensure that our \[latex\]K = 10\[/latex\].
 
 What's more, directly after the "normalize data" step, we add two empty lists for storing the results of cross validation:
 
-```
+```python
 # Normalize data
 input_train = input_train / 255
 input_test = input_test / 255
@@ -374,7 +374,7 @@ loss_per_fold = []
 
 This is followed by a concat of our 'training' and 'testing' datasets - remember that K-fold Cross Validation makes the split!
 
-```
+```python
 # Merge inputs and targets
 inputs = np.concatenate((input_train, input_test), axis=0)
 targets = np.concatenate((target_train, target_test), axis=0)
@@ -382,14 +382,14 @@ targets = np.concatenate((target_train, target_test), axis=0)
 
 Based on this prior work, we can add the code for K-fold Cross Validation:
 
-```
+```python
 fold_no = 1
 for train, test in kfold.split(input_train, target_train):
 ```
 
 Ensure that all the `model` related steps are now wrapped inside the `for` loop. Also make sure to add a couple of extra `print` statements and to replace the inputs and targets to `model.fit`:
 
-```
+```python
 # K-fold Cross Validation model evaluation
 fold_no = 1
 for train, test in kfold.split(inputs, targets):
@@ -424,7 +424,7 @@ for train, test in kfold.split(inputs, targets):
 
 We next replace the "test loss" `print` with one related to what we're doing. Also, we increase the `fold_no`:
 
-```
+```python
   # Generate generalization metrics
   scores = model.evaluate(inputs[test], targets[test], verbose=0)
   print(f'Score for fold {fold_no}: {model.metrics_names[0]} of {scores[0]}; {model.metrics_names[1]} of {scores[1]*100}%')
@@ -441,7 +441,7 @@ Now, why do we do that?
 
 Simple: at the end, we provide an overview of all scores and the averages. This allows us to easily compare the model with others, as we can simply compare these outputs. Add this code at the end of the model, but make sure that it is _not_ wrapped inside the `for` loop:
 
-```
+```python
 # == Provide average scores ==
 print('------------------------------------------------------------------------')
 print('Score per fold')
@@ -461,7 +461,7 @@ Altogether, this is the new code for your K-fold Cross Validation scenario with 
 
 \[affiliatebox\]
 
-```
+```python
 from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D, MaxPooling2D

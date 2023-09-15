@@ -86,7 +86,7 @@ Now that we have recalled how ConvNets work, it's time to actually build one wit
 5. **Forward definition**. In the `forward` def, the forward pass of the data through the network is performed.
 6. **The operational aspects**. Under the `main` check, the random seed is fixed, the data is loaded and preprocessed, the ConvNet, loss function and optimizer are initialized and the training loop is performed. In the training loop, batches of data are passed through the network, after the loss is computed and the error is backpropagated, after which the network weights are adapted during optimization.
 
-```
+```python
 import os
 import torch
 from torch import nn

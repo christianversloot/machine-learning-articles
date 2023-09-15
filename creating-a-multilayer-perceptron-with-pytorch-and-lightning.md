@@ -51,7 +51,7 @@ First, we'll show two full-fledged examples of an MLP - the first created with c
 
 Defining a Multilayer Perceptron in classic PyTorch is not difficult; it just takes quite a few lines of code. We'll explain every aspect in detail in this tutorial, but here is already a **complete code example for a PyTorch created Multilayer Perceptron**. If you want to understand everything in more detail, make sure to rest of the tutorial as well. Best of luck! :)
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -141,7 +141,7 @@ if __name__ == '__main__':
 
 You can also get started with PyTorch Lightning straight away. Here, we provided a **full code example for an MLP created with Lightning**. Once more: if you want to understand everything in more detail, make sure to read the rest of this tutorial as well! :D
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -227,7 +227,7 @@ Implementing an MLP with classic PyTorch involves six steps:
 
 The first step here is to add all the dependencies. We need `os` for file input/output functionality, as we will save the CIFAR-10 dataset to local disk later in this tutorial. We'll also import `torch`, which imports PyTorch. From it we import `nn`, which allows us to define a neural network module. We also import the `DataLoader` (for feeding data into the MLP during training), the `CIFAR10` dataset (for obvious purposes) and `transforms`, which allows us to perform transformations on the data prior to feeding it to the MLP.
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -244,7 +244,7 @@ In the constructor, we first invoke the superclass initialization and then defin
 
 The forward pass allows us to react to input data - for example, during the training process. In our case, it does nothing but feeding the data through the neural network layers, and returning the output.
 
-```
+```python
 class MLP(nn.Module):
   '''
     Multilayer Perceptron.
@@ -272,7 +272,7 @@ After defining the class, we can move on and write the runtime code. This code i
 
 The first thing we define in the runtime code is setting the seed of the random number generator. Using a fixed seed ensures that this generator is initialized with the same starting value. This benefits reproducibility of your ML findings.
 
-```
+```python
 if __name__ == '__main__':
   
   # Set fixed random number seed
@@ -290,7 +290,7 @@ Loading and preparing the CIFAR-10 data is a two-step process:
 1. Initializing the dataset itself, by means of `CIFAR10`. Here, in increasing order, you specify the directory where the dataset has to be saved, that it must be downloaded, and that they must be converted into Tensor format.
 2. Initializing the `DataLoader`, which takes the dataset, a batch size, shuffle parameter (whether the data must be ordered at random) and the number of workers to load data with. In PyTorch, data loaders are used for feeding data to the model uniformly.
 
-```
+```python
   # Prepare CIFAR-10 dataset
   dataset = CIFAR10(os.getcwd(), download=True, transform=transforms.ToTensor())
   trainloader = torch.utils.data.DataLoader(dataset, batch_size=10, shuffle=True, num_workers=1)
@@ -298,7 +298,7 @@ Loading and preparing the CIFAR-10 data is a two-step process:
 
 Now, it's time to initialize the MLP - and use the class that we had not yet used before. We also specify the loss function (categorical crossentropy loss) and the Adam optimizer. The optimizer works on the parameters of the MLP and utilizes a learning rate of `10e-4`. We'll use them next.
 
-```
+```python
   # Initialize the MLP
   mlp = MLP()
   
@@ -323,7 +323,7 @@ Step-by-step, these are the things that happen within the loop:
     - This is followed by the backward pass, where the gradients are computed, and optimization, where the model is adapted.
     - Finally, we print some statistics - but only at every 500th minibatch. At the end of the entire process, we print that the training process has finished.
 
-```
+```python
   # Run the training loop
   for epoch in range(0, 5): # 5 epochs at maximum
     
@@ -373,7 +373,7 @@ For the full model code, see the full code example at the beginning of this tuto
 
 Now, when you save the code e.g. to a file called `mlp.py` and run `python mlp.py`, you'll see the following when your PyTorch has been installed successfully.
 
-```
+```shell
 Starting epoch 1
 Loss after mini-batch   500: 2.232
 Loss after mini-batch  1000: 2.087
@@ -407,7 +407,7 @@ In Lightning, these elements are automated as much as possible. In addition, run
 
 The first step is importing all dependencies. If you have also followed the classic PyTorch example above, you can see that it is not so different from classic PyTorch. In fact, we use the same imports - `os` for file I/O, `torch` and its sub imports for PyTorch functionality, but now also `pytorch_lightning` for Lightning functionality.
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -425,7 +425,7 @@ Different in Lightning is that it also requires you to pass the `training_step` 
 
 That's it for the MLP!
 
-```
+```python
 class MLP(pl.LightningModule):
   
   def __init__(self):
@@ -464,7 +464,7 @@ Since Lightning hides much of the training loop, your runtime code becomes reall
 - You initialize the MLP.
 - You initialize the `Trainer` object, which is responsible for automating away much of the training loop, pass configuration options and then `fit` the data available in the `dataset` through the `DataLoader`.
 
-```
+```python
 if __name__ == '__main__':
   dataset = CIFAR10(os.getcwd(), download=True, transform=transforms.ToTensor())
   pl.seed_everything(42)
@@ -483,8 +483,8 @@ For the full model code, see the full code example at the beginning of this tuto
 
 Now, when you save the code e.g. to a file called `mlp-lightning.py` and run `python mlp-lightning.py`, you'll see the following when your PyTorch and PyTorch Lightning have been installed successfully.
 
-```
-PU available: True, used: True
+```shell
+GPU available: True, used: True
 TPU available: None, using: 0 TPU cores
 LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
 

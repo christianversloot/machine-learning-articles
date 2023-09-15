@@ -146,7 +146,7 @@ As with many of the tutorials at MachineCurve, you'll need to install a set of d
 
 When taking a look at the Keras API for PReLU, we see this:
 
-```
+```python
 keras.layers.PReLU(alpha_initializer='zeros', alpha_regularizer=None, alpha_constraint=None, shared_axes=None)
 ```
 
@@ -179,7 +179,7 @@ Open up your Explorer, navigate to some folder, and create a file, e.g. `model_p
 
 First, we'll have to import the dependencies that we listed before:
 
-```
+```python
 import keras
 from keras.datasets import mnist
 from keras.models import Sequential
@@ -195,7 +195,7 @@ import matplotlib.pyplot as plt
 
 Secondly, we'll add configuration parameters for the ConvNet and the training process. We use the ones we defined and elaborated on in our [tutorial on Keras CNNs](https://www.machinecurve.com/index.php/2019/09/17/how-to-create-a-cnn-classifier-with-keras/), so if you wish to understand the _whys_, I'd recommend you also read that blog post :)
 
-```
+```python
 # Model configuration
 img_width, img_height = 28, 28
 batch_size = 250
@@ -210,7 +210,7 @@ leaky_relu_alpha = 0.1
 
 Subsequently, we import the data and prepare it for training:
 
-```
+```python
 # Load MNIST dataset
 (input_train, target_train), (input_test, target_test) = mnist.load_data()
 
@@ -249,7 +249,7 @@ target_test = keras.utils.to_categorical(target_test, no_classes)
 
 Subsequently, we specify the architecture in line with the image showed above:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3), input_shape=input_shape))
@@ -272,7 +272,7 @@ Note that here, we perform alpha initialization by setting `alpha_initializer` t
 
 Next, we configure the model - in Keras terms: 'compile the model with our hyperparameters as its configuration'. Subsequently, we fit the data to our compiled model, which starts the training process:
 
-```
+```python
 # Compile the model
 model.compile(loss=keras.losses.categorical_crossentropy,
               optimizer=keras.optimizers.Adam(),
@@ -290,7 +290,7 @@ history = model.fit(input_train, target_train,
 
 Finally, we provide metrics for testing the model - based on the test set, to see how well it generalizes to new data - and for [visualizing the training process](https://www.machinecurve.com/index.php/2019/10/08/how-to-visualize-the-training-process-in-keras/).
 
-```
+```python
 # Generate generalization metrics
 score = model.evaluate(input_test, target_test, verbose=0)
 print(f'Test loss for Keras PReLU CNN: {score[0]} / Test accuracy: {score[1]}')

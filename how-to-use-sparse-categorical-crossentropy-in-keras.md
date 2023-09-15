@@ -52,7 +52,7 @@ Training a neural network involves passing data forward, through the model, and 
 
 In that case, **sparse categorical crossentropy loss** can be a good choice. This loss function performs the same type of loss - categorical crossentropy loss - but works on integer targets instead of one-hot encoded ones. Saves you that `to_categorical` step which is common with TensorFlow/Keras models!
 
-```
+```python
 # Compile the model
 model.compile(loss=tensorflow.keras.losses.sparse_categorical_crossentropy,
               optimizer=tensorflow.keras.optimizers.Adam(),
@@ -65,7 +65,7 @@ model.compile(loss=tensorflow.keras.losses.sparse_categorical_crossentropy,
 
 Have you also seen lines of code like these in your Keras projects?
 
-```
+```python
 target_train = tensorflow.keras.utils.to_categorical(target_train, no_classes)
 target_test = tensorflow.keras.utils.to_categorical(target_test, no_classes)
 ```
@@ -141,7 +141,7 @@ Preferably, you run your model in an **Anaconda** environment. This way, you wil
 
 This will be our model for today:
 
-```
+```python
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, Flatten
@@ -206,7 +206,7 @@ Let's break creating the model apart.
 
 First, we add our imports - packages and functions that we'll need for our model to work as intended.
 
-```
+```python
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, Flatten
@@ -224,7 +224,7 @@ More specifically, we...
 
 Next up, model configuration:
 
-```
+```python
 # Model configuration
 img_width, img_height = 28, 28
 batch_size = 250
@@ -240,7 +240,7 @@ We specify image width and image height, which are 28 for both given the images 
 
 Next, we load and prepare the MNIST data:
 
-```
+```python
 # Load MNIST dataset
 (input_train, target_train), (input_test, target_test) = mnist.load_data()
 
@@ -258,7 +258,7 @@ Additionally, we reshape the data so that TensorFlow will accept it.
 
 Additionally, we perform some other preparations which concern the _data_ instead of how it is handled by your system:
 
-```
+```python
 # Parse numbers as floats
 input_train = input_train.astype('float32')
 input_test = input_test.astype('float32')
@@ -276,7 +276,7 @@ Additionally, we normalize the data, which benefits the training process as well
 
 We then create the architecture of our model:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
@@ -300,7 +300,7 @@ To be frank: the architecture of our model doesn't really matter for showing tha
 
 We next compile the model, which involves configuring it by means of hyperparameter tuning:
 
-```
+```python
 # Compile the model
 model.compile(loss=tensorflow.keras.losses.sparse_categorical_crossentropy,
               optimizer=tensorflow.keras.optimizers.Adam(),
@@ -313,7 +313,7 @@ We specify the loss function used - **sparse categorical crossentropy!** We use 
 
 Next, we fit the data following the specification created in the model configuration step and specify evaluation metrics that test the trained model with the testing data:
 
-```
+```python
 # Fit data to model
 model.fit(input_train, target_train,
           batch_size=batch_size,

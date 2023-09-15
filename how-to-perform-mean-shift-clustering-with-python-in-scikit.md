@@ -59,7 +59,7 @@ Yep, those are the clusters that we just showed you, indeed :)
 
 Now, open up a code editor, create a Python file (e.g. `meanshift.py`), so that we can start. The first thing we do is add the imports for today's code:
 
-```
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.datasets import make_blobs
@@ -70,7 +70,7 @@ We'll use Matplotlib for generating visualizations, Numpy for some number proces
 
 Once we defined the imports, we can set the configuration options:
 
-```
+```python
 # Configuration options
 num_samples_total = 10000
 cluster_centers = [(5,5), (3,3), (1,1)]
@@ -81,7 +81,7 @@ We'll be generating 10000 samples in total, across 3 clusters.
 
 Then, it's time to generate the data:
 
-```
+```python
 # Generate data
 X, targets = make_blobs(n_samples = num_samples_total, centers = cluster_centers, n_features = num_classes, center_box=(0, 1), cluster_std = 0.30)
 ```
@@ -90,7 +90,7 @@ With `make_blobs`, we can let Scikit-learn make the blobs we want. We set the co
 
 For reproducibility, though, you might wish to save the dataset you generated. That's why we use Numpy in today's code, for saving the data - and reloading it back into run-time immediately:
 
-```
+```python
 np.save('./clusters.npy', X)
 X = np.load('./clusters.npy'
 ```
@@ -99,7 +99,7 @@ This code is not strictly necessary, but by simply running it once - you can unc
 
 Next, we'll come to Mean Shift specific functionality. First, we define what is known as the "bandwidth" of the algorithm - as you can see here:
 
-```
+```python
 # Estimate bandwith
 bandwidth = estimate_bandwidth(X, quantile=0.2, n_samples=500)
 ```
@@ -110,7 +110,7 @@ That's why the "bandwidth" helps - it simply defines an area around the samples 
 
 We immediately use the bandwidth in the instantiation of the Mean Shift algorithm, after which we fit the data and generate some consequential data, such as the number of labels:
 
-```
+```python
 # Fit Mean Shift with Scikit
 meanshift = MeanShift(bandwidth=bandwidth)
 meanshift.fit(X)
@@ -121,14 +121,14 @@ n_clusters_ = len(labels_unique)
 
 Then, we generate predictions for all the samples in our dataset:
 
-```
+```python
 # Predict the cluster for all the samples
 P = meanshift.predict(X)
 ```
 
 And finally, we generate a visualization to see whether our clustering operation is successful:
 
-```
+```python
 # Generate scatter plot for training data
 colors = list(map(lambda x: '#3b4cc0' if x == 1 else '#b40426' if x == 2 else '#67c614', P))
 plt.scatter(X[:,0], X[:,1], c=colors, marker="o", picker=True)
@@ -148,7 +148,7 @@ Mission complete! 🚀
 
 Should you wish to obtain the full model code at once, that is also possible. Here you go:
 
-```
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.datasets import make_blobs

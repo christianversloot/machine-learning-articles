@@ -99,7 +99,7 @@ We can then add our imports.
 - As we create our model with the Keras Sequential API, we import `Sequential`.
 - Finally, we import `ImageDataGenerator`, with which we'll be able to flow data from files instead of storing everything into memory.
 
-```
+```python
 import os
 import tensorflow
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
@@ -124,7 +124,7 @@ Next, it's time to define some options for model configuration.
 - The labels speak for themselves.
 - The `checkpoint_path` is the path towards the file where [ModelCheckpoint](https://www.machinecurve.com/index.php/2019/05/30/avoid-wasting-resources-with-earlystopping-and-modelcheckpoint-in-keras/) will save our model.
 
-```
+```python
 # Model configuration
 target_size_scalar = 50 # 50 x 50 pixels
 batch_size = 250
@@ -148,7 +148,7 @@ Image data generators can be used for "\[generating\] batches of tensor image da
 - We set `rescale` to `1./255`, meaning that each pixel is multiplied with `1/255`, to ensure that it's in the \[latex\]\[0, 1\]\[/latex\] range. This benefits training (omitting this can even make the model untrainable).
 - For the training and validation `ImageDataGenerator`, we specify the 20% validation split. Next, we will see how this nicely leads to a training and validation dataset.
 
-```
+```python
 # Create ImageDataGenerators for training, validation and testing data
 training_idg = ImageDataGenerator(
     rescale = 1./255, 
@@ -174,7 +174,7 @@ In those cases, `flow_from_directory` can be a nice technique. It connects to yo
 - We apply a `seed` of 28 (this can be any integer close to and above 0), for `shuffling`, which is `True` in our case. In other words, we randomly shuffle the dataset when flowing from directory. However, if we do so with a `seed`, we know that our random initializer is generated in the same way. Doing this across the training and validation generator means that we'll have a nice validation dataset. We specify the differences between the two by means of `subset`.
 - Our batch sizes and target sizes are also specified accordingly.
 
-```
+```python
 # Flow from directory for the IDGs
 train_generator = training_idg.flow_from_directory(
     directory = path,
@@ -231,7 +231,7 @@ Our next step is creating the ConvNet.
 - Then, we flatten the multidimensional data into one-dimensional format with `Flatten`, and apply `Dense` layers to generate the predictions.
 - The final layer is [Softmax-activated](https://www.machinecurve.com/index.php/2020/01/08/how-does-the-softmax-activation-function-work/) in order to generate a multiclass probability distribution over the 3 classes (because `no_classes = 3`).
 
-```
+```python
 # Create the ConvNet
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
@@ -248,7 +248,7 @@ The layer stack above does not represent a full model yet - but rather, a model 
 - We optimize with the Adam optimizer, one of the [widely used optimizers](https://www.machinecurve.com/index.php/2019/11/03/extensions-to-gradient-descent-from-momentum-to-adabound/) these days.
 - For metrics, we specify a wide variety of them - accuracy, of course, but also the more specific ones such as precision, recall, and true/false positives/negatives.
 
-```
+```python
 # Compile the ConvNet
 model.compile(loss=tensorflow.keras.losses.categorical_crossentropy,
               optimizer=tensorflow.keras.optimizers.Adam(),
@@ -277,7 +277,7 @@ But how to compute the weights?
 
 If you have [Scikit-learn](https://scikit-learn.org/stable/) installed onto your system, you can apply `sklearn.utils.class_weight.compute_class_weight` to compute the class weights relative to each other. I created a relatively naïve (i.e. non-generalizable) Python snippet that computes the weights for precisely the training class imbalance for our COVID-19 classifier.
 
-```
+```python
 import numpy as np
 import sklearn
 
@@ -302,13 +302,13 @@ print(weights)
 
 Running it gives the following weights. They make sense: if we multiply 179 with \[latex\]\\approx 5.18\[/latex\] and then divide it by \[latex\]\\approx 0.71\[/latex\], we get \[latex\]\\approx 1301\[/latex\]. The same is true for the others. The weights ensure that the classes are balanced.
 
-```
+```python
 [5.18621974 0.71355368 0.71136654]
 ```
 
 In our code, we therefore now add the weights as follows:
 
-```
+```python
 
 # Compute weights
 class_weights = {0: 5.18621974, 1: 0.71355368, 2: 0.71136654}
@@ -321,7 +321,7 @@ Before, we noted that we use [EarlyStopping and ModelCheckpoint](https://www.mac
 - With `EarlyStopping`, the training process stops early - i.e. if some `monitor` no longer improves. In our case, that monitor is the validation loss. We want to minimize that loss, so our `mode` is set to `min`. We consider an epoch to be a non-improvement if the loss improvement is `< 0.01`. We are patient for five non-improving epochs/iterations, after which the training process stops.
 - With `ModelCheckpoint`, we can save the model after every iteration. However, we ensure that the best is saved only, based on the same `monitor` and `mode`.
 
-```
+```python
 # Define callbacks
 keras_callbacks = [
       EarlyStopping(monitor='val_loss', patience=5, mode='min', min_delta=0.01),
@@ -335,7 +335,7 @@ Now, it's time to start the training process.
 
 - We specify the `train_generator` for our training data and the `val_generator` for our validation data. We also add the callbacks, class weights, define the number of epochs to 1.000 (but, remember, it'll stop early), and set verbosity (i.e. output) to `True`.
 
-```
+```python
 # Fit data to model
 model.fit(train_generator,
           epochs=no_epochs,
@@ -349,7 +349,7 @@ model.fit(train_generator,
 
 Finally, we add some code that helps us [evaluate](https://www.machinecurve.com/index.php/2020/11/03/how-to-evaluate-a-keras-model-with-model-evaluate/) the model after it was trained. We test the model with the `test_generator` to find out if it generalizes well. We do so by listing each individual metric that we defined before.
 
-```
+```python
 # Generalization key value pairs
 kvp = {
   0: 'Categorical crossentropy loss',
@@ -373,7 +373,7 @@ for index, score in enumerate(scores):
 
 Should you wish to obtain the full model code - that is of course also possible :D Here you go.
 
-```
+```python
 import os
 import tensorflow
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
@@ -529,7 +529,7 @@ I created the following snippet for testing a saved model.
 - We generate a testing `ImageDataGenerator` and configure it to flow data from directory - the Test set directory, to be precise.
 - We then [load the model](https://www.machinecurve.com/index.php/2020/02/14/how-to-save-and-load-a-model-with-keras/) and [evaluate it](https://www.machinecurve.com/index.php/2020/11/03/how-to-evaluate-a-keras-model-with-model-evaluate/) with the `ImageDataGenerator`.
 
-```
+```python
 import os
 import tensorflow
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
@@ -626,7 +626,7 @@ The snippet below shows how an `InceptionV3` architecture with weights trained o
 - We then increase the number of `Dense` layers. If we didn't do that, the bottleneck created by the single `Dense` layer would be too extreme and the model wouldn't learn.
 - For the rest, the model is pretty similar: we apply `Dropout` and the same set of metrics as before. The two things that have also changed are the `target_size_scalar` (I thought 256 x 256 pixel images would be better for a deep architecture, so that it can learn more features) and `batch_size` - reduced significantly for memory reasons.
 
-```
+```python
 import os
 import tensorflow
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
@@ -764,7 +764,7 @@ for index, score in enumerate(scores):
 
 A few changes to the testing snippet are necessary to run the test with the pretrained ConvNet:
 
-```
+```python
 
 target_size_scalar = 256
 batch_size = 15

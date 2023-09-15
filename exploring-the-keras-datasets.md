@@ -54,7 +54,7 @@ The images are 32 times 32 pixels and are split into a training set of 50.000 im
 
 With the Keras datasets API, it can be loaded easily (Keras, n.d.). Including the dataset in your code goes as follows:
 
-```
+```python
 from tensorflow.keras.datasets import cifar10
 (x_train, y_train), (x_test, y_test) = cifar10.load_data()
 ```
@@ -122,7 +122,7 @@ Let's now visualize 30 random samples from the CIFAR-10 dataset, to get an impre
 - [![](images/48975.jpg)](https://www.machinecurve.com/wp-content/uploads/2019/12/48975.jpg)
     
 
-```
+```python
 # Imports
 import matplotlib.pyplot as plt
 import numpy as np
@@ -167,14 +167,35 @@ While the CIFAR-10 dataset contains 60.000 samples across 10 classes, the **CIFA
 
 Loading it is easy, as with any of the Keras Datasets (Keras, n.d.):
 
-```
+```python
 from tensorflow.keras.datasets import cifar100
 (x_train, y_train), (x_test, y_test) = cifar100.load_data()
 ```
 
 These are the classes present within CIFAR-100 (Krizhevsky & Hinton, 2009):
 
-<table class="has-subtle-light-gray-background-color has-fixed-layout has-background"><tbody><tr><td>Beaver</td><td>Dolphin</td><td>Otter</td><td>Seal</td><td>Whale</td></tr><tr><td>Aquarium fish</td><td>Flatfish</td><td>Ray</td><td>Shark</td><td>Trout</td></tr><tr><td>Orchids</td><td>Poppies</td><td>Roses</td><td>Sunflowers</td><td>Tulips</td></tr><tr><td>Bottles</td><td>Bowls</td><td>Cans</td><td>Cups</td><td>Plates</td></tr><tr><td>Apples</td><td>Mushrooms</td><td>Oranges</td><td>Pears</td><td>Sweet peppers</td></tr><tr><td>Clok</td><td>Computer keyboard</td><td>Lamp</td><td>Telephone</td><td>Television</td></tr><tr><td>Bed</td><td>Chair</td><td>Couch</td><td>Table</td><td>Wardrobe</td></tr><tr><td>Bee</td><td>Beetle</td><td>Butterfly</td><td>Caterpillar</td><td>Cockroach</td></tr><tr><td>Bear</td><td>Leopard</td><td>Lion</td><td>Tiger</td><td>Wolf</td></tr><tr><td>Bridge</td><td>Castle</td><td>House</td><td>Road</td><td>Skyscraper</td></tr><tr><td>Cloud</td><td>Forest</td><td>Mountain</td><td>Plain</td><td>Sea</td></tr><tr><td>Camel</td><td>Cattle</td><td>Chimpanzee</td><td>Elephant</td><td>Kangaroo</td></tr><tr><td>Fox</td><td>Porcupine</td><td>Possum</td><td>Raccoon</td><td>Skunk</td></tr><tr><td>Crab</td><td>Lobster</td><td>Snail</td><td>Spider</td><td>Worm</td></tr><tr><td>Baby</td><td>Boy</td><td>Girl</td><td>Man</td><td>Woman</td></tr><tr><td>Crocodile</td><td>Dinosaur</td><td>Lizard</td><td>Snake</td><td>Turtle</td></tr><tr><td>Hamster</td><td>Mouse</td><td>Rabbit</td><td>Shrew</td><td>Squirrel</td></tr><tr><td>Maple</td><td>Oak</td><td>Palm</td><td>Pine</td><td>Willow</td></tr><tr><td>Bicycle</td><td>Bus</td><td>Motorcycle</td><td>Pickup truck</td><td>Train</td></tr><tr><td>Lawn-mower</td><td>Rocket</td><td>Streetcar</td><td>Tank</td><td>Tractor</td></tr></tbody></table>
+|               |                   |            |              |               |
+|---------------|-------------------|------------|--------------|---------------|
+| Beaver        | Dolphin           | Otter      | Seal         | Whale         |
+| Aquarium fish | Flatfish          | Ray        | Shark        | Trout         |
+| Orchids       | Poppies           | Roses      | Sunflowers   | Tulips        |
+| Bottles       | Bowls             | Cans       | Cups         | Plates        |
+| Apples        | Mushrooms         | Oranges    | Pears        | Sweet peppers |
+| Clok          | Computer keyboard | Lamp       | Telephone    | Television    |
+| Bed           | Chair             | Couch      | Table        | Wardrobe      |
+| Bee           | Beetle            | Butterfly  | Caterpillar  | Cockroach     |
+| Bear          | Leopard           | Lion       | Tiger        | Wolf          |
+| Bridge        | Castle            | House      | Road         | Skyscraper    |
+| Cloud         | Forest            | Mountain   | Plain        | Sea           |
+| Camel         | Cattle            | Chimpanzee | Elephant     | Kangaroo      |
+| Fox           | Porcupine         | Possum     | Raccoon      | Skunk         |
+| Crab          | Lobster           | Snail      | Spider       | Worm          |
+| Baby          | Boy               | Girl       | Man          | Woman         |
+| Crocodile     | Dinosaur          | Lizard     | Snake        | Turtle        |
+| Hamster       | Mouse             | Rabbit     | Shrew        | Squirrel      |
+| Maple         | Oak               | Palm       | Pine         | Willow        |
+| Bicycle       | Bus               | Motorcycle | Pickup truck | Train         |
+| Lawn-mower    | Rocket            | Streetcar  | Tank         | Tractor       |
 
 And here are, once again, 30 samples randomly drawn and visualized:
 
@@ -239,7 +260,7 @@ And here are, once again, 30 samples randomly drawn and visualized:
 - [![](images/49626.jpg)](https://www.machinecurve.com/wp-content/uploads/2019/12/49626.jpg)
     
 
-```
+```python
 # Imports
 import matplotlib.pyplot as plt
 import numpy as np
@@ -377,7 +398,7 @@ It can be used to experiment with building models for sentiment classification.
 
 As said, it's preprocessed, which warrants a description of _how_ it was preprocessed. Firstly, it's important to understand that "each review is encoded as a sequence of word indexes" (Keras, n.d.). This means that each word was converted into an integer, which represents the position of the word in some word index. One sample (to be precise, index 3 in the training data) looks like this:
 
-```
+```python
 [1, 14, 47, 8, 30, 31, 7, 4, 249, 108, 7, 4, 5974, 54, 61, 369, 13, 71, 149, 14, 22, 112, 4, 2401, 311, 12, 16, 3711, 33, 75, 43, 1829, 296, 4, 86, 320, 35, 534, 19, 263, 4821, 1301, 4, 1873, 33, 89, 78, 12, 66, 16, 4, 360, 7, 4, 58, 316, 334, 11, 4, 1716, 43, 645, 662, 8, 257, 85, 1200, 42, 1228, 2578, 83, 68, 3912, 15, 36, 165, 1539, 278, 36, 69, 44076, 780, 8, 106, 14, 6905, 1338, 18, 6, 22, 12, 215, 28, 610, 40, 6, 87, 326, 23, 2300, 21, 23, 22, 12, 272, 40, 57, 31, 11, 4, 22, 47, 6, 2307, 51, 9, 170, 23, 595, 116, 595, 1352, 13, 191, 79, 638, 89, 51428, 14, 9, 8, 106, 607, 624, 35, 534, 6, 227, 7, 129, 113]
 ```
 
@@ -387,7 +408,7 @@ However, we can find out about them.
 
 I adapted some code created by Mdaoust (2019) [and available here](https://stackoverflow.com/a/44891281) into the following, exploiting the usability of the `get_word_index()` call available for the IMDB dataset:
 
-```
+```python
 from tensorflow.keras.datasets import imdb
 (x_train, y_train), (x_test, y_test) = imdb.load_data()
 
@@ -415,14 +436,14 @@ Do note that the actual index is sorted by word frequency: `i = 1` is the most f
 
 In the simplest form, the data can be loaded as follows:
 
-```
+```python
 from tensorflow.keras.datasets import imdb
 (x_train, y_train), (x_test, y_test) = imdb.load_data()
 ```
 
 However, there are some arguments that can be set (Keras, n.d.):
 
-```
+```python
 from tensorflow.keras.datasets import imdb
 (x_train, y_train), (x_test, y_test) = imdb.load_data(path="imdb.npz",
                                                       num_words=None,
@@ -459,7 +480,7 @@ Another dataset for text classification is the **Reuters newswire topics dataset
 
 The simplest way of loading this dataset goes as follows:
 
-```
+```python
 from tensorflow.keras.datasets import reuters
 (x_train, y_train), (x_test, y_test) = reuters.load_data()
 ```
@@ -468,7 +489,7 @@ The attributes discussed under the IMDB dataset are also available, as well as `
 
 Adapting the code we used previously (originally created by Mdaoust (2019) [and available here](https://stackoverflow.com/a/44891281), adapted by me; please note that I found the Reuters dataset topics [here](https://github.com/keras-team/keras/issues/12072#issuecomment-458154097), Bauer n.d.) into ...
 
-```
+```python
 from tensorflow.keras.datasets import reuters
 import numpy as np
 (x_train, y_train), (x_test, y_test) = reuters.load_data()
@@ -525,7 +546,7 @@ Another dataset that is included in the Keras Datasets API is the **MNIST datase
 
 Loading them is easy:
 
-```
+```python
 from tensorflow.keras.datasets import mnist
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 ```
@@ -555,7 +576,7 @@ In order to overcome these issues, Xiao et al. introduce the **Fashion-MNIST** d
 
 Loading it is easy, once again:
 
-```
+```python
 from tensorflow.keras.datasets import fashion_mnist
 (x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
 ```
@@ -627,7 +648,7 @@ Visualizing 30 yields that the differences within this dataset are larger than w
 - [![](images/58299.jpg)](https://www.machinecurve.com/wp-content/uploads/2019/12/58299.jpg)
     
 
-```
+```python
 # Imports
 import matplotlib.pyplot as plt
 import numpy as np
@@ -678,7 +699,7 @@ Another dataset that is available within the Keras Datasets is the **Boston Hous
 
 Loading the data is easy, as with pretty much all of the Keras Datasets:
 
-```
+```python
 from tensorflow.keras.datasets import boston_housing
 (x_train, y_train), (x_test, y_test) = boston_housing.load_data()
 ```
@@ -689,7 +710,7 @@ The dataset contains 506 observations that relate certain characteristics with t
 - The mean house price was $22.533.
 - Variance in house prices is $84.587.
 
-```
+```python
 DescribeResult(nobs=506, minmax=(5.0, 50.0), mean=22.53280632411067, variance=84.58672359409854, skewness=1.1048108228646372, kurtosis=1.4686287722747515)
 ```
 
@@ -699,7 +720,7 @@ Given this box plot of the training _and_ testing data combined, outliers are pr
 
 Code for generating the summary and the box plot:
 
-```
+```python
 '''
   Generate a BoxPlot image to determine how many outliers are within the Boston Housing Pricing Dataset.
 '''

@@ -41,7 +41,7 @@ However, if you want to use your model in the real world, you must evaluate - or
 
 Testing your PyTorch model requires you to, well, create a PyTorch model first. This involves defining a `nn.Module` based model and adding a custom training loop. Once this process has finished, testing happens, which is performed using a custom testing loop. Here's a **full example of model evaluation in PyTorch**. If you want to understand things in more detail, or want to build this approach step-by-step, make sure to read the rest of this tutorial as well! :)
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -163,7 +163,7 @@ Another way of using PyTorch is with Lightning, a lightweight library on top of 
 
 Here, you'll find a **full example for model evaluation with PyTorch Lightning**. If you want to understand Lightning in more detail, make sure to read on as well!
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -262,7 +262,7 @@ Let's now take a look at how we can evaluate a model that was created with PyTor
 
 This is the model that we want to evaluate. If you want to understand how it works, make sure to [read this tutorial](https://www.machinecurve.com/index.php/2021/01/26/creating-a-multilayer-perceptron-with-pytorch-and-lightning/#classic-pytorch_1) too.
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -364,7 +364,7 @@ We can define the testing loop so in the following way.
     3. During every minibatch iteration, we decompose the data into inputs and targets, generate the outputs, compare the predictions with the ground truth values, and update the `total` and `correct` variables. Here, `torch.max(outputs.data, 1)` looks complex, but it is simple - it simply takes a look at the _indices_ of the classes that have the highest maximum value. Now that's a smart approach, because these are the indices of our classes too! In one line of code, we can make our predictions comparable with the targets.
 3. Finally, we print the accuracy.
 
-```
+```python
   
   # Print about testing
   print('Starting testing')
@@ -429,7 +429,7 @@ Today, many engineers who are used to PyTorch are using PyTorch Lightning, a lib
 
 The PyTorch model that will be used for testing is similar to the one created with classic PyTorch above:
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -486,7 +486,7 @@ Frankly, most of the evaluation code was already added in the code example above
 
 What remains now is to add the runtime code, which loads the datasets (both training and testing data), sets the seed of the random number generator, initializes the model and the Trainer object, and performs training and evaluation.
 
-```
+```python
 if __name__ == '__main__':
   
   # Load the datasets

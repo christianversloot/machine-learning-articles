@@ -50,21 +50,21 @@ These code examples show how you can add ReLU, Sigmoid and Tanh to your TensorFl
 
 ### Rectified Linear Unit (ReLU)
 
-```
+```python
 model.add(Dense(12, input_shape=(8,), activation='relu'))
 model.add(Dense(8, activation='relu'))
 ```
 
 ### Sigmoid
 
-```
+```python
 model.add(Dense(12, input_shape=(8,), activation='sigmoid'))
 model.add(Dense(8, activation='sigmoid'))
 ```
 
 ### Tanh
 
-```
+```python
 model.add(Dense(12, input_shape=(8,), activation='tanh'))
 model.add(Dense(8, activation='tanh'))
 ```
@@ -130,7 +130,7 @@ Note that you'll need the dataset as well. You could either download it from [Ka
 
 We begin with the dependencies:
 
-```
+```python
 # Load dependencies
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
@@ -143,7 +143,7 @@ Additionally, we import `numpy` for reading the file and preparing the dataset.
 
 Second, we load the data:
 
-```
+```python
 # Load data
 dataset = np.loadtxt('./pima_dataset.csv', delimiter=',')
 ```
@@ -152,7 +152,7 @@ Since the data is comma-separated, we set the `delimiter` to a comma.
 
 We then separate the input data and the target data:
 
-```
+```python
 # Separate input data and target data
 X = dataset[:, 0:8]
 Y = dataset[:, 8]
@@ -162,20 +162,20 @@ In the CSV file, the data is appended together. That is, each row contains both 
 
 We then start off with the model itself and instantiate the Sequential API:
 
-```
+```python
 # Create the Perceptron
 model = Sequential()
 ```
 
 We're then ready to add some activation function-specific code. We'll temporarily indicate its position with a comment:
 
-```
+```python
 # ActivationFunction-specific code here
 ```
 
 ...and continue with our final general steps:
 
-```
+```python
 model.add(Dense(1, activation='sigmoid'))
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
@@ -195,7 +195,7 @@ We finally fit the data (variables `X` and `Y` to the model), using 225 epochs w
 
 Now, it's time to add activation function-specific code. In all of the below cases, this is the part that you'll need to replace:
 
-```
+```python
 # ActivationFunction-specific code here
 ```
 
@@ -217,7 +217,7 @@ What's best, if the activation function of your choice - for example [Swish](htt
 
 By consequence, if we wish to implement a neural net work with ReLU, we do this:
 
-```
+```python
 model.add(Dense(12, input_shape=(8,), activation='relu'))
 model.add(Dense(8, activation='relu'))
 ```
@@ -226,7 +226,7 @@ model.add(Dense(8, activation='relu'))
 
 ...and with Sigmoid:
 
-```
+```python
 model.add(Dense(12, input_shape=(8,), activation='sigmoid'))
 model.add(Dense(8, activation='sigmoid'))
 ```
@@ -235,14 +235,14 @@ model.add(Dense(8, activation='sigmoid'))
 
 ...or Tanh:
 
-```
+```python
 model.add(Dense(12, input_shape=(8,), activation='tanh'))
 model.add(Dense(8, activation='tanh'))
 ```
 
 Eventually, your code will look like this:
 
-```
+```python
 # Load dependencies
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense

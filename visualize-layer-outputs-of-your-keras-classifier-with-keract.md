@@ -89,7 +89,7 @@ That's it already! 😊
 
 Open up your Explorer and navigate to some folder. Create a file - and name it e.g. `keract_activations.py`. Now open an editor, open the file, and start coding. What you'll have to code largely aligns with the [Keras CNN tutorial](https://www.machinecurve.com/index.php/2019/09/17/how-to-create-a-cnn-classifier-with-keras/), and especially the first part:
 
-```
+```python
 '''
   Visualize layer activations of a tensorflow.keras CNN with Keract
 '''
@@ -145,7 +145,7 @@ target_test = tensorflow.keras.utils.to_categorical(target_test, no_classes)
 
 The architecture, that follows next, equals the architecture we visualized before:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv2D(6, kernel_size=(5, 5), activation='relu', input_shape=input_shape))
@@ -160,7 +160,7 @@ model.add(Dense(no_classes, activation='softmax'))
 
 Configuring the model (by tuning hyperparameters) and fitting it to the data (i.e., assigning where the training process should start) is similar to the Keras CNN tutorial again:
 
-```
+```python
 # Compile the model
 model.compile(loss=tensorflow.keras.losses.categorical_crossentropy,
               optimizer=tensorflow.keras.optimizers.Adam(),
@@ -200,7 +200,7 @@ Next up: generating visualizations of the outputs of your layers!
 
 Keract comes with a very simple API, and it is very easy to generate output visualizations for your layers. It's as simple as this:
 
-```
+```python
 # =============================================
 # Keract visualizations
 # =============================================
@@ -269,7 +269,7 @@ Finally, data arrives at the **Softmax layer**, which essentially generates a pr
 
 Note that sometimes, you do not only wish to get _output visualizations_ for your layers (showing how the feature maps activate on some aspects of your image), but rather, you wish to generate an input/activation overlay. This can be done with Keract as well, and more specifically with its `display_heatmaps` function. This can be done as follows:
 
-```
+```python
 # =============================================
 # Keract visualizations
 # =============================================

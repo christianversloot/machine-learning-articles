@@ -46,7 +46,7 @@ This code example shows you how you can implement Masked Language Modeling with 
 
 Of course, make sure to read the rest of this tutorial as well if you want to understand concepts in more detail! 🚀
 
-```
+```python
 from transformers import pipeline
 
 # Initialize MLM pipeline
@@ -65,7 +65,7 @@ print(result)
 
 This yields:
 
-```
+```python
 [{
 	'sequence': 'Read the rest of this article to understand things in more detail',
 	'score': 0.35419148206710815,
@@ -166,7 +166,7 @@ Now that we have stated all the preparations, it's time to write some code. As p
 - We specify a `phrase`, where we deliberately leave out a word with our mask, and feed it through the pipeline.
 - We finally print the result.
 
-```
+```python
 from transformers import pipeline
 
 # Initialize MLM pipeline
@@ -187,7 +187,7 @@ print(result)
 
 Running our code with e.g. `python mlm.py` yields the following result:
 
-```
+```python
 [{
 	'sequence': 'At a discount you can drink beer and wine',
 	'score': 0.22876130044460297,
@@ -218,13 +218,13 @@ Running our code with e.g. `python mlm.py` yields the following result:
 
 These are quite relevant, yet we can also see that the model is not too confident - it can either be about the price (cheaper, more expensive) or about the location (cafe, festival). Let's try again with some phrase:
 
-```
+```python
 phrase = f'Performing additions and subtractions is a part of {mask}'
 ```
 
 The result:
 
-```
+```python
 [{
 	'sequence': 'Performing additions and subtractions is a part of mathematics',
 	'score': 0.0855618417263031,

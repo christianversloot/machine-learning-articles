@@ -87,7 +87,7 @@ Since manually splitting the problem into many classification problems would be 
 
 Scikit-learn provides the `MultiOutputClassifier` functionality, which implements a multilabel classifier for any regular classifier. For this reason, it will also work with an SVM. Let's first generate two blobs of data which represent the `classes`, or the 'type' from the assembly line scenario above:
 
-```
+```python
 from sklearn.datasets import make_blobs
 
 # Configuration options
@@ -116,7 +116,7 @@ We can now use Scikit-learn to generate a multilabel SVM classifier. Here, we as
 
 That's it - we have now created a multilabel Support Vector Machine! Now, ensure that `sklearn`, `matplotlib` and `numpy` are installed onto your system / into your environment, and run the code.
 
-```
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.datasets import make_blobs

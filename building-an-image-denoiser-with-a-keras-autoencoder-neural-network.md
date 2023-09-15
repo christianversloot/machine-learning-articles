@@ -138,7 +138,7 @@ Creating our model consists of multiple steps:
 
 Step one: define which packages you'll need in your Python script. They are as follows.
 
-```
+```python
 import keras
 from keras.datasets import mnist
 from keras.models import Sequential
@@ -157,7 +157,7 @@ With Matplotlib, we'll create some visualizations, and Numpy is used for numbers
 
 Step two: defining the configuration of your model.
 
-```
+```python
 # Model configuration
 img_width, img_height = 28, 28
 batch_size = 150
@@ -186,7 +186,7 @@ We do so in a few steps:
 - Next, we parse the int numbers into floats, specifically the `float32` datatype. Presumably, this speeds up the training process.
 - Finally, we normalize the data into the range \[latex\]\[0, 1\]\[/latex\].
 
-```
+```python
 # Load MNIST dataset
 (input_train, target_train), (input_test, target_test) = mnist.load_data()
 
@@ -215,7 +215,7 @@ input_test = input_test / 255
 
 Step four: adding some noise to the dataset. We first retrieve the pure training and testing data, subsequently generate some noisy (Gaussian noise, with a mean of 0 and a standard deviation of 0, based on `pure.shape` and `pure_test.shape`). Subsequently, following the `noise_factor` we set in the configuration step, we add the noise to the pure data, creating the `noisy_input` which we'll feed to the autoencoder.
 
-```
+```python
 # Add noise
 pure = input_train
 pure_test = input_test
@@ -229,7 +229,7 @@ noisy_input_test = pure_test + noise_factor * noise_test
 
 Next, as step five, we specify the architecture that we discussed earlier. Note that the last layer makes use of the Sigmoid activation function, which allows us to use [binary crossentropy loss](https://www.machinecurve.com/index.php/2019/10/22/how-to-use-binary-categorical-crossentropy-with-keras/).
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv2D(64, kernel_size=(3, 3), kernel_constraint=max_norm(max_norm_value), activation='relu', kernel_initializer='he_uniform', input_shape=input_shape))
@@ -243,7 +243,7 @@ model.summary()
 
 Calling `model.summary()` produces this nice summary, which provides even more insight into our model:
 
-```
+```shell
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #
 =================================================================
@@ -268,7 +268,7 @@ Train on 48000 samples, validate on 12000 samples
 
 Step six: compiling the model and starting the training the process. Compiling the model is just a difficult combination of words for setting some configuration values; these are the so-called hyperparameters. We have to choose an optimizer ([for which we use the Adam optimizer](https://www.machinecurve.com/index.php/2019/11/03/extensions-to-gradient-descent-from-momentum-to-adabound/#adam) given its benefits compared with traditional SGD) and a [loss function](https://www.machinecurve.com/index.php/2019/10/04/about-loss-and-loss-functions/) (binary crossentropy loss).
 
-```
+```python
 # Compile and fit data
 model.compile(optimizer='adam', loss='binary_crossentropy')
 model.fit(noisy_input, pure,
@@ -283,7 +283,7 @@ Fitting the data to the compiled way, once again, is just another way of saying 
 
 Step seven - our final step: evaluating the model by generating some visualizations of how test samples are denoised by our trained autoencoder. For this purpose, we'll take a subset of the test data, as well as their targets, and use it to generate predictions - the `denoised_images`.
 
-```
+```python
 # Generate denoised images
 samples = noisy_input_test[:number_of_visualizations]
 targets = target_test[:number_of_visualizations]
@@ -292,7 +292,7 @@ denoised_images = model.predict(samples)
 
 We then create some Matplotlib code to visualize them:
 
-```
+```python
 # Plot denoised images
 for i in range(0, number_of_visualizations):
   # Get the sample and the reconstruction
@@ -320,7 +320,7 @@ And this is it! Now open up a terminal, `cd` to the folder where your model is l
 
 If you're interested in the full model code altogether, here you go:
 
-```
+```python
 import keras
 from keras.datasets import mnist
 from keras.models import Sequential

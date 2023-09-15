@@ -38,7 +38,7 @@ After reading this tutorial, you will...
 
 Here's a quick code example that illustrates how TensorFlow/Keras based `LSTM` models can be wrapped with `Bidirectional`. This converts them from unidirectional recurrent models into bidirectional ones. [Click here](https://www.machinecurve.com/index.php/2021/01/11/bidirectional-lstms-with-tensorflow-and-keras/#tf-keras-layers-bidirectional) to understand the `merge_mode` attribute. If you want to understand bidirectional LSTMs in more detail, or construct the rest of the model and actually run it, make sure to read the rest of this tutorial too! :)
 
-```
+```python
 # Define the Keras model
 model = Sequential()
 model.add(Embedding(num_distinct_words, embedding_output_dims, input_length=max_sequence_length))
@@ -105,7 +105,7 @@ Now that we understand how bidirectional LSTMs work, we can take a look at imple
 
 Bidirectionality of a recurrent Keras Layer can be added by implementing `tf.keras.layers.bidirectional` (TensorFlow, n.d.). It is a [wrapper layer](https://www.tensorflow.org/api_docs/python/tf/keras/layers/Bidirectional) that can be added to any of the recurrent layers available within Keras, such as `LSTM`, `GRU` and `SimpleRNN`. It looks as follows:
 
-```
+```python
 tf.keras.layers.Bidirectional(
     layer, merge_mode='concat', weights=None, backward_layer=None,
     **kwargs
@@ -122,7 +122,7 @@ The layer attributes are as follows:
 
 The first step in creating a Bidirectional LSTM is defining a regular one. This can be done with the `tf.keras.layers.LSTM` layer, which we have [explained in another tutorial](https://www.machinecurve.com/index.php/2021/01/07/build-an-lstm-model-with-tensorflow-and-keras/). For the sake of brevity, we won't copy the entire model here multiple times - so we'll just show the segment that represents the model. As you can see, creating a regular LSTM in TensorFlow involves initializing the model (here, using `Sequential`), adding a [word embedding](https://www.machinecurve.com/index.php/2020/03/03/classifying-imdb-sentiment-with-keras-and-embeddings-dropout-conv1d/), followed by the LSTM layer. Using a final Dense layer, we perform a [binary classification problem](https://www.machinecurve.com/index.php/2020/10/19/3-variants-of-classification-problems-in-machine-learning/).
 
-```
+```python
 # Define the Keras model
 model = Sequential()
 model.add(Embedding(num_distinct_words, embedding_output_dims, input_length=max_sequence_length))
@@ -134,7 +134,7 @@ model.add(Dense(1, activation='sigmoid'))
 
 Converting the regular or unidirectional LSTM into a bidirectional one is really simple. The only thing you have to do is to wrap it with a `Bidirectional` layer and specify the `merge_mode` as explained above. In this case, we set the merge mode to _summation_, which deviates from the default value of _concatenation_.
 
-```
+```python
 # Define the Keras model
 model = Sequential()
 model.add(Embedding(num_distinct_words, embedding_output_dims, input_length=max_sequence_length))
@@ -154,7 +154,7 @@ Of course, we will also show you the full model code for the examples above. Thi
 6. **Generating a summary**. This allows us to [inspect the model in more detail](https://www.machinecurve.com/index.php/2020/04/01/how-to-generate-a-summary-of-your-keras-model/).
 7. **Training and evaluating the model**. With `model.fit(...)`, we start the training process using our [training data](https://www.machinecurve.com/index.php/2020/11/16/how-to-easily-create-a-train-test-split-for-your-machine-learning-model/), with subsequent [evaluation](https://www.machinecurve.com/index.php/2020/11/03/how-to-evaluate-a-keras-model-with-model-evaluate/) on our testing data using `model.evaluate(...)`.
 
-```
+```python
 import tensorflow as tf
 from tensorflow.keras.datasets import imdb
 from tensorflow.keras.layers import Embedding, Dense, LSTM, Bidirectional
@@ -210,7 +210,7 @@ print(f'Test results - Loss: {test_results[0]} - Accuracy: {100*test_results[1]}
 
 We can now run our Bidirectional LSTM by running the code in a terminal that has TensorFlow 2.x installed. This is what you should see:
 
-```
+```shell
 2021-01-11 20:47:14.079739: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
 Epoch 1/5
 157/157 [==============================] - 20s 102ms/step - loss: 0.6621 - accuracy: 0.5929 - val_loss: 0.4486 - val_accuracy: 0.8226

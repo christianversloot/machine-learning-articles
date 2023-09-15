@@ -52,7 +52,7 @@ In this tutorial, you will learn...
 
 You can use the code example below to get started immediately. If you want to understand TensorBoard and how it can be used in more detail, make sure to continue and read the rest of the article below.
 
-```
+```python
 # The 'model' variable is a compiled Keras model.
 
 # Import TensorBoard
@@ -103,7 +103,7 @@ An exemplary combination of Keras callbacks is [EarlyStopping and ModelCheckpoin
 
 In January 2021, Keras defined the **TensorBoard** callback as follows (Keras, n.d.):
 
-```
+```python
 tf.keras.callbacks.tensorboard_v1.TensorBoard(log_dir='./logs', histogram_freq=0, batch_size=32, write_graph=True, write_grads=False, write_images=False, embeddings_freq=0, embeddings_layer_names=None, embeddings_metadata=None, embeddings_data=None, update_freq='epoch')
 ```
 
@@ -241,7 +241,7 @@ Open your Explorer and create a file in a directory of your choice with a name o
 
 Let's next specify the imports:
 
-```
+```python
 import tensorflow.keras
 from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.models import Sequential
@@ -263,7 +263,7 @@ They are really simple:
 
 Next, we configure the model, which is essentially just a configuration of image width and height, batch size, epochs, classes, [validation split](https://www.machinecurve.com/index.php/2020/11/16/how-to-easily-create-a-train-test-split-for-your-machine-learning-model/) and verbosity - just the regular stuff:
 
-```
+```python
 # Model configuration
 img_width, img_height = 32, 32
 batch_size = 250
@@ -275,7 +275,7 @@ verbosity = 1
 
 And (which is why I love Keras) we next [import the data](https://www.machinecurve.com/index.php/2019/12/31/exploring-the-keras-datasets/) with one line of code (or two, if we include the comment):
 
-```
+```python
 # Load CIFAR10 dataset
 (input_train, target_train), (input_test, target_test) = cifar10.load_data()
 ```
@@ -288,7 +288,7 @@ Now, if you wish to visualize the data, a.k.a. create this plot...
 
 ...this is what you'll have to add:
 
-```
+```python
 # Visualize CIFAR10 dataset
 import matplotlib.pyplot as plt
 classes = {
@@ -348,7 +348,7 @@ Now, we can prepare our data, which comprises these steps:
 - Input data [normalization](https://www.machinecurve.com/index.php/2020/11/19/how-to-normalize-or-standardize-a-dataset-in-python/).
 - Generating [categorical data from the integer targets](https://www.machinecurve.com/index.php/2020/11/24/one-hot-encoding-for-machine-learning-with-tensorflow-and-keras/), allowing us to use [categorical crossentropy](https://www.machinecurve.com/index.php/2019/10/22/how-to-use-binary-categorical-crossentropy-with-keras/) for computing loss.
 
-```
+```python
 # Set input shape
 input_shape = (img_width, img_height, 3)
 
@@ -369,7 +369,7 @@ target_test = tensorflow.keras.utils.to_categorical(target_test, no_classes)
 
 Next, we can specify the model architecture:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
@@ -391,7 +391,7 @@ Refer to [this post](https://www.machinecurve.com/index.php/2019/09/17/how-to-cr
 
 Next, we can compile our model - i.e., add our configuration or the model's hyperparameters - and fit the data:
 
-```
+```python
 # Compile the model
 model.compile(loss=tensorflow.keras.losses.categorical_crossentropy,
               optimizer=tensorflow.keras.optimizers.Adam(),
@@ -428,7 +428,7 @@ Tensorboard, or `tensorboard`, in its own is the implementation as defined by th
 
 Finally, we add this evaluation code which tells you how well the trained model performs based on the testing data - i.e., how well it [generalizes](https://www.machinecurve.com/index.php/2020/12/01/how-to-check-if-your-deep-learning-model-is-underfitting-or-overfitting/) to data it has never seen before:
 
-```
+```python
 # Generate generalization metrics
 score = model.evaluate(input_test, target_test, verbose=0)
 print(f'Test loss: {score[0]} / Test accuracy: {score[1]}')
@@ -438,7 +438,7 @@ print(f'Test loss: {score[0]} / Test accuracy: {score[1]}')
 
 If you're interested in the full model code - here you go:
 
-```
+```python
 import tensorflow.keras
 from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.models import Sequential
@@ -568,7 +568,7 @@ Now, you can start the training process by simply opening a terminal that covers
 
 Normally, your model would start the training process, but I ran into this error at first:
 
-```
+```python
 tensorflow.python.framework.errors_impl.NotFoundError: Failed to create a directory: ./logs/1573629879\train; No such file or directory [Op:CreateSummaryFileWriter]
 ```
 
@@ -639,7 +639,7 @@ We can now inspect model performance in TensorBoard!
 
 Once the [training process](https://www.machinecurve.com/index.php/2019/10/04/about-loss-and-loss-functions/#the-high-level-supervised-learning-process) is finished, execute this command in the same terminal:
 
-```
+```console
 tensorboard --logdir=./logs
 ```
 

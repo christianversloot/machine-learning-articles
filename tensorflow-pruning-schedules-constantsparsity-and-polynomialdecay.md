@@ -99,7 +99,7 @@ However, in the [article about pruning](https://www.machinecurve.com/index.php/2
 
 Here, we see the following:
 
-```
+```python
   def on_train_batch_begin(self, batch, logs=None):
     tuples = []
     for layer in self.prunable_layers:
@@ -115,7 +115,7 @@ In it, the pruning step is increased by one: `self.step = self.step + 1`.
 
 This means that every _batch_ during your training process represents a pruning step. This is also why in the pruning article, [we configured the end\_step](https://www.machinecurve.com/index.php/2020/09/23/tensorflow-model-optimization-an-introduction-to-pruning/#loading-and-configuring-pruning) as follows:
 
-```
+```python
 end_step = np.ceil(num_images / batch_size).astype(np.int32) * pruning_epochs
 ```
 
@@ -142,7 +142,7 @@ Those arguments allow you to configure pruning to your needs. With a constant ta
 
 It returns the following (TensorFlow/model-optimization, n.d.) data with respect to `should_prune` and `sparsity`:
 
-```
+```python
     return (self._should_prune_in_step(step, self.begin_step, self.end_step,
                                        self.frequency),
             tf.constant(self.target_sparsity, dtype=tf.float32))
@@ -189,7 +189,7 @@ We train for 30 epochs, as a ConvNet-based MNIST classifier will always see good
 
 Should you wish to get additional explanation or see the code for `PolynomialDecay`, click [here](https://www.machinecurve.com/index.php/2020/09/23/tensorflow-model-optimization-an-introduction-to-pruning/#pruning-a-keras-example). Here is the full code for creating, training, pruning, saving and comparing a pruned Keras model with `ConstantSparsity`:
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential, save_model

@@ -42,7 +42,7 @@ The code below provides a full example of using Activation Maximization with Ten
 
 It allows you to get started quickly. If you want to understand more details behind Activation Maximization or `tf-keras-vis`, make sure to read the rest of this tutorial as well! 🚀
 
-```
+```python
 '''
   Visualizing how layers represent classes with keras-vis Activation Maximization.
 '''
@@ -224,7 +224,7 @@ Open up your file explorer, navigate to some directory, and create a file. You c
 
 We'll first add the code for the [Keras CNN](https://www.machinecurve.com/index.php/2019/09/17/how-to-create-a-cnn-classifier-with-keras/) that we'll visualize. Since this code was already explained here, and an explanation will only distract us from the actual goal of this blog post, I'd like to refer you to the post if you wish to understand the CNN code in more detail.
 
-```
+```python
 '''
   Visualizing how layers represent classes with keras-vis Activation Maximization.
 '''
@@ -296,7 +296,7 @@ model.fit(input_train, target_train,
 
 We next add the imports: the most important one is `ActivationMaximization` from `tf-keras-vis`, in order to apply activation maximization. Note that the `-` characters from the `pip` command have changed into `_` here. Secondly, we import Matplotlib, for actually outputting the visualizations.
 
-```
+```python
 # =============================================
 # Activation Maximization code
 # =============================================
@@ -307,7 +307,7 @@ import matplotlib.pyplot as plt
 
 #### Preparations
 
-```
+```python
 def loss(output):
   return (output[0, 0], output[1, 1], output[2, 2], output[3, 3], output[4, 4], output[5, 5], output[6, 6], output[7, 7], output[8, 8], output[9, 9])
 
@@ -333,7 +333,7 @@ Finally, we add some code for the visualizations. It does the following:
 - Generate the activations with `visualize_activation` and our self-defined `loss` function, the `seed_input` seeds and using 512 steps. The latter is recommended by `tf-keras-vis` docs for "generating good images".
 - Finally, converting the activations into images, and visualizing them.
 
-```
+```python
 # Initialize Activation Maximization
 visualize_activation = ActivationMaximization(model, model_modifier)
 
@@ -416,7 +416,7 @@ This is a random selection from CIFAR10:
 
 This is the code used for CIFAR10 visualization. It is really similar to the MNIST one above, so take a look there for explanations:
 
-```
+```python
 '''
   Visualizing how layers represent classes with keras-vis Activation Maximization.
 '''

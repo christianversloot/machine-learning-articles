@@ -106,7 +106,7 @@ It contains multiple parts:
 - **The nn.Module** **\- a.k.a. the neural network**. As this tutorial involves using the Upsampling functionality within PyTorch, today's neural network is called `UpsampleExample`. It does only one thing: stack one `Upsample` layer in a `Sequential` block, which resizes inputs to `(56, 56)` shape and uses nearest neighbor interpolation for filling up the 'empty' pixels. The `forward` definition simply feeds the inputs to the layers and returns the result.
 - **The main segment**. Firstly, we prepare the MNIST dataset by creating an instance of the `MNIST` class, which downloads the data if necessary. In addition, a Tensorfication of the input data is performed before any data will be passed to the neural network. Secondly, a `DataLoader` is initialized on top of the `dataset`, which shuffles and selects data using a preconfigured batch size (of 10 images). Thirdly, the upsample example is initialized, and we perform an iteration over the (first) batch. For each batch, we feed the data through the neural network, and pick the first example for visualization with Matplotlib.
 
-```
+```python
 import os
 import torch
 from torch import nn

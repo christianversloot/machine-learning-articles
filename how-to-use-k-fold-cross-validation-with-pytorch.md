@@ -50,7 +50,7 @@ K-fold Cross Validation is a more robust evaluation technique. It splits the dat
 
 Below, you will see a **full example of using K-fold Cross Validation with PyTorch**, using Scikit-learn's `KFold` functionality. It can be used on the go. If you want to understand things in more detail, however, it's best to continue reading the rest of the tutorial as well! 🚀
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -317,7 +317,7 @@ The first thing we do is specifying the model imports. We import these Python mo
 - We also import specific functionality related to Computer Vision - using `torchvision`. First, we import the `MNIST` dataset from `torchvision.datasets`. We also import `transforms` from Torch Vision, which allows us to convert the data into Tensor format later.
 - Finally, we import `KFold` from `sklearn.model_selection` to allow us to perform K-fold Cross Validation.
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -335,7 +335,7 @@ Let's define a simple convolutional neural network, i.e. a `SimpleConvNet`, that
 
 We can implement it as follows, by specifying the `__init__` constructor definition and the forward pass. In the `__init__` definition, we specify the neural network as a Sequential stack of PyTorch layers. You can see that we use one convolutional layer (`Conv2d`) with ReLU activations and some `Linear` layers responsible for generating the predictions. Due to the simplicity of the MNIST dataset, this should suffice. We store the stack in `self.layers`, which we use in the forward pass, as defined in the `forward` definition. Here, we simply pass the data - available in `x` - to the layers.
 
-```
+```python
 class SimpleConvNet(nn.Module):
   '''
     Simple Convolutional Neural Network
@@ -361,7 +361,7 @@ class SimpleConvNet(nn.Module):
 
 Before the `class`, we will also add a `def` called `reset_weights`. During the folds, it will be used to reset the parameters of the model. This way, we ensure that the model is trained with weights that are initialized (pseudo)randomly, avoiding weight leakage.
 
-```
+```python
 def reset_weights(m):
   '''
     Try resetting model weights to avoid
@@ -394,7 +394,7 @@ Below, we define some preparation steps that are executed prior to starting the 
 2. We define a dictionary that will store the results for every fold.
 3. We set a fixed random number seed, meaning that all our pseudo random number initializers will be initialized using the same initialization token.
 
-```
+```python
 if __name__ == '__main__':
   
   # Configuration options
@@ -419,7 +419,7 @@ And we don't want that - recall that K-fold Cross Validation generates the train
 
 To solve this, we simply load both parts, and then concatenate them in a `ConcatDataset` object. Don't worry about shuffling the data - you'll see that this is taken care of next.
 
-```
+```python
   # Prepare MNIST dataset by concatenating Train/Test part; we split later.
   dataset_train_part = MNIST(os.getcwd(), download=True, transform=transforms.ToTensor(), train=True)
   dataset_test_part = MNIST(os.getcwd(), download=True, transform=transforms.ToTensor(), train=False)
@@ -430,7 +430,7 @@ To solve this, we simply load both parts, and then concatenate them in a `Concat
 
 Because next, we _do_ define the shuffle - when we initialize the K-fold Cross Validator. Here, we set `shuffle=True`, meaning that shuffling occurs before the data is split into batches. `k_folds` indicates the number of folds, as you would have expected.
 
-```
+```python
   # Define the K-fold Cross Validator
   kfold = KFold(n_splits=k_folds, shuffle=True)
     
@@ -450,7 +450,7 @@ Within the for loop, we first perform a `print` statement, indicating the curren
 - Then, when the neural network is initialized, you can initialize the optimizer for this particular training session - in this case, we use Adam, with a `1e-4` learning rate.
 - In PyTorch, you'll have to define [your own training loop](https://www.machinecurve.com/index.php/2021/01/26/creating-a-multilayer-perceptron-with-pytorch-and-lightning/). It's relatively simple: you iterate over the number of epochs; within an epoch, over the minibatches; per minibatch, you perform the forward pass, the backward pass and subsequent optimization. That's what is happening here. Click the link if you want to understand this process in more detail.
 
-```
+```python
   # K-fold Cross Validation model evaluation
   for fold, (train_ids, test_ids) in enumerate(kfold.split(dataset)):
     
@@ -521,7 +521,7 @@ Within the for loop, we first perform a `print` statement, indicating the curren
 
 After training a model within a particular fold, you must evaluate it too. That's what we'll do next. First, we save the model - so that it will be usable for generating productions later, should you want to re-use it. We then perform [model evaluation activities](https://www.machinecurve.com/index.php/2021/01/27/testing-pytorch-and-lightning-models/) - iterating over the `testloader` and generating predictions for all the samples in the test batch/test part of the fold split. We compute accuracy after evaluation, `print` it on screen, and add it to the `results` dictionary for that particular fold.
 
-```
+```python
 
     # Print about testing
     print('Starting testing')
@@ -563,7 +563,7 @@ It allows you to do two things
 1. See whether your model performs well across all the folds; this is true if the accuracies for every fold don't deviate too significantly.
 2. If they do, you know in which fold, and can take a closer look at the data to see what is happening there.
 
-```
+```python
   # Print fold results
   print(f'K-FOLD CROSS VALIDATION RESULTS FOR {k_folds} FOLDS')
   print('--------------------------------')
@@ -578,7 +578,7 @@ It allows you to do two things
 
 Instead of reading the explanation above, you might also be interested in simply running the code. If so, here it is 😊
 
-```
+```python
 import os
 import torch
 from torch import nn

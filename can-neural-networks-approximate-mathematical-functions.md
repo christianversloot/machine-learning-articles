@@ -31,7 +31,7 @@ Let's see if we can!
 
 For the experiment, I used the following code for approximating \[latex\]x^2\[/latex\]:
 
-```
+```python
 # Imports
 import numpy as np
 from tensorflow.keras.models import Sequential
@@ -87,7 +87,7 @@ For \[latex\]x^2\[/latex\], these were the expected results: `100, 25, 40000, 16
 
 Those are the actual results:
 
-```
+```shell
 [[  101.38112 ]
  [   25.741158]
  [11169.604   ]
@@ -100,7 +100,7 @@ Pretty close for most ones. Only for `40000`, the model generated a wholly wrong
 
 Let's now generate predictions for all the `x`s when the model finishes and plot the results:
 
-```
+```python
 import matplotlib.pyplot as plt
 plt.subplot(2, 1, 1)
 plt.scatter(x, y, s = 1)

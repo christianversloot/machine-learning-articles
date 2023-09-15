@@ -52,7 +52,7 @@ Let's continue by looking at how it works :D
 
 Installing HuggingFace is very easy. Obviously, you will need to have a recent install of Python and PyTorch (the package was tested with Python 3.6+ and PyTorch 1.4.0+). Then, it's only the execution of a `pip` command:
 
-```
+```shell
 pip install accelerate
 ```
 
@@ -66,7 +66,7 @@ Obviously, a model is necessary if you want to accelerate it, so that is why we 
 
 Today, however, we will simply use it for acceleration with HuggingFace Accelerate. Here, you can find the code - which, as you can see, has no references to `cuda` whatsoever and hence runs on CPU by default:
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -154,19 +154,19 @@ if __name__ == '__main__':
 
 The first thing that you will need to do is ensuring that HuggingFace `accelerate` is imported. You can do this by adding the following to the imports:
 
-```
+```python
 from accelerate import Accelerator
 ```
 
 Immediately afterwards, you then initialize the accelerator:
 
-```
+```python
 accelerator = Accelerator()
 ```
 
 That's pretty much it when it comes to loading stuff, you can now immediately use it by accelerating the model (`mlp`), the optimizer (`optimizer`) and `DataLoader` (`trainloader`) - just before the training loop of your MLP:
 
-```
+```python
   # Define the loss function and optimizer
   loss_function = nn.CrossEntropyLoss()
   optimizer = torch.optim.Adam(mlp.parameters(), lr=1e-4)
@@ -177,7 +177,7 @@ That's pretty much it when it comes to loading stuff, you can now immediately us
 
 Now, the only thing you will need to do is changing the backward pass by the functionality provided by the accelerator, so that it is performed in an accelerated way:
 
-```
+```python
       # Compute loss
       loss = loss_function(outputs, targets)
       
@@ -187,7 +187,7 @@ Now, the only thing you will need to do is changing the backward pass by the fun
 
 That's it - here's the full code if you want to get started straight away :)
 
-```
+```python
 import os
 import torch
 from torch import nn

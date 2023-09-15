@@ -48,7 +48,7 @@ Let's go! 🤗🚀
 
 ### Visualizing the importance of the input tokens when predicting an output token
 
-```
+```python
 import ecco
 
 # Load pretrained DistilGPT2 and capture neural activations
@@ -67,7 +67,7 @@ output.saliency()
 
 ### Visualizing what's going on inside the Transformer during prediction
 
-```
+```python
 import ecco
 
 # Load pretrained DistilGPT2 and capture neural activations
@@ -143,7 +143,7 @@ Installing Ecco is really easy. There are two prerequisites to installing Ecco: 
 
 Performing the installation itself then equals the execution of just one command:
 
-```
+```shell
 pip install ecco
 ```
 
@@ -195,7 +195,7 @@ _Frameworks for Machine Learning include:_
 
 We can do so with the following code, which loads the pretrained `distilgpt2` model into Ecco using `transformers`, performs generation of 35 more tokens using the input text, and views input saliency. Run this in a [Jupyter Notebook](https://www.machinecurve.com/index.php/2020/10/07/easy-install-of-jupyter-notebook-with-tensorflow-and-docker/):
 
-```
+```python
 import ecco
 
 # Load pretrained DistilGPT2 and capture neural activations
@@ -249,7 +249,7 @@ Let's take a look at how this works in more detail.
 
 We can visualize the neuron activations in the following way. Here, `n_components` describes the number of groups that we want to construct.
 
-```
+```python
 import ecco
 
 # Load pretrained DistilGPT2 and capture neural activations

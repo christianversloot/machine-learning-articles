@@ -90,7 +90,7 @@ Enough theory for now - it's time to start writing some code!
 
 Open up your code editor, create a file (e.g. `resnet.py`) or a Jupyter Notebook, and write down these imports:
 
-```
+```python
 import os
 import numpy as np
 import tensorflow
@@ -142,7 +142,7 @@ Then, you're writing the generic configuration:
 
 Quite a bit of a discussion, I agree, but well - this allows you to keep configuration in one place! :D
 
-```
+```python
 def model_configuration():
 	"""
 		Get configuration variables for the model.
@@ -244,7 +244,7 @@ Using `load_dataset`, you will be able to load CIFAR-10 data. It returns four ar
 - A combination of `(input_train, target_train)`, representing your training samples and their corresponding targets.
 - Secondly, `(input_test, target_test)`, which covers your testing samples.
 
-```
+```python
 def load_dataset():
 	"""
 		Load the CIFAR-10 dataset
@@ -277,7 +277,7 @@ Let's now implement this in a definition called `preprocessed_dataset`. In the d
 
 Fortunately, [on his website](https://jkjung-avt.github.io/keras-image-cropping/), Jung (2018) proposed a method for generating random crops of a specific size from an input image. Let's use these definitions and pay a lot of gratitude to the author:
 
-```
+```python
 def random_crop(img, random_crop_size):
     # Note: image_data_format is 'channel_last'
     # SOURCE: https://jkjung-avt.github.io/keras-image-cropping/
@@ -326,7 +326,7 @@ We can implement them in our `preprocessed_dataset` def.
 > 
 > He et al. (2016)
 
-```
+```python
 def preprocessed_dataset():
 	"""
 		Load and preprocess the CIFAR-10 dataset.
@@ -411,7 +411,7 @@ As He et al. found identity mappings to work best, the configuration is set to `
 
 Finally, the combined output/skip connection is nonlinearly activated with ReLU before being passed to the next residual block.
 
-```
+```python
 def residual_block(x, number_of_filters, match_filter_size=False):
 	"""
 		Residual block with
@@ -467,7 +467,7 @@ Now that we have the structure of a residual block, it's time to create the logi
 
 For example, with `n = 3`, this yields `6n = 6*3 = 18` layers in your residual blocks and `2n = 2*3 = 6` layers per group. Indeed, with 3 groups, this matches. Finally, with `n = 3`, you will have `6n+2 = 6 * 3 + 2 = 20` layers in your network. Indeed, that's a ResNet-20! :)
 
-```
+```python
 def ResidualBlocks(x):
 	"""
 		Set up the residual blocks.
@@ -522,7 +522,7 @@ Let's add them:
 - Finally, your data is flattened, so that it can be processed by a fully-connected layer (`Dense` layer), also initialized using He initialization. This outputs a `(num_classes, )` shaped logits Tensor, which in the case of CIFAR-10 is `(10, )` because of `num_classes = 10`.
 - Finally, references to `inputs` and `outputs` are returned so that the model can be initialized.
 
-```
+```python
 def model_base(shp):
 	"""
 		Base structure of the model, with residual blocks
@@ -559,7 +559,7 @@ Then, you compile the model with `model.compile` using the loss function, optimi
 
 Time to start training! :)
 
-```
+```python
 def init_model():
 	"""
 		Initialize a compiled ResNet model.
@@ -591,7 +591,7 @@ We simply pass these to the `model.fit` with a large variety of other configurat
 
 This will start the training process and return the trained `model` for evaluation.
 
-```
+```python
 def train_model(model, train_batches, validation_batches):
 	"""
 		Train an initialized model.
@@ -617,7 +617,7 @@ def train_model(model, train_batches, validation_batches):
 
 Evaluation is even simpler: you simply pass the test batches to `model.evaluate` and output the test scores.
 
-```
+```python
 def evaluate_model(model, test_batches):
 	"""
 		Evaluate a trained model.
@@ -645,7 +645,7 @@ In `training_process`, you will do this.
 - This is followed by training the model using the training and validation batches, by calling `train_model()`.
 - Finally, you'll evaluate the trained model with `evaluate_model()`.
 
-```
+```python
 def training_process():
 	"""
 		Run the training process for the ResNet model.
@@ -668,7 +668,7 @@ That's pretty much it!
 
 The only thing that remains is starting the training process when your Python script starts:
 
-```
+```python
 if __name__ == "__main__":
 	training_process()
 ```
@@ -691,7 +691,7 @@ Clearly, the results of the learning rate scheduler are visible around epoch 90 
 
 Subsequently, during model evaluation using our testing data, we found the following scores:
 
-```
+```shell
 Test loss: 0.6111826300621033 / Test accuracy: 0.8930000066757202
 ```
 
@@ -703,7 +703,7 @@ With a `1 - 0.893 = 0.107` test error, results are similar to those found in the
 
 If you want to get started immediately, here is the full model code for building a ResNet from scratch using TensorFlow 2 and Keras:
 
-```
+```python
 import os
 import numpy as np
 import tensorflow

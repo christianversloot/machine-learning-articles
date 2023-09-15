@@ -53,13 +53,13 @@ Keras has a range of activation functions available, but FTSwish is not one of t
 
 In any Keras model, you'll first have to import the backend you're working with, in order to provide tensor-specific operations such as `maximum`:
 
-```
+```python
 from keras import backend as K
 ```
 
 We can then define the FTSwish activation function as follows:
 
-```
+```python
 # Define
 t = -1.0
 def ftswish(x):
@@ -95,7 +95,7 @@ Let's now create an example with Keras :) Open up your Explorer or Finder, navig
 
 Now, open up `model_ftswish.py` in a code editor and start coding :) First, we'll add the imports:
 
-```
+```python
 '''
   Keras model using Flatten-T Swish (FTSwish) activation function
   Source for FTSwish activation function:
@@ -118,7 +118,7 @@ As expected, we'll imporrt `keras` and a lot of sub parts of it: the `cifar10` d
 
 Next, it's time to set some configuration values:
 
-```
+```python
 # Model configuration
 img_width, img_height = 32, 32
 batch_size = 250
@@ -134,7 +134,7 @@ The [CIFAR-10 dataset](https://www.machinecurve.com/index.php/2019/12/31/explori
 
 We next load the CIFAR-10 data:
 
-```
+```python
 # Load CIFAR-10 dataset
 (input_train, target_train), (input_test, target_test) = cifar10.load_data()
 ```
@@ -176,7 +176,7 @@ _A few CIFAR-10 samples._
 
 After loading, we reshape the data based on the channels first/channels last approach used by our backend (to ensure that we can use a fixed `input_shape`):
 
-```
+```python
 # Reshape data based on channels first / channels last strategy.
 # This is dependent on whether you use TF, Theano or CNTK as backend.
 # Source: https://github.com/keras-team/keras/blob/master/examples/mnist_cnn.py
@@ -192,7 +192,7 @@ else:
 
 Then, we parse our numbers into `float32` format, which presumably speeds up our training process:
 
-```
+```python
 # Parse numbers as floats
 input_train = input_train.astype('float32')
 input_test = input_test.astype('float32')
@@ -200,7 +200,7 @@ input_test = input_test.astype('float32')
 
 This is followed by normalizing our data to be in the \[latex\]\[-1, 1\]\[/latex\] range, which is appreciated by the neural network during optimization:
 
-```
+```python
 # Normalize data
 input_train = input_train / 255
 input_test = input_test / 255
@@ -208,7 +208,7 @@ input_test = input_test / 255
 
 Finally, we convert our targets into _categorical format_, which allows us to use [categorical crossentropy loss](https://www.machinecurve.com/index.php/2019/10/22/how-to-use-binary-categorical-crossentropy-with-keras/) later:
 
-```
+```python
 # Convert target vectors to categorical targets
 target_train = keras.utils.to_categorical(target_train, no_classes)
 target_test = keras.utils.to_categorical(target_test, no_classes)
@@ -218,7 +218,7 @@ target_test = keras.utils.to_categorical(target_test, no_classes)
 
 We can next add the definition of the FTSwish activation function we created earlier:
 
-```
+```python
 # Define
 t = -1.0
 def ftswish(x):
@@ -229,7 +229,7 @@ def ftswish(x):
 
 Then, we can create the architecture of our model.
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv2D(64, kernel_size=(3, 3), activation=ftswish, input_shape=input_shape, kernel_initializer='he_normal'))
@@ -250,7 +250,7 @@ It's a relatively simple ConvNet, with two Conv2D layers, max pooling, [Dropout]
 
 Next, we can compile the model:
 
-```
+```python
 # Compile the model
 model.compile(loss=keras.losses.categorical_crossentropy,
               optimizer=keras.optimizers.Adam(),
@@ -265,7 +265,7 @@ For optimization, we use the [Adam optimizer](https://www.machinecurve.com/index
 
 Then, we fit the training data, configuring the model in line with how we specified our model configuration before:
 
-```
+```python
 # Fit data to model
 history_FTSwish = model.fit(input_train, target_train,
           batch_size=batch_size,
@@ -278,7 +278,7 @@ history_FTSwish = model.fit(input_train, target_train,
 
 The final thing we do is adding code for evaluation (using our _testing data_) and [visualizing the training process](https://www.machinecurve.com/index.php/2019/10/08/how-to-visualize-the-training-process-in-keras/):
 
-```
+```python
 # Generate evaluation metrics
 score = model.evaluate(input_test, target_test, verbose=0)
 print(f'Test loss for Keras FTSwish CNN: {score[0]} / Test accuracy: {score[1]}')
@@ -305,7 +305,7 @@ plt.show()
 
 It's also possible to get the full model code at once, should you wish to start playing around with it. In that case, here you go:
 
-```
+```python
 '''
   Keras model using Flatten-T Swish (FTSwish) activation function
   Source for FTSwish activation function:
@@ -418,7 +418,7 @@ Open up a terminal that supports the dependencies listed above, `cd` into the fo
 
 Once it finishes, you should also be able to see the results of the evaluation & visualization steps:
 
-```
+```python
 Test loss for Keras FTSwish CNN: 2.3128050004959104 / Test accuracy: 0.6650999784469604
 ```
 

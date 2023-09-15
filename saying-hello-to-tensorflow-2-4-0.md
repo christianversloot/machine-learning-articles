@@ -49,7 +49,7 @@ While many people who start with TensorFlow train their neural networks on just 
 
 How you setup your training process can be configured by a **distribution strategy**, available through the `tf.distribute` API in TensorFlow. Now, a new strategy was added - called `ParameterServerStrategy`:
 
-```
+```python
 tf.distribute.experimental.ParameterServerStrategy(
     cluster_resolver, variable_partitioner=None
 )
@@ -75,7 +75,7 @@ This greatly boosts parallel training, especially now that Amazon has released [
 
 A synchronous method that [used to be experimental](https://www.machinecurve.com/index.php/2020/10/16/tensorflow-cloud-easy-cloud-based-training-of-your-keras-model/#multiworkermirroredstrategy), called the `MultiWorkerMirroredStrategy`, is being moved from experimental into stable (TensorFlow, n.d.):
 
-```
+```python
 tf.distribute.MultiWorkerMirroredStrategy(
     cluster_resolver=None, communication_options=None
 )
@@ -174,7 +174,7 @@ If you want to understand why your TensorFlow model performs in a certain way, e
 
 Note from above that the strategy was moved into `stable`. This requires that the Profiler is adapted for a multi-worker strategy as well. In TensorFlow 2.4.0, the Profiler [adds support](https://www.tensorflow.org/guide/profiler#profiling_apis) for a multi-worker setup:
 
-```
+```python
 # E.g. your worker IP addresses are 10.0.0.2, 10.0.0.3, 10.0.0.4, and you
 # would like to profile for a duration of 2 seconds.
 tf.profiler.experimental.client.trace(

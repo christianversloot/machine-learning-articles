@@ -97,14 +97,14 @@ With this latter requirement, there is a catch: `pip install keras-vis` doesn't 
 
 Instead, you'll need to install `keras-vis` a little bit differently, like this:
 
-```
+```shell
 pip install https://github.com/raghakot/keras-vis/archive/master.zip
 ```
 
 When doing so, version `0.5.0` will be installed, which is - as of November 2019 - the most recent version:
 
-```
->pip install https://github.com/raghakot/keras-vis/archive/master.zip
+```shell
+> pip install https://github.com/raghakot/keras-vis/archive/master.zip
 Collecting https://github.com/raghakot/keras-vis/archive/master.zip
   Downloading https://github.com/raghakot/keras-vis/archive/master.zip
      \ 58.1MB 819kB/s
@@ -127,7 +127,7 @@ For the sake of brevity, I'm not repeating the explanation about the architectur
 
 Your first step in the context of generating the saliency map visualizations will thus be to open up your Explorer, navigate to some folder, and create a file called e.g. `saliency_maps_mnist.py`. Next, you open your code editor, open up the file, and paste the Keras CNN we created before:
 
-```
+```python
 '''
   Visualizing how layers represent classes with keras-vis Saliency Maps.
 '''
@@ -215,7 +215,7 @@ There is _one difference_ with respect to the Keras CNN.
 
 And it's related to the last layer we'll add:
 
-```
+```python
 model.add(Dense(no_classes, activation='softmax', name='visualized_layer'))
 ```
 
@@ -235,7 +235,7 @@ Let's now create the saliency map itself 😀
 
 For this purpose, we first need to add some imports:
 
-```
+```python
 # =============================================
 # Saliency Maps code
 # =============================================
@@ -251,7 +251,7 @@ Additionally, we import Matplotlib - for generating the visualization plots - an
 
 Next, we find the index of the layer for which we wish to generate the saliency map visualizations - indeed, this is the `visualized_layer` layer name that we assigned to the final layer previously.
 
-```
+```python
 # Find the index of the to be visualized layer above
 layer_index = utils.find_layer_idx(model, 'visualized_layer')
 ```
@@ -260,7 +260,7 @@ This code simply converts a layer name into a layer index, or a number that spec
 
 Next, we swap the final Softmax layer with a linear one:
 
-```
+```python
 # Swap softmax with linear
 model.layers[layer_index].activation = activations.linear
 model = utils.apply_modifications(model)  
@@ -270,14 +270,14 @@ We need to do this because the _saliency map_ generation process essentially per
 
 We next specify some samples from our test set for which we wish to generate saliency maps:
 
-```
+```python
 # Numbers to visualize
 indices_to_visualize = [ 0, 12, 38, 83, 112, 74, 190 ]
 ```
 
 And finally add code for generating the visualizations:
 
-```
+```python
 # Visualize
 for index_to_visualize in indices_to_visualize:
   # Get input
@@ -346,7 +346,7 @@ We can next try to do the same thing with the CIFAR10 dataset, which contains va
 
 We create another file, e.g. `saliency_maps_cifar10.py`, and add code that really resembles the MNIST scenario:
 
-```
+```python
 '''
   Visualizing how layers represent classes with keras-vis Saliency Maps.
 '''

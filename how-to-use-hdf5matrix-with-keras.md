@@ -116,13 +116,13 @@ That's why we created that other blog post about applying `h5py` directly first.
 
 But today, we'll make sure to adapt the data so that we can run it with `HDF5Matrix` too. Let's take a look. Make sure that `h5py` is installed with `pip install h5py`. Then open up a code editor, create a file such as `hdf5matrix_prepare.py` and write some code:
 
-```
+```python
 import h5py
 ```
 
 This one speaks for itself. We import the `h5py` library.
 
-```
+```python
 # Configuration
 img_width, img_height, img_num_channels = 28, 28, 1
 ```
@@ -133,7 +133,7 @@ This one does too. We set a few configuration options, being the image width, im
 
 Then, we load the MNIST data:
 
-```
+```python
 # Load MNIST data
 f = h5py.File('./train.hdf5', 'r')
 input_train = f['image'][...]
@@ -151,7 +151,7 @@ Here, we load the `image` and `label` datasets into memory for both the training
 
 Now that we have loaded the data, it's time to adapt our data to resolve the conflicts that we discussed earlier. First, we'll reshape the data:
 
-```
+```python
 # Reshape data
 input_train = input_train.reshape((len(input_train), img_width, img_height, img_num_channels))
 input_test  = input_test.reshape((len(input_test), img_width, img_height, img_num_channels))
@@ -161,7 +161,7 @@ The code speaks pretty much for itself. We set the shape to be equal to the size
 
 Casting and scaling is also pretty straight-forward:
 
-```
+```python
 # Parse numbers as floats
 input_train = input_train.astype('float32')
 input_test = input_test.astype('float32')
@@ -175,7 +175,7 @@ input_test = input_test / 255
 
 Then, we can save the data into new files - being `train_reshaped.hdf5` and `test_reshaped.hdf5`:
 
-```
+```python
 # Save reshaped training data
 f = h5py.File('./train_reshaped.hdf5', 'w')
 dataset_input = f.create_dataset('image', (len(input_train), img_width, img_height, img_num_channels))
@@ -197,7 +197,7 @@ f.close()
 
 If you wish to obtain the full code for preprocessing at once - of course, that's possible. Here you go :)
 
-```
+```python
 import h5py
 
 # Configuration
@@ -254,7 +254,7 @@ Small note: if you wish to understand how to create a ConvNet with Keras `Conv2D
 
 First, we specify the imports - make sure that `tensorflow` and especially TensorFlow 2.x is installed on your system:
 
-```
+```python
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D
 from tensorflow.keras.losses import sparse_categorical_crossentropy
@@ -264,7 +264,7 @@ from tensorflow.keras.utils import HDF5Matrix
 
 Then, we set the model configuration:
 
-```
+```python
 # Model configuration
 batch_size = 50
 img_width, img_height, img_num_channels = 28, 28, 1
@@ -280,7 +280,7 @@ verbosity = 1
 
 Now, we can show how the `HDF5Matrix` works:
 
-```
+```python
 # Load MNIST data
 input_train = HDF5Matrix('./train_reshaped.hdf5', 'image')
 input_test = HDF5Matrix('./test_reshaped.hdf5', 'image')
@@ -294,7 +294,7 @@ Yep. It's that simple. We assign the output of calling `HDF5Matrix` to arrays, a
 
 Subsequently, we perform the common steps of model specification, compilation and training a.k.a. fitting the data to the compiled model:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(5, 5), activation='relu', input_shape=input_shape))
@@ -341,7 +341,7 @@ Epoch 2/25
 
 Once again, should you wish to obtain the full model code in order to play straight away - here you go
 
-```
+```python
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D
 from tensorflow.keras.losses import sparse_categorical_crossentropy

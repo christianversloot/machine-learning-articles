@@ -48,7 +48,7 @@ Calling Zero Padding with a positive padding results in a zero-valued box of pix
 
 Let's now take a look at how we can implement `ZeroPad2d` for generating a Cropping layer with PyTorch. First, it's time to write down our imports.
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -62,7 +62,7 @@ These are relatively straight-forward: there are many `torch` related imports, w
 
 Time to move forward with the `CroppingNetwork`. Here it is:
 
-```
+```python
 class CroppingNetwork(nn.Module):
   '''
     Simple network with one Cropping layer
@@ -88,7 +88,7 @@ Our input images - MNIST images - have an input shape of `(1, 28, 28)` - or `(28
 
 What remains is stitching everything together:
 
-```
+```python
 if __name__ == '__main__':
   
   # Set fixed random number seed

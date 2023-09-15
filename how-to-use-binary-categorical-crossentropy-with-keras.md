@@ -53,7 +53,7 @@ _Note that the full code for the models we create in this blog post is also avai
 
 This example code shows quickly how to use **binary and categorical crossentropy loss with TensorFlow 2 and Keras**. You can easily copy it to your model code and use it within your neural network. However, if you want to understand the loss functions in more detail and why they should be applied to certain classification problems, make sure to read the rest of this tutorial as well 🚀
 
-```
+```python
 loss_function_used = 'binary_crossentropy' # or use categorical_crossentropy
 model.compile(loss=loss_function_used, optimizer=tensorflow.keras.optimizers.Adam(lr=0.001), metrics=['accuracy'])
 ```
@@ -218,7 +218,7 @@ Let's now create the Keras model using binary crossentropy. Open up some folder 
 
 First, we'll have to import everything we need to run the model:
 
-```
+```python
 '''
   TensorFlow 2 based Keras model discussing Binary Cross Entropy loss.
 '''
@@ -238,7 +238,7 @@ As discussed, we're using Keras, Matplotlib, Numpy, Scikit-learn and Mlxtend. We
 
 Next, we specify some model configuration options:
 
-```
+```python
 # Configuration options
 num_samples_total = 1000
 training_split = 250
@@ -251,7 +251,7 @@ Our `make_circles` call will generate 1000 samples in total, of which 250 will b
 
 Next, we generate the dataset:s
 
-```
+```python
 # Generate data
 X, targets = make_circles(n_samples = num_samples_total, factor=0.1)
 X_training = X[training_split:, :]
@@ -264,7 +264,7 @@ First, we call `make_circles` and generate the 1000 samples. Our `factor`, or th
 
 Next, we split data into training and testing data, before we move on to data visualization:
 
-```
+```python
 # Generate scatter plot for training data
 plt.scatter(X_training[:,0], X_training[:,1])
 plt.title('Nonlinear data')
@@ -283,7 +283,7 @@ In our case, we'll use a one-dimensional feature vector with a shape of (2, ) - 
 
 This looks as follows when coded:
 
-```
+```python
 # Set the input shape
 feature_vector_shape = len(X_training[0])
 input_shape = (feature_vector_shape,)
@@ -293,7 +293,7 @@ input_shape = (feature_vector_shape,)
 
 Next, we can actually create the architecture of our model:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Dense(12, input_shape=input_shape, activation='relu', kernel_initializer='he_uniform'))
@@ -313,7 +313,7 @@ The Sigmoid activation function produces outputs between zero and one.
 
 Configuring the model means applying the _hyperparameters_, or the configuration settings. We do this next:
 
-```
+```python
 # Configure the model and start training
 model.compile(loss=loss_function_used, optimizer=tensorflow.keras.optimizers.Adam(lr=0.001), metrics=['accuracy'])
 history = model.fit(X_training, Targets_training, epochs=30, batch_size=5, verbose=1, validation_split=0.2)
@@ -331,7 +331,7 @@ However, in order to make the model useful to the real world, it must also work 
 
 That's why you generate a _testing set_, which you can use to evaluate the model's _generalization performance_ afterwards. We can do that in Keras by calling the `evaluate` call on the `model` instance:
 
-```
+```python
 # Test the model after training
 test_results = model.evaluate(X_testing, Targets_testing, verbose=1)
 print(f'Test results - Loss: {test_results[0]} - Accuracy: {test_results[1]*100}%')
@@ -339,7 +339,7 @@ print(f'Test results - Loss: {test_results[0]} - Accuracy: {test_results[1]*100}
 
 Next, we [plot the decision boundary](https://www.machinecurve.com/index.php/2019/10/11/how-to-visualize-the-decision-boundary-for-your-keras-model/) for our model with the _testing data_ to see how well it performs, once again with data it has never seen before:
 
-```
+```python
 # Plot decision boundary
 plot_decision_regions(X_testing, Targets_testing, clf=model, legend=2)
 plt.show()
@@ -347,7 +347,7 @@ plt.show()
 
 And we [plot the model's training process history](https://www.machinecurve.com/index.php/2019/10/08/how-to-visualize-the-training-process-in-keras/), to find out whether it has improved, whether it can still improve any further and whether it is not overfitting:
 
-```
+```python
 # Visualize training process
 plt.plot(history.history['loss'], label='Binary crossentropy loss (training data)')
 plt.plot(history.history['val_loss'], label='Binary crossentropy loss (validation data)')
@@ -379,7 +379,7 @@ As you can see, with binary crossentropy, the Keras model has learnt to generate
 
 If you wish to copy the whole model at once, here you go:
 
-```
+```python
 '''
   TensorFlow 2 based Keras model discussing Binary Cross Entropy loss.
 '''
@@ -456,7 +456,7 @@ We implement the categorical crossentropy variant by creating a file called `cat
 
 We first put in place the imports:
 
-```
+```python
 '''
   TensorFlow 2 based Keras model discussing Categorical Cross Entropy loss.
 '''
@@ -477,7 +477,7 @@ Instead of `make_circles` as with the binary crossentropy model, we'll use `make
 
 Next, we specify the configuration of our model:
 
-```
+```python
 # Configuration options
 num_samples_total = 1000
 training_split = 250
@@ -496,7 +496,7 @@ If you wish, you can increase the number of clusters, reduce the number of clust
 
 Dataset generation is similar to the binary case but different at two essential points:
 
-```
+```python
 # Generate data
 X, targets = make_blobs(n_samples = num_samples_total, centers = cluster_centers, n_features = num_classes, center_box=(0, 1), cluster_std = 1.5)
 categorical_targets = to_categorical(targets)
@@ -512,7 +512,7 @@ Additionally, we convert targets into categorical format by applying `to_categor
 
 Setting the shape remains identical, but is still required:
 
-```
+```python
 # Set shape based on data
 feature_vector_length = len(X_training[0])
 input_shape = (feature_vector_length,)
@@ -521,7 +521,7 @@ print(f'Feature shape: {input_shape}')
 
 The same applies to the visualization code for the dataset:
 
-```
+```python
 # Generate scatter plot for training data
 plt.scatter(X_training[:,0], X_training[:,1])
 plt.title('Nonlinear data')
@@ -534,7 +534,7 @@ plt.show()
 
 We use the same architecture, except for the output layer:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Dense(12, input_shape=input_shape, activation='relu', kernel_initializer='he_uniform'))
@@ -551,7 +551,7 @@ Hence, we must:
 
 We kept model compilation & data fitting the same:
 
-```
+```python
 # Configure the model and start training
 model.compile(loss=loss_function_used, optimizer=tensorflow.keras.optimizers.Adam(lr=0.001), metrics=['accuracy'])
 history = model.fit(X_training, Targets_training, epochs=30, batch_size=5, verbose=1, validation_split=0.2)
@@ -561,7 +561,7 @@ history = model.fit(X_training, Targets_training, epochs=30, batch_size=5, verbo
 
 The same for model performance testing:
 
-```
+```python
 # Test the model after training
 test_results = model.evaluate(X_testing, Targets_testing, verbose=1)
 print(f'Test results - Loss: {test_results[0]} - Accuracy: {test_results[1]*100}%')
@@ -571,7 +571,7 @@ However, visualizing model performance is done a bit differently when it comes t
 
 We therefore need to add this code next:
 
-```
+```python
 '''
   The Onehot2Int class is used to adapt the model so that it generates non-categorical data.
   This is required by the `plot_decision_regions` function.
@@ -604,7 +604,7 @@ It will allow us to generate the decision boundary plot 😄
 
 Finally, we visualize the training process as we have done with the binary case:
 
-```
+```python
 # Visualize training process
 plt.plot(history.history['loss'], label='Categorical crossentropy loss (training data)')
 plt.plot(history.history['val_loss'], label='Categorical crossentropy loss (validation data)')
@@ -634,7 +634,7 @@ All in all, I'm happy with the performance of this model too 😄
 
 If you wish to obtain the whole model at once, you can find it here:
 
-```
+```python
 import tensorflow
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense

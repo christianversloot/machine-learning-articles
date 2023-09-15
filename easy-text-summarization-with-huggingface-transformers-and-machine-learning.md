@@ -49,7 +49,7 @@ In this tutorial, you'll learn how to create an easy summarization pipeline with
 
 If you want to understand everything in a bit more detail, make sure to read the rest of the tutorial as well! ⚡
 
-```
+```python
 from transformers import pipeline
 
 # Open and read the article
@@ -182,7 +182,7 @@ Implementing such a summarizer involves multiple steps:
 
 ...and easy it is! In fact, you can build a text summarization model with pretrained BART in just a few lines of code:
 
-```
+```python
 from transformers import pipeline
 
 # Open and read the article

@@ -91,7 +91,7 @@ Createing a multilabel classifier with TensorFlow and Keras is easy. In fact, it
 
 Here is the Python code which is the output of the steps mentioned above:
 
-```
+```python
 # Imports
 from sklearn.datasets import make_multilabel_classification
 from sklearn.model_selection import train_test_split
@@ -143,7 +143,7 @@ print(f'Test loss: {score[0]} / Test accuracy: {score[1]}')
 
 Running it gives the following performance:
 
-```
+```shell
 Test loss: 0.30817817240050344 / Test accuracy: 0.8562628030776978
 ```
 

@@ -97,7 +97,7 @@ As per the [GitHub repository](https://github.com/christianversloot/net2vis-dock
 
 If you choose to run it in the frontend, the backend will start first, followed by the frontend. The first time, it will also build the Docker containers :) Startup looks like this:
 
-```
+```shell
 Creating backend ... done                                                                                                                                                                                                                                                                                                    Recreating frontend ... done                                                                                                                                                                                                                                                                                                 Attaching to backend, frontend
 backend             |  * Serving Flask app "server" (lazy loading)
 backend             |  * Environment: production
@@ -166,7 +166,7 @@ Let's now walk through each of these :)
 
 But first - the model we'll be visualizing today. It's a simple ConvNet with two Conv2D layers, Max Pooling and [Dropout](https://www.machinecurve.com/index.php/2019/12/18/how-to-use-dropout-with-keras/). Do note that Net2Vis has a particular structure, which in essence boils down to this:
 
-```
+```python
 def get_model():
    model = ....
    .....
@@ -179,7 +179,7 @@ You really only have to add the `model` definition, the layers, the necessary va
 
 Take this example of the ConvNet to be visualized as follows:
 
-```
+```python
 # You can freely modify this file.
 # However, you need to have a function that is named get_model and returns a Keras Model.
 import keras as k

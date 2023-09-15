@@ -80,7 +80,7 @@ Next, we'll adapt the traditional CNN we created for classifying instances of th
 
 This was the traditional CNN that we used in the other blog
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
@@ -161,7 +161,7 @@ Now that we understand what happens in the model code, we can introduce the `Sep
 
 The layer is very similar to the traditional `Conv2D` layer. It can be added to your Keras model easily and, as we saw above, it performs mostly the same trick. However, it comes with some separation-specific configuration options that must be set before training is commenced. The [Keras website](https://keras.io/layers/convolutional/) defines the `SeparableConv2D` layer as follows:
 
-```
+```python
 tensorflow.keras.layers.SeparableConv2D(filters, kernel_size, strides=(1, 1), padding='valid', data_format=None, dilation_rate=(1, 1), depth_multiplier=1, activation=None, use_bias=True, depthwise_initializer='glorot_uniform', pointwise_initializer='glorot_uniform', bias_initializer='zeros', depthwise_regularizer=None, pointwise_regularizer=None, bias_regularizer=None, activity_regularizer=None, depthwise_constraint=None, pointwise_constraint=None, bias_constraint=None)
 ```
 
@@ -189,7 +189,7 @@ And that's really simple - we'll just adapt the `Conv2D` layers to use `Separabl
 
 Eventually, we then end up with this:
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential

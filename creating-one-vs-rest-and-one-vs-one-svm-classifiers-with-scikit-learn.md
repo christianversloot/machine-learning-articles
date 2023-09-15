@@ -107,7 +107,7 @@ Say that we've got the following linearly separable dataset with three classes i
 
 It can be generated as follows:
 
-```
+```python
 from sklearn.datasets import make_blobs
 
 # Configuration options
@@ -121,7 +121,7 @@ X, y = make_blobs(n_samples = num_samples_total, centers = cluster_centers, n_fe
 
 We can now create a linear Support Vector Machine for classification with Scikit-learn's `sklearn.svm.LinearSVC` model type and a `OneVsRestClassifier` wrapper. Note that for evaluation purposes, we also generate a [confusion matrix](https://www.machinecurve.com/index.php/2020/05/05/how-to-create-a-confusion-matrix-with-scikit-learn/) and a [decision boundary plot](https://www.machinecurve.com/index.php/2019/10/11/how-to-visualize-the-decision-boundary-for-your-keras-model/) in the code below. For this reason, make sure that besides `sklearn` you also have `mlxtend` installed onto your system (or remove the code if not).
 
-```
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.datasets import make_blobs
@@ -190,7 +190,7 @@ Here, the winner is the class that is picked the most. So, for example, if yello
 
 Here is a simple example of using `OneVsOneClassifier` i.e. One-vs-One with Scikit-learn. Very similar to the One-vs-Rest setting, we can wrap a linear binary SVM into the wrapper, resulting in a set of classifiers being created, trained and subsequently used for multiclass predictions. Do note again that we are also generating a [confusion matrix](https://www.machinecurve.com/index.php/2020/05/05/how-to-create-a-confusion-matrix-with-scikit-learn/) and [decision boundary](https://www.machinecurve.com/index.php/2019/10/11/how-to-visualize-the-decision-boundary-for-your-keras-model/) and that by consequence `mlxtend` is required besides `sklearn`.
 
-```
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.datasets import make_blobs
