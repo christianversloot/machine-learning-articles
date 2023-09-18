@@ -28,11 +28,13 @@ All right, let's go! 😀
 
 Suppose that you have the following list:
 
-`[0. 0.5 1. 1.5]`
+```python
+[0. 0.5 1. 1.5]
+```
 
 ...which can be reshaped into a (2, 2) image:
 
-```
+```python
 [[0. 0.5]
  [1. 1.5]]
 ```
@@ -57,7 +59,7 @@ Keras, the deep learning framework I really like for creating deep neural networ
 
 Let's see how we did that, understanding upsampling in more detail, before we move on to more advanced examples.
 
-```
+```python
 import keras
 from keras.models import Sequential
 from keras.layers import UpSampling2D
@@ -75,7 +77,7 @@ First, we import some libraries that we need:
 
 Then, we generate some data and measure some input-related values, such as the shape, as well as the shape of the entire _model input_ (which requires some notion about [image channels](https://en.wikipedia.org/wiki/Channel_(digital_image)), hence adding an extra 1):
 
-```
+```python
 # Generate some data
 input_flattened = np.arange(0, 2, 0.5)
 input_image = np.reshape(input_flattened, (2, 2, 1))
@@ -85,7 +87,7 @@ input_image_shape = (input_image_shape[0], input_image_shape[1], 1)
 
 Next, we specify a simple model architecture:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(UpSampling2D((32, 32), input_shape=input_image_shape, interpolation='bilinear'))
@@ -101,7 +103,7 @@ As you can see, we use UpSampling2D five times. The settings are to be understoo
 
 Next, we generate a 'prediction' - even though we already know the outcome of our Upsampling operation :)
 
-```
+```python
 # Perform upsampling
 model_inputs = np.array([input_image])
 outputs_upsampled = model.predict(model_inputs)
@@ -112,7 +114,7 @@ output_upsampled = outputs_upsampled[0]
 
 Finally, we visualize the original and the upsampled version together:
 
-```
+```python
 # Visualize input and output
 fig, axes = plt.subplots(1, 2)
 axes[0].imshow(input_image[:, :, 0]) 
@@ -131,7 +133,7 @@ Unsurprisingly, that's quite equal to the examples we saw above 😎
 
 If you wish to get the code of this simple example in full, here you go:
 
-```
+```python
 import keras
 from keras.models import Sequential
 from keras.layers import UpSampling2D
@@ -240,7 +242,7 @@ Open up your Explorer, and at a location of your choice, create a Python file ca
 
 We first import the things we need:
 
-```
+```python
 import keras
 from keras.datasets import mnist
 from keras.models import Sequential
@@ -257,7 +259,7 @@ Additionally, we need the Matplotlib Pyplot library, and an instance of Numpy.
 
 Next, we specify some configuration options:
 
-```
+```python
 # Model configuration
 img_width, img_height = 28, 28
 batch_size = 25
@@ -275,7 +277,7 @@ As we're using the MNIST dataset today (see image), we set width and height to 2
 
 Next, we load, reshape, cast and normalize the data:
 
-```
+```python
 # Load MNIST dataset
 (input_train, target_train), (input_test, target_test) = mnist.load_data()
 
@@ -299,7 +301,7 @@ As we use the MNIST dataset, it makes sense to use the Keras API, which provides
 
 Next, we create the model architecture in line with the architectural visualization from earlier:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv2D(8, (2, 2), activation='relu', kernel_initializer='he_uniform', padding='same', input_shape=input_shape))
@@ -363,7 +365,7 @@ Only 1.4K trainable parameters. Shouldn't be too difficult to train this model :
 
 Next, we compile the model and fit the data:
 
-```
+```python
 # Compile and fit data
 model.compile(optimizer='adam', loss='binary_crossentropy')
 model.fit(input_train, input_train,
@@ -383,7 +385,7 @@ Generating reconstructions and visualizing them simply boils down to two things:
 
 It can be done with the following code:
 
-```
+```python
 # Generate reconstructions
 num_reconstructions = 8
 samples = input_test[:num_reconstructions]
@@ -411,7 +413,7 @@ for i in np.arange(0, num_reconstructions):
 
 If you are interested in the full model code only, which is perfectly fine, here you go:
 
-```
+```python
 import keras
 from keras.datasets import mnist
 from keras.models import Sequential

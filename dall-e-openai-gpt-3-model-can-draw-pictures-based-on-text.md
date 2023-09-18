@@ -1,9 +1,9 @@
 ---
 title: "DALL·E: OpenAI GPT-3 model can draw pictures based on text"
 date: "2021-01-05"
-categories: 
+categories:
   - "deep-learning"
-tags: 
+tags:
   - "dall-e"
   - "dalle"
   - "gpt"

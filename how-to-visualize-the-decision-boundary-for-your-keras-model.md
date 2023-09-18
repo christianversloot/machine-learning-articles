@@ -1,10 +1,10 @@
 ---
 title: "Visualizing the decision boundary of your TensorFlow 2 / Keras model"
 date: "2019-10-11"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
-tags: 
+tags:
   - "classifier"
   - "decision-boundary"
   - "keras"
@@ -50,7 +50,7 @@ _Note that code is also available on [GitHub](https://github.com/christianverslo
 
 This code example provides a **full example showing how to visualize the decision boundary of your TensorFlow / Keras model**. If you want to understand it in more detail, in particular the usage of Mlxtend's `plot_decision_regions`, make sure to read the rest of this tutorial as well!
 
-```
+```python
 # Imports
 import tensorflow.keras
 from tensorflow.keras.datasets import mnist
@@ -118,7 +118,7 @@ Let's start. Perhaps, create a file in some folder called `decision_boundary_lin
 
 We first import the required dependencies:
 
-```
+```python
 # Imports
 import tensorflow.keras
 from tensorflow.keras.datasets import mnist
@@ -137,7 +137,7 @@ We use **TensorFlow 2.0** for training our machine learning model, which include
 
 Next, we set some configuration options:
 
-```
+```python
 # Configuration options
 num_samples_total = 1000
 training_split = 250
@@ -153,7 +153,7 @@ Let's now generate data for the experiment.
 
 With the help of the Scikit-learn library we generate data using the `make_blobs` function. It generates `n_samples` data points at the centers (0, 0) and (15, 15). The `n_features` is two: our samples have an (x, y) value on a 2D-space. The standard deviation of our cluster is set at 2.5. This allows us to add some spread without losing linear separability.
 
-```
+```python
 # Generate data
 X, targets = make_blobs(n_samples = num_samples_total, centers = [(0,0), (15,15)], n_features = 2, center_box=(0, 1), cluster_std = 2.5)
 targets[np.where(targets == 0)] = -1
@@ -171,7 +171,7 @@ We finally split between training and testing data given the number of splitoff 
 
 We next visualize our data:
 
-```
+```python
 # Generate scatter plot for training data
 plt.scatter(X_training[:,0], X_training[:,1])
 plt.title('Linearly separable data')
@@ -188,7 +188,7 @@ Put simply, we generate a scatter plot with Matplotlib, which clearly shows line
 
 We next add the (relatively basic) Keras model used today:
 
-```
+```python
 # Set the input shape
 feature_vector_shape = len(X_training[0])
 input_shape = (feature_vector_shape,)
@@ -214,7 +214,7 @@ Next, we fit the training data to the model, perform 50 iterations (or epochs) w
 
 Subsequently, we add another default metric, which tests the final model once it stops training against the test set - to also show its power to _generalize_ to data the model has not seen before.
 
-```
+```python
 # Test the model after training
 test_results = model.evaluate(X_testing, Targets_testing, verbose=1)
 print(f'Test results - Loss: {test_results[0]} - Accuracy: {test_results[1]*100}%')
@@ -226,7 +226,7 @@ Finally, we add code for visualizing the model's decision boundary. We use [Mlxt
 
 What's even better is that we can visualize the decision boundary of our Keras model with only two lines of code:
 
-```
+```python
 # Plot decision boundary
 plot_decision_regions(X_testing, Targets_testing, clf=model, legend=2)
 plt.show()
@@ -236,7 +236,7 @@ Note that we use our testing data for this rather than our training data, that w
 
 Altogether, this is the code for the entire experiment:
 
-```
+```python
 # Imports
 import tensorflow.keras
 from tensorflow.keras.datasets import mnist
@@ -415,13 +415,13 @@ Now what if we have nonlinear data? We can do the same!
 
 We'll have to change a few lines in our code, though. Let's first replace the `make_blobs` import by `make_moons`:
 
-```
+```python
 from sklearn.datasets import make_moons
 ```
 
 Next, also replace the call to this function under _Generate data_ to this:
 
-```
+```python
 X, targets = make_moons(n_samples = num_samples_total)
 ```
 
@@ -431,7 +431,7 @@ What happens? Well, unlike the linearly separable data, two shapes resembling ha
 
 Running the code with these adaptations (the full code can be retrieved next) shows that the Keras model is actually able to perform hinge-loss based nonlinear separation pretty successfully:
 
-```
+```python
 Epoch 50/50
 600/600 [==============================] - 0s 107us/step - loss: 0.0748 - acc: 0.9233 - val_loss: 0.0714 - val_acc: 0.9400
 250/250 [==============================] - 0s 26us/step
@@ -444,7 +444,7 @@ And it looks as follows:
 
 ### Full model code
 
-```
+```python
 # Imports
 import tensorflow.keras
 from tensorflow.keras.datasets import mnist

@@ -1,10 +1,10 @@
 ---
 title: "Creating a simple binary SVM classifier with Python and Scikit-learn"
 date: "2020-05-03"
-categories: 
+categories:
   - "frameworks"
   - "svms"
-tags: 
+tags:
   - "classification"
   - "classifier"
   - "python"
@@ -124,7 +124,7 @@ _A plot of today's dataset._
 
 As with any Python script, we need to define our imports on top:
 
-```
+```python
 # Imports
 from sklearn.datasets import make_blobs
 from sklearn.model_selection import train_test_split
@@ -143,7 +143,7 @@ We're going to use four imports for generating our dataset:
 
 Once we set the imports, we're going to define a number of configuration options:
 
-```
+```python
 # Configuration options
 blobs_random_seed = 42
 centers = [(0,0), (5,5)]
@@ -164,7 +164,7 @@ num_samples_total = 1000
 
 Now that we have the imports and the configuration, we can generate the data:
 
-```
+```python
 # Generate data
 inputs, targets = make_blobs(n_samples = num_samples_total, centers = centers, n_features = num_features_for_samples, cluster_std = cluster_std)
 X_train, X_test, y_train, y_test = train_test_split(inputs, targets, test_size=frac_test_split, random_state=blobs_random_seed)
@@ -180,7 +180,7 @@ Then, we split the inputs and targets into training and testing data.
 
 Should you wish to re-use your generated data many times, you don't want the plot to change every time you run the script. In that case, you might use Numpy to save the data temporarily, and load it before continuing:
 
-```
+```python
 # Save and load temporarily
 np.save('./data.npy', (X_train, X_test, y_train, y_test))
 X_train, X_test, y_train, y_test = np.load('./data.npy', allow_pickle=True)
@@ -192,8 +192,8 @@ Now, if you run the code once, then uncomment `np.save` (and possibly the genera
 
 Finally, we can generate that visualization from above:
 
-```
-# Generate scatter plot for training data 
+```python
+# Generate scatter plot for training data
 plt.scatter(X_train[:,0], X_train[:,1])
 plt.title('Linearly separable data')
 plt.xlabel('X1')
@@ -209,7 +209,7 @@ Et voila - if we run it, we get the plot (although in yours, the samples are at 
 
 Should you wish to obtain the full code so far, you can copy from here:
 
-```
+```python
 # Imports
 from sklearn.datasets import make_blobs
 from sklearn.model_selection import train_test_split
@@ -232,7 +232,7 @@ X_train, X_test, y_train, y_test = train_test_split(inputs, targets, test_size=f
 np.save('./data.npy', (X_train, X_test, y_train, y_test))
 X_train, X_test, y_train, y_test = np.load('./data.npy', allow_pickle=True)
 
-# Generate scatter plot for training data 
+# Generate scatter plot for training data
 plt.scatter(X_train[:,0], X_train[:,1])
 plt.title('Linearly separable data')
 plt.xlabel('X1')
@@ -303,20 +303,20 @@ Fortunately, in our case, we have linearly separable data - check the plot again
 
 We can now extend our code - by adding this to our imports first:
 
-```
+```python
 from sklearn import svm
 ```
 
 Subsequently, we can initialize our SVM classifier:
 
-```
+```python
 # Initialize SVM classifier
 clf = svm.SVC(kernel='linear')
 ```
 
 After which we can fit our training data to our classifier, which means that the training process starts:
 
-```
+```python
 clf = clf.fit(X_train, y_train)
 ```
 
@@ -324,7 +324,7 @@ clf = clf.fit(X_train, y_train)
 
 All right, so far, we have generated our dataset _and_ initialized our SVM classifier, with which we are also fitting data already. Should you wish to obtain what we have so far in full, here you go:
 
-```
+```python
 # Imports
 from sklearn.datasets import make_blobs
 from sklearn.model_selection import train_test_split
@@ -348,7 +348,7 @@ X_train, X_test, y_train, y_test = train_test_split(inputs, targets, test_size=f
 np.save('./data.npy', (X_train, X_test, y_train, y_test))
 X_train, X_test, y_train, y_test = np.load('./data.npy', allow_pickle=True)
 
-# Generate scatter plot for training data 
+# Generate scatter plot for training data
 plt.scatter(X_train[:,0], X_train[:,1])
 plt.title('Linearly separable data')
 plt.xlabel('X1')
@@ -366,7 +366,7 @@ clf = clf.fit(X_train, y_train)
 
 Generating new predictions is simple. For example, for generating predictions of our test set, we simply add:
 
-```
+```python
 predictions = clf.predict(X_test)
 ```
 
@@ -380,13 +380,13 @@ Let's show the confusion matrix.
 
 If we add to our imports...
 
-```
+```python
 from sklearn.metrics import plot_confusion_matrix
 ```
 
 ...and subsequently after our `fit` call:
 
-```
+```python
 # Predict the test set
 predictions = clf.predict(X_test)
 
@@ -411,7 +411,7 @@ That's not strange given the linear separability of our dataset - and very unlik
 
 Should you wish to obtain what we have so far - here you go:
 
-```
+```python
 # Imports
 from sklearn.datasets import make_blobs
 from sklearn.model_selection import train_test_split
@@ -436,7 +436,7 @@ X_train, X_test, y_train, y_test = train_test_split(inputs, targets, test_size=f
 # np.save('./data.npy', (X_train, X_test, y_train, y_test))
 X_train, X_test, y_train, y_test = np.load('./data.npy', allow_pickle=True)
 
-# Generate scatter plot for training data 
+# Generate scatter plot for training data
 plt.scatter(X_train[:,0], X_train[:,1])
 plt.title('Linearly separable data')
 plt.xlabel('X1')
@@ -469,7 +469,7 @@ As we recalled before, the decision boundary is determined by so-called "support
 
 We can visualize those support vectors with Scikit-learn and Matplotlib:
 
-```
+```python
 # Get support vectors
 support_vectors = clf.support_vectors_
 
@@ -492,7 +492,7 @@ Indeed, as we intuitively grasped, the linear separability of our dataset ensure
 
 Here's our code so far:
 
-```
+```python
 # Imports
 from sklearn.datasets import make_blobs
 from sklearn.model_selection import train_test_split
@@ -517,7 +517,7 @@ X_train, X_test, y_train, y_test = train_test_split(inputs, targets, test_size=f
 # np.save('./data.npy', (X_train, X_test, y_train, y_test))
 X_train, X_test, y_train, y_test = np.load('./data.npy', allow_pickle=True)
 
-# Generate scatter plot for training data 
+# Generate scatter plot for training data
 plt.scatter(X_train[:,0], X_train[:,1])
 plt.title('Linearly separable data')
 plt.xlabel('X1')
@@ -562,13 +562,13 @@ We can do so with a fantastic package called [Mlxtend](https://www.machinecurve.
 
 It can be installed in a very simple way: `pip install mlxtend`. Then, if we add it to the imports:
 
-```
+```python
 from mlxtend.plotting import plot_decision_regions
 ```
 
 ...and subsequently add _two lines of code only_:
 
-```
+```python
 # Plot decision boundary
 plot_decision_regions(X_test, y_test, clf=clf, legend=2)
 plt.show()
@@ -584,7 +584,7 @@ Nice :D
 
 Now, if you should wish to obtain everything at once - here you go :D
 
-```
+```python
 # Imports
 from sklearn.datasets import make_blobs
 from sklearn.model_selection import train_test_split
@@ -610,7 +610,7 @@ X_train, X_test, y_train, y_test = train_test_split(inputs, targets, test_size=f
 # np.save('./data.npy', (X_train, X_test, y_train, y_test))
 X_train, X_test, y_train, y_test = np.load('./data.npy', allow_pickle=True)
 
-# Generate scatter plot for training data 
+# Generate scatter plot for training data
 plt.scatter(X_train[:,0], X_train[:,1])
 plt.title('Linearly separable data')
 plt.xlabel('X1')

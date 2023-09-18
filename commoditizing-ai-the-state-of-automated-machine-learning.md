@@ -1,10 +1,10 @@
 ---
 title: "Commoditizing AI? The state of automated machine learning."
 date: "2019-07-22"
-categories: 
+categories:
   - "deep-learning"
   - "svms"
-tags: 
+tags:
   - "automl"
   - "commoditization"
   - "deep-learning"

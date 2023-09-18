@@ -1,10 +1,10 @@
 ---
 title: "Creating a Multilabel Neural Network Classifier with Tensorflow 2.0 and Keras"
 date: "2020-11-16"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "classification"
   - "deep-learning"
   - "deep-neural-network"
@@ -37,11 +37,11 @@ Suppose that we are observing someone who is working in a factory. It's their ta
 This is _classification,_ and to be more precise it is an instance of **multilabel classification**.
 
 > In machine learning, **multi-label classification** and the strongly related problem of **multi-output classification** are variants of the classification problem where multiple labels may be assigned to each instance.
-> 
+>
 > Wikipedia (2006)
 
 > Formally, multi-label classification is the problem of finding a model that maps inputs x to binary vectors y (assigning a value of 0 or 1 for each element (label) in y).
-> 
+>
 > Wikipedia (2006)
 
 Visually, this looks as follows:
@@ -91,7 +91,7 @@ Createing a multilabel classifier with TensorFlow and Keras is easy. In fact, it
 
 Here is the Python code which is the output of the steps mentioned above:
 
-```
+```python
 # Imports
 from sklearn.datasets import make_multilabel_classification
 from sklearn.model_selection import train_test_split
@@ -143,7 +143,7 @@ print(f'Test loss: {score[0]} / Test accuracy: {score[1]}')
 
 Running it gives the following performance:
 
-```
+```shell
 Test loss: 0.30817817240050344 / Test accuracy: 0.8562628030776978
 ```
 

@@ -39,7 +39,7 @@ Let's take a look! 😎
 
 With this quick example you can get started with DBSCAN in Python immediately. If you want to understand how the algorithm works in more detail, or see step-by-step examples for coding the clustering method, make sure to read the full article below!
 
-```
+```python
 from sklearn.datasets import make_blobs
 from sklearn.cluster import DBSCAN
 import numpy as np
@@ -199,7 +199,7 @@ The first thing that we do is adding the imports:
 - NumPy (as `np`) will be used for number processing.
 - Finally, we'll use the Matplotlib PyPlot API (`plt`) for visualizing the generated dataset after clustering.
 
-```
+```python
 from sklearn.datasets import make_blobs
 from sklearn.cluster import DBSCAN
 import numpy as np
@@ -210,7 +210,7 @@ import matplotlib.pyplot as plt
 
 For generating the dataset, we'll do two things: specifying some configuration options and using them when calling `make_blobs`. Note that we also specify `epsilon` and `min_samples`, which will later be used for the clustering operation.
 
-```
+```python
 # Configuration options
 num_samples_total = 1000
 cluster_centers = [(3,3), (7,7)]
@@ -229,7 +229,7 @@ The clusters look as follows (in your case, they will look slightly differently 
 
 For replicability, it can be wise to save the data just once after running the script - by uncommenting the `.save(...)` line then, you'll always load the same data from the `clusters.npy` file. This is however not required.
 
-```
+```python
 np.save('./clusters.npy', X)
 X = np.load('./clusters.npy')
 ```
@@ -242,7 +242,7 @@ We can now initialize DBScan and compute the clusters.
 - We then immediately fit the data to DBSCAN, meaning that clustering will start.
 - We load the generated labels (i.e. cluster indices) into `labels` after clustering has finished.
 
-```
+```python
 # Compute DBSCAN
 db = DBSCAN(eps=epsilon, min_samples=min_samples).fit(X)
 labels = db.labels_
@@ -250,7 +250,7 @@ labels = db.labels_
 
 In our case, printing the number of clusters and number of noisy samples yields 2 clusters with 0 noisy samples due to our selection of \[latex\]\\epsilon = 1.0; \\text{minPts} = 13\[/latex\]. In your case, the results will likely be different. Shuffling around with epsilon values (i.e. making the circle bigger) or minimum number of samples (depending on the density of your clusters) will yield other results then!
 
-```
+```python
 no_clusters = len(np.unique(labels) )
 no_noise = np.sum(np.array(labels) == -1, axis=0)
 
@@ -269,7 +269,7 @@ Estimated no. of noise points: 0
 
 Finally, we can generate a scatter plot for our training data. Since we have two clusters, we use a simple lambda function that selects either one color or the other. If you have multiple clusters, you can easily generalize this lambda function [with a dictionary approach](https://www.machinecurve.com/index.php/question/how-to-give-multiple-colors-when-plotting-clusters/).
 
-```
+```python
 # Generate scatter plot for training data
 colors = list(map(lambda x: '#3b4cc0' if x == 1 else '#b40426', labels))
 plt.scatter(X[:,0], X[:,1], c=colors, marker="o", picker=True)
@@ -287,7 +287,7 @@ The end result is indeed two clusters, as intended:
 
 Here's the full code for those who aim to use it straight away:
 
-```
+```python
 from sklearn.datasets import make_blobs
 from sklearn.cluster import DBSCAN
 import numpy as np
@@ -342,7 +342,7 @@ Adding the lines before generating the scatter plot shows that samples that are 
 
 For this reason, we can also use DBSCAN as a noise removal algorithm, e.g. before applying [SVM based classification](https://www.machinecurve.com/index.php/2020/05/03/creating-a-simple-binary-svm-classifier-with-python-and-scikit-learn/), to find better decision boundaries.
 
-```
+```python
 # Remove the noise
 range_max = len(X)
 X = np.array([X[i] for i in range(0, range_max) if labels[i] != -1])

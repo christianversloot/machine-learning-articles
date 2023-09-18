@@ -195,7 +195,7 @@ Let's now take a look at how Keras represents pooling layers in its API.
 
 Max Pooling comes in a one-dimensional, two-dimensional and three-dimensional variant (Keras, n.d.). The one-dimensional variant can be used together with Conv1D layers, and thus for temporal data:
 
-```
+```python
 keras.layers.MaxPooling1D(pool_size=2, strides=None, padding='valid', data_format='channels_last')
 ```
 
@@ -203,7 +203,7 @@ Here, the pool size can be set as an integer value through `pool_size`, strides 
 
 Max Pooling is also available for 2D data, which can be used together with Conv2D for spatial data (Keras, n.d.):
 
-```
+```python
 keras.layers.MaxPooling2D(pool_size=(2, 2), strides=None, padding='valid', data_format=None)
 ```
 
@@ -211,7 +211,7 @@ The API is really similar, except for the `pool_size`. It's possible to define i
 
 3D Max Pooling can be used for spatial or spatio-temporal data (Keras, n.d.):
 
-```
+```python
 keras.layers.MaxPooling3D(pool_size=(2, 2, 2), strides=None, padding='valid', data_format=None)
 ```
 
@@ -221,7 +221,7 @@ Here, the same thing applies for the `pool_size`: it can either be set as an int
 
 For Average Pooling, the API is no different than for Max Pooling, and hence I won't repeat everything here except for the API representation (Keras, n.d.):
 
-```
+```python
 keras.layers.AveragePooling1D(pool_size=2, strides=None, padding='valid', data_format='channels_last')
 keras.layers.AveragePooling2D(pool_size=(2, 2), strides=None, padding='valid', data_format=None)
 keras.layers.AveragePooling3D(pool_size=(2, 2, 2), strides=None, padding='valid', data_format=None)
@@ -231,7 +231,7 @@ keras.layers.AveragePooling3D(pool_size=(2, 2, 2), strides=None, padding='valid'
 
 Due to the unique structure of global pooling layers where the pool shape equals the input shape, their representation in the Keras API is really simple. For example, for Global Max Pooling (Keras, n.d.):
 
-```
+```python
 keras.layers.GlobalMaxPooling1D(data_format='channels_last')
 keras.layers.GlobalMaxPooling2D(data_format='channels_last')
 keras.layers.GlobalMaxPooling3D(data_format='channels_last')
@@ -243,7 +243,7 @@ Here, the only thing to be configured is the `data_format`, which tells us somet
 
 The same can be observed for Global Average Pooling (Keras, n.d.):
 
-```
+```python
 keras.layers.GlobalAveragePooling1D(data_format='channels_last')
 keras.layers.GlobalAveragePooling2D(data_format='channels_last')
 keras.layers.GlobalAveragePooling3D(data_format='channels_last')
@@ -257,7 +257,7 @@ Now that we know what pooling layers are and how they are represented within Ker
 
 But what we do is show you the fragment where pooling is applied. Here it is:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape))

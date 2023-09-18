@@ -177,13 +177,13 @@ Running the model gives us the components of the **bias error** and the **varian
 
 - Note that in November 2020, the Mlxtend package could not yet generate a decomposition for a Keras model. However, this was added quite recently, but was not available in the `pip` release yet. Therefore, make sure to install/upgrade Mlxtend from GitHub (GitHub, n.d.), by means of:
 
-```
+```console
 pip install git+git://github.com/rasbt/mlxtend.git
 ```
 
 Here is the code.
 
-```
+```python
 # Imports
 from mlxtend.evaluate import bias_variance_decomp
 from tensorflow.keras.models import Sequential

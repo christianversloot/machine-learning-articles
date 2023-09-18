@@ -1,9 +1,9 @@
 ---
 title: "How to create a confusion matrix with Scikit-learn?"
 date: "2020-05-05"
-categories: 
+categories:
   - "frameworks"
-tags: 
+tags:
   - "confusion-matrix"
   - "machine-learning"
   - "model-evaluation"
@@ -96,7 +96,7 @@ Very briefly, but importantly: if you wish to run this code, you must make sure 
 
 The first step is generating an example dataset. We will be using Scikit-learn for this purpose too. First, create a file called `confusion-matrix.py`, and open it in a code editor. The first thing we do is add the imports:
 
-```
+```python
 # Imports
 from sklearn.datasets import make_blobs
 from sklearn.model_selection import train_test_split
@@ -112,7 +112,7 @@ As we will evaluate the model, we need to ensure that the dataset is split betwe
 
 Next, we can define a number of configuration options:
 
-```
+```python
 # Configuration options
 blobs_random_seed = 42
 centers = [(0,0), (5,5), (0,5), (2,3)]
@@ -138,7 +138,7 @@ Finally, the **number of samples generated** is pretty self-explanatory. We set 
 
 Next up is the call to `make_blobs` and to `train_test_split` for actually generating and splitting the data:
 
-```
+```python
 # Generate data
 inputs, targets = make_blobs(n_samples = num_samples_total, centers = centers, n_features = num_features_for_samples, cluster_std = cluster_std)
 X_train, X_test, y_train, y_test = train_test_split(inputs, targets, test_size=frac_test_split, random_state=blobs_random_seed)
@@ -150,7 +150,7 @@ Once the data is generated, you may choose to save it to file. This is an option
 
 Then, you can tweak away your visualization easily without having to deal with new data all the time :)
 
-```
+```python
 # Save and load temporarily
 np.save('./data_cf.npy', (X_train, X_test, y_train, y_test))
 X_train, X_test, y_train, y_test = np.load('./data_cf.npy', allow_pickle=True)
@@ -158,8 +158,8 @@ X_train, X_test, y_train, y_test = np.load('./data_cf.npy', allow_pickle=True)
 
 Should you wish to visualize the data, this is of course possible:
 
-```
-# Generate scatter plot for training data 
+```python
+# Generate scatter plot for training data
 plt.scatter(X_train[:,0], X_train[:,1])
 plt.title('Linearly separable data')
 plt.xlabel('X1')
@@ -195,7 +195,7 @@ As we have seen in the post linked above, we can also use Scikit-learn to constr
 
 First, we'll have to add a few extra imports to the top of our script:
 
-```
+```python
 from sklearn import svm
 from sklearn.metrics import plot_confusion_matrix
 from mlxtend.plotting import plot_decision_regions
@@ -207,14 +207,14 @@ from mlxtend.plotting import plot_decision_regions
 
 First, we initialize the SVM classifier. I'm using a `linear` kernel because I suspect (actually, I'm confident, as we constructed the data ourselves) that the data is linearly separable:
 
-```
+```python
 # Initialize SVM classifier
 clf = svm.SVC(kernel='linear')
 ```
 
 Then, we fit the training data - starting the training process:
 
-```
+```python
 # Fit data
 clf = clf.fit(X_train, y_train)
 ```
@@ -229,7 +229,7 @@ Recall that we compare the predictions generated during evaluation with the grou
 
 The `plot_confusion_matrix` call takes care of this for us, and we simply have to provide it the classifier (`clf`), the test set (`X_test` and `y_test`), a color map and whether to normalize the data.
 
-```
+```python
 # Generate confusion matrix
 matrix = plot_confusion_matrix(clf, X_test, y_test,
                                  cmap=plt.cm.Blues,
@@ -252,7 +252,7 @@ Here are some other visualizations that help us explain the confusion matrix (fo
 - ![](images/rcf_sup.png)
     
 
-```
+```python
 # Get support vectors
 support_vectors = clf.support_vectors_
 
@@ -277,7 +277,7 @@ The only class that underperforms is class 3, with a score of 0.68. It's still a
 
 Should you wish to obtain the full model code, that's of course possible. Here you go :)
 
-```
+```python
 # Imports
 from sklearn.datasets import make_blobs
 from sklearn.model_selection import train_test_split
@@ -303,7 +303,7 @@ X_train, X_test, y_train, y_test = train_test_split(inputs, targets, test_size=f
 np.save('./data_cf.npy', (X_train, X_test, y_train, y_test))
 X_train, X_test, y_train, y_test = np.load('./data_cf.npy', allow_pickle=True)
 
-# Generate scatter plot for training data 
+# Generate scatter plot for training data
 plt.scatter(X_train[:,0], X_train[:,1])
 plt.title('Linearly separable data')
 plt.xlabel('X1')

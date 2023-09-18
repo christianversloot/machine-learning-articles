@@ -110,13 +110,13 @@ A terminal should now open displaying `(base)`. This is good - it's the base env
 
 Let's make a new environment:
 
-```
+```shell
 conda create --name first-tensorflow  
 ```
 
 Here, we'll be making a new environment called `first-tensorflow`. After hitting Enter, you must likely confirm the creation of the environment:
 
-```
+```shell
 ## Package Plan ##
 
   environment location: C:\Users\chris\miniconda3\envs\first-tensorflow
@@ -128,7 +128,7 @@ Proceed ([y]/n)? y
 
 After which it is created:
 
-```
+```shell
 Preparing transaction: done
 Verifying transaction: done
 Executing transaction: done
@@ -146,14 +146,14 @@ It's now time to **activate** the environment, as the instructions already sugge
 
 By writing `conda activate first-tensorflow`, the newly created environment is created, and you can see `(base)` change into `(first-tensorflow)`:
 
-```
+```shell
 (base) PS C:\Users\chris> conda activate first-tensorflow 
 (first-tensorflow) PS C:\Users\chris>     
 ```
 
 The next step - installing TensorFlow, which includes Keras - is remarkably simple:
 
-```
+```shell
 (first-tensorflow) PS C:\Users\chris> conda install tensorflow==2.1.0
 ```
 
@@ -187,7 +187,7 @@ Let's find out if we can create such a classifier. Open up your code editor (e.g
 
 Time to add to the file the TensorFlow components that we need:
 
-```
+```python
 import tensorflow
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Conv2D, Flatten
@@ -199,7 +199,7 @@ We'll need `tensorflow` in general, and some specific components. We'll be using
 
 Next, we must specify a few configuration options:
 
-```
+```python
 # Configuration
 img_width, img_height = 28, 28
 input_shape = (img_width, img_height, 1)
@@ -216,7 +216,7 @@ The image width and height are set to 28 pixels, because that's the size of each
 
 We can next load the dataset:
 
-```
+```python
 # Load data
 def load_data():
   return tensorflow.keras.datasets.mnist.load_data(path="mnist.npz")
@@ -228,7 +228,7 @@ Per the Keras datasets `load_data` function, we can easily load the MNIST data -
 
 Then, it's actually time to add the neural network. Using `model.add`, we stack a few layers on top of each other - starting with convolutional layers for extracting features (i.e. selecting what patterns within the dataset must be used for generating predictions) and Dense layers for actually converting the presence of features into a prediction (i.e. the true predictive part). Jointly, they can be expected to produce quite a performance indeed!
 
-```
+```python
 # Model creation
 def create_model():
   model = Sequential()
@@ -245,7 +245,7 @@ def create_model():
 
 Above, we just created a _skeleton_ of the model. That is, we didn't create a working model yet, but simply described what it should look like. Compiling a model involves specifying an optimization mechanism ([Adam](https://www.machinecurve.com/index.php/2019/11/03/extensions-to-gradient-descent-from-momentum-to-adabound/) in our case) and [loss function](https://www.machinecurve.com/index.php/2019/10/04/about-loss-and-loss-functions/):
 
-```
+```python
 # Model compilation
 def compile_model(model):
   model.compile(loss=tensorflow.keras.losses.sparse_categorical_crossentropy,
@@ -258,7 +258,7 @@ def compile_model(model):
 
 Finally, before we actually start the training process, we must add functionality both for _training_ (which makes sense) and _testing_ (which I should explain in a bit more detail). When a model is trained, it must be tested against data that it hasn't seen before. This ensures that the model _can be generalized_, meaning that it is also effective on data that it has not seen before. If it's not, there's no point in generating the predictive model, is there? Hence, your goal as a machine learning engineer is to create a model that can both predict _and_ generalize.
 
-```
+```python
 # Model training
 def train_model(model, X_train, y_train):
   model.fit(X_train, y_train,
@@ -280,21 +280,21 @@ def test_model(model, X_test, y_test):
 
 We can now add code which truly loads our data based on the definition we created before:
 
-```
+```python
 # Load data
 (X_train, y_train), (X_test, y_test) = load_data()
 ```
 
 We must normalize it to the \[latex\]\[0, 1\]\[/latex\] range:
 
-```
+```python
 # Normalize data
 (X_train, X_test) = (X_train / 255.0, X_test / 255.0)
 ```
 
 Also reshape it, because TensorFlow expects our input to have a specific structure:
 
-```
+```python
 # Reshape data
 (X_train, X_test) = (
   X_train.reshape(X_train.shape[0], X_train.shape[1], X_train.shape[2], 1),
@@ -304,7 +304,7 @@ Also reshape it, because TensorFlow expects our input to have a specific structu
 
 And finally, we can create, compile, train and test our model:
 
-```
+```python
 # Create and train the model
 model = create_model()
 model = compile_model(model)
@@ -335,7 +335,7 @@ Test loss: 0.0544307005890682 / Test accuracy: 0.9878000020980835
 
 Should you wish to obtain the full model code just at once - here you go:
 
-```
+```python
 import tensorflow
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Conv2D, Flatten

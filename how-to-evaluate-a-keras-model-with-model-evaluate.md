@@ -1,11 +1,11 @@
 ---
 title: "How to evaluate a TensorFlow 2.0 Keras model with model.evaluate"
 date: "2020-11-03"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "generalization"
   - "keras"
   - "model-evaluation"
@@ -61,7 +61,7 @@ If you look at the TensorFlow API, the `model.evaluate` functionality for model 
 
 It looks like this:
 
-```
+```python
 evaluate(
     x=None, y=None, batch_size=None, verbose=1, sample_weight=None, steps=None,
     callbacks=None, max_queue_size=10, workers=1, use_multiprocessing=False,
@@ -95,7 +95,7 @@ We first create the following TensorFlow model.
 
 Click [here](https://www.machinecurve.com/index.php/2019/09/17/how-to-create-a-cnn-classifier-with-keras/) if you wish to understand creating a Convolutional Neural Network in more detail.
 
-```
+```python
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, Flatten
@@ -162,7 +162,7 @@ You can now use `model.evaluate` in order to generate evaluation scores and prin
 - We call `evaluate` on the `model` with the testing data - verbosity off, so we don't see output on the screen.
 - As our main loss function is [sparse categorical crossentropy](https://www.machinecurve.com/index.php/2019/10/06/how-to-use-sparse-categorical-crossentropy-in-keras/) (see above) and our additional metric is accuracy, the `score` variable contains the scores in that particular other. Hence, `score[0]` represents crossentropy, and `score[1]` represents accuracy. We finally call `print()` to output the scores on screen.
 
-```
+```python
 # Generate generalization metrics
 score = model.evaluate(input_test, target_test, verbose=0)
 print(f'Test loss: {score[0]} / Test accuracy: {score[1]}')
@@ -170,7 +170,7 @@ print(f'Test loss: {score[0]} / Test accuracy: {score[1]}')
 
 Running the model will first train our model and subsequently print the evaluation metrics:
 
-```
+```shell
 Test loss: 0.0175113923806377 / Test accuracy: 0.9951000213623047
 ```
 
@@ -188,7 +188,7 @@ With the former two, you likely still end up with lists of training samples - i.
 
 And it is also possible to evaluate a model using `model.evaluate` if you are using a generator. Say, for example, that you are using the following generator:
 
-```
+```python
 # Load data
 def generate_arrays_from_file(path, batchsize):
     inputs = []
@@ -212,7 +212,7 @@ def generate_arrays_from_file(path, batchsize):
 
 Then you can evaluate the model by passing the generator to the evaluation function. Make sure to use a different `path` compared to your training dataset, since these need to be strictly separated.
 
-```
+```python
 # Generate generalization metrics
 score = model.evaluate(generate_arrays_from_file('./five_hundred_evaluation_samples.csv', batch_size), verbose=0)
 print(f'Test loss: {score[0]} / Test accuracy: {score[1]}')

@@ -1,10 +1,10 @@
 ---
 title: "How to visualize a model with TensorFlow 2 and Keras?"
 date: "2019-10-07"
-categories: 
+categories:
   - "buffer"
   - "frameworks"
-tags: 
+tags:
   - "architecture"
   - "deep-learning"
   - "keras"
@@ -40,7 +40,7 @@ _Note that model code is also available [on GitHub](https://github.com/christian
 
 If you want to get started straight away, here is the code that you can use for visualizing your TensorFlow 2.0/Keras model with `plot_model`:
 
-```
+```python
 from tensorflow.keras.utils import plot_model
 plot_model(model, to_file='model.png')
 ```
@@ -57,7 +57,7 @@ Today, we will visualize the [Convolutional Neural Network](https://www.machinec
 
 This is the code of that model:
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
@@ -80,7 +80,7 @@ sample_shape = input_train[0].shape
 img_width, img_height = sample_shape[0], sample_shape[1]
 input_shape = (img_width, img_height, 1)
 
-# Reshape data 
+# Reshape data
 input_train = input_train.reshape(len(input_train), input_shape[0], input_shape[1], input_shape[2])
 input_test  = input_test.reshape(len(input_test), input_shape[0], input_shape[1], input_shape[2])
 
@@ -145,7 +145,7 @@ It allows you to create a visualization of your Keras neural network.
 
 More specifically, the Keras docs define it as follows:
 
-```
+```python
 from tensorflow.keras.utils import plot_model
 plot_model(model, to_file='model.png')
 ```
@@ -199,7 +199,7 @@ Sometimes, it helps to install `pydotplus` as well with `pip install pydotplus`.
 
 When adapting the code from my original CNN, scrapping away the elements I don't need for visualizing the model architecture, I end up with this:
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
@@ -218,7 +218,7 @@ input_shape = (img_width, img_height, 1)
 # Number of classes
 no_classes = 10
 
-# Reshape data 
+# Reshape data
 input_train = input_train.reshape(len(input_train), input_shape[0], input_shape[1], input_shape[2])
 input_test  = input_test.reshape(len(input_test), input_shape[0], input_shape[1], input_shape[2])
 
@@ -261,7 +261,7 @@ Indeed, above we saw that we can use the `rankdir` attribute (which is set to `T
 
 Making a horizontal plot of your TensorFlow/Keras model simply involves adding the `rankdir='LR'` a.k.a. _horizontal_ attribute:
 
-```
+```python
 plot_model(model, to_file='model.png', rankdir='LR')
 ```
 

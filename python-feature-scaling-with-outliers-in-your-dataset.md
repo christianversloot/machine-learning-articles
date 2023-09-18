@@ -36,7 +36,7 @@ Let's take a look! 😎
 
 If you have trained Machine Learning models before, or if you have looked closely at the articles at MachineCurve, you have likely seen lines like these sometimes:
 
-```
+```python
 # Convert into [0, 1] range.
 input_train = input_train / 255
 input_test = input_test / 255
@@ -108,13 +108,13 @@ You can click on the referenced link above to dive into Normalization and Standa
 In the article referenced above, we saw that datasets can become surprisingly comparable when Standardization is applied - in this case, the variance of one feature seems to be comparable after Standardization. This means that both variables are equally important, which is not something we thought when we first saw the dataset on the left!
 
 - ![](images/gauss0.png)
-    
+
 - ![](images/gauss1.png)
-    
+
 
 As expected, the entire feature space would now be centered around \[latex\](\\mu = 0, \\sigma = 1)\[/latex\]. The new range is approximately \[latex\]\[-3.66, 3.16\]\[/latex\].
 
-```
+```python
 print(np.mean(X1))
 print(np.std(X1))
 print(f'Range: [{np.min(X1)}, {np.max(X1)}]')
@@ -127,9 +127,9 @@ print(f'Range: [{np.min(X1)}, {np.max(X1)}]')
 Now let's take a look at what happens when we regenerate the dataset but then introduce outliers - in approximately 20% of the cases, the samples are multiplied by 10-25 so that they are really off:
 
 - ![](images/outliers-1.png)
-    
+
 - ![](images/outliers2-1.png)
-    
+
 
 The `StandardScaler` used for applying Standardization to this dataset nicely generates a standard dataset centered around \[latex\](\\mu = 0, \\sigma = 1)\[/latex\].
 
@@ -172,7 +172,7 @@ Using the `RobustScaler` in Scikit-learn, we can overcome this problem, by scali
 
 Applying Robust Scaling with the `RobustScaler` is really easy and works both for Scikit-learn and TensorFlow models. Suppose that we generate the originally Gaussian data from the plots above, and then stretch one of the axes by `2.63` and then stretch 20% of the data more by multiplying it with a number between \[latex\]\[10, 25\]\[/latex\]. We then have a dataset available in `X1` which is also what we would have when e.g. training a [Scikit-learn](https://www.machinecurve.com/index.php/2020/11/12/using-error-correcting-output-codes-for-multiclass-svm-classification/) or a [TensorFlow](https://www.machinecurve.com/index.php/2019/09/17/how-to-create-a-cnn-classifier-with-keras/) model.
 
-```
+```python
 # Imports
 from sklearn.datasets import make_gaussian_quantiles
 from sklearn.preprocessing import RobustScaler

@@ -1,11 +1,11 @@
 ---
 title: "Using EarlyStopping and ModelCheckpoint with TensorFlow 2 and Keras"
 date: "2019-05-30"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "ai"
   - "callbacks"
   - "deep-learning"
@@ -17,7 +17,7 @@ Training a neural network can take a lot of time. In some cases, especially with
 
 In Keras, when you train a neural network such as a [classifier](https://www.machinecurve.com/index.php/2019/09/17/how-to-create-a-cnn-classifier-with-keras/) or a [regression model](https://www.machinecurve.com/index.php/2019/07/30/creating-an-mlp-for-regression-with-keras/), you'll usually set the number of epochs when you call `model.fit`:
 
-```
+```python
 fit(x=None, y=None, batch_size=None, epochs=1, verbose=1, callbacks=None, validation_split=0.0, validation_data=None, shuffle=True, class_weight=None, sample_weight=None, initial_epoch=0, steps_per_epoch=None, validation_steps=None, validation_freq=1)
 ```
 
@@ -60,7 +60,7 @@ Let's take a look 🚀
 
 This code example immediately teaches you **how EarlyStopping and ModelCheckpointing can be used with TensorFlow**. It allows you to get started straight away. If you want to understand both callbacks in more detail, however, then make sure to continue reading the rest of this tutorial.
 
-```
+```python
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 
 keras_callbacks   = [
@@ -98,7 +98,7 @@ We will slightly alter it in order to (1) include the callbacks and (2) keep it 
 
 Let's first load the Keras imports. Note that we also include `numpy`, which is not done in the Keras example. We include it because we'll need to fix the random number generator, but we'll come to that shortly.
 
-```
+```python
 from tensorflow.keras.preprocessing import sequence
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, Activation
@@ -110,7 +110,7 @@ import numpy as np
 
 We will then set the parameters. Note that instead of 2 epochs in the example, we'll use 200.000 epochs here.
 
-```
+```python
 # set parameters:
 max_features = 5000
 maxlen = 400
@@ -124,13 +124,13 @@ epochs = 200000
 
 We'll fix the random seed in Numpy. This allows us to use the same pseudo random number generator every time. This removes the probability that variation in the data is caused by the pseudo-randomness between multiple instances of a 'random' number generator - rather, the pseudo-randomness is equal all the time.
 
-```
+```python
 np.random.seed(7)
 ```
 
 We then load the data. We make a `load_data` call to the [IMDB data set](https://www.machinecurve.com/index.php/2019/12/31/exploring-the-keras-datasets/#imdb-movie-reviews-sentiment-classification), which is provided in Keras by default. We load a maximum of 5.000 words according to our configuration file. The `load_data` definition provided by Keras automatically splits the data in training and testing data (with inputs `x` and targets `y`). In order to create feature vectors that have the same shape, the sequences are padded. That is, `0.0` is added towards the end. Neural networks tend not to be influenced by those numbers.
 
-```
+```python
 (x_train, y_train), (x_test, y_test) = imdb.load_data(num_words=max_features)
 x_train = sequence.pad_sequences(x_train, maxlen=maxlen)
 x_test = sequence.pad_sequences(x_test, maxlen=maxlen)
@@ -138,7 +138,7 @@ x_test = sequence.pad_sequences(x_test, maxlen=maxlen)
 
 Next up is the model itself. It is proposed by Google. Given the goal of this blog post, there's not much need for explaining whether the architecture is good (which is the case, though):
 
-```
+```python
 model = Sequential()
 model.add(Embedding(max_features,
                     embedding_dims,
@@ -159,7 +159,7 @@ model.add(Activation('sigmoid'))
 
 Next, we compile the model. [Binary crossentropy](https://www.machinecurve.com/index.php/2019/10/22/how-to-use-binary-categorical-crossentropy-with-keras/) is used since we have two target classes (`positive` and `negative`) and our task is a classification task (for which [crossentropy](https://www.machinecurve.com/index.php/2019/10/04/about-loss-and-loss-functions/#binary-crossentropy) is a good way of computing loss). The optimizer is [Adam](https://www.machinecurve.com/index.php/2019/11/03/extensions-to-gradient-descent-from-momentum-to-adabound/#adam), which is a state-of-the-art optimizer combining various improvements to original [stochastic gradient descent](https://www.machinecurve.com/index.php/2019/10/24/gradient-descent-and-its-variants/). As an additional metric which is more intuitive to human beings, `accuracy` is included as well.
 
-```
+```python
 model.compile(loss='binary_crossentropy',
               optimizer='adam',
               metrics=['accuracy'])
@@ -167,7 +167,7 @@ model.compile(loss='binary_crossentropy',
 
 We'll next make slight changes to the example. Google utilizes the `test` data for validation; we don't do that. Rather, we'll create a separate validation split from the training data. We thus end up with three distinct data sets: a training set, which is used to train the model; a validation set, which is used to study its predictive power after every epoch, and a testing set, which shows its generalization power since it contains data the model has never seen. We generate the validation data by splitting the training data in actual training data and validation date. We use a 80/20 split for this; thus, 20% of the original training data will become validation data. All right, let's fit the training data and start the training process.
 
-```
+```python
 model.fit(x_train, y_train,
           batch_size=batch_size,
           epochs=epochs,
@@ -180,13 +180,13 @@ Later, we'll evaluate the model with the test data.
 
 We must however first add the callbacks to the imports at the top of our code:
 
-```
+```python
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 ```
 
 We can then include them into our code. Just before `model.fit`, add this Python variable:
 
-```
+```python
 keras_callbacks   = [
       EarlyStopping(monitor='val_loss', patience=30, mode='min', min_delta=0.0001),
       ModelCheckpoint(checkpoint_path, monitor='val_loss', save_best_only=True, mode='min')
@@ -207,7 +207,7 @@ Those are not the only parameters. There's many more for both [ModelCheckpoint](
 
 All right, if we would now add the callback variable to the `model.fit` call, we'd have a model that stops when it no longer improves _and_ saves the best model. Replace your current code with this:
 
-```
+```python
 model.fit(x_train, y_train,
           batch_size=batch_size,
           epochs=epochs,
@@ -227,13 +227,13 @@ All right, let's give it a go!
 
 It may be that you'll run into issues with Numpy when you load the data into a Numpy array. Specifically, the error looks as follows:
 
-```
+```shell
 ValueError: Object arrays cannot be loaded when allow_pickle=False
 ```
 
 It occurs because Numpy has recently inverted the default value for allow\_pickle and Keras has not updated yet. Altering `imdb.py` in `keras/datasets` folder will resolve this issue. Let's hope the pull request that has been issued for this problem will be accepted soon. Change line 59 into:
 
-```
+```python
 with np.load(path, allow_pickle=True) as f:
 ```
 
@@ -245,7 +245,7 @@ with np.load(path, allow_pickle=True) as f:
 
 You'll relatively quickly see the results:
 
-```
+```shell
 Epoch 1/200000
 20000/20000 [==============================] - 10s 507us/step - loss: 0.4380 - acc: 0.7744 - val_loss: 0.3145 - val_acc: 0.8706
 Epoch 00001: val_loss improved from inf to 0.31446, saving model to C:\Users\chris\DevFiles\Deep Learning/testmodel.h5
@@ -261,7 +261,7 @@ Epoch 00003: val_loss did not improve from 0.27188
 
 Apparently, the training process achieves optimal validation loss after just two epochs (which was also indicated by the Google engineers who created the model code we are thankful for using and which we adapted), because after epoch 32 it shows:
 
-```
+```shell
 Epoch 32/200000
 20000/20000 [==============================] - 7s 366us/step - loss: 0.0105 - acc: 0.9960 - val_loss: 0.7375 - val_acc: 0.8780
 Epoch 00032: val_loss did not improve from 0.27188
@@ -282,13 +282,13 @@ We can next comment out everything from `model = Sequential()` up to and includi
 
 We should load the model, so we should add its feature to the imports:
 
-```
+```python
 from tensorflow.keras.models import load_model
 ```
 
 And subsequently add evaluation code just after the code that was commented out:
 
-```
+```python
 model = load_model(checkpoint_path)
 scores = model.evaluate(x_test, y_test, verbose=1)
 print(f'Score: {model.metrics_names[0]} of {scores[0]}; {model.metrics_names[1]} of {scores[1]*100}%')
@@ -296,7 +296,7 @@ print(f'Score: {model.metrics_names[0]} of {scores[0]}; {model.metrics_names[1]}
 
 Next, run it again. Instead of training the model again (you commented out the code specifying the model and the training process), it will now load the model you saved during training and evaluate it. You will most likely see a test accuracy of ≈ 88%.
 
-```
+```shell
 25000/25000 [==============================] - 3s 127us/step
 Score: loss of 0.27852724124908446; acc of 88.232%
 ```

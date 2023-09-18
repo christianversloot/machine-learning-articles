@@ -1,10 +1,10 @@
 ---
 title: "Build an LSTM Model with TensorFlow 2.0 and Keras"
 date: "2021-01-07"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "deep-neural-network"
   - "long-short-term-memory"
@@ -36,7 +36,7 @@ Let's get to work! 😎
 
 The code example below gives you a working LSTM based model with TensorFlow 2.x and Keras. If you want to understand it in more detail, make sure to read the rest of the article below.
 
-```
+```python
 import tensorflow as tf
 from tensorflow.keras.datasets import imdb
 from tensorflow.keras.layers import Embedding, Dense, LSTM
@@ -132,14 +132,14 @@ This makes them a lot faster than vanilla RNNs.
 Now that we understand how LSTMs work in theory, let's take a look at constructing them in TensorFlow and Keras. Of course, we must take a look at how they are represented first. In TensorFlow and Keras, this happens through the `tf.keras.layers.LSTM` class, and it is described as:
 
 > Long Short-Term Memory layer - Hochreiter 1997.
-> 
+>
 > TensorFlow (n.d.)
 
 Indeed, that's the LSTM we want, although it might not have all the gates yet - gates were changed in another paper that was a follow-up to the Hochreiter paper. Nevertheless, understanding the LSTM with all the gates is a good idea, because that's what most of them look like today.
 
 In code, it looks as follows:
 
-```
+```python
 tf.keras.layers.LSTM(
     units, activation='tanh', recurrent_activation='sigmoid',
     use_bias=True, kernel_initializer='glorot_uniform',
@@ -191,7 +191,7 @@ Open up a code editor and create a file, e.g. called `lstm.py`, and let's go!
 
 Let's specify the model imports first:
 
-```
+```python
 import tensorflow as tf
 from tensorflow.keras.datasets import imdb
 from tensorflow.keras.layers import Embedding, Dense, LSTM
@@ -215,7 +215,7 @@ The next step is specifying the model configuration. While strictly not necessar
 
 Below, we can see that our model will be trained with a batch size of 128, using [binary crossentropy loss](https://www.machinecurve.com/index.php/2019/10/22/how-to-use-binary-categorical-crossentropy-with-keras/) and [Adam optimization](https://www.machinecurve.com/index.php/2019/11/03/extensions-to-gradient-descent-from-momentum-to-adabound/), and only for five epochs (we only have to show you that it works). 20% of our training data will be used for validation purposes, and the output will be verbose, with verbosity mode set to 1 out of 0, 1 and 2. Our [learned word embedding](https://www.machinecurve.com/index.php/2020/03/03/classifying-imdb-sentiment-with-keras-and-embeddings-dropout-conv1d/) will have 15 hidden dimensions and each sequence passed through the model is 300 characters at max. Our vocabulary will contain 5000 words at max.
 
-```
+```python
 # Model configuration
 additional_metrics = ['accuracy']
 batch_size = 128
@@ -231,7 +231,7 @@ verbosity_mode = 1
 
 You might now also want to disable [Eager Execution in TensorFlow](https://www.machinecurve.com/index.php/2020/09/13/tensorflow-eager-execution-what-is-it/). While it doesn't work for all, some people report that the training process speeds up after using it. However, it's not necessary to do so - simply test how it behaves on your machine:
 
-```
+```python
 # Disable eager execution
 tf.compat.v1.disable_eager_execution()
 ```
@@ -242,7 +242,7 @@ Once this is complete, we can load and prepare the data. To make things easier, 
 
 Once the data has been loaded, we apply `pad_sequences`. This ensures that sentences shorter than the maximum sentence length are brought to equal length by applying padding with, in this case, zeroes, because that often corresponds with the padding character.
 
-```
+```python
 # Load dataset
 (x_train, y_train), (x_test, y_test) = imdb.load_data(num_words=num_distinct_words)
 print(x_train.shape)
@@ -257,7 +257,7 @@ padded_inputs_test = pad_sequences(x_test, maxlen=max_sequence_length, value = 0
 
 We can then define the Keras model. As we are using the Sequential API, we can initialize the `model` variable with `Sequential()`. The first layer is an `Embedding` layer, which learns a [word embedding](https://www.machinecurve.com/index.php/2020/03/03/classifying-imdb-sentiment-with-keras-and-embeddings-dropout-conv1d/) that in our case has a dimensionality of 15. This is followed by an `LSTM` layer providing the recurrent segment (with default `tanh` activation enabled), and a `Dense` layer that has one output - through Sigmoid a number between 0 and 1, representing an orientation towards a class.
 
-```
+```python
 # Define the Keras model
 model = Sequential()
 model.add(Embedding(num_distinct_words, embedding_output_dims, input_length=max_sequence_length))
@@ -269,14 +269,14 @@ model.add(Dense(1, activation='sigmoid'))
 
 The model can then be compiled. This initializes the model that has so far been a skeleton, a foundation, but no actual model yet. We do so by specifying the optimizer, the loss function, and the additional metrics that we had specified before.
 
-```
+```python
 # Compile the model
 model.compile(optimizer=optimizer, loss=loss_function, metrics=additional_metrics)
 ```
 
 This is also a good place to [generate a summary](https://www.machinecurve.com/index.php/2020/04/01/how-to-generate-a-summary-of-your-keras-model/) of what the model looks like.
 
-```
+```python
 # Give a summary
 model.summary()
 ```
@@ -285,7 +285,7 @@ model.summary()
 
 Then, we can instruct TensorFlow to start the training process.
 
-```
+```python
 # Train the model
 history = model.fit(padded_inputs, y_train, batch_size=batch_size, epochs=number_of_epochs, verbose=verbosity_mode, validation_split=validation_split)
 ```
@@ -296,7 +296,7 @@ The `(input, output)` pairs passed to the model are the padded inputs and their 
 
 We cannot evaluate the model on the same dataset that was used for training it. We fortunately have testing data available through the [train/test split](https://www.machinecurve.com/index.php/2020/11/16/how-to-easily-create-a-train-test-split-for-your-machine-learning-model/) performed in the `load_data(...)` section, and can use built-in [evaluation facilities](https://www.machinecurve.com/index.php/2020/11/03/how-to-evaluate-a-keras-model-with-model-evaluate/) to evaluate the model. We then print the test results on screen.
 
-```
+```python
 # Test the model after training
 test_results = model.evaluate(padded_inputs_test, y_test, verbose=False)
 print(f'Test results - Loss: {test_results[0]} - Accuracy: {100*test_results[1]}%')
@@ -306,7 +306,7 @@ print(f'Test results - Loss: {test_results[0]} - Accuracy: {100*test_results[1]}
 
 If you want to get the full model code just at once, e.g. for copy-and-run, here you go:
 
-```
+```python
 import tensorflow as tf
 from tensorflow.keras.datasets import imdb
 from tensorflow.keras.layers import Embedding, Dense, LSTM
@@ -400,7 +400,7 @@ Test results - Loss: 0.3316078186035156 - Accuracy: 87.09200024604797%
 
 If you face speed issues with training the TensorFlow LSTM on your GPU, you might decide to temporarily disable its access to your GPUs by adding the following _before_ `model.fit`:
 
-```
+```python
 import os
 os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 ```

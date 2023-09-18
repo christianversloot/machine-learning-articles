@@ -1,10 +1,10 @@
 ---
 title: "Conv2DTranspose: using 2D transposed convolutions with Keras"
 date: "2019-12-10"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "autoencoder"
   - "conv2d"
   - "conv2dtranspose"
@@ -65,7 +65,7 @@ We'll leave the three-dimensional variant to another blog and cover the two-dime
 
 This is how Conv2DTranspose is represented within the Keras API:
 
-```
+```python
 keras.layers.Conv2DTranspose(filters, kernel_size, strides=(1, 1), padding='valid', output_padding=None, data_format=None, dilation_rate=(1, 1), activation=None, use_bias=True, kernel_initializer='glorot_uniform', bias_initializer='zeros', kernel_regularizer=None, bias_regularizer=None, activity_regularizer=None, kernel_constraint=None, bias_constraint=None)
 ```
 
@@ -147,7 +147,7 @@ Open up your code editor as well as this file, and let's start writing some code
 
 We first add all the imports:
 
-```
+```python
 import keras
 from keras.datasets import mnist
 from keras.models import Sequential
@@ -165,7 +165,7 @@ import numpy as np
 
 Subsequently, we specify some configuration options:
 
-```
+```python
 # Model configuration
 img_width, img_height = 28, 28
 batch_size = 1000
@@ -189,7 +189,7 @@ Example MNIST digits
 
 We next load the MNIST data (this assumes that you'll run Keras on Tensorflow given the channels first/channels last approach):
 
-```
+```python
 # Load MNIST dataset
 (input_train, target_train), (input_test, target_test) = mnist.load_data()
 
@@ -223,7 +223,7 @@ The Conv2D layers are followed by three Conv2DTranspose layers, which form the '
 
 In code, it looks like this:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', kernel_initializer='he_normal', input_shape=input_shape))
@@ -246,7 +246,7 @@ Do note the following aspects:
 
 Next, we compile the model:
 
-```
+```python
 # Compile and fit data
 model.compile(optimizer='adam', loss='binary_crossentropy')
 ```
@@ -255,7 +255,7 @@ model.compile(optimizer='adam', loss='binary_crossentropy')
 
 Then, we fit the data:
 
-```
+```python
 model.fit(input_train, input_train,
                 epochs=no_epochs,
                 batch_size=batch_size,
@@ -268,7 +268,7 @@ Do note that we fit the input data _as targets_ as well. This allows the decoder
 
 `model.fit` starts the training process. Once the model has finished training, it is likely that you have created a reconstruction model that can reconstruct the MNIST digits quite successfully. Let's now see whether we can actually achieve this.
 
-```
+```python
 # Generate reconstructions
 num_reconstructions = 8
 samples = input_test[:num_reconstructions]
@@ -282,7 +282,7 @@ The code above, when added, takes `num_reconstructions` of the test data set (i.
 
 Next, we add relatively simple code for visualizing the original inputs and reconstructions:
 
-```
+```python
 # Plot reconstructions
 for i in np.arange(0, num_reconstructions):
   # Get the sample and the reconstruction

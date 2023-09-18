@@ -1,10 +1,10 @@
 ---
 title: "How to visualize support vectors of your SVM classifier?"
 date: "2020-05-05"
-categories: 
+categories:
   - "frameworks"
   - "svms"
-tags: 
+tags:
   - "machine-learning"
   - "scikit-learn"
   - "support-vector-machine"
@@ -56,7 +56,7 @@ That's why today, given the focus of this post, we don't focus on creating the S
 
 Here's the full code for generating a dataset, performing a 66/33 train/test split and training the linear SVM:
 
-```
+```python
 # Imports
 from sklearn.datasets import make_blobs
 
@@ -82,7 +82,7 @@ X_train, X_test, y_train, y_test = train_test_split(inputs, targets, test_size=f
 np.save('./datasv.npy', (X_train, X_test, y_train, y_test))
 X_train, X_test, y_train, y_test = np.load('./datasv.npy', allow_pickle=True)
 
-# Generate scatter plot for training data 
+# Generate scatter plot for training data
 plt.scatter(X_train[:,0], X_train[:,1])
 plt.title('Linearly separable data')
 plt.xlabel('X1')
@@ -110,7 +110,7 @@ Let's now take a look at each one in more detail.
 
 If you wanted to retrieve the index numbers of the support vectors for your SVM, you would need to add this code:
 
-```
+```python
 # Get support vector indices
 support_vector_indices = clf.support_
 print(support_vector_indices)
@@ -118,13 +118,13 @@ print(support_vector_indices)
 
 Which, in our case, produces:
 
-```
+```python
 [ 66 108 138 267 319 367 427 536 548 562 606 650   4   9  99 126]
 ```
 
 I count 16 vectors. Indeed, if you look at the numbers of support vectors per class, you see 2x8 = 16 vectors - so they are evenly spread across the classes:
 
-```
+```python
 # Get number of support vectors per class
 support_vectors_per_class = clf.n_support_
 print(support_vectors_per_class)
@@ -132,7 +132,7 @@ print(support_vectors_per_class)
 
 Then, finally, by simply using Matplotlib to visualize the training set and stacking the support vectors on top, we can visualize the support vectors and the training set:
 
-```
+```python
 # Get support vectors themselves
 support_vectors = clf.support_vectors_
 

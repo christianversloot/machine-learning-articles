@@ -70,7 +70,7 @@ This is what constant padding does: the "frame" around the feature maps which en
 
 First, constant padding for 1D data - a.k.a. `ConstantPadding1D`:
 
-```
+```python
 from tensorflow import pad
 from tensorflow.keras.layers import Layer
 
@@ -116,7 +116,7 @@ In both padding cases, note that the "left side" of the input is very dark, and 
 
 Here's `ConstantPadding2D`:
 
-```
+```python
 from tensorflow import pad
 from tensorflow.keras.layers import Layer
 
@@ -178,7 +178,7 @@ Reflection padding thus "reflects" the row into the padding. This is useful beca
 
 Here's the implementation for 1D data, i.e. `ReflectionPadding1D`:
 
-```
+```python
 from tensorflow import pad
 from tensorflow.keras.layers import Layer
 
@@ -214,7 +214,7 @@ However, what you'll also see, is that from the "max value" in your feature map 
 
 Now, let's take a look at 2D Reflection Padding, or `ReflectionPadding2D`:
 
-```
+```python
 from tensorflow import pad
 from tensorflow.keras.layers import Layer
 
@@ -266,7 +266,7 @@ In TensorFlow, replication padding is not known by the name "replication padding
 
 Here's the code for `ReplicationPadding1D`:
 
-```
+```python
 from tensorflow import pad
 from tensorflow.keras.layers import Layer
 
@@ -302,7 +302,7 @@ Indeed, it's clear that the "transition zone" between input and padding is broad
 
 Now, the code for 2D Replication Padding a.k.a. `ReplicationPadding2D`:
 
-```
+```python
 from tensorflow import pad
 from tensorflow.keras.layers import Layer
 
@@ -340,7 +340,7 @@ We've made `ConstantPadding`, `ReflectionPadding` and `ReplicationPadding` avail
 
 Here's an example for 2D padding, where we create a `Sequential` model, apply a `Conv2D` layer and subsequently apply both replication and constant padding. Obviously, this will produce a padded feature map that is larger than our original input. However, we just wanted to show how to apply replication/reflection padding, _and_ constant padding, as you require an additional parameter there :)
 
-```
+```python
 model = Sequential()
 model.add(Conv2D(img_num_channels, kernel_size=(5, 5), activation='linear', input_shape=input_shape, kernel_initializer=Ones(), bias_initializer=Ones()))
 model.add(ReplicationPadding2D(padding=(3, 3)))

@@ -1,11 +1,11 @@
 ---
 title: "How to use L1, L2 and Elastic Net regularization with PyTorch?"
 date: "2021-07-21"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "elastic-net-regularization"
   - "l1-regularization"
@@ -85,7 +85,7 @@ Implementing **L1 Regularization** with PyTorch can be done in the following way
 
 Here is the full example for L1 Regularization with PyTorch:
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -187,7 +187,7 @@ if __name__ == '__main__':
 
 Implementing **L2 Regularization** with PyTorch is also easy. Understand that in this case, we don't take the absolute value for the weight values, but rather their squares. In other words, we add \[latex\]\\sum\_f{ \_{i=1}^{n}} w\_i^2\[/latex\] to the loss component. In the example below, you can find how L2 Regularization can be used with PyTorch:
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -288,12 +288,12 @@ if __name__ == '__main__':
 L2 based weight decay can also be implemented by setting a delta value for `weight_decay` in the optimizer.
 
 > **weight\_decay** ([_float_](https://docs.python.org/3/library/functions.html#float)_, optional_) – weight decay (L2 penalty) (default: 0)
-> 
+>
 > PyTorch (n.d.)
 
 For example:
 
-```
+```python
 optimizer = torch.optim.Adam(mlp.parameters(), lr=1e-4, weight_decay=1.0)
 ```
 
@@ -311,7 +311,7 @@ In this example, Elastic Net (L1 + L2) Regularization is implemented with PyTorc
 - In the training loop, these are applied, in a weighted fashion (with weights of 0.3 and 0.7, respectively).
 - The loss components are also printed on-screen when the statistics are printed.
 
-```
+```python
 class MLP(nn.Module):
   '''
     Multilayer Perceptron.

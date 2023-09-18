@@ -1,10 +1,10 @@
 ---
 title: "Automating neural network configuration with Keras Tuner"
 date: "2020-06-09"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-neural-network"
   - "hyperparameter-tuning"
   - "hyperparameters"
@@ -60,7 +60,7 @@ If you look at how we build models, you'll generally see that doing so consists 
 
 In step (1), you add various layers of your neural network to the skeleton, such as the [Convolutional Neural Network](https://www.machinecurve.com/index.php/2020/03/30/how-to-use-conv2d-with-keras/) created here with Keras:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
@@ -74,7 +74,7 @@ model.add(Dense(no_classes, activation='softmax'))
 Here, the architectural choices you make (such as the number of filters for a `Conv2D` layer, kernel size, or the number of output nodes for your `Dense` layer) determine what are known as the _parameters_ of your neural network - the weights (and by consequence biases) of your neural network:[](https://datascience.stackexchange.com/posts/17643/timeline)
 
 > The parameters of a neural network are typically the weights of the connections. In this case, these parameters are learned during the training stage. So, the algorithm itself (and the input data) tunes these parameters.
-> 
+>
 > [Robin, at StackExchange](https://datascience.stackexchange.com/questions/17635/model-parameters-hyper-parameters-of-neural-network-their-tuning-in-training#:~:text=The%20parameters%20of%20a%20neural,or%20the%20number%20of%20epochs.)
 
 ### Tuning hyperparameters in your neural network
@@ -89,7 +89,7 @@ However, things don't end there. Rather, in step (2), you'll _configure_ the mod
 Here's why they are called _hyper_parameters:
 
 > The hyper parameters are typically the learning rate, the batch size or the number of epochs. The are so called "hyper" because they influence how your parameters will be learned. You optimize these hyper parameters as you want (depends on your possibilities): grid search, random search, by hand, using visualisations… The validation stage help you to both know if your parameters have been learned enough and know if your hyper parameters are good.
-> 
+>
 > [Robin, at StackExchange](https://datascience.stackexchange.com/questions/17635/model-parameters-hyper-parameters-of-neural-network-their-tuning-in-training#:~:text=The%20parameters%20of%20a%20neural,or%20the%20number%20of%20epochs.)
 
 As Robin suggests, hyperparameters can be selected (and optimized) in multiple ways. The easiest way of doing so is by hand: you, as a deep learning engineer, select a set of hyperparameters that you will subsequently alter in an attempt to make the model better.
@@ -103,7 +103,7 @@ However, can't we do this in a better way when training a Keras model?
 As you would have expected: yes, we can! :) Let's introduce Keras Tuner to the scene. As you would expect from engineers, the description as to what it does is really short but provides all the details:
 
 > A hyperparameter tuner for Keras, specifically for tf.keras with TensorFlow 2.0.
-> 
+>
 > [Keras-tuner on GitHub](https://github.com/keras-team/keras-tuner)
 
 If you already want to look around, you could visit their website, and if not, let's take a look at what it does.
@@ -161,7 +161,7 @@ Make sure that Keras Tuner is installed by executing `pip install -U keras-tuner
 
 Open up your IDE and create a file e.g. called `tuning.py`. Here, you're going to write down your code. We'll start with imports (such as `tensorflow.keras` and `kerastuner`), defining the model configuration options and loading the data. If you have no experience in doing so, I recommend that you first read the [Conv2D post](https://www.machinecurve.com/index.php/2020/03/30/how-to-use-conv2d-with-keras/) as I explain these things there in more detail. Here's the code that you'll add first:
 
-```
+```python
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D
@@ -213,7 +213,7 @@ Those functions are nothing more than a Python `def` where you create the model 
 
 Here's the code for the model-building function. If you've used Keras before, you instantly recognize what it does!
 
-```
+```python
 # MODEL BUILDING FUNCTION
 def build_model(hp):
   # Create the model
@@ -243,7 +243,7 @@ def build_model(hp):
 
 Now, it's time to perform tuning. As we've constructed our search space, we must first define our search strategy - and it will be `RandomSearch` today:
 
-```
+```python
 # Perform tuning
 tuner = RandomSearch(
     build_model,
@@ -258,7 +258,7 @@ We'll add the model-building function as the function that contains our model an
 
 Now that we have configured our search strategy, it's time to print a summary of it and actually perform the search operation:
 
-```
+```python
 # Display search space summary
 tuner.search_space_summary()
 
@@ -274,7 +274,7 @@ Here, we instruct Keras Tuner to perform hyperparameter tuning with our training
 
 Once the search is complete, you can get the best model, and train it fully as per your configuration:
 
-```
+```python
 # Get best model
 models = tuner.get_best_models(num_models=1)
 best_model = models[0]
@@ -297,7 +297,7 @@ That's it! :) You should now have a fully working Keras Tuner based hyperparamet
 
 If you wish to obtain the full model code, that's of course also possible. Here you go:
 
-```
+```python
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D

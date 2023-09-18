@@ -1,9 +1,9 @@
 ---
 title: "Differences between Autoregressive, Autoencoding and Sequence-to-Sequence Models in Machine Learning"
 date: "2020-12-29"
-categories: 
+categories:
   - "deep-learning"
-tags: 
+tags:
   - "autoencoder"
   - "autoencoding"
   - "autoregressive"
@@ -51,7 +51,7 @@ A **sequence-to-sequence model** is capable of ingesting a sequence of a particu
 There are many applications of performing sequence-to-sequence learning.
 
 > Sequence to sequence learning has been successful in many tasks such as machine translation, speech recognition (...) and text summarization (...) amongst others.
-> 
+>
 > Gehring et al. (2017)
 
 While this is not strictly necessary (e.g. think vanilla RNNs), most contemporary Seq2Seq models make use of an encoder-decoder architecture. In this architecture, an encoder is trained to convert input sequences into a hidden representation. Often, this is a [high-dimensional hidden state vector](https://www.machinecurve.com/index.php/2019/12/26/how-to-visualize-the-encoded-state-of-an-autoencoder-with-keras/).
@@ -61,7 +61,7 @@ Subsequently, a trained decoder is applied, which is capable of changing the hid
 By chaining the encoder and decoder together into one Machine Learning task, e.g. for translating using German inputs and English outputs, the encoder and decoder's weight matrices jointly learn to perform the transduction task.
 
 > The primary components \[of a Seq2Seq model\] are one encoder and one decoder network. The encoder turns each item into a corresponding hidden vector containing the item and its context. The decoder reverses the process, turning the vector into an output item, using the previous output as the input context.
-> 
+>
 > Wikipedia (2019)
 
 ### Seq2Seq made visual
@@ -100,7 +100,7 @@ There are however more tasks within Natural Language Processing. One of these ta
 The answer to creating a model that can generate text lies in the class of **autoregressive models**.
 
 > A statistical model is autoregressive if it predicts future values based on past values. For example, an autoregressive model might seek to predict a stock's future prices based on its past performance.
-> 
+>
 > Investopedia (n.d.)
 
 In the statistics oriented but applicable definition above, you'll already read what is key to text generation: using past values for predicting future values. Or, in other words, using words predicted in the past for predicting the word at present.
@@ -137,11 +137,11 @@ Autoregressive models are very good when the goal is to model language - i.e., t
 **Autoencoding models** can help here.
 
 > The aim of an autoencoder is to learn a representation (encoding) for a set of data, typically for dimensionality reduction, by training the network to ignore signal “noise”. Along with the reduction side, a reconstructing side is learnt, where the autoencoder tries to generate from the reduced encoding a representation as close as possible to its original input, hence its name.
-> 
+>
 > Wikipedia (2006)
 
 > Autoencoding models are pretrained by corrupting the input tokens in some way and trying to reconstruct the original sentence.
-> 
+>
 > HuggingFace (n.d.)
 
 ### Autoencoding Transformers
@@ -167,7 +167,7 @@ It's **the task that is solved**, as well as the **type of training** (HuggingFa
 - If the idea is that you use all previous predictions for generating the next one, in a cyclical fashion, we're talking about an **autoregressive model**.
 
 > Note that the only difference between autoregressive models and autoencoding models is in the way the model is pretrained. Therefore, the same architecture can be used for both autoregressive and autoencoding models. When a given model has been used for both types of pretraining, we have put it in the category corresponding to the article where it was first introduced.
-> 
+>
 > HuggingFace (n.d.)
 
 Hopefully, this makes things a bit more clear.

@@ -1,9 +1,9 @@
 ---
 title: "CNNs and feature extraction? The curse of data sparsity."
 date: "2019-07-19"
-categories: 
+categories:
   - "deep-learning"
-tags: 
+tags:
   - "computer-vision"
   - "convolutional-neural-networks"
   - "deep-learning"
@@ -50,7 +50,7 @@ Indeed, it's the [MNIST](http://yann.lecun.com/exdb/mnist/) dataset: "a training
 
 To give you a baseline of what a CNN can do with such a dataset, you will next see the result of training a CNN based on a [default Keras example script](https://github.com/keras-team/keras/blob/master/examples/mnist_cnn.py):
 
-```
+```shell
 Epoch 1/12
 60000/60000 [==============================] - 24s 404us/step - loss: 0.2616 - acc: 0.9201 - val_loss: 0.0745 - val_acc: 0.9779
 Epoch 2/12
@@ -91,10 +91,8 @@ The DCT is a signal compression technique which, according to [Wikipedia](https:
 
 I'm specifically using the `scipy.fftpack` DCT, type 2, which is the de facto default DCT in the scientific community. It can be written as [follows](https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.fftpack.dct.html):
 
-```
-          N-1
-y[k] = 2* sum x[n]*cos(pi*k*(2n+1)/(2*N)), 0 <= k < N.
-          n=0
+```math
+y_{k} = \sum^{N-1}_{n=0} x_n * cos(\pi*k*\frac{2n+1}{2*N}, 0 <= k < N
 ```
 
 This is what the numbers subsequently look like visually:
@@ -115,7 +113,7 @@ Let's redo the experiment. Note that this time, I had to change all references t
 
 The [convolution operation](https://machinecurve.com/index.php/2018/12/07/convolutional-neural-networks-and-their-components-for-computer-vision/) with learning filters itself, however, remains similar. This is the result:
 
-```
+```shell
 Epoch 1/12
 60000/60000 [==============================] - 23s 380us/step - loss: 2.5680 - acc: 0.1103 - val_loss: 2.3011 - val_acc: 0.1135
 Epoch 2/12

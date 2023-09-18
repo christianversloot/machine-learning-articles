@@ -164,7 +164,7 @@ The main part of the OPTICS algorithm is the **main loop** (Wikipedia, 2009). It
         - For the ordered priority queue (where we shall see that lowest reachability distance from the core point \[latex\]p\[/latex\] and hence the closest points are covered first), for each point, we get its neighbors. We then mark the point \[latex\]q\[/latex\] as processed and output it to the ordered list. If it's a core point as well, we can extend the priority queue as the clusters are close to each other and likely belong to the same bigger cluster. Extending the priority queue through update means that more points are added to the reachability-distance ordered Seeds list.
     - In other words, the algorithm keeps expanding on a particular point _until_ none of the unprocessed points have a core distance anymore (i.e. aren't core points). These are the outliers.
 
-```
+```python
 function OPTICS(DB, eps, MinPts) is
     for each point p of DB do
         p.reachability-distance = UNDEFINED
@@ -197,7 +197,7 @@ Updating happens in the following way:
 
 In other words, during the extension, we continuously change the order in the priority queue, where points with lower reachability distance (and hence points closer to the cluster's center points) are added earlier.
 
-```
+```python
 function update(N, p, Seeds, eps, MinPts) is
     coredist = core-distance(p, eps, MinPts)
     for each o in N
@@ -252,7 +252,7 @@ With the following code, we can perform OPTICS based clustering on a random blob
 - Based on this data, we perform OPTICS-based clustering, with epsilon, minimum number of samples, cluster method and metric defined. We immediately fit the data so that the clusters are generated.
 - We then print some information about the number of clusters and noisy samples, and finally generate a scatter plot.
 
-```
+```python
 from sklearn.datasets import make_blobs
 from sklearn.cluster import OPTICS
 import numpy as np
@@ -295,7 +295,7 @@ Running the algorithm yields the following scatter plot:
 
 We can also easily generate the reachability plot:
 
-```
+```python
 # Generate reachability plot
 reachability = db.reachability_[db.ordering_]
 plt.plot(reachability)

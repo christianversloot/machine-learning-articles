@@ -1,10 +1,10 @@
 ---
 title: "Binary Crossentropy Loss with PyTorch, Ignite and Lightning"
 date: "2021-01-20"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "binary-crossentropy"
   - "crossentropy"
   - "deep-learning"
@@ -49,13 +49,13 @@ Using `BCELoss` in classic PyTorch is a two-step process:
 
 Step 1 - the criterion definition:
 
-```
+```python
 criterion = nn.BCELoss()
 ```
 
 Step 2 - using it in the custom training loop:
 
-```
+```python
 for epoch in range(5):
     for i, data in enumerate(trainloader, 0):
         inputs, labels = data
@@ -74,7 +74,7 @@ for epoch in range(5):
 
 In Lightning, we can **add `BCELoss` to our `training_step`, `validation_step` and `testing_step`** like this to start using Binary Crossentropy Loss:
 
-```
+```python
 from torch import nn
 import pytorch_lightning as pl
   
@@ -92,7 +92,7 @@ class NeuralNetwork(pl.LightningModule):
 
 In Ignite, we can **add `BCELoss` as a `criterion` to the Trainer** **creation** for using Binary Crossentropy Loss. It can be added like this:
 
-```
+```python
 from torch import nn
 
 criterion = nn.BCELoss()
@@ -159,7 +159,7 @@ In this section, we'll see a step-by-step approach to constructing Binary Crosse
 
 In PyTorch, Binary Crossentropy Loss is provided as `[nn.BCELoss](https://pytorch.org/docs/stable/generated/torch.nn.BCELoss.html)`. This loss function can be used with classic PyTorch, with PyTorch Lightning and with PyTorch Ignite. It looks like this (PyTorch, n.d.):
 
-```
+```python
 torch.nn.BCELoss(weight: Optional[torch.Tensor] = None, size_average=None, reduce=None, reduction: str = 'mean')
 ```
 
@@ -179,13 +179,13 @@ In classic PyTorch, we must define the training, testing and validation loops ou
 
 Specifying the loss as a criterion involves using `BCELoss` in the following way:
 
-```
+```python
 criterion = nn.BCELoss()
 ```
 
 Here is an example of a (very simple) training loop. It performs nothing but resetting the optimizer (so that it can be used at every iteration), making a forward pass, computing the loss, performing the backward pass with backpropagation and subsequent model optimization.
 
-```
+```python
 for epoch in range(5):
     for i, data in enumerate(trainloader, 0):
         inputs, labels = data
@@ -208,7 +208,7 @@ PyTorch Lightning is a wrapper on top of native PyTorch which helps you organize
 
 Using native PyTorch under the hood, we can also use `nn.BCELoss` here. The first step is initializing it in the `__init__` definition:
 
-```
+```python
 from torch import nn
 import pytorch_lightning as pl
   
@@ -226,7 +226,7 @@ Recall that a loss function computes the aggregate error when a set of predictio
 - We generate `y_hat`, which is the set of predictions for `x`, by feeding `x` forward through our neural network defined in `self.layers`. Note that you will see the creation of `self.layers` in the full code example below.
 - We then compute binary crossentropy loss between `y_hat` (predictions) and `y` (ground truth), log the loss, and return it. Based on this loss, PyTorch Lightning will handle the gradients computation and subsequent optimization (with the optimizer defined in `configure_optimizers`, see the full code example below).
 
-```
+```python
   def training_step(self, batch, batch_idx):
     x, y = batch
     x = x.view(x.size(0), -1)
@@ -238,7 +238,7 @@ Recall that a loss function computes the aggregate error when a set of predictio
 
 Quite easy, isn't it? When added to a regular Lightning model i.e. to the `LightningModule`, the full code looks as follows:
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -288,7 +288,7 @@ if __name__ == '__main__':
 
 In PyTorch Ignite, we can also add Binary Crossentropy loss quite easily. Here, we have to specify it as a `criterion` in the Trainer. Like with classic PyTorch and Lightning, we can use `nn.BCELoss` for this purpose. Adding BCE loss can be done as follows:
 
-```
+```python
 from torch import nn
 
 criterion = nn.BCELoss()

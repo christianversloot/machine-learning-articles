@@ -1,11 +1,11 @@
 ---
 title: "How to perform Sentiment Analysis with Python, HuggingFace Transformers and Machine Learning"
 date: "2020-12-23"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "bert"
   - "distilbert"
   - "huggingface"
@@ -41,7 +41,7 @@ Let's take a look! 😎
 Before we move to taking a look at the technical details of Sentiment Analysis, it may be a good idea to take a look at what Sentiment Analysis is in the first place.
 
 > **Sentiment analysis** (also known as **opinion mining** or **emotion AI**) refers to the use of natural language processing, text analysis, computational linguistics, and biometrics to systematically identify, extract, quantify, and study affective states and subjective information.
-> 
+>
 > Wikipedia (2006)
 
 Now, that is quite a mouth full of words.
@@ -49,7 +49,7 @@ Now, that is quite a mouth full of words.
 So, when performing Sentiment Analysis, a variety of techniques and technologies is used to extract "subjective information" and "affective states". Subjective here means obviously that it is related to personal feelings; affective state is related to _affect_.
 
 > Affect, in psychology, refers to the underlying experience of feeling, emotion or mood.
-> 
+>
 > Wikipedia (2005)
 
 Aha!
@@ -103,7 +103,7 @@ By using DistilBERT as your pretrained model, you can significantly speed up fin
 The original DistilBERT model has been pretrained on the unlabeled datasets BERT was also trained on. It must be fine-tuned if it needs to be tailored to a specific task. In the HuggingFace based Sentiment Analysis pipeline that we will implement, the DistilBERT architecture was fine-tuned on the SST-2 dataset. This dataset stands for **Stanford Sentiment Treebank** **version 2** and can be described as follows:
 
 > The Stanford Sentiment Treebank SST-2 dataset contains 215,154 phrases with fine-grained sentiment labels in the parse trees of 11,855 sentences from movie reviews. Models performances are evaluated either based on a fine-grained (5-way) or binary classification model based on accuracy.
-> 
+>
 > DeepAI (n.d.)
 
 In other words, sentences are expressed in a tree-like structure. Contrary to SST-1, which is version 1 of the same dataset, neutral phrases are deleted in order to keep strictly positive and strictly negative ones. Visually, phrases can look as follows (Stanford NLP, n.d.). We can see that this sentence as a whole is negative, but that some parts of it are positive.
@@ -119,7 +119,7 @@ Now that we understand how Sentiment Analysis is used, what our [Transformer](ht
 For the pipeline, we will be using the HuggingFace Transformers library:
 
 > 🤗 Transformers (formerly known as pytorch-transformers and pytorch-pretrained-bert) provides general-purpose architectures (BERT, GPT-2, RoBERTa, XLM, DistilBert, XLNet…) for Natural Language Understanding (NLU) and Natural Language Generation (NLG) with over 32+ pretrained models in 100+ languages and deep interoperability between TensorFlow 2.0 and PyTorch.
-> 
+>
 > HuggingFace (n.d.)
 
 In other words, applying Transformers in a PyTorch and TensorFlow setup has never been easier before. Installing it is also easy: ensure that you have TensorFlow or PyTorch installed, followed by a simple HF install with `pip install transformers`.
@@ -130,7 +130,7 @@ That's all!
 
 In today's model, we're setting up a pipeline with HuggingFace's DistilBERT-pretrained and SST-2-fine-tuned Sentiment Analysis model. This is really easy, because it belongs to HuggingFace's out-of-the-box pipelines:
 
-```
+```python
     "sentiment-analysis": {
         "impl": TextClassificationPipeline,
         "tf": TFAutoModelForSequenceClassification if is_tf_available() else None,
@@ -155,7 +155,7 @@ Implementing the pipeline is really easy:
 - We import the `pipeline` class from `transformers` and initialize it with a `sentiment-analysis` task. This ensures that the PyTorch and TensorFlow models are initialized following the SST-2-fine-tuned model above.
 - We can then easily call the Sentiment Analyzer and print the results.
 
-```
+```python
 from transformers import pipeline
 sentimentanalyzer = pipeline("sentiment-analysis")
 

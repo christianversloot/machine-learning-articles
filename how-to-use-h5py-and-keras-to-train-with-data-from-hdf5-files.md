@@ -1,10 +1,10 @@
 ---
 title: "How to use H5Py and Keras to train with data from HDF5 files?"
 date: "2020-04-13"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "dataset"
   - "deep-learning"
   - "h5py"
@@ -35,7 +35,7 @@ Are you ready? Let's go! 😊
 You see them every now and then: HDF5 files. Let's see what such a file is before we actually start working with them. If we go to Wikipedia, we see that...
 
 > Hierarchical Data Format (HDF) is a set of file formats (HDF4, HDF5) designed to store and organize large amounts of data.
-> 
+>
 > Wikipedia (2004)
 
 It's a file format that is specifically designed for large datasets. That might be what we need sometimes for our machine learning projects!
@@ -83,7 +83,7 @@ Our HDF5 based model is not too different compared to any other Keras model. In 
 
 The imports first. The only thing that we will add to the imports we already copied from that other blog is the `import h5py` statement:
 
-```
+```python
 import h5py
 from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.models import Sequential
@@ -96,7 +96,7 @@ This is what H5py does:
 
 > **HDF5 for Python**  
 > The h5py package is a Pythonic interface to the HDF5 binary data format.
-> 
+>
 > H5py (n.d.)
 
 We can thus use it to access the data, which we'll do now.
@@ -105,7 +105,7 @@ We can thus use it to access the data, which we'll do now.
 
 Let's put the model configuration in your file next:
 
-```
+```python
 # Model configuration
 batch_size = 50
 img_width, img_height, img_num_channels = 28, 28, 1
@@ -119,7 +119,7 @@ verbosity = 1
 
 Followed by loading and reshaping the input data into the correct [input shape](https://www.machinecurve.com/index.php/2020/04/05/how-to-find-the-value-for-keras-input_shape-input_dim/) (i.e. _length_ of the datasets times `(28, 28, 1)` as MNIST contains grayscale 28x28 pixels images). Here's the code for that:
 
-```
+```python
 # Load MNIST data
 f = h5py.File('./train.hdf5', 'r')
 input_train = f['image'][...]
@@ -147,7 +147,7 @@ That's pretty much it with respect to loading data from HDF5!
 
 We can now add the other code which creates, configures and trains the Keras model, which means that we end with this code as a whole:
 
-```
+```python
 import h5py
 from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.models import Sequential

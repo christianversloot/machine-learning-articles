@@ -1,10 +1,10 @@
 ---
 title: "Feature Scaling with Python and Sparse Data"
 date: "2020-11-23"
-categories: 
+categories:
   - "frameworks"
   - "svms"
-tags: 
+tags:
   - "feature-scaling"
   - "normalization"
   - "scikit-learn"
@@ -46,7 +46,7 @@ In other words, we can create a classifier that helps us determine what class a 
 3. Sometimes, especially when we are using traditional Machine Learning algorithms, we don't want too many variables in our feature space - because of the _[curse of dimensionality](https://www.machinecurve.com/index.php/2020/11/19/how-to-normalize-or-standardize-a-dataset-in-python/)._ In those cases, we want to select the variables that contribute most first. Algorithms we can use for this purpose, such as Principal Component Analysis, rely on the _variance_ of the variables for picking the most important ones.
 
 > _Variance is the expectation of the squared deviation of a random variable from its mean. Informally, it measures how far a set of numbers is spread out from their average value._
-> 
+>
 > Wikipedia (2001)
 
 Given the three points mentioned above and the dataset displayed above, we can intuitively say the following:
@@ -85,7 +85,7 @@ This is what such a table can look like:
 This is an example of **sparse data**:
 
 > A variable with sparse data is one in which a relatively high percentage of the variable's cells do not contain actual data. Such "empty," or NA, values take up storage space in the file.
-> 
+>
 > Oracle (n.d.)
 
 Having sparse data is common when you are creating Machine Learning models related to time series. As we shall see, Feature Scaling can be quite problematic in that case.
@@ -96,7 +96,7 @@ Having sparse data is common when you are creating Machine Learning models relat
 
 Suppose that we take the first feature and use standardization to rescale it:
 
-```
+```python
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 samples_feature = np.array([0, 0, 1.26, 0, 2.12, 0, 0, 0, 0, 0, 0, 0]).reshape(-1, 1)
@@ -108,7 +108,7 @@ print(standardized_dataset)
 
 This would be the output:
 
-```
+```python
 [[-0.43079317]
  [-0.43079317]
  [ 1.49630526]
@@ -134,12 +134,12 @@ If your Machine Learning setting depends on sparse data, e.g. when it needs to f
 Fortunately, there is a way in which Feature Scaling can be applied to Sparse Data. We can do so using Scikit-learn's `MaxAbsScaler`.
 
 > Scale each feature by its maximum absolute value. This estimator scales and translates each feature individually such that the maximal absolute value of each feature in the training set will be 1.0. It does not shift/center the data, and thus does not destroy any sparsity.
-> 
+>
 > Scikit-learn (n.d.)
 
 As we can see, it uses the maximum absolute value to perform the scaling - and it therefore works in a similar way compared to regular min-max normalization, except then that we use absolute values here. The MaxAbsScaler does not center the data, but rather scales the range. This is why it works perfectly with sparse data. In fact, it is the recommenmded
 
-```
+```python
 
 import numpy as np
 from sklearn.preprocessing import MaxAbsScaler
@@ -152,7 +152,7 @@ print(standardized_dataset)
 
 ...indeed gives the sparsity and scaling that we were looking for:
 
-```
+```python
 [[0. ]
  [0. ]
  [0.59433962]
@@ -173,7 +173,7 @@ Great, I thought, but why use the `MaxAbsScaler` - and why cannot we use simple 
 
 Especially because the output would be the same if we applied the `MinMaxScaler`, which is Scikit-learn's implementation of min-max normalization, to the dataset we used above:
 
-```
+```python
 [[0. ]
  [0. ]
  [0.59433962]
@@ -192,13 +192,13 @@ Now, here's the catch - all values in the original input array to the scaler wer
 
 What if we used a dataset where negative values are present?
 
-```
+```python
 samples_feature = np.array([-2.40, -6.13, 0.24, 0, 0, 0, 0, 0, 0, 2.13]).reshape(-1, 1)
 ```
 
 Min-max normalization would produce this:
 
-```
+```python
 [[0.45157385]
  [0. ]
  [0.77118644]
@@ -215,7 +215,7 @@ Bye bye sparsity!
 
 The output of our `MaxAbsScaler` is good, as we would expect:
 
-```
+```python
 [[-0.39151713]
  [-1. ]
  [ 0.03915171]

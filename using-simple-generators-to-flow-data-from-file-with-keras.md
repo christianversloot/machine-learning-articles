@@ -94,7 +94,7 @@ Let's go!
 
 As always, the first thing we do is loading our imports. We import the Sequential API from `tensorflow.keras`, the TensorFlow 2.x way of importing Keras, as well as the Dense layer. As you may understand by now, we'll be building a densely-connected neural network with the Sequential API. Additionally, we also import TensorFlow itself, and Numpy.
 
-```
+```python
 # Load dependencies
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
@@ -106,7 +106,7 @@ import tensorflow
 
 Next, we set two configuration options. First, we specify the total number of rows present in the file:
 
-```
+```python
 # Num rows
 num_rows = 5e8 # Five hundred million
 batch_size = 250
@@ -124,7 +124,7 @@ It has a `path` and a `batchsize` attribute, which are used later, and first cre
 
 Subsequently, we keep iterating - we simply set `while True`, which sets a never-ending loop until the script is killed. Every time, we we open the file, and subsequently parse the inputs and targets. Once the batch count equals the batch size that we configured (do note that this happens when we have the _exact same size_, as the batch count starts at 0 instead of 1), we finalize the arrays and subsequently yield the data. Don't forget to reset the `inputs`, `targets` and `batchcount`, though!
 
-```
+```python
 # Load data
 def generate_arrays_from_file(path, batchsize):
     inputs = []
@@ -152,7 +152,7 @@ Now that we have specified our function for flowing data from file, we can creat
 
 As you can see by the number of output neurons for every layer, slowly but surely, an information bottleneck is created. We use [ReLU](https://www.machinecurve.com/index.php/2019/09/04/relu-sigmoid-and-tanh-todays-most-used-activation-functions/) for activating in the hidden layers, and `linear` for the final layer. This, in return, suggests that we're dealing with a regression scenario. Unsurprisingly: we are.
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Dense(16, input_dim=1, activation='relu'))
@@ -164,7 +164,7 @@ model.add(Dense(1, activation='linear'))
 
 This latter fact gets even more clear when we look at the `compile` function for our model. As our loss, we use the mean absolute error, which is a typical [loss function for regression problems](https://www.machinecurve.com/index.php/2019/10/04/about-loss-and-loss-functions/#loss-functions-for-regression). Additionally, we specify the mean squared error, which is one too. Adam is [used for optimizing the model](https://www.machinecurve.com/index.php/2019/11/03/extensions-to-gradient-descent-from-momentum-to-adabound/#adam) - which is a common choice, especially when you don't really care about optimizers, as we do now (it's not the goal of today's blog post), Adam is an adequate choice.
 
-```
+```python
 # Compile the model
 model.compile(loss='mean_absolute_error',
               optimizer=tensorflow.keras.optimizers.Adam(),
@@ -177,7 +177,7 @@ Next, we `fit` the generator function - together with the file and batch size - 
 
 Note that on my machine, this file with five hundred million rows exceeds 10GB. If it were bigger, it wouldn't have fit in memory!
 
-```
+```python
 # Fit data to model
 model.fit(generate_arrays_from_file('./five_hundred.csv', batch_size),
                     steps_per_epoch=num_rows / batch_size, epochs=10)
@@ -187,7 +187,7 @@ model.fit(generate_arrays_from_file('./five_hundred.csv', batch_size),
 
 Altogether, here's the code as a whole:
 
-```
+```python
 # Load dependencies
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
@@ -263,7 +263,7 @@ Here, `x` is the input argument, or the training data you're inputting - for whi
 
 One comment to this post argued that counter to the docs, it is possible to use a generator for validation data. And indeed, it seems to work (Stack Overflow, n.d.). That's why it's also possible to let validation data flow into your model - like this:
 
-```
+```python
 # Fit data to model
 model.fit(generate_arrays_from_file('./five_hundred.csv', batch_size),
                     steps_per_epoch=num_rows / batch_size, epochs=10, validation_data=generate_arrays_from_file('./five_hundred_validation_split.csv', batch_size), validation_steps=num_val_steps)

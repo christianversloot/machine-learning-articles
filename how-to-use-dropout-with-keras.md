@@ -1,10 +1,10 @@
 ---
 title: "How to use Dropout with Keras?"
 date: "2019-12-18"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "convolutional-neural-networks"
   - "deep-learning"
   - "deep-neural-network"
@@ -53,7 +53,7 @@ Any optimizer can be used. Given the benefits of the [Adam optimizer](https://ww
 
 Within Keras, Dropout is represented as one of the _Core layers_ (Keras, n.d.):
 
-```
+```python
 keras.layers.Dropout(rate, noise_shape=None, seed=None)
 ```
 
@@ -103,7 +103,7 @@ Open up your Explorer, navigate to some folder, and create a file called `model_
 
 The first thing we need to do is to list our imports:
 
-```
+```python
 import keras
 from keras.datasets import cifar10
 from keras.models import Sequential
@@ -127,7 +127,7 @@ Finally, we import the `max_norm` Constraints, which is a Dropout best practice 
 
 Next, we can specify some configuration parameters for the model:
 
-```
+```python
 # Model configuration
 img_width, img_height         = 32, 32
 batch_size                    = 250
@@ -148,7 +148,7 @@ Finally, `max_norm_value` is set to 2.0. This value specifies the maximum norm t
 
 The next steps to add are related to loading and preparing the CIFAR-10 dataset:
 
-```
+```python
 # Load CIFAR10 dataset
 (input_train, target_train), (input_test, target_test) = cifar10.load_data()
 
@@ -187,7 +187,7 @@ Next, we parse numbers as floats, which presumably speeds up the training proces
 
 Once the data has been loaded, we can define the architecture:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv2D(64, kernel_size=(3, 3), kernel_constraint=max_norm(max_norm_value), activation='relu', input_shape=input_shape, kernel_initializer='he_uniform'))
@@ -207,7 +207,7 @@ It's in line with the architectural diagram [we discussed earlier](#model-archit
 
 The next step is to compile the model. Compiling, or configuring the model, allows you to specify a [loss function](https://www.machinecurve.com/index.php/2019/10/04/about-loss-and-loss-functions/), an [optimizer](https://www.machinecurve.com/index.php/2019/11/03/extensions-to-gradient-descent-from-momentum-to-adabound/) and additional metrics, such as accuracy. As said, we use categorical crossentropy loss to determine the difference between prediction and actual target. Additionally, we use the Adam optimizer - pretty much one of the standard optimizers today.
 
-```
+```python
 # Compile the model
 model.compile(loss=keras.losses.categorical_crossentropy,
               optimizer=keras.optimizers.Adam(),
@@ -228,7 +228,7 @@ Once our model has been configured, we can `fit` the training data to the model!
 
 The final step is adding a metric for evaluation with the test set - to identify how well it generalizes to data it has not seen before. This allows us to compare various models, which we will do next.
 
-```
+```python
 # Generate generalization metrics
 score = model.evaluate(input_test, target_test, verbose=0)
 print(f'Test loss: {score[0]} / Test accuracy: {score[1]}')
@@ -238,7 +238,7 @@ print(f'Test loss: {score[0]} / Test accuracy: {score[1]}')
 
 If you wish to copy the entire model at once, here you go:
 
-```
+```python
 import keras
 from keras.datasets import cifar10
 from keras.models import Sequential

@@ -1,11 +1,11 @@
 ---
 title: "MLP for regression with TensorFlow 2 and Keras"
 date: "2019-07-30"
-categories: 
+categories:
   - "buffer"
   - "frameworks"
   - "svms"
-tags: 
+tags:
   - "keras"
   - "mlp"
   - "multilayer-perceptron"
@@ -46,7 +46,7 @@ Let's go.
 
 If you want to get started immediately, you can use this **example code for a Multilayer Perceptron**. It was created with **TensorFlow 2.0 and Keras**, and runs on the Chennai Water Management Dataset. The dataset can be downloaded [here](https://www.kaggle.com/sudalairajkumar/chennai-water-management/version/3). If you want to understand the code and the concepts behind it in more detail, make sure to read the rest of the tutorial too! 😎
 
-```
+```python
 # Load dependencies
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
@@ -112,9 +112,9 @@ Let's next first get used to our dataset :)
 In this blog, we use the Chennai Water Management Dataset. It is a CC0 Public Domain dataset that is available at [Kaggle](https://www.kaggle.com/sudalairajkumar/chennai-water-management/version/3). It is about the city of Chennai in India and especially its water management. Particularly:
 
 > Chennai also known as Madras is the capital of the Indian state of Tamil Nadu. Located on the Coromandel Coast off the Bay of Bengal, it is the biggest cultural, economic and educational centre of south India.
-> 
+>
 > Being my second home, the city is facing an acute water shortage now (June 2019). Chennai is entirely dependent on ground water resources to meet its water needs. There are four reservoirs in the city, namely, Red Hills, Cholavaram, Poondi and Chembarambakkam, with a combined capacity of 11,057 mcft. These are the major sources of fresh water for the city.
-> 
+>
 > Source: [Sudalai Rajkumar](https://www.kaggle.com/sudalairajkumar/chennai-water-management/version/3), the author of the dataset
 
 It was uploaded with the goal of inspiring people to come up with solutions that will help Chennai face its water shortage.
@@ -201,7 +201,7 @@ As usual, we'll start by creating a folder, say `keras-mlp-regression`, and we c
 
 We then add our imports:
 
-```
+```python
 # Load dependencies
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
@@ -212,7 +212,7 @@ We use the Sequential API and the densely-connected layer type for creating the 
 
 That's what we do next, we load our dataset (it is available from [Kaggle](https://www.kaggle.com/sudalairajkumar/chennai-water-management/version/3)):
 
-```
+```python
 # Load data
 dataset = np.loadtxt('./chennai_reservoir_levels.csv', delimiter='|', skiprows=1, usecols=(1,2,3,4))
 ```
@@ -223,7 +223,7 @@ We use NumPy's `loadtxt` definition for loading the data from the CSV file. It w
 
 We next split the data into feature vectors and targets:
 
-```
+```python
 # Separate features and targets
 X = dataset[:, 0:3]
 Y = dataset[:, 3]
@@ -237,7 +237,7 @@ If you're from the region and say in advance that it's a false assumption - my a
 
 We set the input shape as our next step:
 
-```
+```python
 # Set the input shape
 input_shape = (3,)
 print(f'Feature shape: {input_shape}')
@@ -249,7 +249,7 @@ The input shape is a onedimensional vector of three features, this time. The fea
 
 Next, we create our MLP:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Dense(16, input_shape=input_shape, activation='relu'))
@@ -269,7 +269,7 @@ Note that we're using ReLU based activation because it is [one of the standard a
 
 We finally configure the model and start the training process:
 
-```
+```python
 # Configure the model and start training
 model.compile(loss='mean_absolute_error', optimizer='adam', metrics=['mean_squared_error'])
 model.fit(X, Y, epochs=10, batch_size=10, verbose=1, validation_split=0.2)
@@ -298,7 +298,7 @@ We use 10 epochs, a batch size of 1, a validation split of 20% and verbosity mod
 
 Should you wish to obtain the full model code just at once - that's of course possible too. Here you go 😎
 
-```
+```python
 # Load dependencies
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
@@ -337,7 +337,7 @@ Next, let's start the training process and see what happens.
 
 These are the results from our first attempt:
 
-```
+```shell
 Epoch 1/10
 4517/4517 [==============================] - 14s 3ms/step - loss: 332.6803 - mean_squared_error: 246576.6700 - val_loss: 294.8595 - val_mean_squared_error: 151995.6923
 Epoch 2/10
@@ -366,7 +366,7 @@ And that's no single droplet only.
 
 Second attempt with MSE as the loss function:
 
-```
+```shell
 Epoch 1/10
 4517/4517 [==============================] - 15s 3ms/step - loss: 255334.5861 - mean_absolute_error: 333.2326 - val_loss: 158943.3863 - val_mean_absolute_error: 304.4497
 Epoch 2/10
@@ -398,7 +398,7 @@ It crossed my mind that we're indeed using timeseries data, albeit not in a time
 However, precisely that may still be problematic. We split the data into training and validation data - and this is how Keras splits the data:
 
 > The validation data is selected from the last samples in the x and y data provided, before shuffling.
-> 
+>
 > Source: [Keras (n.d.)](https://keras.io/models/sequential/)
 
 Ah, okay. That's like taking the last 20 percent off this graph for validation while training with the rest:
@@ -427,7 +427,7 @@ Randomly shuffling the data before training may yield a balance between training
 
 For this, we add two lines between `Loading the data` and `Separating the data into training and testing data`, as follows:
 
-```
+```python
 # Load data
 dataset = np.loadtxt('./chennai_reservoir_levels.csv', delimiter='|', skiprows=1, usecols=(1,2,3,4))
 
@@ -441,7 +441,7 @@ Y = dataset[:, 3]
 
 Those are the results when we run the training process again:
 
-```
+```shell
 4517/4517 [==============================] - 16s 3ms/step - loss: 296.1796 - mean_squared_error: 156532.2806 - val_loss: 290.2458 - val_mean_squared_error: 141232.8286
 Epoch 2/10
 4517/4517 [==============================] - 14s 3ms/step - loss: 282.1418 - mean_squared_error: 133645.8504 - val_loss: 280.9738 - val_mean_squared_error: 134865.3968

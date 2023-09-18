@@ -86,7 +86,7 @@ If you wish to understand how the model was created - that's entirely possible :
 
 Here's the Python code for today's model. Open up a code editor, create a Python file (such as `vanillagradients.py`) and code away:
 
-```
+```python
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D
@@ -167,7 +167,7 @@ Let's start with adding `tf-explain` to our imports.
 
 These are the current imports for our Keras model:
 
-```
+```python
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D
@@ -177,7 +177,7 @@ from tensorflow.keras.optimizers import Adam
 
 We'll have to add `tf_explain` and specifically the VanillaGradientsCallback, which is done as follows:
 
-```
+```python
 from tf_explain.callbacks.vanilla_gradients import VanillaGradientsCallback
 ```
 
@@ -185,7 +185,7 @@ Also make sure to import the `os` module, the need for which we'll explain later
 
 ...this yields:
 
-```
+```python
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D
@@ -207,7 +207,7 @@ This saves you resources and avoids that your [saved model](https://www.machinec
 
 However, we can also apply callbacks for using vanilla gradients with `tf-explain`: by means of the `VanillaGradientsCallback`, we can visualize and explain our model during the training process. Here's the code for creating the Keras callback:
 
-```
+```python
 # Defining callbacks
 output_dir = './output'
 os.mkdir(output_dir)
@@ -230,7 +230,7 @@ It contains of 3 separate blocks:
 
 We can then add the callback to our `model.fit` operation which starts the training process, to ensure that it is actually used:
 
-```
+```python
 # Fit data to model
 history = model.fit(input_train, target_train,
             batch_size=batch_size,
@@ -246,7 +246,7 @@ That's it already! If you open up your terminal where `tf-explain` and TensorFlo
 
 If you wish to obtain the full model code at once, that's possible :) Here you go:
 
-```
+```python
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D
@@ -323,7 +323,7 @@ print(f'Test loss: {score[0]} / Test accuracy: {score[1]}')
 
 Now, open up your terminal again (possibly the same one as you trained your model in), `cd` to the folder where your `.py` file is located, and start TensorBoard:
 
-```
+```shell
 tensorboard --logdir=./output
 ```
 
@@ -351,7 +351,7 @@ Let's give an example.
 
 The first thing we do is adding the `VanillaGradients` explainer to our imports:
 
-```
+```python
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D
@@ -368,7 +368,7 @@ We also add Matplotlib, for generating visualizations later, and Numpy, for numb
 
 Then, after `model.fit`, we select a sample - in this case, sample 25 from the test set:
 
-```
+```python
 # Get some sample
 sample = 25
 sample_image = np.array(input_test[sample]).reshape((img_width, img_height))
@@ -380,14 +380,14 @@ We also visualize it.
 
 Then, we instantiate the Vanilla Gradients explainer:
 
-```
+```python
 # Instantiate the explainer
 explainer = VanillaGradients()
 ```
 
 And explain away:
 
-```
+```python
 # Explain away
 sample_array = (np.array([input_test[sample]]), None)
 explanation = explainer.explain(sample_array, model, class_index=0)
@@ -401,7 +401,7 @@ plt.show()
 
 Should you wish to obtain the full code for your model - that's possible again :) Here you go:
 
-```
+```python
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D

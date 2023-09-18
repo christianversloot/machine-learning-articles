@@ -1,10 +1,10 @@
 ---
 title: "Easy Object Detection with Python, HuggingFace Transformers and Machine Learning"
 date: "2022-01-04"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "detection-transformer"
   - "huggingface-transformers"
   - "object-detection"
@@ -82,7 +82,7 @@ Let's start looking at the tech details now! :D
 
 The `ObjectDetectionPipeline` can easily be initialized as a `pipeline` instance ... in other words, by means of `pipeline("object-detection")`, and we shall see this in the example below. When you provide no other input, this is how the pipeline gets initialized according to GitHub (n.d.):
 
-```
+```python
     "object-detection": {
         "impl": ObjectDetectionPipeline,
         "tf": (),
@@ -97,7 +97,7 @@ Unsurprisingly, an `ObjectDetectionPipeline` instance is used, which is tailored
 As you learned, by default, the `facebook/detr-resnet-50` [model](https://huggingface.co/facebook/detr-resnet-50) is used for deriving image features:
 
 > DEtection TRansformer (DETR) model trained end-to-end on COCO 2017 object detection (118k annotated images). It was introduced in the paper [End-to-End Object Detection with Transformers](https://arxiv.org/abs/2005.12872) by Carion et al.
-> 
+>
 > HuggingFace (n.d.)
 
 The COCO dataset (Common Objects in Context) is one of the standard datasets used for object detection models and was used for training this model. Don't worry, you can obviously also train your own DeTr based model!
@@ -120,7 +120,7 @@ This is the image we will run the object detection pipeline we're creating for, 
 
 We begin with the imports:
 
-```
+```python
 from transformers import pipeline
 from PIL import Image, ImageDraw, ImageFont
 ```
@@ -129,7 +129,7 @@ Obviously, we're using `transformers`, and specifically its `pipeline` represent
 
 Speaking of both, next up is loading the font (we pick Arial) and initializing the object detection pipeline we introduced above.
 
-```
+```python
 # Load font
 font = ImageFont.truetype("arial.ttf", 40)
 
@@ -145,7 +145,7 @@ In the definition, you will...
 - Secondly, draw the textual label slightly above the bounding box.
 - Finally, return the intermediate result, so that we can draw the next bounding box and label on top.
 
-```
+```python
 # Draw bounding box definition
 def draw_bounding_box(im, score, label, xmin, ymin, xmax, ymax, index, num_boxes):
 	""" Draw a bounding box. """
@@ -175,7 +175,7 @@ Finally, we save the image - to `street_bboxes.jpg`.
 
 Voilà, that's it! :o
 
-```
+```python
 # Open the image
 with Image.open("street.jpg") as im:
 
@@ -212,13 +212,13 @@ with Image.open("street.jpg") as im:
 
 Doing so will require you to add the following to the imports:
 
-```
+```python
 from transformers import DetrFeatureExtractor, DetrForObjectDetection
 ```
 
 Then, you can initialize the feature extractor and model, and initialize the `object_detector` with them instead of the default one. For example, if you want to use ResNet-101 as your backbone instead, you can do this as follows:
 
-```
+```python
 # Initialize another model and feature extractor
 feature_extractor = DetrFeatureExtractor.from_pretrained('facebook/detr-resnet-101')
 model = DetrForObjectDetection.from_pretrained('facebook/detr-resnet-101')
@@ -245,7 +245,7 @@ Or, when zoomed in:
 
 Here's the full code for people who want to get started immediately:
 
-```
+```python
 from transformers import pipeline
 from PIL import Image, ImageDraw, ImageFont
 

@@ -1,11 +1,11 @@
 ---
 title: "Creating depthwise separable convolutions with TensorFlow 2 and Keras"
 date: "2019-09-24"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "convolutional-neural-networks"
   - "deep-learning"
   - "keras"
@@ -80,7 +80,7 @@ Next, we'll adapt the traditional CNN we created for classifying instances of th
 
 This was the traditional CNN that we used in the other blog
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
@@ -161,7 +161,7 @@ Now that we understand what happens in the model code, we can introduce the `Sep
 
 The layer is very similar to the traditional `Conv2D` layer. It can be added to your Keras model easily and, as we saw above, it performs mostly the same trick. However, it comes with some separation-specific configuration options that must be set before training is commenced. The [Keras website](https://keras.io/layers/convolutional/) defines the `SeparableConv2D` layer as follows:
 
-```
+```python
 tensorflow.keras.layers.SeparableConv2D(filters, kernel_size, strides=(1, 1), padding='valid', data_format=None, dilation_rate=(1, 1), depth_multiplier=1, activation=None, use_bias=True, depthwise_initializer='glorot_uniform', pointwise_initializer='glorot_uniform', bias_initializer='zeros', depthwise_regularizer=None, pointwise_regularizer=None, bias_regularizer=None, activity_regularizer=None, depthwise_constraint=None, pointwise_constraint=None, bias_constraint=None)
 ```
 
@@ -189,7 +189,7 @@ And that's really simple - we'll just adapt the `Conv2D` layers to use `Separabl
 
 Eventually, we then end up with this:
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
@@ -267,13 +267,13 @@ Let's go & train our model to see how it performs!
 
 I quote my usual advice about software dependencies from another blog -
 
->   
-> We always start with listing certain dependencies that you'll need to install before you can run the model on your machine. Those are for today:  
->   
+>
+> We always start with listing certain dependencies that you'll need to install before you can run the model on your machine. Those are for today:
+>
 > A version of **Python** that can run `tensorflow.keras` (e.g. 3.8+).  
 > **TensorFlow 2.0**, e.g. 2.4+.  
 > If you wish to generate plots, it's also wise to install **Numpy** (if it's not a peer dependency of the previous ones) and **Matplotlib**.  
->   
+>
 > Preferably, you'll install these in an Anaconda environment. [Read here how to do that.](https://towardsdatascience.com/installing-keras-tensorflow-using-anaconda-for-machine-learning-44ab28ff39cb)
 
 ### Running your model
@@ -400,7 +400,7 @@ What's more interesting is that _despite the many fewer multiplications_ the dep
 - **Update 08/Feb/2021:** it seems to be the case that the issue remains unresolved.
 
 > Also experiencing that SeparableConv2d is slower than Conv2d in Keras. The number of input\_channels does not seem to matter, I tested 32-2048 and in all cases the Conv2d is faster. Interestingly, in the SeparableConv2d-model the number parameters is lower as well as the FLOPS. Still this does not seem to have the wanted affect on the inference.
-> 
+>
 > Source: gitman88 (2019), [https://github.com/tensorflow/tensorflow/issues/12132#issuecomment-471880273](https://github.com/tensorflow/tensorflow/issues/12132#issuecomment-471880273)
 
 * * *

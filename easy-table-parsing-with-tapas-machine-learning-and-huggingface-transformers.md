@@ -1,11 +1,11 @@
 ---
 title: "Easy Table Parsing with TAPAS, Machine Learning and HuggingFace Transformers"
 date: "2021-03-10"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "huggingface"
   - "language-model"
@@ -102,7 +102,7 @@ Compared to [Pipelines](https://www.machinecurve.com/index.php/getting-started-w
     - _Running TAPAS:_ `run_tapas` combines all other `def`s together in an end-to-end flow. This wasn't directly added to `__main__` because it's best practice to keep as much functionality within Python definitions.
 - **Running the whole thing:** so far, we have created a lot of definitions, but nothing is running yet. That's why we check whether our Python is running with that if statement at the bottom, and if so, invoke `run_tapas()` - and therefore the whole model.
 
-```
+```python
 from transformers import TapasTokenizer, TapasForQuestionAnswering
 import pandas as pd
 

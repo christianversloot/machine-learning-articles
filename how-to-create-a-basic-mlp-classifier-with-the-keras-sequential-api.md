@@ -1,11 +1,11 @@
 ---
 title: "How to create an MLP classifier with TensorFlow 2 and Keras"
 date: "2019-07-27"
-categories: 
+categories:
   - "buffer"
   - "frameworks"
   - "svms"
-tags: 
+tags:
   - "classifier"
   - "keras"
   - "mlp"
@@ -47,7 +47,7 @@ Let's go! 🚀
 
 Here is a full example code for creating a Multilayer Perceptron created with TensorFlow 2.0 and Keras. It is used to classify on the MNIST dataset. If you want to understand it in more detail, or why you better use Conv2D layers in addition to Dense layers when handling image data, make sure to read the rest of this tutorial too!
 
-```
+```python
 # Imports
 import tensorflow
 from tensorflow.keras.datasets import mnist
@@ -113,7 +113,7 @@ The other stream of thought had a radically different point of view. In this str
 When Rosenblatt demonstrated his perceptron in the late 1950s, he made it quite clear what he thought it would be capable of in many years:
 
 > The Navy revealed the embryo of an electronic computer today that it expects will be able to walk, talk, see, write, reproduce itself and be conscious of its existence.
-> 
+>
 > A summary of Rosenblatt's remarks (The New York Times, 1958).
 
 Minsky and other people who thought symbolic AI was the way forward got furious about these claims. With strong rhetoric, they argued that Rosenblatt only introduced a hype and did not stress upon the limitations of the Perceptron enough (Olazaran, 1996).
@@ -172,7 +172,7 @@ If you wish to visualize your data, you also need Matplotlib. This is however no
 
 Let's now import the essential Python packages:
 
-```
+```python
 # Imports
 import tensorflow
 from tensorflow.keras.datasets import mnist
@@ -217,7 +217,7 @@ And `to_categorical` serves this purpose.
 
 Next, we can assign some configuration variables:
 
-```
+```python
 # Configuration options
 feature_vector_length = 784
 num_classes = 10
@@ -229,7 +229,7 @@ The MNIST dataset contains 60.000 images in its training set. Each image belongs
 
 Finally, we can load the data:
 
-```
+```python
 # Load the data
 (X_train, Y_train), (X_test, Y_test) = mnist.load_data()
 
@@ -267,7 +267,7 @@ Perhaps you are willing to visualize your features first in order to get a bette
 
 Code:
 
-```
+```python
 # Imports
 import tensorflow
 from tensorflow.keras.datasets import mnist
@@ -296,7 +296,7 @@ Result:
 
 All right, let's continue ... the next step is actually creating the MLP in your code:
 
-```
+```python
 # Set the input shape
 input_shape = (feature_vector_length,)
 print(f'Feature shape: {input_shape}')
@@ -332,7 +332,7 @@ Ok, we just configured the model _architecture_... but we didn't cover yet _how 
 
 We can configure precisely that by means of the model's hyperparameters:
 
-```
+```python
 # Configure the model and start training
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 model.fit(X_train, Y_train, epochs=10, batch_size=250, verbose=1, validation_split=0.2)
@@ -356,7 +356,7 @@ Execute your code in Python, in an environment where TensorFlow and Keras are in
 
 It then starts training, which should be similar to this:
 
-```
+```shell
 2019-07-27 20:35:33.356042: I T:\src\github\tensorflow\tensorflow\core\common_runtime\gpu\gpu_device.cc:1084] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 3026 MB memory) -> physical GPU (device: 0, name: GeForce GTX 1050 Ti with Max-Q Design, pci bus id: 0000:01:00.0, compute capability: 6.1)
 48000/48000 [==============================] - 54s 1ms/step - loss: 1.8697 - acc: 0.5851 - val_loss: 0.4227 - val_acc: 0.8801
 Epoch 2/10
@@ -390,7 +390,7 @@ Validation loss is also still decreasing during the 10th epoch. This means that 
 
 However, this was all observed from validation data. What's best is to test it with the actual testing data that was generated earlier:
 
-```
+```python
 # Test the model after training
 test_results = model.evaluate(X_test, Y_test, verbose=1)
 print(f'Test results - Loss: {test_results[0]} - Accuracy: {test_results[1]}%')
@@ -400,7 +400,7 @@ Testing against the testing data will ensure that you've got a reliable metric f
 
 However, for our attempt, the test results are positive:
 
-```
+```shell
 Test results - Loss: 0.1073538348050788 - Accuracy: 0.9686%
 ```
 
@@ -412,7 +412,7 @@ Similar - almost 97%! That's great 😎
 
 It's of course also possible to obtain the full code for this model:
 
-```
+```python
 # Imports
 import tensorflow
 from tensorflow.keras.datasets import mnist

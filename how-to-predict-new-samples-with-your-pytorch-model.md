@@ -1,7 +1,7 @@
 ---
 title: "How to predict new samples with your PyTorch model?"
 date: "2021-02-10"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
@@ -33,7 +33,7 @@ However, here, we will cover it briefly, so that you understand what is happenin
 - Third, the runtime code. Here, you actually prepare the MNIST data, initialize the MLP, define loss function and optimizer, and define a custom training loop - for 5 iterations, or epochs. In the training loop, for every epoch, you feed forward all samples in a minibatch, compute loss, compute the error in the backwards pass, and optimize the model.
 - Finally, once all 5 epochs have passed, you print about model completion.
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -125,7 +125,7 @@ if __name__ == '__main__':
 
 The first thing to do when you want to generate new predictions is add `matplotlib` and `numpy`
 
-```
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 ```
@@ -139,7 +139,7 @@ You can then add the following code to predict new samples with your PyTorch mod
 - This is followed by reshaping the `image` into a shape that can be used by Matplotlib for visualization. The default MNIST dataset represents images as `(1, 28, 28)` whereas Matplotlib requires `(28, 28, 1)`.
 - Finally, you visualize the image, and set the prediction compared to the actual target as the `title`.
 
-```
+```python
   # Disable grad
   with torch.no_grad():
     
@@ -179,7 +179,7 @@ These are some of the results:
 
 You can also use a [saved model](https://www.machinecurve.com/index.php/2021/02/03/how-to-save-and-load-a-pytorch-model/) for inference:
 
-```
+```python
   # Disable grad
   with torch.no_grad():
     

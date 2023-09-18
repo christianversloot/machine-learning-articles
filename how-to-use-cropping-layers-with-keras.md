@@ -1,10 +1,10 @@
 ---
 title: "How to use Cropping layers with TensorFlow and Keras?"
 date: "2020-02-04"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "conv2d"
   - "convolutional-neural-networks"
   - "cropping"
@@ -57,7 +57,7 @@ Hence, it shouldn't surprise you that Keras offers three types of Cropping layer
 
 Firstly, there is the one-dimensional variant:
 
-```
+```python
 tensorflow.keras.layers.Cropping1D(cropping=(1, 1))
 ```
 
@@ -65,7 +65,7 @@ It has one simple attribute: `cropping`, which specifies "how many units should 
 
 Secondly, there is two-dimensional variant:
 
-```
+```python
 tensorflow.keras.layers.Cropping2D(cropping=((0, 0), (0, 0)), data_format=None)
 ```
 
@@ -76,7 +76,7 @@ It is pretty similar to the one-dimensional case, but there are minor difference
 
 Thirdly, and finally, there is the 3D Cropping layer:
 
-```
+```python
 tensorflow.keras.layers.Cropping3D(cropping=((1, 1), (1, 1), (1, 1)), data_format=None)
 ```
 
@@ -101,7 +101,7 @@ Open up a code editor and create a file, e.g. `cropping2d.py`. Then, the first s
 - The `PyPlot` API from Matplotlib, for generating some plots.
 - Finally, `Numpy`, for number processing.
 
-```
+```python
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Cropping2D
 from tensorflow.keras.datasets import mnist
@@ -113,7 +113,7 @@ import numpy as np
 
 Next, it's time to load the MNIST dataset and select a sample:
 
-```
+```python
 # Load MNIST data
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 input_image_shape = (28, 28, 1)
@@ -126,7 +126,7 @@ Here, we use `load_data()` to load the full dataset. However, we only use one sa
 
 Subsequently, we can specify the model architecture... _which is pretty simple:_
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Cropping2D(cropping=((5, 5), (5, 5)), input_shape=input_image_shape))
@@ -143,7 +143,7 @@ By specifying the `input_shape` in the `model.add` section, the model automatica
 
 Hence, we can continue straight away with generating a 'prediction' - i.e. feeding the `input_image` to the `model` through `model.predict`. Do note that our model expects an array of inputs, and thus we must wrap it with a list:
 
-```
+```python
 # Perform actual cropping
 model_inputs = np.array([input_image])
 outputs_cropped = model.predict(model_inputs)
@@ -151,14 +151,14 @@ outputs_cropped = model.predict(model_inputs)
 
 As the model predicts for a list, the outputs are also a list, and we need to take the first element:
 
-```
+```python
 # Get output
 outputs_cropped = outputs_cropped[0]
 ```
 
 Finally, we can visualize the input and output together with Matplotlib:
 
-```
+```python
 # Visualize input and output
 fig, axes = plt.subplots(1, 2)
 axes[0].imshow(input_image[:, :, 0]) 
@@ -204,7 +204,7 @@ Indeed, the blank box around the digits has been removed! 😎
 
 Should you wish to obtain the full code for this simple application of Keras `Cropping2D` layers, here you go:
 
-```
+```python
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Cropping2D
 from tensorflow.keras.datasets import mnist
@@ -255,7 +255,7 @@ Let's take a look at some code! 😎 Open up a code editor, create a new file (e
 
 Firstly, we'll define the imports for our model:
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
@@ -274,7 +274,7 @@ We import `tensorflow`, as we'll need it later to specify e.g. the [loss functio
 
 Now that our imports are defined, we can set the configuration options for the model:
 
-```
+```python
 # Model configuration
 img_width, img_height = 28, 28
 batch_size = 250
@@ -292,14 +292,14 @@ Finally, 20% of the training data is used for validation purposes (i.e. validati
 
 When the model configuration options are set, we can load the MNIST dataset. We do so by calling the `load_data()` definition that is present within the [Keras datasets module](https://www.machinecurve.com/index.php/2019/12/31/exploring-the-keras-datasets/):
 
-```
+```python
 # Load MNIST dataset
 (input_train, target_train), (input_test, target_test) = mnist.load_data()
 ```
 
 The first subsequent activity is reshaping the data into the correct format, so that it can be consumed by the neural network.
 
-```
+```python
 # Reshape data
 input_train = input_train.reshape(input_train.shape[0], img_width, img_height, 1)
 input_test = input_test.reshape(input_test.shape[0], img_width, img_height, 1)
@@ -308,7 +308,7 @@ input_shape = (img_width, img_height, 1)
 
 We subsequently cast the numbers into `float32` type. This makes learning more [precise](https://www.machinecurve.com/index.php/2020/09/16/tensorflow-model-optimization-an-introduction-to-quantization/#float32-in-your-ml-model-why-its-great):
 
-```
+```python
 # Parse numbers as floats
 input_train = input_train.astype('float32')
 input_test = input_test.astype('float32')
@@ -316,7 +316,7 @@ input_test = input_test.astype('float32')
 
 The next step is to divide the data points by 255 in order to normalize the data into the \[latex\]\[0, 1\]\[/latex\] range:
 
-```
+```python
 # Normalize data
 input_train = input_train / 255
 input_test = input_test / 255
@@ -324,7 +324,7 @@ input_test = input_test / 255
 
 The final step that is left is to convert the targets into categorical format through one-hot encoding, so that [categorical crossentropy](https://www.machinecurve.com/index.php/2019/10/22/how-to-use-binary-categorical-crossentropy-with-keras/) can be used:
 
-```
+```python
 # Convert target vectors to categorical targets
 target_train = tensorflow.keras.utils.to_categorical(target_train, no_classes)
 target_test = tensorflow.keras.utils.to_categorical(target_test, no_classes)
@@ -334,7 +334,7 @@ target_test = tensorflow.keras.utils.to_categorical(target_test, no_classes)
 
 The next step now that we have prepared the data for use in our neural network is to specify the actual _architecture_... i.e., the skeleton of your model:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Cropping2D(cropping=((5, 5), (5, 5)), input_shape=input_shape))
@@ -364,7 +364,7 @@ It works as follows:
 
 The next step is model compilation, or "configuring" the model skeleton. For this, we use [categorical crossentropy loss](https://www.machinecurve.com/index.php/2019/10/22/how-to-use-binary-categorical-crossentropy-with-keras/) and the [Adam optimizer](https://www.machinecurve.com/index.php/2019/11/03/extensions-to-gradient-descent-from-momentum-to-adabound/#adam). Accuracy is added as a more intuitive metric.
 
-```
+```python
 # Compile the model
 model.compile(loss=tensorflow.keras.losses.categorical_crossentropy,
               optimizer=tensorflow.keras.optimizers.Adam(),
@@ -373,7 +373,7 @@ model.compile(loss=tensorflow.keras.losses.categorical_crossentropy,
 
 Next, we `fit` the data to the model - and assign the output to the `history` object. With this object, it will be possible to [visualize e.g. the history of the training process](https://www.machinecurve.com/index.php/2019/10/08/how-to-visualize-the-training-process-in-keras/). Here, we also _actually_ set the configuration options that we set before.
 
-```
+```python
 # Fit data to model
 history = model.fit(input_train, target_train,
             batch_size=batch_size,
@@ -386,7 +386,7 @@ history = model.fit(input_train, target_train,
 
 Finally, we can generate some evaluation metrics based on the test set:
 
-```
+```python
 # Generate generalization metrics
 score = model.evaluate(input_test, target_test, verbose=0)
 print(f'Test loss: {score[0]} / Test accuracy: {score[1]}')
@@ -416,7 +416,7 @@ Even though the model does not show better results, we at least found out about 
 
 Should you wish to obtain the full model code instead? That's possible :) Here you go:
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
@@ -487,7 +487,7 @@ print(f'Test loss: {score[0]} / Test accuracy: {score[1]}')
 
 Cropping does not necessarily have to take place at the level of input data only. Rather, you can also apply it at the level of the _feature maps_, i.e. the features extracted by the convolutional layers. This is demonstrated here:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Cropping2D(cropping=((5, 5), (5, 5)), input_shape=input_shape))

@@ -1,10 +1,10 @@
 ---
 title: "Greedy layer-wise training of deep networks, a TensorFlow/Keras example"
 date: "2022-01-09"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "greedy-layer-wise-training"
   - "keras"
@@ -73,7 +73,7 @@ First of all, you'll need a few imports. Obviously, you'll import `tensorflow`. 
 
 Do note that in the case of images, it would be best to create a [Convolutional Neural Network](https://www.machinecurve.com/index.php/2021/07/08/convolutional-neural-networks-with-pytorch/). Instead, for the sake of simplicity, we will be [creating an MLP](https://www.machinecurve.com/index.php/2019/07/27/how-to-create-a-basic-mlp-classifier-with-the-keras-sequential-api/) instead.
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.models import Sequential
@@ -86,7 +86,7 @@ Now that you have specified the imports, it's time to start writing some Python 
 
 The first one we create is `get_global_configuration`. This definition will return the overall configuration for the training process. In today's model, that will only be the number of layers to add greedily - in other words, we'll be training 10 times, expanding the layers after every run.
 
-```
+```python
 def get_global_configuration():
     """ Retrieve configuration of the training process. """
     num_layers_to_add = 10
@@ -97,7 +97,7 @@ def get_global_configuration():
 
 Then, we add the model configuration definition - `get_model_configuration`. It has the model-specific elements, such as image size, number of classes present in the dataset, and so forth. These all speak for themselves if you have worked with deep learning models before. If not, [take a look here](https://www.machinecurve.com/index.php/2019/07/27/how-to-create-a-basic-mlp-classifier-with-the-keras-sequential-api/).
 
-```
+```python
 def get_model_configuration():
     """ Retrieve configuration for the model. """
     img_width, img_height = 32, 32
@@ -121,7 +121,7 @@ Next up is a definition for retrieving the dataset, after it has been preprocess
 - Converting target vectors (targets here are simple integers) into [categorical targets](https://www.machinecurve.com/index.php/2020/11/24/one-hot-encoding-for-machine-learning-with-tensorflow-and-keras/) by means of one-hot encoding.
 - Finally, returning all the data elements!
 
-```
+```python
 def get_dataset():
     """ Load and convert dataset into inputs and targets """
     # Load relevant model configuration
@@ -130,7 +130,7 @@ def get_dataset():
     # Load cifar10 dataset
     (input_train, target_train), (input_test, target_test) = cifar10.load_data()
 
-    # Reshape data 
+    # Reshape data
     input_train = input_train.reshape(input_train.shape[0], img_width, img_height, 3)
     input_test = input_test.reshape(input_test.shape[0], img_width, img_height, 3)
     input_shape = (img_width, img_height, 3) 
@@ -161,7 +161,7 @@ Then, you create a simple Keras `model` using the `Sequential` API. The first th
 
 Finally, you return the base model.
 
-```
+```python
 def create_base_model():
     """ Create a base model: one Dense layer. """
     # Retrieve relevant model configuration
@@ -190,7 +190,7 @@ In other words, we'll need the existing `model` as input, and add a new layer. H
 - Then, you remove the output layer, and add the new, untrained layer.
 - Finally, you re-add the trained (and trainable) output layer and return the model.
 
-```
+```python
 def add_extra_layer(model):
     """ Add an extra Dense layer to the model. """
     # Define the layer that must be added
@@ -223,7 +223,7 @@ This involves multiple steps:
 - Evaluating your model with your testing data, and writing evaluation results to the terminal.
 - Returning the trained `model`, so that a layer can be added and a new training process can start.
 
-```
+```python
 def train_model(model, data):
     """ Compile and train a model. """
     # Retrieve relevant model configuration
@@ -257,7 +257,7 @@ Then, you load the process configuration, and create a loop that iterates for as
 
 In each iteration, you train and evaluate the current model (the base model in the first loop; the base model + (N-1) layers in each subsequent Nth loop) and add an extra layer.
 
-```
+```python
 def training_process():
     """ Run the training process. """
     # Create the base model
@@ -275,7 +275,7 @@ def training_process():
 
 Then, you instruct the Python interpreter to start the training process when your Python script starts:
 
-```
+```python
 if __name__ == "__main__":
     training_process()
 ```
@@ -286,7 +286,7 @@ Now, everything should run! :)
 
 Here's the full model code for when you want to get started immediately:
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.models import Sequential
@@ -319,7 +319,7 @@ def get_dataset():
     # Load cifar10 dataset
     (input_train, target_train), (input_test, target_test) = cifar10.load_data()
 
-    # Reshape data 
+    # Reshape data
     input_train = input_train.reshape(input_train.shape[0], img_width, img_height, 3)
     input_test = input_test.reshape(input_test.shape[0], img_width, img_height, 3)
     input_shape = (img_width, img_height, 3) 
@@ -420,7 +420,7 @@ if __name__ == "__main__":
 
 When I ran the code, these are the results that were written to my screen:
 
-```
+```shell
 Test loss: 1.4798256158828735 / Test accuracy: 0.4846999943256378
 Test loss: 1.3947865962982178 / Test accuracy: 0.513700008392334
 Test loss: 1.4665762186050415 / Test accuracy: 0.5048999786376953

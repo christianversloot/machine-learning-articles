@@ -1,9 +1,9 @@
 ---
 title: "Getting started with PyTorch"
 date: "2021-01-13"
-categories: 
+categories:
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "getting-started"
   - "introduction"
@@ -41,7 +41,7 @@ If you want to get started with PyTorch, **follow these 3 starting steps** to ge
 2. Make sure that you understand what a `LightningModule` is, how it works and why it improves the model creation process over classic PyTorch.
 3. Copy and paste the following example code into your editor and run it with Python.
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -106,7 +106,7 @@ Native PyTorch models can be a bit disorganized, to say it nicely. They are esse
 With **[PyTorch Lightning](https://www.pytorchlightning.ai/)**, this is no longer the case. It is a layer on top of native [PyTorch](https://pytorch.org/) and is hence compatible with all your original code - which can in fact be re-organized into Lightning code, to improve reusability. This is what makes Lightning different:
 
 > Lightning makes coding complex networks simple.
-> 
+>
 > PyTorch Lightning (2021)
 
 ### Benefits of PyTorch Lightning over classic PyTorch
@@ -130,7 +130,7 @@ The _first benefit_ of using PyTorch Lightning is that **you'll have the same, P
 - We specify an `optimizer`; the [Adam](https://www.machinecurve.com/index.php/2019/11/03/extensions-to-gradient-descent-from-momentum-to-adabound/) one in this case.
 - Finally, we specify a custom training loop.
 
-```
+```python
 # models
 encoder = nn.Sequential(nn.Linear(28 * 28, 64), nn.ReLU(), nn.Linear(64, 3))
 decoder = nn.Sequential(
@@ -185,7 +185,7 @@ In classic PyTorch, in the training loop, you have to write a lot of custom code
 With PyTorch Lightning, this is no longer necessary either. The second benefit is that it **comes with a** **`Trainer` object** **that automates all the steps mentioned above, without forbidding control.**
 
 > Once you’ve organized your PyTorch code into a LightningModule, the Trainer automates everything else.
-> 
+>
 > PyTorch Lightning (n.d.)
 
 Yes: the `Trainer` automates training mode and gradient flow, automates the training loop, performs optimization, and allows you to tell PyTorch easily on what devices it must run and with what strategy.
@@ -200,7 +200,7 @@ In order to understand what this means, you must realize that data processing on
 
 An example from the PyTorch docs is provided below (PyTorch, n.d.). In this example, three Tensors are created and possibly manipulated. The first Tensor is directly allocated to the first CUDA available device, i.e. a GPU. The second is first created on CPU and then transferred to the same GPU with `.cuda()`. The third is also first created on CPU and then transferred to a GPU, but then an explicitly defined one, using `.to(device=cuda)`.
 
-```
+```python
 cuda = torch.device('cuda')     # Default CUDA device
 cuda0 = torch.device('cuda:0')
 cuda2 = torch.device('cuda:2')  # GPU 2 (these are 0-indexed)
@@ -229,7 +229,7 @@ The fourth and final key benefit of PyTorch Lightning is that **Lightning takes 
 
 Indeed, adding parallelism is as simple as specifying e.g. the GPUs that you want to train your model on in the `Trainer` object (PyTorch Lightning, n.d.):
 
-```
+```python
 Trainer(gpus=[0, 1])
 ```
 
@@ -257,7 +257,7 @@ That's why we'll use Lightning in our PyTorch oriented tutorials as the library 
 Okay, so now we know why PyTorch Lightning improves PyTorch and that it can be used for constructing PyTorch models. Let's now take a look at the _what_, i.e. the `LightningModule` with which we'll work during the construction of our PyTorch models.
 
 > A `LightningModule` is a [`torch.nn.Module`](https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module) but with added functionality
-> 
+>
 > PyTorch Lightning (n.d.)
 
 Here, the `torch.nn.Module` is the base class for all PyTorch based neural networks. In other words, a `LightningModule` is a layer on top of the basic way in which neural networks are constructed with PyTorch. It allows us to achieve the benefits that were outlined above, and in particular the benefit related to the organization of your machine learning model.
@@ -290,7 +290,7 @@ That's all you need to get started with PyTorch Lightning!
 
 If you are still missing packages after installation, also try the following:
 
-```
+```bash
 conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
 ```
 
@@ -324,7 +324,7 @@ Once this is completed, we can create the `LightningModule`. In fact, we create 
 - Also initialize the super class i.e. the instantiation of `pl.LightningModule` using `super().__init__()`.
 - Define the neural network: using `nn.Sequential`, we can add our neural layers on top of each other. In this network, we're going to use three `Linear` layers that have ReLU activation functions and one final `Linear` layer.
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -354,7 +354,7 @@ The second step is to define the `forward` step that is used during inference. I
 
 In our case, that is a pass of the input sample through our layers, and the output is returned.
 
-```
+```python
   def forward(self, x):
     return self.layers(x)
 ```
@@ -365,7 +365,7 @@ The third step is to define the training step, by means of the `training_step` d
 
 We first decompose the batch into `x` and `y` values, which contain the inputs and targets, respectively.
 
-```
+```python
   def training_step(self, batch, batch_idx):
     x, y = batch
     x = x.view(x.size(0), -1)
@@ -379,7 +379,7 @@ We first decompose the batch into `x` and `y` values, which contain the inputs a
 
 We can then configure the optimizer. In this case, we use the Adam optimizer - which is a very common optimizer - and return it in our `configure_optimizers` definition. We set the default learning rate to \[latex\]10^-4\[/latex\] and let it use the model's parameters.
 
-```
+```python
   def configure_optimizers(self):
     optimizer = torch.optim.Adam(self.parameters(), lr=1e-4)
     return optimizer
@@ -397,7 +397,7 @@ We wrap all these aspects in `if __name__ == '__main__':`:
 - We initialize the PyTorch Lightning `Trainer` and instruct it to automatically scale batch size based on the hardware characteristics of our system. In addition, we instruct it to use a GPU device for training. If you don't have a dedicated GPU, you might use the CPU for training instead. In that case, simply remove `gpus=1`. Finally, we set `deterministic=True` to ensure reproducibility of the model (PyTorch LIghtning, n.d.).
 - Finally, we apply `.fit(..)` and fit the `dataset` to the `neuralnetwork` by means of a `DataLoader`.
 
-```
+```python
 if __name__ == '__main__':
   dataset = MNIST(os.getcwd(), download=True, transform=transforms.ToTensor())
   neuralnetwork= MNISTNetwork()
@@ -410,7 +410,7 @@ if __name__ == '__main__':
 
 Here's the full model code, for those who want to copy it and get started immediately.
 
-```
+```python
 import os
 import torch
 from torch import nn

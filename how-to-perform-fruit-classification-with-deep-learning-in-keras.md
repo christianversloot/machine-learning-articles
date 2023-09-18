@@ -1,10 +1,10 @@
 ---
 title: "How to Perform Fruit Classification with Deep Learning in Keras"
 date: "2020-04-08"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "classifier"
   - "dataset"
   - "deep-learning"
@@ -83,7 +83,7 @@ Should you wish to generate the visualization yourself, here's the code that I u
 - Configure the number of `files_per_row` based on the number of files that you've copied (e.g., you cannot set `files_per_row = 3` if you have copied 5 files) - or copy more files.
 - Run the code!
 
-```
+```python
 # Imports
 import os
 import matplotlib.pyplot as plt
@@ -175,7 +175,7 @@ Time to create an actual machine learning model! In today's blog, we're using th
 
 As always, the first thing we do is import our dependencies. As you can see, we'll use the Sequential API, which allows us to stack each neural network layer on top of each other easily. We also import Dense, Flatten and Conv2D - [the default layers in such a network](https://www.machinecurve.com/index.php/2020/03/30/how-to-use-conv2d-with-keras/). Then, we import [sparse categorical crossentropy](https://www.machinecurve.com/index.php/2019/10/06/how-to-use-sparse-categorical-crossentropy-in-keras/) for computing [loss](https://www.machinecurve.com/index.php/2019/10/04/about-loss-and-loss-functions/), [Adam](https://www.machinecurve.com/index.php/2019/11/03/extensions-to-gradient-descent-from-momentum-to-adabound/#adam) for optimization, and an ImageDataGenerator for loading our images from folder.
 
-```
+```python
 # Imports
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D
@@ -200,7 +200,7 @@ Indeed - and you're a very diligent reader :) However, as you will see later, we
 
 For loss, as said, we'll be using [sparse categorical crossentropy](https://www.machinecurve.com/index.php/2019/10/04/about-loss-and-loss-functions/#sparse-categorical-crossentropy), which can work with integer targets. As the number of classes we're using is 10, we set `no_classes` to 10. The number of epochs (or iterations) is set to 25, which is low - very low - but is okay for education purposes. As we shall see, with 10 classes, we get some very good performance regardless. In normal settings, you would usually have thousands of epochs, though. For optimization, we use the [Adam optimizer](https://www.machinecurve.com/index.php/2019/11/03/extensions-to-gradient-descent-from-momentum-to-adabound/#adam) - which is a good default choice, and extends traditional gradient descent with local parameter updates and momentum-like optimization ([click here for more information](https://www.machinecurve.com/index.php/2019/11/03/extensions-to-gradient-descent-from-momentum-to-adabound/#adam)). Verbosity is set to 1, which means `True`, which means that all the output is displayed on screen. Normally, we set this to False, as prints slightly slow down the training process, but that's not the purpose of today's post - so we keep it on.
 
-```
+```python
 # Data configuration
 training_set_folder = './fruits-360/Training_smaller'
 test_set_folder     = './fruits-360/Test_smaller'
@@ -227,7 +227,7 @@ Now, in Keras, `ImageDataGenerators` can be configured substantially - allowing 
 
 Next, we _feed data to the data generator_. We do so with `flow_from_directory`, which allows us to load all the data from folder. We specify the folder where our training data is located, specify `save_to_dir` - which saves the intermediate samples to some directory, in `jpeg` format - as well as batch size and `class_mode` (_sparse_ because of our loss funciton). Then, `target_size` is set to `(25, 25)` - that's the resizing I just discussed!
 
-```
+```python
 # Determine shape of the data
 input_shape = (img_width, img_height, img_num_channels)
 
@@ -252,7 +252,7 @@ It's very simple: using the Sequential API, we stack four convolutional layers f
 
 Additionally, we display a [model summary](https://www.machinecurve.com/index.php/2020/04/01/how-to-generate-a-summary-of-your-keras-model/) for visualization purposes.
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv2D(16, kernel_size=(5, 5), activation='relu', input_shape=input_shape))
@@ -271,7 +271,7 @@ model.summary()
 
 As our final step, we _compile the model_ - which means instantiating it, as we had previously created the skeleton / the framework only - and _fit_ the data (by means of the generator), so that the training process is started. Note that we use the configuration options that we defined previously to configure both the instantiation and the training process.
 
-```
+```python
 # Compile the model
 model.compile(loss=loss_function,
               optimizer=optimizer,
@@ -288,7 +288,7 @@ model.fit(
 
 It's also possible to obtain the model code as a whole, if you wish to start playing around immediately. Here you go:
 
-```
+```python
 # Imports
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D

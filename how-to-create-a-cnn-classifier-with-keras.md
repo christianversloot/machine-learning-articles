@@ -1,10 +1,10 @@
 ---
 title: "How to create a CNN with TensorFlow 2.0 and Keras?"
 date: "2019-09-17"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "classifier"
   - "convolutional-neural-networks"
   - "deep-learning"
@@ -47,7 +47,7 @@ Let's go! 😎
 
 Below, you'll find a full-fledged code example for a Convolutional Neural Network based classifier created with TensorFlow and Keras. Make sure to read the article below if you want to understand the code and the concepts in full detail.
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
@@ -65,7 +65,7 @@ verbosity = 1
 # Load MNIST dataset
 (input_train, target_train), (input_test, target_test) = mnist.load_data()
 
-# Reshape data 
+# Reshape data
 input_train = input_train.reshape(input_train.shape[0], img_width, img_height, 1)
 input_test = input_test.reshape(input_test.shape[0], img_width, img_height, 1)
 input_shape = (img_width, img_height, 1) 
@@ -201,7 +201,7 @@ The first step of creating the machine learning model is creating a folder, e.g.
 
 In this file, we'll first import the dependencies that we require later on:
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
@@ -225,7 +225,7 @@ With Dropout, we're essentially breaking tiny bits of the magnifier directly in 
 
 We'll next configure the CNN itself:
 
-```
+```python
 # Model configuration
 img_width, img_height = 28, 28
 batch_size = 250
@@ -241,7 +241,7 @@ Since the MNIST images are 28x28 pixels, we define `img_width` and `img_height` 
 
 We next load and prepare the MNIST data. The code looks somewhat complex, but it is actually really simple:
 
-```
+```python
 # Reshape data
 input_train = input_train.reshape(input_train.shape[0], img_width, img_height, 1)
 input_test = input_test.reshape(input_test.shape[0], img_width, img_height, 1)
@@ -266,7 +266,7 @@ Finally, we convert the numbers to greyscale by dividing all (numeric!) image sa
 
 We next convert our target vectors, which are integers (`0-9`) into _categorical data_:
 
-```
+```python
 # Convert target vectors to categorical targets
 target_train = tensorflow.keras.utils.to_categorical(target_train, no_classes)
 target_test = tensorflow.keras.utils.to_categorical(target_test, no_classes)
@@ -274,11 +274,11 @@ target_test = tensorflow.keras.utils.to_categorical(target_test, no_classes)
 
 In a different post explaining [how to create MLPs with Keras](https://machinecurve.com/index.php/2019/07/27/how-to-create-a-basic-mlp-classifier-with-the-keras-sequential-api/), I explained the need for categorical data as being dependent on the loss function (the means of computing the difference between actual targets and generated predictions during passing the data forward):
 
->   
+>
 > For those problems, we need a loss function that is called _categorical crossentropy._ In plain English, I always compare it with a purple elephant 🐘.  
->   
+>
 > Suppose that the relationships in the real world (which are captured by your training date) together compose a purple elephant (a.k.a. distribution). We next train a machine learning model that attempts to be as accurate as the original data; hence attempting to classify data as that purple elephant. How well the model is capable of doing that is what is called a _loss_, and the loss function allows one to compare one distribution (elephant) with the other (hopefully the same elephant). Cross entropy allows one to compare those. We can't use the binary variant (it only compares two elephants), but need the _categorical_ one (which can compare multiple elephants). This however requires us to 'lock' the set of elephants first, to avoid that another one is added somehow. This is called _categorical data_: it belongs to a fixed set of categories (Chollet, 2017).
-> 
+>
 > [How to create a basic MLP classifier with the Keras Sequential API](https://machinecurve.com/index.php/2019/07/27/how-to-create-a-basic-mlp-classifier-with-the-keras-sequential-api/)
 
 I suggest to click the link above if you wish to understand `to_categorical` at a deeper level. We'll need it again here, since we have 10 categories of data - the numbers 0 to 10, and don't ever include an 11th category in this scenario. Hence, we apply it in our model.
@@ -287,7 +287,7 @@ I suggest to click the link above if you wish to understand `to_categorical` at 
 
 We then create the architecture of the model:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
@@ -319,7 +319,7 @@ Note that the number of output neurons is `num_classes` for the final layer for 
 
 We then compile the model and start the training by _fitting the data_:
 
-```
+```python
 # Compile the model
 model.compile(loss=tensorflow.keras.losses.categorical_crossentropy,
               optimizer=tensorflow.keras.optimizers.Adam(),
@@ -348,7 +348,7 @@ And then let's see what happens!
 
 ...except that you'll need to add metrics for _testing_ as well. After training with the training and validation data, which essentially tells you something about the model's _predictive performance_, you also wish to test it for _generalization_ - or, whether it works well when data is used that the model has [never seen before](https://www.machinecurve.com/index.php/2020/11/03/how-to-evaluate-a-keras-model-with-model-evaluate/). That's why you created the train / test split in the first place. Now is the time to add a test, or an evaluation step, to the model - which executes just after the training process ends:
 
-```
+```python
 # Generate generalization metrics
 score = model.evaluate(input_test, target_test, verbose=0)
 print(f'Test loss: {score[0]} / Test accuracy: {score[1]}')
@@ -358,7 +358,7 @@ print(f'Test loss: {score[0]} / Test accuracy: {score[1]}')
 
 In the process, altogether you've created this:
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
@@ -376,7 +376,7 @@ verbosity = 1
 # Load MNIST dataset
 (input_train, target_train), (input_test, target_test) = mnist.load_data()
 
-# Reshape data 
+# Reshape data
 input_train = input_train.reshape(input_train.shape[0], img_width, img_height, 1)
 input_test = input_test.reshape(input_test.shape[0], img_width, img_height, 1)
 input_shape = (img_width, img_height, 1) 
@@ -434,7 +434,7 @@ Then, navigate to the folder with e.g. `cd /path/to/folder` and execute your mod
 
 With the training process configured above, this is what you'll likely see:
 
-```
+```shell
 Epoch 1/25
 48000/48000 [==============================] - 7s 145us/step - loss: 0.3609 - acc: 0.8909 - val_loss: 0.1040 - val_acc: 0.9711
 Epoch 2/25

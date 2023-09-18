@@ -1,11 +1,11 @@
 ---
 title: "How to save and load a PyTorch model?"
 date: "2021-02-03"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "load-model"
   - "machine-learning"
@@ -32,7 +32,7 @@ Let's take a look! 😎
 
 Suppose that you have created a PyTorch model, say a simple Multilayer Perceptron, like this.
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -70,7 +70,7 @@ In other words, a well-performing model that must be saved.
 
 And saving a deep learning model with PyTorch is actually really easy - the only thing that you have to do is call `torch.save`, like this:
 
-```
+```python
 # Saving the model
 save_path = './mlp.pth'
 torch.save(mlp.state_dict(), save_path)
@@ -95,7 +95,7 @@ Loading the model is however really easy and involves the following steps:
 3. Setting the state of your model to the state just loaded.
 4. Evaluating the model.
 
-```
+```python
 # Loading the model
 mlp = MLP()
 mlp.load_state_dict(torch.load(save_path))

@@ -45,7 +45,7 @@ Let's get to work! 😎
 
 This quick code example allows you to start using Principal Component Analysis with Python immediately. If you want to understand the concepts and code in more detail, make sure to read the rest of this article :)
 
-```
+```python
 from sklearn import datasets
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
@@ -193,7 +193,7 @@ Another important note is that for step (1), decomposing your dataset into vecto
 
 Suppose that we generate a dataset based on two overlapping blobs which we consider to be part of just one dataset:
 
-```
+```python
 from sklearn.datasets import make_blobs
 import matplotlib.pyplot as plt
 import numpy as np
@@ -252,7 +252,7 @@ For the example above, we can see that the eigenvalue for the downward-oriented 
 
 In fact, the total (relative) contribution of the eigenvectors to the spread for our example is as follows:
 
-```
+```python
 [0.76318124 0.23681876]
 ```
 
@@ -320,7 +320,7 @@ If we want to show how PCA works, we must use a dataset where the number of dime
 
 This code can be used for visualizing two dimensions every time:
 
-```
+```python
 from sklearn import datasets
 import matplotlib.pyplot as plt
 import numpy as np
@@ -376,7 +376,7 @@ This yields the following plots, if we play with the dimensions:
 
 The images illustrate that two of the Iris flowers cannot be linearly separated, but that this group _can_ be separated from the other Iris flower. Printing the shape yields the following:
 
-```
+```python
 (150, 4)
 (150,)
 ```
@@ -387,7 +387,7 @@ The images illustrate that two of the Iris flowers cannot be linearly separated,
 
 We first add Python code for [standardization](https://www.machinecurve.com/index.php/2020/11/19/how-to-normalize-or-standardize-a-dataset-in-python/), which brings our data to \[latex\]\\mu = 0.0, \\sigma = 1.0\[/latex\] by performing \[latex\]x = \\frac{x - \\mu}{\\sigma}\[/latex\] for each dimension (MachineCurve, 2020).
 
-```
+```python
 # Perform standardization
 for dim in range(0, X.shape[1]):
   print(f'Old mean/std for dim={dim}: {np.average(X[:, dim])}/{np.std(X[:, dim])}')
@@ -451,7 +451,7 @@ By consequence, our covariance matrix is a symmetrical and square, \[latex\]n \\
 
 We can compute the covariance matrix by generating a \[latex\]n \\times n\[/latex\] matrix and then filling it by iterating over its rows and columns, setting the value to the average covariance for each respective number from both variables:
 
-```
+```python
 # Compute covariance matrix
 cov_matrix = np.empty((X.shape[1], X.shape[1])) # 4 x 4 matrix
 for row in range(0, X.shape[1]):
@@ -462,7 +462,7 @@ for row in range(0, X.shape[1]):
 
 If we compare our self-computed covariance matrix with one generated with NumPy's `np.cov`, we can see the similarities:
 
-```
+```python
 # Compare the matrices
 print('Self-computed:')
 print(cov_matrix)
@@ -495,7 +495,7 @@ Here, \[latex\]\\mathbf V\[/latex\] is a matrix of _eigenvectors_ where each col
 
 We can use NumPy's `numpy.linalg.eig` to compute the eigenvectors for this square array:
 
-```
+```python
 # Compute the eigenpairs
 eig_vals, eig_vect = np.linalg.eig(cov_matrix)
 print(eig_vect)
@@ -504,7 +504,7 @@ print(eig_vals)
 
 This yields the following:
 
-```
+```python
 [[ 0.52103086 -0.37921152 -0.71988993  0.25784482]
  [-0.27132907 -0.92251432  0.24581197 -0.12216523]
  [ 0.57953987 -0.02547068  0.14583347 -0.80138466]
@@ -516,14 +516,14 @@ This yields the following:
 
 If we compute how much each principal dimension contributes to variance explanation, we get the following:
 
-```
+```python
 # Compute variance contribution of each vector
 contrib_func = np.vectorize(lambda x: x / np.sum(eig_vals))
 var_contrib = contrib_func(eig_vals)
 print(var_contrib)
 print(np.sum(var_contrib))
-> [0.72978232 0.2279609  0.03606625 0.00619053]
-> 1.0
+# > [0.72978232 0.2279609  0.03606625 0.00619053]
+# > 1.0
 ```
 
 In other words, the first principal dimension contributes for 73%; the second one for 23%. If we therefore reduce the dimensionality to two, we get to keep approximately \[latex\]73 + 23 = 96%\[/latex\] of the variance explanation.
@@ -534,7 +534,7 @@ Even though the eigenpairs above have already been sorted, it's a thing we must 
 
 Sorting the eigenpairs happens by eigenvalue: the eigenvalues must be sorted in a descending way; the corresponding eigenvectors must therefore also be sorted equally.
 
-```
+```python
 # Sort eigenpairs
 eigenpairs = [(np.abs(eig_vals[x]), eig_vect[:,x]) for x in range(0, len(eig_vals))]
 eig_vals = [eigenpairs[x][0] for x in range(0, len(eigenpairs))]
@@ -544,7 +544,7 @@ print(eig_vals)
 
 This yields sorted eigenpairs, as we can see from the eigenvalues:
 
-```
+```python
 [2.919129264835876, 0.9118436180017795, 0.14426499504958146, 0.024762122112763244]
 ```
 
@@ -556,7 +556,7 @@ Above, we saw that 96% of the variance can be explained by only two of the dimen
 
 The final thing we must do is generate the **projection matrix** and **project our original data onto the (two) principal components** (Raschka, 2015):
 
-```
+```python
 # Build the projection matrix
 proj_matrix = np.hstack((eig_vect[0].reshape(4,1), eig_vect[1].reshape(4,1)))
 print(proj_matrix)
@@ -569,7 +569,7 @@ X_proj = X.dot(proj_matrix)
 
 If we now plot the projected data, we get the following plot:
 
-```
+```python
 # Make plot of projection
 plt.scatter(X_proj[:, 0], X_proj[:, 1], c=colors)
 plt.title(f'Visualizing the principal components')
@@ -594,7 +594,7 @@ Note that here as well, we'll use a vanilla / native Python approach to performi
 
 In the PCA-SVD approach, we also use the Iris dataset as an example. Using the code below, we'll load the Iris data and perform [standardization](https://www.machinecurve.com/index.php/2020/11/19/how-to-normalize-or-standardize-a-dataset-in-python/), which means that your mean will become \[latex\]\\mu = 0.0\[/latex\] and your standard deviation will become \[latex\]\\sigma = 1.0\[/latex\].
 
-```
+```python
 from sklearn import datasets
 import matplotlib.pyplot as plt
 import numpy as np
@@ -631,7 +631,7 @@ In the EIG variant of PCA, we computed the covariance matrix of our dataset, and
 
 In the SVD variant, we compute the **singular values** of the **data matrix** instead. It is a generalization of the Eigenvector Decomposition, meaning that it can also be used on non-square and non-symmetric matrices (which in the EIG case required us to use the covariance matrix, which satisfies both criteria).
 
-```
+```python
 # Compute SVD
 u, s, vh = np.linalg.svd(X.T, full_matrices=True)
 ```
@@ -648,7 +648,7 @@ Here, the columns of the unitary arrays give results equal to the eigenvectors o
 
 In other words, by performing SVD on the data matrix, we can create the same results as with the PCA-EIG approach. With that approach, the eigenvectors of the covariance matrix were as follows:
 
-```
+```python
 [[ 0.52103086 -0.37921152 -0.71988993  0.25784482]
  [-0.27132907 -0.92251432  0.24581197 -0.12216523]
  [ 0.57953987 -0.02547068  0.14583347 -0.80138466]
@@ -657,7 +657,7 @@ In other words, by performing SVD on the data matrix, we can create the same res
 
 Now compare them to the output of `vh`:
 
-```
+```python
 print(vh)
 
 > [[ 0.52106591 -0.26934744  0.5804131   0.56485654]
@@ -680,7 +680,7 @@ Here, too, we can simply select \[latex\]n\[/latex\] components. As with the PCA
 
 We can now easily build the projection matrix as we did in the PCA-EIG case, project our data onto the principal components, and make a plot of the projection.
 
-```
+```python
 # Build the projection matrix
 proj_matrix = np.hstack((vh[0].reshape(4,1), vh[1].reshape(4,1)))
 print(proj_matrix)
@@ -717,7 +717,7 @@ To be more precise, Scikit-learn utilizes PCA-SVD for computing the Principal Co
 
 Here, too, we start with the Iris dataset:
 
-```
+```python
 from sklearn import datasets
 import matplotlib.pyplot as plt
 import numpy as np
@@ -734,7 +734,7 @@ y = iris.target
 
 As we could read in [another article](https://www.machinecurve.com/index.php/2020/11/19/how-to-normalize-or-standardize-a-dataset-in-python/), Scikit-learn provides standardization out of the box through the `StandardScaler`, so we also implement it here:
 
-```
+```python
 # Standardize
 scaler = StandardScaler()
 scaler.fit(X)
@@ -745,7 +745,7 @@ X = scaler.transform(X)
 
 We can then easily implement PCA as follows. First, we initialize `sklearn.decomposition.PCA` and instruct it to extract two principal components (just like we did before) based on the Iris dataset (recall that `X = iris.data`):
 
-```
+```python
 # PCA
 pca = PCA(n_components=2)
 pca.fit(X)
@@ -753,12 +753,12 @@ pca.fit(X)
 
 We can then already print information about the analysis:
 
-```
+```python
 print(pca.explained_variance_ratio_)
 print(pca.components_)
 ```
 
-```
+```shell
 > [0.72962445 0.22850762]
 > [[ 0.52106591 -0.26934744  0.5804131   0.56485654]
 >  [ 0.37741762  0.92329566  0.02449161  0.06694199]]
@@ -768,13 +768,13 @@ We can see that our explained variance ratio is equal to the ones we found manua
 
 We can now easily project the data onto the principal components with `.transform(X)`:
 
-```
+```python
 X = pca.transform(X)
 ```
 
 Visualizing the data...
 
-```
+```python
 # Color definitions
 colors = {
   0: '#b40426',
@@ -801,7 +801,7 @@ Voila, precisely as we have seen before!
 
 The full code for performing the PCA with Scikit-learn on the Iris dataset is as follows:
 
-```
+```python
 from sklearn import datasets
 import matplotlib.pyplot as plt
 import numpy as np

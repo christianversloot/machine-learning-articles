@@ -1,11 +1,11 @@
 ---
 title: "How to use LiSHT activation function with TensorFlow 2 based Keras?"
 date: "2019-11-17"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "activation-function"
   - "deep-learning"
   - "keras"
@@ -43,7 +43,7 @@ Let's go! 😄
 
 It can be the case that you want a quick and full example where the **LiSHT activation function is applied**. Below, you can see a fully working example for TensorFlow 2 based Keras. If you want to understand LiSHT in mored detail, or want to find out how all the code works, then make sure to read the rest of this tutorial as well! 🚀
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
@@ -153,7 +153,7 @@ In this blog post, we'll focus on how to implement LiSHT with Keras instead. Ker
 
 For example, for LiSHT:
 
-```
+```python
 # LiSHT
 def LiSHT(x):
   return x * K.tanh(x)
@@ -171,7 +171,7 @@ The fix is simple - replace your Numpy based tanh (i.e. `np.tanh(x)`) with the K
 
 Subsequently, you can use the created def in arbitrary Keras layers - e.g. with the Sequential API:
 
-```
+```python
 model.add(Dense(256, activation=LiSHT))
 ```
 
@@ -208,7 +208,7 @@ Now that we know what we need, we can actually create our model. Open up your fi
 
 We first define our imports:
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
@@ -226,7 +226,7 @@ Finally, you import Numpy and Matplotlib - as said, for data processing and visu
 
 The next thing we do is defining LiSHT in terms of a Python definition:
 
-```
+```python
 # LiSHT
 def LiSHT(x):
   return x * tensorflow.math.tanh(x)
@@ -238,7 +238,7 @@ For doing so, we use `tensorflow.math` based `tanh` because it can run with Tens
 
 Subsequently, we add variables for model configuration:
 
-```
+```python
 # Model configuration
 img_width, img_height = 28, 28
 batch_size = 250
@@ -258,7 +258,7 @@ We use 20% of our training data for validation purposes and set model verbosity 
 
 We next import our data. As said before, this is essentially a one-line statement due to the way the MNIST dataset is integrated in TensorFlow / the Keras library:
 
-```
+```python
 # Load MNIST dataset
 (input_train, target_train), (input_test, target_test) = mnist.load_data()
 ```
@@ -267,7 +267,7 @@ When running, it downloads the dataset automatically, and if you downloaded it b
 
 Next, we add code for data processing and preparation:
 
-```
+```python
 # Reshape data
 input_train = input_train.reshape(input_train.shape[0], img_width, img_height, 1)
 input_test = input_test.reshape(input_test.shape[0], img_width, img_height, 1)
@@ -297,7 +297,7 @@ This code essentially:
 
 Next, we specify the architecture of our model. We use two convolutional blocks with max pooling and dropout, as well as two densely-connected layers. Please [refer to this post](https://www.machinecurve.com/index.php/2019/09/17/how-to-create-a-cnn-classifier-with-keras/) if you wish to understand these blocks in more detail. Here's the code:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3), activation=LiSHT, input_shape=input_shape))
@@ -321,7 +321,7 @@ Next, we compile our model with the hyperparameters set in the _model configurat
 
 We store the training history in the `history` object, for [visualizing model performance](https://www.machinecurve.com/index.php/2019/10/08/how-to-visualize-the-training-process-in-keras/) over time.
 
-```
+```python
 # Compile the model
 model.compile(loss=tensorflow.keras.losses.categorical_crossentropy,
               optimizer=tensorflow.keras.optimizers.Adam(),
@@ -339,7 +339,7 @@ history = model.fit(input_train, target_train,
 
 We next add code for testing the _generalization power_ of our model and for visualizing the model history:
 
-```
+```python
 # Generate generalization metrics
 score = model.evaluate(input_test, target_test, verbose=0)
 print(f'Test loss: {score[0]} / Test accuracy: {score[1]}')
@@ -367,7 +367,7 @@ plt.show()
 
 ...and finally arrive at the full model as specified as follows:
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential

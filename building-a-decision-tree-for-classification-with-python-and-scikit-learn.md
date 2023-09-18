@@ -1,9 +1,9 @@
 ---
 title: "Building a Decision Tree for classification with Python and Scikit-learn"
 date: "2022-01-23"
-categories: 
+categories:
   - "geen-categorie"
-tags: 
+tags:
   - "decision-tree"
   - "decision-trees"
   - "machine-learning"
@@ -74,7 +74,7 @@ The first - and default - split evaluation metric available in Scikit's decision
 The metric is defined in the following way:
 
 > Gini impurity (named after Italian mathematician Corrado Gini) is a measure of how often a randomly chosen element from the set would be incorrectly labeled if it was randomly labeled according to the distribution of labels in the subset.
-> 
+>
 > Wikipedia (2004)
 
 Suppose that we...
@@ -181,7 +181,7 @@ That's very simple - although in the real world data is _key_ to success, these 
 For that reason, today, you will be using one of the datasets that comes with Scikit-learn out of the box: the **wine dataset**.
 
 > The wine dataset is a classic and very easy multi-class classification dataset.
-> 
+>
 > Scikit-learn
 
 It is a dataset with 178 samples and 13 attributes that assigns each sample to a wine variety (indeed, we're using a dataset similar to what you have read about before!). The dataset has 3 wine varieties. These are the attributes that are part of the wine dataset:
@@ -206,7 +206,7 @@ In other words, in the various dimensions of the _independent variables_, many s
 
 Now that you understand something about decision tree learning and today's dataset, let's start writing some code. Open up a Python file in your favorite IDE or create a Jupyter Notebook, and let's add some imports:
 
-```
+```python
 from sklearn.datasets import load_wine
 from sklearn import tree
 import matplotlib.pyplot as plt
@@ -220,7 +220,7 @@ In Python, it's good practice to work with _definitions_. They make code reusabl
 
 The first one that you will create is one for loading your dataset. It simply calls `load_wine(...)` and passes the `return_X_y` attribute set to `True`. This way, your dataset will be returned in two separate lists - `X` and `y`.
 
-```
+```python
 def load_dataset():
 	""" Load today's dataset. """
 	return load_wine(return_X_y=True)
@@ -230,7 +230,7 @@ def load_dataset():
 
 Next up, you will specify a definition that returns names of the features (the independent variables) and the eventual class names.
 
-```
+```python
 def feature_and_class_names():
 	""" Define feature and class names. """
 	feature_names = ["Alcohol","Malic acid","Ash","Alcalinity of ash","Magnesium","Total phenols","Flavanoids","Nonflavanoid phenols","Proanthocyanins","Color intensity","Hue","OD280/OD315 of diluted wines","Proline",]
@@ -270,7 +270,7 @@ Per the Scikit-learn documentation of the `DecisionTreeClassifier` model type th
 
 Let's now create a definition for initializing your decision tree. We choose Gini impurity, best splitting, and letting maximum depth be guided by the minimum of samples necessary for generating a split. In other words, we risk overfitting to avoid adding a lot of complexity to the tree. In practice, that wouldn't be a good
 
-```
+```python
 def init_tree():
 	""" Initialize the DecisionTreeClassifier. """
 	return tree.DecisionTreeClassifier()
@@ -278,7 +278,7 @@ def init_tree():
 
 Then, we can add a definition for training the tree:
 
-```
+```python
 def train_tree(empty_tree, X, Y):
 	""" Train the DecisionTreeClassifier. """
 	return empty_tree.fit(X, Y)
@@ -288,7 +288,7 @@ def train_tree(empty_tree, X, Y):
 
 Finally, what's left is a definition for plotting the decision tree:
 
-```
+```python
 def plot_tree(trained_tree):
 	""" Plot the DecisionTreeClassifier. """
 
@@ -307,7 +307,7 @@ Then, you merge everything together ...
 - In a definition, you load the dataset, initialize the tree, train the tree, and plot the trained tree.
 - You then call this definition when your Python script starts.
 
-```
+```python
 def decision_tree_classifier():
 	""" End-to-end training of decision tree classifier. """
 
@@ -330,7 +330,7 @@ if __name__ == '__main__':
 
 If you want to get started immediately, here is the full code example for creating a classification decision tree with Scikit-learn.
 
-```
+```python
 from sklearn.datasets import load_wine
 from sklearn import tree
 import matplotlib.pyplot as plt

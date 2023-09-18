@@ -1,10 +1,10 @@
 ---
 title: "Classifying IMDB sentiment with Keras and Embeddings, Dropout & Conv1D"
 date: "2020-03-03"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "dataset"
   - "deep-learning"
   - "imdb-dataset"
@@ -51,7 +51,7 @@ We'll begin with _sentiment_. What is it? What does it represent? Likely, you al
 Sentiment is a term that we see a lot in terms of Tweets, as much machine learning research has focused on building models with Twitter data given its enormous size. However, more generally, using the Oxford Learner's Dictionaries (n.d.), we arrive at this definition for _sentiment_:
 
 > \[countable, uncountable\] _(formal)_ a feeling or an opinion, especially one based on emotions
-> 
+>
 > Oxford Learner's Dictionaries (n.d.)
 
 We were close with our initial guess.
@@ -63,7 +63,7 @@ If you express sentiment about something, such as a movie, you express the feeli
 In the `keras.datasets` module, we find the IMDB dataset:
 
 > Dataset of 25,000 movies reviews from IMDB, labeled by sentiment (positive/negative). Reviews have been preprocessed, and each review is encoded as a [sequence](https://keras.io/preprocessing/sequence/) of word indexes (integers). For convenience, words are indexed by overall frequency in the dataset, so that for instance the integer "3" encodes the 3rd most frequent word in the data. This allows for quick filtering operations such as: "only consider the top 10,000 most common words, but eliminate the top 20 most common words".
-> 
+>
 > Keras (n.d.)
 
 When processing the reviews into [readable format](https://www.machinecurve.com/index.php/2019/12/31/exploring-the-keras-datasets/#imdb-movie-reviews-sentiment-classification), this is an example:
@@ -136,7 +136,7 @@ As you will see later in this blog post, a Keras sentiment classifier can be cre
 Now, while this will likely work, it's a naïve approach according to Chollet (2017):
 
 > \[Note\] that merely flattening the embedded sequences and training a single Dense layer on top leads to a model that treats each word in the input sequence separately, without considering inter-word relationships and sentence structure (for example, this model would likely treat both “this movie is a bomb” and “this movie is the bomb” as being negative reviews). It’s much better to add recurrent layers or 1D convolutional layers on top of the embedded sequences to learn features that take into account each sequence as a whole.
-> 
+>
 > Chollet (2017, p. 187)
 
 Hence, we could also use one-dimensional convolutional layers. But what are they?
@@ -173,7 +173,7 @@ Preferably, install the dependencies in an Anaconda environment, so that you mak
 
 First things first - let's add the model imports:
 
-```
+```python
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Embedding, Flatten, Dense, Dropout, Conv1D, MaxPooling1D
 from tensorflow.keras.datasets import imdb
@@ -188,7 +188,7 @@ Here, we use the `Sequential` API for stacking layers on top of each other. More
 
 Next, model configuration:
 
-```
+```python
 # Model configuration
 max_sequence_length = 100
 num_distinct_words = 10000
@@ -211,7 +211,7 @@ Our embeddings layer has a dimensionality of `embedding_output_dims = 15`. For [
 
 Next, we load the IMDB dataset and print some basic statistics:
 
-```
+```python
 # Load dataset
 (x_train, y_train), (x_test, y_test) = imdb.load_data(num_words=num_distinct_words)
 print(x_train.shape)
@@ -220,7 +220,7 @@ print(x_test.shape)
 
 Now, we'll have to add a little comment:
 
-```
+```python
 # Here, you'd normally test first that the model generalizes and concatenate all data
 # (that is, normally, you'd perform e.g. K-fold Cross Validation first)
 # Then, you can use all data for a full training run. Now, we'll use x_train for training only.
@@ -230,7 +230,7 @@ Indeed, normally, you wouldn't want to split training and testing data when trai
 
 The next step would be to pad all sequences, as suggested before, to ensure that the shape of all inputs is equal (in our case, 100 words long):
 
-```
+```python
 # Pad all sequences
 padded_inputs = pad_sequences(x_train, maxlen=max_sequence_length, value = 0.0) # 0.0 because it corresponds with <PAD>
 padded_inputs_test = pad_sequences(x_test, maxlen=max_sequence_length, value = 0.0) # 0.0 because it corresponds with <PAD>
@@ -238,7 +238,7 @@ padded_inputs_test = pad_sequences(x_test, maxlen=max_sequence_length, value = 0
 
 Next, we output three texts on screen - to get a feeling for what we're working with:
 
-```
+```python
 # Obtain 3 texts
 for i in np.random.randint(0, len(padded_inputs), 3):
   INDEX_FROM=3   # word index offset
@@ -260,7 +260,7 @@ for i in np.random.randint(0, len(padded_inputs), 3):
 
 Then, we can define the Keras model:
 
-```
+```python
 # Define the Keras model
 model = Sequential()
 model.add(Embedding(num_distinct_words, embedding_output_dims, input_length=max_sequence_length))
@@ -283,7 +283,7 @@ Following the Embedding layer is a `Conv1D` layer with 32 filters of size 2. The
 
 Next, we compile the model, fit the data and generate a summary:
 
-```
+```python
 # Compile the model
 model.compile(optimizer=optimizer, loss=loss_function, metrics=additional_metrics)
 
@@ -302,7 +302,7 @@ However, let's add a few evaluation & visualization parts before doing so - for 
 
 First, we add a numerical evaluation using `model.evaluate` and the testing dataset:
 
-```
+```python
 # Test the model after training
 test_results = model.evaluate(padded_inputs_test, y_test, verbose=False)
 print(f'Test results - Loss: {test_results[0]} - Accuracy: {100*test_results[1]}%')
@@ -310,7 +310,7 @@ print(f'Test results - Loss: {test_results[0]} - Accuracy: {100*test_results[1]}
 
 And subsequently, we use the `history` object in order to [visualize model history](https://www.machinecurve.com/index.php/2019/10/08/how-to-visualize-the-training-process-in-keras/):
 
-```
+```python
 # Visualize history
 # Plot history: Validation loss
 plt.plot(history.history['val_loss'])
@@ -333,7 +333,7 @@ We now have a fully functioning machine learning model for IMDB sentiment classi
 
 Should you wish to obtain the full model code at once - here you go :)
 
-```
+```python
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Embedding, Flatten, Dense, Dropout, Conv1D, MaxPooling1D
 from tensorflow.keras.datasets import imdb
@@ -444,7 +444,7 @@ Instead, the scope of our blog post - to create an IMDB sentiment classifier - w
 
 We can also generate predictions for 'new' texts - like this:
 
-```
+```python
 # Texts
 text_bad = x_train[7737]
 text_good = x_train[449]
@@ -458,7 +458,7 @@ print(predictions)
 
 For sample 449, the prediction is `0.8987303` ... close to "good". This makes sense - the text clearly indicates that the viewer had positive sentiment about the movie, but he/she also makes a few neutral statements (such as "the acting is ok"):
 
-```
+```shell
 =================================================
 Sample = 449 | Length = 100
 =================================================
@@ -467,7 +467,7 @@ i'm doing these two together because their comic timing and acting quality was s
 
 For sample 7337, the output is `0.02299032` - which is close to `0`, "bad". Obviously, this is correct given the text:
 
-```
+```shell
 =================================================
 Sample = 7337 | Length = 100
 =================================================

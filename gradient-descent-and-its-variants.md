@@ -1,10 +1,10 @@
 ---
 title: "Gradient Descent and its variants"
 date: "2019-10-24"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
-tags: 
+tags:
   - "deep-learning"
   - "gradient-descent"
   - "machine-learning"

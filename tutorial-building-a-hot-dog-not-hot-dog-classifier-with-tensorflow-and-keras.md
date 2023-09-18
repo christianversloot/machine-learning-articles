@@ -120,7 +120,7 @@ The first step in building it is adding the necessary imports. Primarily, we're 
 
 Make sure to add this code to your `hotdog.py` file:
 
-```
+```python
 import tensorflow
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Conv2D, Flatten
@@ -133,7 +133,7 @@ import cv2
 
 After specifying the imports, we can add the configuration options for our model:
 
-```
+```python
 # Configuration
 img_width, img_height = 25, 25
 input_shape = (img_width, img_height, 1)
@@ -156,7 +156,7 @@ To give you an idea about the dataset: it's a few hundred pictures of hot dogs, 
 
 After downloading the dataset, it's time to write some code that (1) loads the data from that particular folder and (2) preprocesses it. Here it is:
 
-```
+```python
 # Load data
 def load_data(data_type='train', class_name='hot_dog'):
   instances = []
@@ -188,7 +188,7 @@ Now we have defined a function for loading and preprocessing the data, we can mo
 
 Make sure to add this code for specifying the model skeleton:
 
-```
+```python
 # Model creation
 def create_model():
   model = Sequential()
@@ -209,7 +209,7 @@ It finally returns the `model` after creating the skeleton.
 
 Instantiating the model, _making it alive_, involves the `model` we just built - as well as a compilation step:
 
-```
+```python
 # Model compilation
 def compile_model(model):
   model.compile(loss=tensorflow.keras.losses.sparse_categorical_crossentropy,
@@ -226,7 +226,7 @@ Here, we specify things like the [loss function](https://www.machinecurve.com/in
 
 We define another function for doing this:
 
-```
+```python
 # Model training
 def train_model(model, X_train, y_train):
   model.fit(X_train, y_train,
@@ -244,7 +244,7 @@ Here, we accept the `model` as well as the features and corresponding targets fr
 
 We can then test our model by means of applying `model.evaluate`:
 
-```
+```python
 # Model testing
 def test_model(model, X_test, y_test):
   score = model.evaluate(X_test, y_test, verbose=0)
@@ -265,7 +265,7 @@ What we did in the sections above is creating the building blocks of today's mac
 
 This step is really easy:
 
-```
+```python
 # CLICKING EVERYTHING TOGETHER
 # Load and merge training data
 X_train_nh, y_train_nh = load_data(data_type='train', class_name='not_hot_dog')
@@ -288,7 +288,7 @@ For both data sets, we use `load_data` to retrieve our hot dog / not hot dog dat
 
 Finally, constructing the model is essentially connecting the functions we defined above:
 
-```
+```python
 # Create and train the model
 model = create_model()
 model = compile_model(model)
@@ -300,7 +300,7 @@ model = test_model(model, X_test, y_test)
 
 As we now have a functional model, I can imagine that it would be preferable to some people that they can copy and paste the full model code at once. Especially for you, here you go! :)
 
-```
+```python
 import tensorflow
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Conv2D, Flatten

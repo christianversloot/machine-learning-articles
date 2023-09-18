@@ -56,7 +56,7 @@ We can now create a **linear** **classifier** using **Support Vector Machines**.
 
 Let's now run the model - ensure that you have installed the Python packages (`matplotlib`, `numpy`, `scikit-learn` and `mlxtend`) and run the code!
 
-```
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.datasets import make_blobs
@@ -130,7 +130,7 @@ We can also try to use a linear Support Vector Machine by making a few changes t
 - Instead of `make_blobs`, we use `make_gaussian_quantiles` to generate the Gaussian data.
 - For this reason, we also specify different Configuration options.
 
-```
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.datasets import make_gaussian_quantiles
@@ -235,7 +235,7 @@ Here, \[latex\]d(\\cdot,\\cdot)\[/latex\] is the [Euclidian distance](https://en
 
 In other words, the bigger the distance \[latex\]d(x\_i, x\_j)\[/latex\], the larger the value that goes into the exponent, and the lower the \[latex\]z\[/latex\] value will be:
 
-```
+```shell
 >>> import numpy as np
 >>> np.exp(0)
 1.0
@@ -260,7 +260,7 @@ We can visualize what happens with our dataset in a third axis (which the SVM ca
 - We then generate the \[latex\]z\[/latex\] component for our data by calling the RBF with the default length scale of `1.0`.
 - We then plot the data into a 3D scatter chart.
 
-```
+```python
 from mpl_toolkits.mplot3d import Axes3D
 from sklearn.gaussian_process.kernels import RBF
 from sklearn.datasets import make_gaussian_quantiles
@@ -324,7 +324,7 @@ We can easily implement an RBF based SVM classifier with Scikit-learn: the only 
 
 For the rest, we configure, generate, split, create, fit and evaluate just as we did above.
 
-```
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.datasets import make_gaussian_quantiles

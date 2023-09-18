@@ -85,7 +85,7 @@ The TensorFlow Model Optimization toolkit actually piggybacks on TensorBoard fun
 
 PruningSummaries are available in the optimization toolkit's API, and the callback is hence documented. Here's what it looks like:
 
-```
+```python
 tfmot.sparsity.keras.PruningSummaries(
     log_dir, update_freq='epoch', **kwargs
 )
@@ -107,7 +107,7 @@ First of all, we add model imporst, define our ConvNet and compile our model. As
 
 Make sure to create a Python file (e.g. `pruningsummaries.py`) or open a Jupyter Notebook, and add the following code:
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential, save_model
@@ -168,7 +168,7 @@ model.compile(loss=tensorflow.keras.losses.categorical_crossentropy,
 
 Now that we have a compiled model, we can convert it so that it is wrapped with pruning functionality - which allows pruning to happen:
 
-```
+```python
 # Load functionality for adding pruning wrappers
 prune_low_magnitude = tfmot.sparsity.keras.prune_low_magnitude
 
@@ -201,7 +201,7 @@ Finally, we actually _add_ the wrappers by calling `prune_low_magnitude` with ou
 
 Next, it's time to define the callbacks that Keras will use during training:
 
-```
+```python
 # Model callbacks
 log_dir = '.\logs'
 callbacks = [
@@ -226,7 +226,7 @@ As is clear, we write all logs to our `log_dir`. Note that `.\logs` means that i
 
 Then, it's time to start the training process - including pruning:
 
-```
+```python
 # Fitting data
 model_for_pruning.fit(input_train, target_train,
                       batch_size=batch_size,
@@ -240,7 +240,7 @@ model_for_pruning.fit(input_train, target_train,
 
 Finally, we test our trained and pruned model with our test dataset (split off above, in the first part of the model code) and print the evaluation scores:
 
-```
+```python
 # Generate generalization metrics
 score_pruned = model_for_pruning.evaluate(input_test, target_test, verbose=0)
 print(f'Pruned CNN - Test loss: {score_pruned[0]} / Test accuracy: {score_pruned[1]}')
@@ -250,7 +250,7 @@ print(f'Pruned CNN - Test loss: {score_pruned[0]} / Test accuracy: {score_pruned
 
 If you wish to obtain the full model code at once - that's of course possible :) Here you go:
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential, save_model
@@ -370,7 +370,7 @@ Pruned CNN - Test loss: 0.024733462060560124 / Test accuracy: 0.9921000003814697
 
 More interestingly, however, is what information `PruningSummaries` provide in TensorBoard. Let's open the board by means of a terminal that works from the same directory as where your `*.py` file is located:
 
-```
+```shell
 tensorboard --logdir=./logs
 ```
 

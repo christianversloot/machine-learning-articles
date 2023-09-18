@@ -1,10 +1,10 @@
 ---
 title: "Affinity Propagation Tutorial: Example with Scikit-learn"
 date: "2020-04-18"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "affinity-propagation"
   - "clustering"
   - "machine-learning"
@@ -37,7 +37,7 @@ In this tutorial, you will learn...
 
 With this **quick example** you will be able to start using **Affinity Propagation with Scikit-learn** immediately. Copy and paste the code into your project and you are ready to go. If you want to understand how Affinity Propagation works in more detail, or learn how to write the code step-by-step, make sure to read the rest of this tutorial.
 
-```
+```python
 from sklearn.datasets import make_blobs
 from sklearn.cluster import AffinityPropagation
 
@@ -133,7 +133,7 @@ Here they are again, the clusters that we also saw in our blog about [K-means cl
 
 Remember how we generated them? Open up a Python file and name it \`affinity.py\`, add the imports (which are Scikit-learn, Numpy and Matplotlib)...
 
-```
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.datasets import make_blobs
@@ -144,7 +144,7 @@ We then add a few configuration options: the number of samples in total we gener
 
 We save them with Numpy and subsequently load them and assign them to \[latex\]X\[/latex\] again. Those two lines of code aren't necessary for your model to run, but if you want to compare across settings, you likely don't want to generate samples at random every time. By saving them once, and subsequently commenting out `save` and `make_blobs`, you'll load them from file again and again :)
 
-```
+```python
 # Configuration options
 num_samples_total = 50
 cluster_centers = [(20,20), (4,4)]
@@ -159,7 +159,7 @@ X = np.load('./clusters.npy')
 
 We then fit the data to the Affinity Propagation algorithm, after we loaded it, which just takes two lines of code. In another two lines, we derive characteristics such as the exemplars and by consequence the number of clusters:
 
-```
+```python
 # Fit AFfinity Propagation with Scikit
 afprop = AffinityPropagation(max_iter=250)
 afprop.fit(X)
@@ -169,14 +169,14 @@ n_clusters_ = len(cluster_centers_indices)
 
 Finally, by using the algorithm we fit, we predict for all our samples to which cluster they belong:
 
-```
+```python
 # Predict the cluster for all the samples
 P = afprop.predict(X)
 ```
 
 And finally visualize the outcome:
 
-```
+```python
 # Generate scatter plot for training data
 colors = list(map(lambda x: '#3b4cc0' if x == 1 else '#b40426', P))
 plt.scatter(X[:,0], X[:,1], c=colors, marker="o", picker=True)
@@ -194,7 +194,7 @@ Here it is! 😊👇
 
 Should you wish to obtain the full model code at once, so that you can start working with it straight away - here you go! 😎
 
-```
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.datasets import make_blobs

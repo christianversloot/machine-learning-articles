@@ -1,10 +1,10 @@
 ---
 title: "How to Normalize or Standardize a Dataset in Python?"
 date: "2020-11-19"
-categories: 
+categories:
   - "frameworks"
   - "svms"
-tags: 
+tags:
   - "data-preprocessing"
   - "dataset"
   - "deep-learning"
@@ -53,13 +53,13 @@ Suppose that we given a dataset of a **runner's diary** and that our goal is to 
 2. **We don't want to use features that contribute insignificantly.** Some features (columns) contribute to the output less significantly than others. It could be that when removed, the model will still be able to perform, but at a significantly lower computational cost. We therefore want to be able to select the features that contribute most significantly.
 
 > In machine learning problems that involve learning a "state-of-nature" from a finite number of data samples in a high-dimensional feature space with each feature having a range of possible values, typically an enormous amount of training data is required to ensure that there are several samples with each combination of values.
-> 
+>
 > Wikipedia (n.d.) about the curse of dimensionality
 
 We would e.g. apply algorithms such as [_Principal Component Analysis_ (PCA)](https://www.machinecurve.com/index.php/2020/12/07/introducing-pca-with-python-and-scikit-learn-for-machine-learning/) to help us determine which features are most important. If we look at how these algorithms work, we see that e.g. PCA extracts new features based on the _principal directions_ in the dataset, i.e. the directions in your data where variance is largest (Scikit-learn, n.d.).
 
 > Variance is the expectation of the squared deviation of a random variable from its mean. Informally, it measures how far a set of numbers is spread out from their average value.
-> 
+>
 > Wikipedia (2001)
 
 Let's keep this in mind when looking at the following dataset:
@@ -77,7 +77,7 @@ However, this does not necessarily mean that it _is_ in fact more important - be
 And, to be speaking most generally, that method is called **feature scaling** - and it is applied during the data preprocessing step.
 
 > Feature scaling is a method used to normalize the range of independent variables or features of data. In data processing, it is also known as data normalization and is generally performed during the data preprocessing step.
-> 
+>
 > Wikipedia (2011)
 
 There are two primary ways for feature scaling which we will cover in the remainder of this article:
@@ -97,19 +97,19 @@ Rescaling, or **min-max normalization**, is a simple method for bringing your da
 
 Suppose that we have the following array:
 
-```
+```python
 dataset = np.array([1.0, 12.4, 3.9, 10.4])
 ```
 
 Min-max normalization for the range \[latex\]\[0, 1\]\[/latex\] can be defined as follows:
 
-```
+```python
 normalized_dataset = (dataset - min(dataset)) / (max(dataset) - min(dataset))
 ```
 
 In a naïve way, using Numpy, we can therefore normalize our data into the \[latex\]\[0, 1\]\[/latex\] range in the following way:
 
-```
+```python
 import numpy as np
 dataset = np.array([1.0, 12.4, 3.9, 10.4])
 normalized_dataset = (dataset - np.min(dataset)) / (np.max(dataset) - np.min(dataset))
@@ -118,7 +118,7 @@ print(normalized_dataset)
 
 This indeed yields an array where the lowest value is now `0.0` and the biggest is `1.0`:
 
-```
+```python
 [0. 1. 0.25438596 0.8245614 ]
 ```
 
@@ -128,13 +128,13 @@ If instead we wanted to scale it to some other arbitrary range - say \[latex\]\[
 
 We can use the following formula for normalization:
 
-```
+```python
 normalized_dataset = a + ((dataset - min(dataset)) * (b - a) / (max(dataset) - min(dataset)))
 ```
 
 Or, for the dataset from the previous section, using a naïve Python implementation:
 
-```
+```python
 import numpy as np
 a = 0
 b = 1.5
@@ -145,7 +145,7 @@ print(normalized_dataset)
 
 Which yields:
 
-```
+```python
 [0. 1.5        0.38157895 1.23684211]
 ```
 
@@ -161,7 +161,7 @@ It allows us to fit a scaler with a predefined range to our dataset, and subsequ
 - We then fit the data to our scaler, using `scaler.fit(dataset)`. This way, it becomes capable of transforming datasets.
 - We finally transform the `dataset` using `scaler.transform(dataset)` and print the result.
 
-```
+```python
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 dataset = np.array([1.0, 12.4, 3.9, 10.4]).reshape(-1, 1)
@@ -173,7 +173,7 @@ print(normalized_dataset)
 
 And indeed, after printing, we can see that the outcome is the same as obtained with our naïve approach:
 
-```
+```python
 [[0. ]
  [1.5       ]
  [0.38157895]
@@ -186,13 +186,13 @@ And indeed, after printing, we can see that the outcome is the same as obtained 
 
 In the previous example, we normalized our dataset based on the minimum and maximum values. Mean and standard deviation are however not _standard,_ meaning that the mean is zero and that the standard deviation is one.
 
-```
+```python
 print(normalized_dataset)
 print(np.mean(normalized_dataset))
 print(np.std(normalized_dataset))
 ```
 
-```
+```python
 [[0. ]
  [1.5       ]
  [0.38157895]
@@ -205,7 +205,7 @@ Because the bounds of our normalizations would not be equal, it would still be (
 
 For example, if we used a different dataset, our results would be different:
 
-```
+```python
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 dataset = np.array([2.4, 6.2, 1.8, 9.0]).reshape(-1, 1)
@@ -230,7 +230,7 @@ This is where **standardization** or _Z-score normalization_ comes into the pict
 
 The formula for standardization is as follows:
 
-```
+```python
 standardized_dataset = (dataset - mean(dataset)) / standard_deviation(dataset))
 ```
 
@@ -240,7 +240,7 @@ In other words, for each sample from the dataset, we subtract the mean and divid
 
 This can also be implemented with Python:
 
-```
+```python
 import numpy as np
 dataset = np.array([1.0, 2.0, 3.0, 3.0, 3.0, 2.0, 1.0])
 standardized_dataset = (dataset - np.average(dataset)) / (np.std(dataset))
@@ -249,14 +249,14 @@ print(standardized_dataset)
 
 Which yields:
 
-```
+```python
 [-1.37198868 -0.17149859  1.02899151  1.02899151  1.02899151 -0.17149859
  -1.37198868]
 ```
 
 In Scikit-learn, the `sklearn.preprocessing` module provides the `StandardScaler` which helps us perform the same action in an efficient way.
 
-```
+```python
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 dataset = np.array([1.0, 2.0, 3.0, 3.0, 3.0, 2.0, 1.0]).reshape(-1, 1)
@@ -270,7 +270,7 @@ print(np.std(standardized_dataset))
 
 With as outcome:
 
-```
+```python
 [[-1.37198868]
  [-0.17149859]
  [ 1.02899151]
@@ -296,7 +296,7 @@ The example below illustrates the effects of standardization. In it, we create G
 
 If we hadn't applied feature scaling here, algorithms like [PCA](https://www.machinecurve.com/index.php/2020/12/07/introducing-pca-with-python-and-scikit-learn-for-machine-learning/) would have pretty much fooled us. ;-)
 
-```
+```python
 # Imports
 import matplotlib.pyplot as plt
 from sklearn.datasets import make_gaussian_quantiles

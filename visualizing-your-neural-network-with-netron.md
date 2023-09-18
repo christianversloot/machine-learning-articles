@@ -98,7 +98,7 @@ Do note that Netron works with any `model` instance, so models created by yourse
 
 Now, open up your Explorer, navigate to some folder, and create a file - say, `netron.py`. Given what we decided above, today's model code will be very brief. Let's start with the imports:
 
-```
+```python
 # Imports
 from tensorflow.keras.applications.mobilenet_v2 import MobileNetV2
 ```
@@ -107,14 +107,14 @@ Or, rather, _import_ 😉
 
 There is only one: the `MobileNetV2` class of the MobileNet v2 model that we'll be visualizing today. The next thing we do is instantiate it:
 
-```
+```python
 # Define the model
 model = MobileNetV2()
 ```
 
 And subsequently, we save it into an HDF5 file:
 
-```
+```python
 # Save the model
 model.save('netron_model_mobilenetv2.h5')
 ```

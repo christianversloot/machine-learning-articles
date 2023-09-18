@@ -1,11 +1,11 @@
 ---
 title: "How to use hinge & squared hinge loss with TensorFlow 2 and Keras?"
 date: "2019-10-15"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "hinge"
   - "hinge-loss"
@@ -49,7 +49,7 @@ _Note that the full code for the models we create in this blog post is also avai
 
 This example code shows you how to use hinge loss and squared hinge loss easily. If you want to understand how it works, what the differences are and how to apply it to a full Keras model more deeply, make sure to read the rest of this tutorial as well!
 
-```
+```python
 loss_function_used = 'hinge' # or use 'squared_hinge' 
 model.compile(loss=loss_function_used, optimizer=tensorflow.keras.optimizers.Adam(lr=0.03), metrics=['accuracy'])
 ```
@@ -104,7 +104,7 @@ Now that we know about what hinge loss and squared hinge loss are, we can start 
 
 Before you start, it's a good idea to create a file (e.g. `hinge-loss.py`) in some folder on your machine. Then, you can start off by adding the necessary software dependencies:
 
-```
+```python
 '''
   Keras model discussing Hinge loss.
 '''
@@ -140,7 +140,7 @@ As indicated, we can now generate the data that we use to demonstrate how hinge 
 
 We first specify some configuration options:
 
-```
+```python
 # Configuration options
 num_samples_total = 1000
 training_split = 250
@@ -150,7 +150,7 @@ Put very simply, these specify _how many samples are generated in total_ and how
 
 Next, we actually generate the data:
 
-```
+```python
 # Generate data
 X, targets = make_circles(n_samples = num_samples_total, factor=0.1)
 targets[np.where(targets == 0)] = -1
@@ -172,7 +172,7 @@ Finally, we split the data into training and testing data, for both the feature 
 
 We can now also visualize the data, to get a feel for what we just did:
 
-```
+```python
 # Generate scatter plot for training data
 plt.scatter(X_training[:,0], X_training[:,1])
 plt.title('Nonlinear data')
@@ -199,7 +199,7 @@ Now that we have a feel for the dataset, we can actually implement a `tensorflow
 
 As usual, we first define some variables for model configuration by adding this to our code:
 
-```
+```python
 # Set the input shape
 feature_vector_shape = len(X_training[0])
 input_shape = (feature_vector_shape,)
@@ -215,7 +215,7 @@ Obviously, we use `hinge` as our loss function. Using squared hinge loss is poss
 
 Next, we define the architecture for our model:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Dense(4, input_shape=input_shape, activation='relu', kernel_initializer='he_uniform'))
@@ -241,7 +241,7 @@ Now that we know what architecture we'll use, we can perform hyperparameter conf
 
 However, first, the hyperparameters:
 
-```
+```python
 # Configure the model and start training
 model.compile(loss=loss_function_used, optimizer=tensorflow.keras.optimizers.Adam(lr=0.03), metrics=['accuracy'])
 ```
@@ -250,7 +250,7 @@ The loss function used is, indeed, `hinge` loss. We use Adam for optimization an
 
 Now the actual training process:
 
-```
+```python
 history = model.fit(X_training, Targets_training, epochs=30, batch_size=5, verbose=1, validation_split=0.2)
 ```
 
@@ -262,7 +262,7 @@ Hence, from the 1000 samples that were generated, 250 are used for testing, 600 
 
 We store the results of the fitting (training) procedure into a `history` object, which allows us the actually [visualize model performance across epochs](https://www.machinecurve.com/index.php/2019/10/08/how-to-visualize-the-training-process-in-keras/). But first, we add code for testing the model for its generalization power:
 
-```
+```python
 # Test the model after training
 test_results = model.evaluate(X_testing, Targets_testing, verbose=1)
 print(f'Test results - Loss: {test_results[0]} - Accuracy: {test_results[1]*100}%')
@@ -270,7 +270,7 @@ print(f'Test results - Loss: {test_results[0]} - Accuracy: {test_results[1]*100}
 
 Then a [plot of the decision boundary](https://www.machinecurve.com/index.php/2019/10/11/how-to-visualize-the-decision-boundary-for-your-keras-model/) based on the testing data:
 
-```
+```python
 # Plot decision boundary
 plot_decision_regions(X_testing, Targets_testing, clf=model, legend=2)
 plt.show()
@@ -278,7 +278,7 @@ plt.show()
 
 And eventually, the [visualization for the training process](https://www.machinecurve.com/index.php/2019/10/08/how-to-visualize-the-training-process-in-keras/):
 
-```
+```python
 # Visualize training process
 plt.plot(history.history['loss'], label='Hinge loss (testing data)')
 plt.plot(history.history['val_loss'], label='Hinge loss (validation data)')
@@ -385,7 +385,7 @@ Reason why? Simple. My thesis is that this occurs because the data, both in the 
 
 By changing `loss_function_used` into `squared_hinge` we can now show you results for squared hinge:
 
-```
+```python
 loss_function_used = 'squared_hinge'
 ```
 

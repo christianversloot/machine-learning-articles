@@ -41,7 +41,7 @@ Let's take a look! 😊
 
 This quick example helps you get started with SELU straight away. If you want to know how to use SELU with TensorFlow or Keras, you can use the code below. Do make sure to take a look at the important notes however, they're really important! Read the full article below if you want to understand their _whys_ and the SELU activation function in general in more detail.
 
-```
+```python
 # Using SELU with TensorFlow and Keras - example.
 # Important:
 # 1. When using SELU, the LecunNormal() initializer must be used.
@@ -126,7 +126,7 @@ Visually, a SELU activation functions looks as follows:
 
 Of course, it is possible to use **Scaled Exponential Linear Unit** or SELU with TensorFlow and Keras. The example at the top of this page already demonstrates how you can use it within your neural network. In TensorFlow 2.x, the SELU activation function is available as `tf.keras.activations.selu` (TensorFlow, n.d.):
 
-```
+```python
 tf.keras.activations.selu(
     x
 )
@@ -152,7 +152,7 @@ Adding SELU to a TensorFlow / Keras powered neural network is really easy and in
 2. **Using the `LecunNormal` kernel initializer**. The TensorFlow docs suggest to use this initializer when using SELU, which is related in the fact that [different activation functions need different initializers](https://www.machinecurve.com/index.php/2019/09/16/he-xavier-initialization-activation-functions-choose-wisely/).
 3. **Using `AlphaDropout` instead of `Dropout`.** Another important suggestion made the docs is to use this type of [Dropout](https://www.machinecurve.com/index.php/2019/12/16/what-is-dropout-reduce-overfitting-in-your-neural-networks/) when you need to use it.
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3), kernel_initializer=LecunNormal(), activation='selu', input_shape=input_shape))
@@ -175,7 +175,7 @@ In other words, the neural network that we will create is capable of generating 
 5. **Training the model**. We use the `input_train` and `target_train` variables for this; in other words, [our training dataset](https://www.machinecurve.com/index.php/2020/11/16/how-to-easily-create-a-train-test-split-for-your-machine-learning-model/).
 6. **[Evaluating](https://www.machinecurve.com/index.php/2020/11/03/how-to-evaluate-a-keras-model-with-model-evaluate/) the model**. Finally, we evaluate the performance of the model with `input_test` and `target_test`, to see whether it generalizes to data that we haven't seen before.
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
@@ -239,7 +239,7 @@ print(f'Test loss: {score[0]} / Test accuracy: {score[1]}')
 
 If you are getting memory errors when running this script using your GPU, you might need to add the following code directly after the imports. It limits the growth of GPU memory and allows you to get your code running again.
 
-```
+```python
 gpus = tensorflow.config.experimental.list_physical_devices('GPU')
 if gpus:
   try:

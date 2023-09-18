@@ -1,10 +1,10 @@
 ---
 title: "Conditional GANs (cGANs) explained"
 date: "2021-03-25"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
-tags: 
+tags:
   - "cgan"
   - "conditional-gan"
   - "gan"
@@ -46,7 +46,7 @@ Through their joint training, the Generator learns to convert samples from the l
 According to Goodfellow et al. (2014), vanilla GANs have many straightforward extensions - of which cGANs are one:
 
 > A conditional generative model p(x | c) can be obtained by adding c as input to both G and D
-> 
+>
 > Goodfellow et al. (2014)
 
 Yes, vanilla GANs are _unconditional_. In the quote above, you can read \[latex\]p(\\text{x | c})\[/latex\] as _the probability that we generate vector \[latex\]\\bf{x}\[/latex\] given some condition \[latex\]c\[/latex\]._ Adding a condition to our probabilities allows us to teach the Generator to use the latent distribution in an even more structured way.

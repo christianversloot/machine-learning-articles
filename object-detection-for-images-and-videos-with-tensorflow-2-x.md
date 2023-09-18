@@ -45,7 +45,7 @@ With this fully functional **example of object detection with TensorFlow**, you 
 3. Ensure that you correctly configure the path to the Object Detection API, the model checkpoint and the labels. Also make sure to set the model name correctly.
 4. Optionally, comment out the `os.environ(...)` call if you want to run the code on your GPU. Of course, this only works if your TensorFlow is GPU-enabled.
 
-```
+```python
 # Specify model imports
 from object_detection.builders import model_builder
 from object_detection.utils import config_util
@@ -243,7 +243,7 @@ Here, we assume that you have Python installed on your system already. If not, [
 
 [Installing TensorFlow](https://www.tensorflow.org/install) is really easy these days. Run the following two commands from within a terminal that has access to Python:
 
-```
+```shell
 # Requires the latest pip
 pip install --upgrade pip
 
@@ -331,7 +331,7 @@ Creating the foundation of this `TFObjectDetector` involves adding the Python im
 
 The first code always involves Python imports, and today is not different:
 
-```
+```python
 # Specify model imports
 from object_detection.builders import model_builder
 from object_detection.utils import config_util
@@ -351,7 +351,7 @@ OpenCV (`cv2`) will be used for image input/output, NumPy (`np`) for numbers pro
 
 The second step is to disable the GPU, but this is **optional** - in other words, only if you want to. Especially when you have a GPU but when it is misconfigured, this can be useful. You then simply have to erase all CUDA visible devices from the visible environment. If you don't use the GPU version of TensorFlow, this code can be omitted.
 
-```
+```python
 # Disable GPU if necessary
 os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 ```
@@ -360,7 +360,7 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 
 Now, it's time for the real work. Let's create a class called `TFObjectDetector` which covers all the functionalities of our object detector.
 
-```
+```python
 # Create object detector
 class TFObjectDetector():
 ```
@@ -378,7 +378,7 @@ In the constructor, we do quite a few things. Firstly, we fill a lot of _instanc
 
 This starts the setup mechanism for our model, which we'll take a look at now.
 
-```
+```python
 # Create object detector
 class TFObjectDetector():
   
@@ -406,7 +406,7 @@ The setup mechanism is responsible for setting up the model in the background an
 
 Let's group the execution of these steps in the `setup_model()` definition. Recall that this definition is called in the `__init__` definition specified above and thus at the creation of our object detector.
 
-```
+```python
   # Set up model for usage
   def setup_model(self):
     self.build_model()
@@ -417,7 +417,7 @@ Let's group the execution of these steps in the `setup_model()` definition. Reca
 
 We can next create `build_model()`:
 
-```
+```python
   # Build detection model
   def build_model(self):
     model_config = self.full_config['model']
@@ -430,7 +430,7 @@ This definition retrieves the configuration, ensures that it exists and builds t
 
 With `restore_checkpoint()`, we can set the model back to the checkpointed position / state provided by the TensorFlow Detection Model Zoo.
 
-```
+```python
   # Restore checkpoint into model
   def restore_checkpoint(self):
     assert self.model is not None
@@ -440,7 +440,7 @@ With `restore_checkpoint()`, we can set the model back to the checkpointed posit
 
 We can then generate a `tf.function` for detection. This function utilizes our model, preprocesses the image, generates the prediction, postprocesses the detections and returns everything.
 
-```
+```python
   # Get a tf.function for detection
   def get_model_detection_function(self):
     assert self.model is not None
@@ -457,7 +457,7 @@ We can then generate a `tf.function` for detection. This function utilizes our m
 
 Finally, we generate a definition called `prepare_labels()`. Note that it was created by the people at TensorFlow and that it is responsible for mapping class identifiers to textual labels. It sets these to the instance variables.
 
-```
+```python
   # Prepare labels
   # Source: https://github.com/tensorflow/models/blob/master/research/object_detection/colab_tutorials/inference_tf2_colab.ipynb
   def prepare_labels(self):
@@ -474,7 +474,7 @@ Finally, we generate a definition called `prepare_labels()`. Note that it was cr
 
 So far, we have created a foundation that is capable of preparing the object detector. We only need to create two more helper functions to finish this part. The first restructures keypoint tuples and the second one prepares the image, i.e. converting it into a Tensor.
 
-```
+```python
   # Get keypoint tuples
   # Source: https://github.com/tensorflow/models/blob/master/research/object_detection/colab_tutorials/inference_tf2_colab.ipynb
   def get_keypoint_tuples(self, eval_config):
@@ -510,7 +510,7 @@ The first definition is the general detection function. General here means that 
 - We then add the bounding boxes with our predictions to the image using the `viz_utils` APIs provided by the Object Detection API.
 - Finally, we return the image with bounding boxes.
 
-```
+```python
   # Perform detection
   def detect(self, image, label_offset = 1):
     # Ensure that we have a detection function
@@ -550,7 +550,7 @@ The first definition is the general detection function. General here means that 
 
 Detecting objects on any image is now easy. It simply involves reading the image from a `path` with OpenCV, calling the general detection definition, and writing the output to the `output_path`.
 
-```
+```python
   # Predict image from folder
   def detect_image(self, path, output_path):
 
@@ -576,7 +576,7 @@ This segment is composed of the following steps:
 - Now, we loop over the frame, perform detection (see that this is nothing more than detection on images!), and write the frame to the output video. We then read then ext frame, and continue until no frames can be read anymore (i.e. until `frame_read != True`).
 - Once we have processed every frame, we release the output video using `out.release()`.
 
-```
+```python
   # Predict video from folder
   def detect_video(self, path, output_path):
     
@@ -610,7 +610,7 @@ This segment is composed of the following steps:
 
 Parts 1 and 2 conclude the creation of our `TFObjectDetector` class and hence our object detector. Now that we have finished it, it's time to call it. We can do so with the following code.
 
-```
+```python
 if __name__ == '__main__':
   detector = TFObjectDetector('../../tf-models/research/object_detection/configs/tf2', './checkpoint', './labels.pbtxt', 'ssd_mobilenet_v2_fpnlite_640x640_coco17_tpu-8')
   detector.detect_image('./shop.jpg', './shopout.jpg')

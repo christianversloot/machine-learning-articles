@@ -1,9 +1,9 @@
 ---
 title: "ALBERT explained: A Lite BERT"
 date: "2021-01-06"
-categories: 
+categories:
   - "deep-learning"
-tags: 
+tags:
   - "albert"
   - "bert"
   - "deep-learning"
@@ -51,13 +51,13 @@ However, let's take a quick look at BERT here as well before we move on. Below, 
 Previous studies (such as the [study creating BERT](https://www.machinecurve.com/index.php/2021/01/04/intuitive-introduction-to-bert/) or the [one creating GPT](https://www.machinecurve.com/index.php/2021/01/05/dall-e-openai-gpt-3-model-can-draw-pictures-based-on-text/)) have demonstrated that the size of language models is related to performance. The bigger the language model, the better the model performs, is the general finding.
 
 > Evidence from these improvements reveals that a large network is of crucial importance for achieving state-of-the-art performance
-> 
+>
 > Lam et al. (2019)
 
 While this allows us to build models that really work well, this also comes at a cost: models are really huge and therefore cannot be used widely in practice.
 
 > An obstacle to answering this question is the memory limitations of available hardware. Given that current state-of-the-art models often have hundreds of millions or even billions of parameters, it is easy to hit these limitations as we try to scale our models. Training speed can also be significantly hampered in distributed training, as the communication overhead is directly proportional to the number of parameters in the model.
-> 
+>
 > Lam et al. (2019)
 
 Recall that BERT comes in two flavors: a \[latex\]\\text{BERT}\_\\text{BASE}\[/latex\] model that has 110 million trainable parameters, and a \[latex\]\\text{BERT}\_\\text{LARGE}\[/latex\] model that has 340 million ones (Devlin et al., 2018).
@@ -89,7 +89,7 @@ If things are not clear by now, don't worry - that was expected :D We're going t
 The first key difference between the BERT and ALBERT models is that **parameters of the word embeddings are factorized**.
 
 > In mathematics, **factorization** (...) or **factoring** consists of writing a number or another mathematical object as a product of several _factors_, usually smaller or simpler objects of the same kind. For example, 3 × 5 is a factorization of the integer 15
-> 
+>
 > Wikipedia (2002)
 
 Factorization of these parameters is achieved by taking the matrix representing the weights of the word embeddings \[latex\]E\[/latex\] and decomposing it into two different matrices. Instead of projecting the one-hot encoded vectors directly onto the hidden space, they are first projected on some-kind of lower-dimensional embedding space, which is then projected to the hidden space (Lan et al, 2019). Normally, this should not produce a different result, but let's wait.
@@ -168,7 +168,7 @@ The following results can be reported:
 Beyond the general results, the authors have also performed ablation experiments to see whether the changes actually cause the performance improvement, or not.
 
 > An ablation study studies the performance of an AI system by removing certain components, to understand the contribution of the component to the overall system.
-> 
+>
 > Wikipedia (n.d.)
 
 These are the results:

@@ -99,7 +99,7 @@ Indeed, regression always attempts to generate a hyperplane which allows us to p
 
 Suppose that we would generate some samples:
 
-```
+```python
 from sklearn.datasets import make_blobsx
 import numpy as np
 import matplotlib.pyplot as plt
@@ -164,7 +164,7 @@ Here's the code. Ensure that you have Scikit-learn installed on your machine (`p
 
 Voilà, performing an Ordinary Least Squares based linear fit is easy - especially now that you know how it works under the hood!
 
-```
+```python
 from sklearn.datasets import make_blobs
 from sklearn.linear_model import LinearRegression
 import numpy as np

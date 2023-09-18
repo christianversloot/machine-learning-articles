@@ -1,10 +1,10 @@
 ---
 title: "How to use Conv2D with Keras?"
 date: "2020-03-30"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "conv2d"
   - "convolutional-neural-networks"
   - "deep-learning"
@@ -90,7 +90,7 @@ Such layers are also represented within the Keras deep learning framework. For t
 
 In more detail, this is its exact representation (Keras, n.d.):
 
-```
+```python
 keras.layers.Conv2D(filters, kernel_size, strides=(1, 1), padding='valid', data_format=None, dilation_rate=(1, 1), activation=None, use_bias=True, kernel_initializer='glorot_uniform', bias_initializer='zeros', kernel_regularizer=None, bias_regularizer=None, activity_regularizer=None, kernel_constraint=None, bias_constraint=None)
 ```
 
@@ -118,7 +118,7 @@ Obviously, you'll also need a recent version of Python - possibly, using Anacond
 
 This is the model that we'll be coding today. Don't worry - I will walk you through every step, but here's the code as a whole for those who just wish to copy and play:
 
-```
+```python
 from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D
@@ -181,7 +181,7 @@ Let's now study the model in more detail.
 
 The first thing we'll need to do is import some things:
 
-```
+```python
 from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D
@@ -211,7 +211,7 @@ Next up, the model configuration.
 - We use 20% of the training data for **validation purposes** - i.e., to see how well your model performs after each iteration. This helps spot whether our model is [overfitting](https://www.machinecurve.com/index.php/2019/12/16/what-is-dropout-reduce-overfitting-in-your-neural-networks/).
 - Finally, we set **verbosity** mode to 1 - or True, showing all the output on screen.
 
-```
+```python
 # Model configuration
 batch_size = 50
 img_width, img_height, img_num_channels = 32, 32, 3
@@ -235,7 +235,7 @@ Let's take a look at the CIFAR10 dataset:
 
 These are just a few samples from this dataset - as you can see, it contains many common day classes such as truck, deer, and automobile. We'll load and prepare it as follows:
 
-```
+```python
 # Load CIFAR-10 data
 (input_train, target_train), (input_test, target_test) = cifar10.load_data()
 
@@ -259,7 +259,7 @@ Now, for the other two steps, these are just technicalities. By casting our data
 
 Now that all the "work upfront" is complete, we can actually specify the model:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
@@ -284,7 +284,7 @@ Keras allows you to do so quite easily: with `model.compile` and `model.fit`. Th
 
 Then, with `fit`, we can fit the `input_train` and `target_train` (i.e. the inputs and targets of our training set) to the model, actually starting the training process. We do so based on the options that we configured earlier, i.e. batch size, number of epochs, verbosity mode and validation split.
 
-```
+```python
 # Compile the model
 model.compile(loss=loss_function,
               optimizer=optimizer,
@@ -302,7 +302,7 @@ history = model.fit(input_train, target_train,
 
 The final step is to evaluate our model after we performed training. Keras allows you to do so with `model.evaluate`. As you can see, instead of the training dataset, we're using testing data here: `input_test` and `target_test`. This way, we can be sure that we test the model with data that it hasn't seen before during training, evaluating its power to generalize to new data (which happens in real-world settings all the time!). Evaluation is done in a non-verbose way, and the results are printed on screen.
 
-```
+```python
 # Generate generalization metrics
 score = model.evaluate(input_test, target_test, verbose=0)
 print(f'Test loss: {score[0]} / Test accuracy: {score[1]}')

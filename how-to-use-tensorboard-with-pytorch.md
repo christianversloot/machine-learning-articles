@@ -1,10 +1,10 @@
 ---
 title: "How to use TensorBoard with PyTorch"
 date: "2021-11-10"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "machine-learning"
   - "model-visualization"
@@ -35,7 +35,7 @@ Are you ready? Let's take a look! 😎
 People who create stuff can usually know best how to describe what they created - and the same is true for the creators of TensorBoard:
 
 > _In machine learning, to improve something you often need to be able to measure it. TensorBoard is a tool for providing the measurements and visualizations needed during the machine learning workflow. It enables tracking experiment metrics like_ [loss](https://www.machinecurve.com/index.php/2019/10/04/about-loss-and-loss-functions/) _and accuracy, visualizing the model graph, projecting embeddings to a lower dimensional space, and much more._
-> 
+>
 > [TensorBoard – Get Started](https://www.tensorflow.org/tensorboard/get_started)
 
 In other words, it's a tool for visualizing the machine learning experiments you performed in a variety of ways.
@@ -59,7 +59,7 @@ Installing TensorBoard must be done separately to your PyTorch install. Doing so
 TensorBoard was originally developed for TensorFlow. As you saw above, it is also available for PyTorch! But how? Through the `SummaryWriter`:
 
 > The SummaryWriter class provides a high-level API to create an event file in a given directory and add summaries and events to it. The class updates the file contents asynchronously. This allows a training program to call methods to add data to the file directly from the training loop, without slowing down training.
-> 
+>
 > PyTorch (n.d.)
 
 Great!
@@ -108,7 +108,7 @@ This will give you a rough idea how TensorBoard can be used, leaving sufficient 
 
 In a different article, [we created a simple Convolutional Neural Network](https://www.machinecurve.com/index.php/2021/07/08/convolutional-neural-networks-with-pytorch/) for classifying MNIST digits. Let's use that code here and expand it with the `SummaryWriter` for
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -202,7 +202,7 @@ if __name__ == '__main__':
 
 Add the `SummaryWriter` to your imports first:
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -214,7 +214,7 @@ from torchvision import transforms
 
 Then, directly after the `__name__` check, initialize it:
 
-```
+```python
 if __name__ == '__main__':
 
   # Initialize the SummaryWriter for TensorBoard
@@ -230,14 +230,14 @@ If we inspect the code above, a prime candidate for writing to TensorBoard is th
 
 First, we add a new counter just after we start the training loop:
 
-```
+```python
   # Run the training loop
   loss_idx_value = 0
 ```
 
 Then, we add the `add_scalar` call to our code - we write away the `current_loss` variable for the current index value, which we then increase with one.
 
-```
+```python
       # Print statistics
       current_loss += loss.item()
       writer.add_scalar("Loss", current_loss, loss_idx_value)
@@ -252,13 +252,13 @@ Because `current_loss` is reset after every 500th minibatch, we're likely going 
 
 Let's now run the Python script - and when training finishes, you can start TensorBoard as follows _from the directory where your script is located_:
 
-```
+```console
 tensorboard --logdir=runs
 ```
 
 You should then see the following:
 
-```
+```console
 (pytorch) C:\Users\Chris\Test>tensorboard --logdir=runs
 Serving TensorBoard on localhost; to expose to the network, use a proxy or pass --bind_all
 TensorBoard 2.6.0 at http://localhost:6006/ (Press CTRL+C to quit)
@@ -272,7 +272,7 @@ Indeed, a wavy pattern. This makes sense, because loss is reset continuously. Fo
 
 If we want, we can also group multiple graphs in a **scalar group**, this way:
 
-```
+```python
   # Run the training loop
   loss_idx_value = 0
   for epoch in range(0, 5): # 5 epochs at maximum
@@ -327,7 +327,7 @@ We can now see loss at _minibatch level_ (including the resets) and _epoch level
 
 Using `add_graph`, you can write the network graph to TensorBoard so that it can be visualized. This is how to do it:
 
-```
+```python
     # Iterate over the DataLoader for training data
     for i, data in enumerate(trainloader, 0):
       
@@ -347,7 +347,7 @@ Et voila:
 
 Suppose that you have _image data_ available during the training process - for example, random selections from your batches, weight visualizations or e.g. Activation Maximization values - then you can use `add_image` in the following way:
 
-```
+```python
       # Write an image at every batch 0
       if i == 0:
         writer.add_image("Example input", inputs[0], global_step=epoch)
@@ -363,7 +363,7 @@ Visualizing weight histograms in TensorBoard takes a bit more time, because PyTo
 
 _Please do note that the functionality below only works with `Conv2d` and `Linear` layers. All others will be skipped. If you need other layers, please feel free to let me know through the comments, and I will try to add them!_
 
-```
+```python
 def weight_histograms_conv2d(writer, step, weights, layer_number):
   weights_shape = weights.shape
   num_kernels = weights_shape[0]
@@ -402,7 +402,7 @@ Add these Python `def`s above the `__main__` check. Here's what they do, from th
 
 You can then add the call to your code:
 
-```
+```python
   # Run the training loop
   loss_idx_value = 0
   for epoch in range(0, 5): # 5 epochs at maximum
@@ -421,7 +421,7 @@ It's then possible to see weight histograms in your TensorBoard page (_note that
 
 Should you wish to use everything at once, here you go:
 
-```
+```python
 import os
 import torch
 from torch import nn

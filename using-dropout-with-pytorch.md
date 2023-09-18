@@ -68,7 +68,7 @@ In the example, you'll see that:
 - The `forward` definition is a relatively standard PyTorch definition that must be included in a `nn.Module`: it ensures that the forward pass of the network (i.e., when the data is fed to the network), is performed by feeding input data `x` through the `layers` defined in the constructor.
 - In the `main` check, a random seed is fixed, the dataset is loaded and prepared; the MLP, loss function and optimizer are initialized; then the model is trained. This is the classic PyTorch training loop: gradients are zeroed, a forward pass is performed, loss is computed and backpropagated through the network, and optimization is performed. Finally, after every iteration, statistics are printed.
 
-```
+```python
 import os
 import torch
 from torch import nn

@@ -116,7 +116,7 @@ Suppose that we express the Group feautre, with _healthy, unhealthy and healthy_
 - We then perform a `.transform(..)` operation on two elements from the array with features: first, on a Healthy; secondly, on an Unhealthy group member. We expect the outcome to be `[1, 0]` for the healthy group, and `[0, 1]` for the unhealthy group.
 - After the transform, we convert the data into array format and print it to standard output.
 
-```
+```python
 import numpy as np
 from sklearn import preprocessing
 
@@ -141,7 +141,7 @@ Unhealthy one-hot encoded: [[0. 1.]]
 
 Let's now take a look at a real-world dataset. We can load the [MNIST dataset](https://www.machinecurve.com/index.php/2019/12/31/exploring-the-keras-datasets/#mnist-database-of-handwritten-digits), which is a dataset of handwritten numbers, as follows:
 
-```
+```python
 from tensorflow.keras.datasets import mnist
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 ```
@@ -152,7 +152,7 @@ The data looks like this:
 
 Now let's print one of the `y` values on screen:
 
-```
+```python
 from tensorflow.keras.datasets import mnist
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 print(y_test[123])
@@ -168,7 +168,7 @@ Let's see how we can do this with Scikit-learn.
 - We then perform fit and transform operations with the `OneHotEncoder` initialization for both the training and the testing segments of our dataset.
 - We finally print the results for the `y` variable we checked earlier.
 
-```
+```python
 import numpy as np
 from sklearn import preprocessing
 from tensorflow.keras.datasets import mnist

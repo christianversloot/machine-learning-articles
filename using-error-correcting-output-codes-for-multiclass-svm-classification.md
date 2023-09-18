@@ -88,7 +88,7 @@ Imagine that you would need to generate a multiclass classifier for this linearl
 
 Constructing the dataset can be done in the following way:
 
-```
+```python
 from sklearn.datasets import make_blobs
 
 # Configuration options
@@ -115,7 +115,7 @@ Now that we have a dataset that we can use for generating an ECOC based multicla
 - The trained classifier can then be evaluated. Performing classification analysis using a [confusion matrix](https://www.machinecurve.com/index.php/2020/05/05/how-to-create-a-confusion-matrix-with-scikit-learn/) is a useful tool for quick-and-dirty analysis of model performance. We use `plot_confusion_matrix` with the testing data and some Matplotlib colormap to generate the confusion matrix. With `normalize='true'`, we instruct Scikit to display the _normalized_ predictions: in other words, we don't see the absolute amount of predictions on screen, but rather the proportions between predictions.
 - We finally plot the confusion matrix with Matplotlib.
 
-```
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.datasets import make_blobs

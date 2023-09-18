@@ -1,10 +1,10 @@
 ---
 title: "Extensions to Gradient Descent: from momentum to AdaBound"
 date: "2019-11-03"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
-tags: 
+tags:
   - "adam"
   - "adaptive-optimizers"
   - "deep-learning"

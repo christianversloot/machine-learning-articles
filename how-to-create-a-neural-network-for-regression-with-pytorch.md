@@ -1,11 +1,11 @@
 ---
 title: "How to create a neural network for regression with PyTorch"
 date: "2021-07-20"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "mlp"
   - "multilayer-perceptron"
@@ -69,43 +69,43 @@ The **[Boston House Prices Regression dataset](https://www.machinecurve.com/inde
 Some observations about this data (from [this article](https://www.machinecurve.com/index.php/2019/12/31/exploring-the-keras-datasets/#boston-housing-price-regression-dataset)):
 
 > The minimum house price is $5000, while the maximum house price is $50.000. This may sound weird, but it’s not: house prices have risen over the decades, and the study that produced this data is from 1978 (Harrison & Rubinfeld, 1978). Actually, around 1978 prices of ≈$50.000 were quite the median value, so this dataset seems to contain relatively cheaper houses (or the Boston area was cheaper back then – I don’t know; Martin, 2017).
-> 
+>
 > The mean house price was $22.533.
-> 
+>
 > Variance in house prices is $84.587.
-> 
+>
 > MachineCurve (2020)
 
 These are variables available in the dataset:
 
 > **CRIM** per capita crime rate by town
-> 
+>
 > **ZN** proportion of residential land zoned for lots over 25,000 sq.ft.
-> 
+>
 > **INDUS** proportion of non-retail business acres per town
-> 
+>
 > **CHAS** Charles River dummy variable (= 1 if tract bounds river; 0 otherwise)
-> 
+>
 > **NOX** nitric oxides concentration (parts per 10 million)
-> 
+>
 > **RM** average number of rooms per dwelling
-> 
+>
 > **AGE** proportion of owner-occupied units built prior to 1940
-> 
+>
 > **DIS** weighted distances to five Boston employment centres
-> 
+>
 > **RAD** index of accessibility to radial highways
-> 
+>
 > **TAX** full-value property-tax rate per $10,000
-> 
+>
 > **PTRATIO** pupil-teacher ratio by town
-> 
+>
 > **B** 1000(Bk – 0.63)^2 where Bk is the proportion of blacks by town
-> 
+>
 > **LSTAT** % lower status of the population
-> 
+>
 > **MEDV** Median value of owner-occupied homes in $1000’s
-> 
+>
 > MachineCurve (2020)
 
 Obviously, **MEDV** is the median value and hence the target variable.
@@ -116,7 +116,7 @@ The first thing that we have to do is specifying the imports that will be used f
 
 Next to PyTorch, we will also import two parts (the `load_boston` and `StandardScaler` components) from Scikit-learn. We will need them for loading and preparing the data; they represent as the source and [a preparation mechanism](https://www.machinecurve.com/index.php/2020/11/19/how-to-normalize-or-standardize-a-dataset-in-python/), respectively.
 
-```
+```python
 import torch
 from torch import nn
 from torch.utils.data import DataLoader
@@ -132,7 +132,7 @@ A PyTorch dataset simply is a class that extends the `Dataset` class; in our cas
 
 In the constructor, we receive `X` and `y` representing inputs and targets and possibly a `scale_data` variable for [standardization](https://www.machinecurve.com/index.php/2020/11/19/how-to-normalize-or-standardize-a-dataset-in-python/), being `True` by default. We then check whether the data already has Tensor format - it really needs to be non-Tensor format to be processed. Subsequently, depending on whether we want our data to be [standardized](https://www.machinecurve.com/index.php/2020/11/19/how-to-normalize-or-standardize-a-dataset-in-python/) (which is smart), we apply the `StandardScaler` and immediately transform the data after fitting the scaler to the data. Next, we represent the inputs (`X`) and targets (`y`) as instance variables of each `BostonDataset` object.
 
-```
+```python
 class BostonDataset(torch.utils.data.Dataset):
   '''
   Prepare the Boston dataset for regression
@@ -175,7 +175,7 @@ Yep, that one output value is precisely the target variable that should be learn
 
 In the `forward` pass, we simply feed the input data (`x`) through the model (`self.layers`) and return the result.
 
-```
+```python
 class MLP(nn.Module):
   '''
     Multilayer Perceptron for regression.
@@ -202,7 +202,7 @@ class MLP(nn.Module):
 
 Now that we have specified a representation of the dataset and the model, it is time that we start using them.
 
-```
+```python
 if __name__ == '__main__':
   
   # Set fixed random number seed
@@ -220,7 +220,7 @@ We can next actually prepare our dataset in PyTorch format by creating a `Boston
 
 Now that we have a PyTorch-compatible dataset, it still cannot be used directly. We will need to batch and shuffle the dataset first. This essentially means changing the order of the inputs and targets randomly, so that no hidden patterns in data collection can disturb model training. Following this, we generate _batches_ of data - so that we can feed them through the model batched, given possible hardware constraints. We config the model to use 10 samples per batch, but this can be configured depending on your own hardware.
 
-```
+```python
   # Prepare Boston dataset
   dataset = BostonDataset(X, y)
   trainloader = torch.utils.data.DataLoader(dataset, batch_size=10, shuffle=True, num_workers=1)
@@ -236,7 +236,7 @@ Picking a [loss function](https://www.machinecurve.com/index.php/2021/07/19/how-
 
 For the sake of simplicity, we will be using MAE loss (i.e., `nn.L1Loss`) today. Now that we have defined the MLP and prepared the data, we can initialize the `MLP` and the `loss_function`. We also initialize the optimizer, which adapts the weights of our model (i.e. makes it better) after the error (loss) was computed backwards. We will be using Adam, which is quite a standard optimizer, with a relatively default learning rate of `1e-4`.
 
-```
+```python
   # Initialize the MLP
   mlp = MLP()
   
@@ -258,7 +258,7 @@ You can see that in this loop, the following happens:
 - We then zero the gradients in the optimizer. This means that knowledge of previous improvements (especially important in batch > 0 for every epoch) is no longer available. This is followed by the **forward pass**, the error computation using our loss function, the **backward pass**, and finally the **optimization**.
 - Found loss is added to the loss value for the current epoch. In addition, after every tenth batch, some statistics about the current state of affairs are printed.
 
-```
+```python
   # Run the training loop
   for epoch in range(0, 5): # 5 epochs at maximum
     
@@ -306,7 +306,7 @@ You can see that in this loop, the following happens:
 
 It may be the case that you want to use all the code immediately.. In that case, here you go! :)
 
-```
+```python
 import torch
 from torch import nn
 from torch.utils.data import DataLoader

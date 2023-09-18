@@ -1,11 +1,11 @@
 ---
 title: "How to use PyTorch loss functions"
 date: "2021-07-19"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "bceloss"
   - "bcewithlogitsloss"
   - "binary-crossentropy"
@@ -80,7 +80,7 @@ Implementing binary cross-entropy loss with PyTorch is easy. It involves the fol
 
 A full example of using binary cross-entropy loss is given next, using the `torchvision.datasets.FakeData` dataset:
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -179,7 +179,7 @@ Simple binary cross-entropy loss (represented by `nn.BCELoss` in PyTorch) comput
 However, it is possible to generate more numerically stable variant of binary cross-entropy loss by _combining_ the Sigmoid and the BCE Loss into one loss function:
 
 > This version is more numerically stable than using a plain Sigmoid followed by a BCELoss as, by combining the operations into one layer, we take advantage of the log-sum-exp trick for numerical stability.
-> 
+>
 > PyTorch (n.d.)
 
 This trick is summarized [here](https://en.wikipedia.org/wiki/LogSumExp#log-sum-exp_trick_for_log-domain_calculations).
@@ -188,7 +188,7 @@ In PyTorch, this is combined into the `**nn.BCEWithLogitsLoss**` function. The d
 
 Here is an example demonstrating `nn.BCEWithLogitsLoss` using the `torchvision.datasets.FakeData` dataset:
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -301,7 +301,7 @@ Note as well that by consequence, you can also model a binary classification pro
 
 As you can see above, the _prediction_ of our classifier should be a _pseudo probability distribution_ over all the target classes. The softmax activation function serves this purpose. Using `nn.NLLLoss` therefore requires that we use a Softmax activated output in our neural network. `nn.LogSoftmax` is faster than pure `nn.Softmax`, however; that's why we are using `nn.LogSoftmax` in the `nn.NLLLoss` example for PyTorch below.
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -394,7 +394,7 @@ Recall that `nn.NLLLoss` requires the application of a `Softmax` (or `LogSoftmax
 
 This is an example of `nn.CrossEntropyLoss` with a PyTorch neural network. Note that the final layer does not use any `Softmax` related loss; this is already built into the loss function!
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -488,7 +488,7 @@ Suppose that your multiclass classification targets are drawn from a Poisson dis
 
 An example using Poisson Negative log likelihood loss with PyTorch is as follows:
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -583,7 +583,7 @@ Suppose that your multiclass classification targets are drawn from a Gaussian di
 
 This is an example of using Gaussian Negative log likelihood loss with PyTorch.
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -678,7 +678,7 @@ In PyTorch, the **Hinge Embedding Loss** is defined as follows:
 
 It can be used to measure whether two inputs (`x` and `y`) are similar, and works only if `y`s are either 1 or -1.
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -781,7 +781,7 @@ The two-class soft margin loss optimizes the following formula (PyTorch, n.d.):
 
 It can be used in binary classification problems as follows:
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -884,7 +884,7 @@ For multiclass classification problems, a **multi-class hinge loss** can be used
 
 Here is an examplke using `nn.MultiMarginLoss` with PyTorch for **multi-class single-label classification problems:**
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -980,7 +980,7 @@ Multilabel soft margin loss (implemented in PyTorch as `nn.MultiLabelSoftMarginL
 - We use the MNIST dataset for this purpose. By replacing the targets with one of three multilabel Tensors, we are simulating a multilabel classification problem. Note that there is no resemblence whatsoever between targets and inputs, as this is simply an example.
 - The final Linear layer outputs a 10-dimensional Tensor, which makes sense since we need 10 logits per sample.
 
-```
+```python
 import os
 import numpy as np
 import torch
@@ -1008,7 +1008,7 @@ class MLP(nn.Module):
   def forward(self, x):
     '''
       Forward pass
-      Note that 
+      Note that
     '''
     fp = self.layers(x)
     return fp
@@ -1092,7 +1092,7 @@ if __name__ == '__main__':
 
 KL Divergence can be used for [Variational Autoencoders, multiclass classification and replacing Least Squares regression](https://www.machinecurve.com/index.php/2019/12/21/how-to-use-kullback-leibler-divergence-kl-divergence-with-keras/). Here is an example that uses KL Divergence with PyTorch:
 
-```
+```python
 import os
 import numpy as np
 import torch
@@ -1121,7 +1121,7 @@ class MLP(nn.Module):
   def forward(self, x):
     '''
       Forward pass
-      Note that 
+      Note that
     '''
     fp = self.layers(x)
     return fp
@@ -1201,7 +1201,7 @@ As you can see, it simply computes the difference between the input `x` and the 
 
 Below, you will see an example of MAE loss (also called L1 Loss) within PyTorch, using `nn.L1Loss` and the Boston Housing dataset:
 
-```
+```python
 import os
 import numpy as np
 import torch
@@ -1250,7 +1250,7 @@ class MLP(nn.Module):
   def forward(self, x):
     '''
       Forward pass
-      Note that 
+      Note that
     '''
     fp = self.layers(x)
     return fp
@@ -1326,7 +1326,7 @@ The **Mean Squared Error** loss (or `nn.MSELoss`) essentially performs the same,
 
 This is an example of using MSE Loss with PyTorch, which is provided as `nn.MSELoss`:
 
-```
+```python
 import os
 import numpy as np
 import torch
@@ -1375,7 +1375,7 @@ class MLP(nn.Module):
   def forward(self, x):
     '''
       Forward pass
-      Note that 
+      Note that
     '''
     fp = self.layers(x)
     return fp
@@ -1451,7 +1451,7 @@ The `beta` parameter is configurable in the `nn.SmoothL1Loss(...)` initializatio
 
 ![](images/image-5.png)
 
-```
+```python
 import os
 import numpy as np
 import torch
@@ -1500,7 +1500,7 @@ class MLP(nn.Module):
   def forward(self, x):
     '''
       Forward pass
-      Note that 
+      Note that
     '''
     fp = self.layers(x)
     return fp
@@ -1582,7 +1582,7 @@ In other words, by tweaking the value for `delta`, we can adapt the loss functio
 
 Being available as `nn.HuberLoss` (with a configurable `delta` parameter), it can be used in the following way:
 
-```
+```python
 import os
 import numpy as np
 import torch
@@ -1631,7 +1631,7 @@ class MLP(nn.Module):
   def forward(self, x):
     '''
       Forward pass
-      Note that 
+      Note that
     '''
     fp = self.layers(x)
     return fp

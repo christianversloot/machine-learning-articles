@@ -1,9 +1,9 @@
 ---
 title: "Convolutional Neural Networks and their components for computer vision"
 date: "2018-12-07"
-categories: 
+categories:
   - "deep-learning"
-tags: 
+tags:
   - "cnn"
   - "computer-vision"
   - "convolutional-neural-networks"

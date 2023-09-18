@@ -1,10 +1,10 @@
 ---
 title: "How to find the value for Keras input_shape/input_dim?"
 date: "2020-04-05"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "dataset"
   - "deep-learning"
   - "input-shape"
@@ -54,7 +54,7 @@ With this understanding, let's now take a look at the _rank_ and the _shape_ of 
 
 Say that we have this Array:
 
-```
+```python
 [[1, 2, 3], [4, 5, 6]]
 ```
 
@@ -87,7 +87,7 @@ Now that we know about the rank and shape of Tensors, and how they are related t
 
 Let's begin with `input_shape`:
 
-```
+```python
 model = Sequential()
 model.add(Dense(4, input_shape=(10,))
 ```
@@ -102,7 +102,7 @@ It's actually really simple. The input shape parameter simply tells the input la
 
 Sometimes, though, you just have one dimension - which is the case with one-dimensional / flattened arrays, for example. In this case, you can also simply use `input_dim`: specifying the number of elements within that first dimension only. For example:
 
-```
+```python
 model = Sequential()
 model.add(Dense(32, input_dim=784))
 ```
@@ -117,7 +117,7 @@ Now, suppose that I'm loading an example dataset - such as the MNIST dataset fro
 
 That would be something like this:
 
-```
+```python
 from tensorflow.keras.datasets import mnist
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 ```
@@ -128,20 +128,20 @@ Very simple - we can use the [Numpy](https://numpy.org/) package used for number
 
 Let's add this import to the top:
 
-```
+```python
 import numpy as np
 ```
 
 And then we add this to the bottom:
 
-```
+```python
 training_set_shape = x_train.shape
 print(training_set_shape)
 ```
 
 Yielding this as a whole:
 
-```
+```python
 import numpy as np
 from tensorflow.keras.datasets import mnist
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
@@ -151,7 +151,7 @@ print(training_set_shape)
 
 Let's now run it and see what happens.
 
-```
+```console
 $ python datasettest.py
 2020-04-05 19:22:27.146991: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cudart64_100.dll
 (60000, 28, 28)
@@ -173,21 +173,21 @@ Now, with images, we would often use Convolutional Neural Networks. In those mod
 
 However, we can also automate this, for the case when we want to use a different image dataset. We simply add the following:
 
-```
+```python
 number_of_channels = 1
 sample_shape = (training_set_shape[1], training_set_shape[2], number_of_channels)
 ```
 
 We could even expand on our prints:
 
-```
+```python
 print(f'Dataset shape: {training_set_shape}')
 print(f'Sample shape: {sample_shape}')
 ```
 
 Indeed, it would yield the same output:
 
-```
+```console
 $ python datasettest.py
 2020-04-05 19:28:28.235295: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cudart64_100.dll
 Dataset shape: (60000, 28, 28)
@@ -204,7 +204,7 @@ For this, we'll be analyzing the [simple two-dimensional ConvNet](https://www.ma
 
 Here is the code - you can find the analysis below it:
 
-```
+```python
 from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D

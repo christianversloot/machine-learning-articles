@@ -1,10 +1,10 @@
 ---
 title: "How to save and load a model with Keras?"
 date: "2020-02-14"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "keras"
   - "load-model"
@@ -33,7 +33,7 @@ Before we can show you how to save and load your Keras model, we should define a
 
 So, for this purpose, we'll be using this model today:
 
-```
+```python
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.layers import Dense, Flatten, Conv2D
 from tensorflow.keras.losses import sparse_categorical_crossentropy
@@ -53,7 +53,7 @@ verbosity = 1
 # Load MNIST dataset
 (input_train, target_train), (input_test, target_test) = mnist.load_data()
 
-# Reshape data    
+# Reshape data
 input_train = input_train.reshape((input_train.shape[0], img_width, img_height, 1))
 input_test = input_test.reshape((input_test.shape[0], img_width, img_height, 1))
 input_shape = (img_width, img_height, 1)
@@ -108,7 +108,7 @@ But first, saving the model.
 
 In order to save whole models, Keras provides the `save_model` definition:
 
-```
+```python
 tf.keras.models.save_model(
     model,
     filepath,
@@ -136,7 +136,7 @@ Now, let's take a look at what this means for our model.
 
 Fortunately, it's a simple one, so we can simply specify the model and the filepath and we're done. Add this to your code and run it to train the model:
 
-```
+```python
 # Save the model
 filepath = './saved_model'
 save_model(model, filepath)
@@ -144,7 +144,7 @@ save_model(model, filepath)
 
 Don't forget to add `save_model` to your imports and to create a directory called `save_model` at the `filepath` you specify.
 
-```
+```python
 from tensorflow.keras.models import Sequential, save_model
 ```
 
@@ -156,7 +156,7 @@ After running the model, indeed, our `save_model` folder is now full of model fi
 
 Now, if we wanted to save our model into HDF (`.h5`) format, we would change the `save_model` call into:
 
-```
+```python
 # Save the model
 filepath = './saved_model'
 save_model(model, filepath, save_format='h5')
@@ -182,19 +182,19 @@ Now that we have a saved model, we can demonstrate how to _load_ it again - in o
 
 The first thing that we'll have to do if we wish to load our Keras model is adding a few extra imports. Firstly, add `load_model` to your `tensorflow.keras.models` import:
 
-```
+```python
 from tensorflow.keras.models import Sequential, save_model, load_model
 ```
 
 Also make sure to import `numpy`, as we'll need to compute an `argmax` value for our Softmax activated model prediction later:
 
-```
+```python
 import numpy as np
 ```
 
 We can then load the model:
 
-```
+```python
 # Load the model
 loaded_model = load_model(
     filepath,
@@ -208,12 +208,12 @@ Et voila, you've loaded your model :)
 Now, while `filepath` is pretty clear, what do `custom_objects` and `compile` mean?
 
 > If the model you want to load includes custom layers or other custom classes or functions, you can pass them to the loading mechanism via the `custom_objects` argument.
-> 
+>
 > Keras (n.d.; FAQ)
 
 Indeed - by default, custom objects are not saved with the model. You can however specify them with the `custom_objects` attribute upon loading it, like this (Keras, n.d.):
 
-```
+```python
 model = load_model('my_model.h5', custom_objects={'AttentionLayer': AttentionLayer})
 ```
 
@@ -223,7 +223,7 @@ Now, the `compile` indicates whether the model must be compiled or not. It's `Tr
 
 With the model we loaded, we can generate predictions for new data:
 
-```
+```python
 # Generate a prediction with loaded model
 sample_index = 788
 sample_input, sample_target = input_test[sample_index], target_test[sample_index]

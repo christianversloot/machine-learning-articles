@@ -1,10 +1,10 @@
 ---
 title: "How to generate a summary of your Keras model?"
 date: "2020-04-01"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "keras"
   - "model-summary"
@@ -93,7 +93,7 @@ Now that we know some of the high-level building blocks of a Keras model, and kn
 
 For this reason, we'll give you an example [Convolutional Neural Network](https://www.machinecurve.com/index.php/2020/03/30/how-to-use-conv2d-with-keras/) for two-dimensional inputs. Here it is:
 
-```
+```python
 from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D
@@ -167,7 +167,7 @@ Very simple.
 
 Add `model.summary()` to your code, perhaps with a nice remark, like `# Display a model summary`. Like this:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape))

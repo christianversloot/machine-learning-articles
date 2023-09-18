@@ -217,7 +217,7 @@ The first thing that we have to do is define today's Keras model. We'll use a mo
 
 Create a folder containing a Python file, such as `base_model.py`. In this file, add the following code:
 
-```
+```python
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, Conv2D, MaxPooling2D
@@ -267,7 +267,7 @@ model.add(Dense(no_classes, activation='softmax'))
 
 Do note above that one thing is different compared to the sparse categorical crossentropy model: we import the code for Cyclical Learning Rates as `CLR` and the one for the Learning Rate Range Test as `LRFinder` - as you can see here:
 
-```
+```python
 from CLR.clr_callback import CyclicLR
 from LRF.lr_finder import LRFinder
 ```
@@ -306,7 +306,7 @@ The first thing we'll have to find out is the cycle length.
 
 Then, we need to identify the minimum and maximum bounds. The Learning Rate Range Test is what we can use for this. Let's add some code for using `LRFinder`:
 
-```
+```python
 ##
 ## LR Finder specific code
 ##
@@ -321,7 +321,7 @@ First, we compile the model - that is, create a true instance with our specified
 
 Then, we specify a few configuration options:
 
-```
+```python
 # Configuration settings for LR finder
 start_lr = 1e-4
 end_lr = 1e0
@@ -332,7 +332,7 @@ We will try to find the best learning rate within the range between \[latex\]10^
 
 We then define the Learning Rate Range Test as `lr_finder` and add it as a Keras callback to `model.fit`:
 
-```
+```python
 # Define LR finder callback
 lr_finder = LRFinder(min_lr=start_lr, max_lr=end_lr)
 
@@ -352,7 +352,7 @@ We observe a plateau around \[latex\]10^{-2}\[/latex\], after which loss values 
 
 Now that we know which bounds we'll use, we can remove all Learning Rate Range Test specific code. That is, remove everything up to and including:
 
-```
+```python
 ##
 ## LR Finder specific code
 ##
@@ -364,7 +364,7 @@ If they do, let's move on - and add the Cyclical Learning Rate implementation.
 
 The first thing that we'll have to do is to specify the options:
 
-```
+```python
 # Set CLR options
 clr_step_size = int(4 * (len(input_train)/batch_size))
 base_lr = 1e-4
@@ -380,14 +380,14 @@ The `mode` is set to triangular: that's equal to linear mode. We don't use `tria
 
 We can then define the callback for our Keras model:
 
-```
+```python
 # Define the callback
 clr = CyclicLR(base_lr=base_lr, max_lr=max_lr, step_size=clr_step_size, mode=mode)
 ```
 
 The only thing that is left by then is model compilation with `model.compile` and starting the training process with `model.fit`. Note the use of the callback during the `fit`!
 
-```
+```python
 # Compile the model
 model.compile(loss=loss_function,
               optimizer=optimizer,

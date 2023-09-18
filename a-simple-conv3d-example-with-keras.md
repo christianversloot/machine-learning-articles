@@ -1,11 +1,11 @@
 ---
 title: "A simple Conv3D example with TensorFlow 2 and Keras"
 date: "2019-10-18"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "conv3d"
   - "convolutional-neural-networks"
   - "deep-learning"
@@ -49,7 +49,7 @@ _Note that the code for this blog post is also available on [GitHub](https://git
 
 This example shows how you can **create 3D convolutional neural networks** with TensorFlow 2 based Keras through `Conv3D` layers. You can immediately use it in your neural network code. However, if you want to understand 3D Convolutions in more detail or wish to get step-by-step examples for creating your own 3D ConvNet, make sure to read the rest of this tutorial too 🚀
 
-```
+```python
     # Create the model
     model = Sequential()
     model.add(Conv3D(32, kernel_size=(3, 3, 3), activation='relu', kernel_initializer='he_uniform', input_shape=sample_shape))
@@ -126,7 +126,7 @@ So let's open up your code editor and _on y va!_ (🇫🇷 for _let's go!_).
 
 As usual, we import the dependencies first:
 
-```
+```python
 '''
   A simple Conv3D example with TensorFlow 2 based Keras
 '''
@@ -153,7 +153,7 @@ For most of them, I already explained why we need them. However, for the Keras o
 
 Now that we imported all dependencies, we can proceed with some model configuration variables that allow us to configure the model in an orderly fashion:
 
-```
+```python
 # -- Preparatory code --
 # Model configuration
 batch_size = 100
@@ -177,7 +177,7 @@ Specifically, we configure the model as follows:
 
 Contrary to the two-dimensional CNN, we must add some helper functions:
 
-```
+```python
 # Convert 1D vector into 3D values, provided by the 3D MNIST authors at
 # https://www.kaggle.com/daavoo/3d-mnist
 def array_to_color(array, cmap="Oranges"):
@@ -205,10 +205,10 @@ The function reshapes the data, which per sample comes in a (4096,) shape (16x16
 
 We can next import and prepare the data:
 
-```
+```python
 # -- Process code --
 # Load the HDF5 data file
-with h5py.File("./full_dataset_vectors.h5", "r") as hf:    
+with h5py.File("./full_dataset_vectors.h5", "r") as hf:
 
     # Split the data into training/test features/targets
     X_train = hf["X_train"][:]
@@ -242,7 +242,7 @@ We can now finally create the model architecture and start the training process.
 
 First - the architecture:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv3D(32, kernel_size=(3, 3, 3), activation='relu', kernel_initializer='he_uniform', input_shape=sample_shape))
@@ -266,7 +266,7 @@ Finally, we output the data into a Dense layer with `no_classes` (= 10) neurons 
 
 Second - the training procedure:
 
-```
+```python
 # Compile the model
 model.compile(loss=tensorflow.keras.losses.categorical_crossentropy,
               optimizer=tensorflow.keras.optimizers.Adam(lr=learning_rate),
@@ -288,7 +288,7 @@ Next, we `fit` the data to the model, using the other configuration settings set
 
 Finally, we can add some code for evaluating model performance:
 
-```
+```python
 # Generate generalization metrics
 score = model.evaluate(X_test, targets_test, verbose=0)
 print(f'Test loss: {score[0]} / Test accuracy: {score[1]}')
@@ -313,7 +313,7 @@ The above code simply evaluates the model by means of the testing data, printing
 
 Altogether, we arrive at this model code:
 
-```
+```python
 '''
   A simple Conv3D example with TensorFlow 2 based Keras
 '''
@@ -352,7 +352,7 @@ def rgb_data_transform(data):
 
 # -- Process code --
 # Load the HDF5 data file
-with h5py.File("./full_dataset_vectors.h5", "r") as hf:    
+with h5py.File("./full_dataset_vectors.h5", "r") as hf:
 
     # Split the data into training/test features/targets
     X_train = hf["X_train"][:]
@@ -413,7 +413,7 @@ with h5py.File("./full_dataset_vectors.h5", "r") as hf:
 
 Running the model produces mediocre performance - a test accuracy of approximately 65.6%, contrary to the 99%+ of the 2D model:
 
-```
+```shell
 Train on 8000 samples, validate on 2000 samples
 Epoch 1/30
 2019-10-18 14:49:16.626766: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cublas64_100.dll
@@ -498,7 +498,7 @@ Now - we got a working Conv3D model with the 3D MNIST dataset, but can we improv
 
 Adding [Dropout](https://www.machinecurve.com/index.php/2019/12/18/how-to-use-dropout-with-keras/) to the model architecture allows us to 'drop' random elements from the feature maps during training. Although this confuses the model, it disallows it to adapt too much to the training data:
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Conv3D(32, kernel_size=(3, 3, 3), activation='relu', kernel_initializer='he_uniform', input_shape=sample_shape))
@@ -514,7 +514,7 @@ model.add(Dense(no_classes, activation='softmax'))
 
 Don't forget to add it as an extra import:
 
-```
+```python
 from tensorflow.keras.layers import Dense, Flatten, Conv3D, MaxPooling3D, Dropout
 ```
 

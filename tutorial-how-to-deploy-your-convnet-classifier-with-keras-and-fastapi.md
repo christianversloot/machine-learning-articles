@@ -63,7 +63,7 @@ Then Pillow:
 
 We can use Pillow to manipulate images - which is what we'll do, as the inputs for our ConvNet are images. Installation, once again, goes through `pip`:
 
-```
+```shell
 pip install Pillow
 ```
 
@@ -122,7 +122,7 @@ Not willing to interrupt, but there are two things that you'll have to do first 
 
 The first thing to do is to state all the model imports:
 
-```
+```python
 # Imports
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from PIL import Image
@@ -144,7 +144,7 @@ Obviously, we'll need parts from `FastAPI`, `PIL` (Pillow), `pydantic` and `tens
 
 Next, we [load the model](https://www.machinecurve.com/index.php/2020/02/14/how-to-save-and-load-a-model-with-keras/):
 
-```
+```python
 # Load the model
 filepath = './saved_model'
 model = load_model(filepath, compile = True)
@@ -154,7 +154,7 @@ This assumes that your model is in the new TensorFlow 2.0 format. If it's not, c
 
 Then, we get the input shape _as expected by the model_:
 
-```
+```python
 # Get the input shape for the model layer
 input_shape = model.layers[0].input_shape
 ```
@@ -165,7 +165,7 @@ That is, we _wish to know what the model expects_ - so that we can transform any
 
 Second stage already! Time to build the actual groundwork. First, let's define the FastAPI app:
 
-```
+```python
 # Define the FastAPI app
 app = FastAPI()
 ```
@@ -174,7 +174,7 @@ app = FastAPI()
 
 Then, we can define the Response - or the output that we'll serve if people trigger our web service once it's live. It looks like this:
 
-```
+```python
 # Define the Response
 class Prediction(BaseModel):
   filename: str
@@ -194,7 +194,7 @@ It contains four parts:
 
 Now, we'll define the main route - that is, when people navigate to your web API directly, without going to the `/prediction` route. It's a very simple piece of code:
 
-```
+```python
 # Define the main route
 @app.get('/')
 def root_route():
@@ -207,7 +207,7 @@ It simply tells people to use the correct route.
 
 The `/prediction` route is a slightly longer one:
 
-```
+```python
 # Define the /prediction route
 @app.post('/prediction/', response_model=Prediction)
 async def prediction_route(file: UploadFile = File(...)):
@@ -312,7 +312,7 @@ Specifying all the details:
 
 Results in this output:
 
-```
+```json
 {
     "filename": "mnist_sample.png",
     "contenttype": "image/png",
@@ -346,7 +346,7 @@ Sorry for the long delay in blogs again and happy engineering. See you soon! ðŸ˜
 
 If you wish to obtain the code at once, here you go:
 
-```
+```python
 # Imports
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from PIL import Image

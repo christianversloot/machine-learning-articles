@@ -1,11 +1,11 @@
 ---
 title: "How to use Upsample for upsampling with PyTorch"
 date: "2021-12-28"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
   - "geen-categorie"
-tags: 
+tags:
   - "computer-vision"
   - "convolutional-neural-networks"
   - "deep-learning"
@@ -40,7 +40,7 @@ Are you ready? Let's take a look 😎
 Here's the Wikipedia explanation of upsampling:
 
 > When upsampling is performed on a sequence of samples of a _signal_ or other continuous function, it produces an approximation of the sequence that would have been obtained by sampling the signal at a higher rate (or [density](https://en.wikipedia.org/wiki/Dots_per_inch), as in the case of a photograph).
-> 
+>
 > Wikipedia (2004)
 
 In other words: you have an input, in computer vision frequently an image, that has a specific size. For example, you have an MNIST image that is 28 x 28 pixels and has one color channel. That is, a grayscale image.
@@ -72,7 +72,7 @@ Read the [StyleGAN article](https://www.machinecurve.com/index.php/2021/12/27/st
 In PyTorch, upsampling is built into the `torch.nn.Upsample` class representing a layer called `Upsample` that can be added to your neural network:
 
 > Upsamples a given multi-channel 1D (temporal), 2D (spatial) or 3D (volumetric) data.
-> 
+>
 > PyTorch (n.d.)
 
 In other words, it works with both 1D, 2D and 3D data:
@@ -106,7 +106,7 @@ It contains multiple parts:
 - **The nn.Module** **\- a.k.a. the neural network**. As this tutorial involves using the Upsampling functionality within PyTorch, today's neural network is called `UpsampleExample`. It does only one thing: stack one `Upsample` layer in a `Sequential` block, which resizes inputs to `(56, 56)` shape and uses nearest neighbor interpolation for filling up the 'empty' pixels. The `forward` definition simply feeds the inputs to the layers and returns the result.
 - **The main segment**. Firstly, we prepare the MNIST dataset by creating an instance of the `MNIST` class, which downloads the data if necessary. In addition, a Tensorfication of the input data is performed before any data will be passed to the neural network. Secondly, a `DataLoader` is initialized on top of the `dataset`, which shuffles and selects data using a preconfigured batch size (of 10 images). Thirdly, the upsample example is initialized, and we perform an iteration over the (first) batch. For each batch, we feed the data through the neural network, and pick the first example for visualization with Matplotlib.
 
-```
+```python
 import os
 import torch
 from torch import nn

@@ -63,7 +63,7 @@ That's great from a cost perspective, as well as a user perspective. The benefit
 
 By default, TensorFlow (and Keras) use `float32` number representation while training machine learning models:
 
-```
+```shell
 >>> tf.keras.backend.floatx()
 'float32'
 ```
@@ -162,7 +162,7 @@ Let's now implement (dynamic range) quantization for a model trained with `tf.ke
 
 Here's the full code for the CNN classifier which serves as our starting point. It constructs a two-Conv-layer neural network combined with [max pooling](https://www.machinecurve.com/index.php/2020/01/30/what-are-max-pooling-average-pooling-global-max-pooling-and-global-average-pooling/) and [Dropout](https://www.machinecurve.com/index.php/2019/12/18/how-to-use-dropout-with-keras/). It trains on the MNIST dataset, which is first converted from `uint8` format into `float32` format - precisely because of that precision mentioned in the beginning of this blog post. The rest for the code speaks for itself; if not, I'd recommend reading the ConvNet post linked above.
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
@@ -231,7 +231,7 @@ print(f'Test loss: {score[0]} / Test accuracy: {score[1]}')
 
 The next step is creating a `TFLiteConverter` which can convert our Keras model into a TFLite representation. Here, we specify that it must optimize the model when doing so, using the `tf.lite.Optimize.DEFAULT` optimization method. In practice, this [reflects](https://www.tensorflow.org/lite/performance/post_training_integer_quant#convert_using_dynamic_range_quantization) dynamic range quantization.
 
-```
+```python
 # Convert into TFLite model and convert with DEFAULT (dynamic range) quantization
 converter = tf.lite.TFLiteConverter.from_keras_model(model)
 converter.optimizations = [tf.lite.Optimize.DEFAULT]

@@ -1,10 +1,10 @@
 ---
 title: "Beyond Swish: the LiSHT activation function"
 date: "2019-11-17"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
-tags: 
+tags:
   - "activation-function"
   - "activation-functions"
   - "deep-learning"

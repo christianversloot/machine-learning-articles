@@ -1,11 +1,11 @@
 ---
 title: "Easy Named Entity Recognition with Machine Learning and HuggingFace Transformers"
 date: "2021-02-11"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "deep-learning"
   - "huggingface"
   - "machine-learning"
@@ -37,7 +37,7 @@ Let's take a look! 🚀
 
 The code below allows you to create a **simple but effective Named Entity Recognition pipeline** with HuggingFace Transformers. If you use it, ensure that the former is installed on your system, as well as TensorFlow or PyTorch. If you want to understand everything in a bit more detail, make sure to read the rest of the tutorial as well! 🔥
 
-```
+```python
 from transformers import pipeline
 
 # Initialize the NER pipeline
@@ -60,7 +60,7 @@ print(ner_result)
 If we are to build a model for **Named Entity Recognition** (NER), we will need to understand what it does, don't we?
 
 > \[Named Entity Recognition is used\] to locate and classify named entities mentioned in unstructured text into pre-defined categories such as person names, organizations, locations, medical codes, time expressions, quantities, monetary values, percentages, etc.
-> 
+>
 > Wikipedia (2005)
 
 As with any technical definition, it is quite a difficult one for beginners, so let's take a look at it in a bit more detail :-)
@@ -68,7 +68,7 @@ As with any technical definition, it is quite a difficult one for beginners, so 
 Now, what is a "named entity", for example?
 
 > A named entity is a real-world object, such as persons, locations, organizations, products, etc., that can be denoted with a proper name. It can be abstract or have a physical existence.
-> 
+>
 > Wikipedia (2007)
 
 I see - so NER models can be used to detect real-world objects in text. For example, for the following text:
@@ -118,7 +118,7 @@ We are using the `BERTlarge` type of BERT which is pretrained with 24 encoder se
 Finetuning happens with the CoNLL-2003 dataset:
 
 > The shared task of CoNLL-2003 concerns language-independent named entity recognition. We will concentrate on four types of named entities: persons, locations, organizations and names of miscellaneous entities that do not belong to the previous three groups.
-> 
+>
 > UAntwerpen (n.d.)
 
 * * *
@@ -152,7 +152,7 @@ Below, you can find the entire code for the NER pipeline. As I said, it's going 
 - The next action you take is defining a phrase and feeding it through the `ner` pipeline.
 - That's it - you then print the outcome on screen.
 
-```
+```python
 from transformers import pipeline
 
 # Initialize the NER pipeline
@@ -170,7 +170,7 @@ print(ner_result)
 
 Here's what you will see for the phrase specified above:
 
-```
+```python
 [{'word': 'David', 'score': 0.9964208602905273, 'entity': 'I-PER', 'index': 1}, {'word': 'Peter', 'score': 0.9955975413322449, 'entity': 'I-PER', 'index': 3}]
 ```
 

@@ -1,9 +1,9 @@
 ---
 title: "A gentle introduction to Long Short-Term Memory Networks (LSTM)"
 date: "2020-12-29"
-categories: 
+categories:
   - "deep-learning"
-tags: 
+tags:
   - "deep-learning"
   - "long-short-term-memory"
   - "lstm"
@@ -53,13 +53,13 @@ After tokenizing a sequence such as a phrase, we can feed individual tokens (e.g
 Especially when you unfold this structure showing the parsing of subsequent tokens \[latex\]x\_{t-1}\[/latex\] etc., we see that hidden state passes across tokens in a left-to-right fashion. Each token can use information from the previous steps and hence benefit from additional context when transducing (e.g. translating) a token.
 
 > The structure of the network is similar to that of a standard multilayer perceptron, with the distinction that we allow connections among hidden units associated with a time delay. Through these connections the model can retain information about the past, enabling it to discover temporal correlations between events that are far away from each other in the data.
-> 
+>
 > Pascanu et al. (2013)
 
 While being a relatively great step forward, especially with larger sequences, classic RNNs did not show great improvements over classic neural networks where the inputs were sets of time steps (i.e. multiple tokens just at once), according to Hochreiter & Schmidhuber (1997). Diving into Hochreiter's thesis work from 6 years earlier, the researchers have identified the [vanishing gradients problem](https://www.machinecurve.com/index.php/2019/08/30/random-initialization-vanishing-and-exploding-gradients/) and the relatively large distances error flow has to go when sequences are big as one of the leading causes why such models don't perform well.
 
 > The vanishing gradients problem refers to the opposite behaviour, when long term components go exponentially fast to norm 0, making it impossible for the model to learn correlation between temporally distant events.
-> 
+>
 > Pascanu et al. (2013)
 
 ### Why vanishing gradients?

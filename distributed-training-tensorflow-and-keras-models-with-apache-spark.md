@@ -1,10 +1,10 @@
 ---
 title: "Distributed training: TensorFlow and Keras models with Apache Spark"
 date: "2020-10-22"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "apache-spark"
   - "big-data"
   - "deep-learning"
@@ -133,7 +133,7 @@ First of all, the landscape. Apache Spark is used for _processing_. It works bes
 Second of all, the how. How does Apache Spark make sure that it can do what your naïve approach can't? Although precisely explaining how Spark works takes too much time here (especially since this article focuses on machine learning), according to Wikipedia:
 
 > Apache Spark has its architectural foundation in the resilient distributed dataset (RDD), a read-only [multiset](https://en.wikipedia.org/wiki/Multiset) of data items distributed over a cluster of machines, that is maintained in a [fault-tolerant](https://en.wikipedia.org/wiki/Fault-tolerant_computing) way.
-> 
+>
 > Wikipedia (2012)
 
 The benefit of Spark is that it is capable of generating a Resilient Distributed Dataset or RDD, which is a multiset (a replicated set) distributed over a cluster of machines. This essentially allows for the same benefits for Compute as available to Storage with e.g. Hadoop: using a large amount of commodity (i.e., cheap) machines, large-scale data processing can take place. Because it's stored in a multiset fashion, resiliency is built-in and data loss is not much of a problem. In addition, because it is built in a particular way (Google for RDD lineage), Spark ensures that it's fast too.
@@ -164,7 +164,7 @@ Today, we'll take a look at the following extensions that make it possible to tr
 Let's begin with **Elephas**. Freely available on [GitHub](https://github.com/danielenricocahall/elephas), with an open source license - I am always fan of open source tools - it can be described as follows:
 
 > Elephas is an extension of Keras, which allows you to run distributed deep learning models at scale with Spark.
-> 
+>
 > Elephas (n.d.)
 
 We all know that Keras makes creating a deep learning model incredibly simple if you know what you are doing. With the latter, I of course mean: if you know what concepts to apply in what order, and if you know how the parameters and hyperparameters of the model must be trained. It is therefore not surprising that TensorFlow 2.x utilizes `tensorflow.keras` as the main API towards creating machine learning models. Its deep integration is truly symbiotic.
@@ -215,7 +215,7 @@ Creating a model with Keras and Elephas is truly simple. [As per the docs on Git
 
 The steps are explained in more detailed [here](https://github.com/maxpumperla/elephas#basic-spark-integration), but here's a full code example of a simple Keras classifier - our [hot dog classifier made Spark-ready](https://www.machinecurve.com/index.php/2020/10/20/tutorial-building-a-hot-dog-not-hot-dog-classifier-with-tensorflow-and-keras/). Do note that we omitted some general parts, which can be retrieved in the linked article.
 
-```
+```python
 import tensorflow
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Conv2D, Flatten
@@ -268,7 +268,7 @@ spark_model.fit(rdd, epochs=20, batch_size=32, verbose=0, validation_split=0.1)
 The [CERN Database Group](https://github.com/cerndb) (indeed, the European Organization for Nuclear Research, which produced the [Large Hadron Collider](https://home.cern/science/accelerators/large-hadron-collider)) created [dist-keras](https://github.com/cerndb/dist-keras), which can be used for distributed optimization of your Keras-based deep learning model. In fact:
 
 > Distributed Keras is a distributed deep learning framework built op top of Apache Spark and Keras, with a focus on "state-of-the-art" distributed optimization algorithms. We designed the framework in such a way that a new distributed optimizer could be implemented with ease, thus enabling a person to focus on research. Several distributed methods are supported, such as, but not restricted to, the training of **ensembles** and models using **data parallel** methods.
-> 
+>
 > CERN (n.d.)
 
 Similar to Elephas, `dist-keras` also allows people to train models on Apache Spark in a data parallel way (for those who haven't read about Elephas yet: navigate to the Elephas section above if you want to understand the concept of data parallelism in more detail). It does so by allowing people to perform distributed optimization; that is, rather than performing [Adam](https://www.machinecurve.com/index.php/2019/11/03/extensions-to-gradient-descent-from-momentum-to-adabound/) or [classic SGD](https://www.machinecurve.com/index.php/2019/10/24/gradient-descent-and-its-variants/), `dist-keras` utilizes _distributed_ optimizers such as ADAG, Dynamic SGD and AEASGD ([click here for a great article that explains them](https://joerihermans.com/ramblings/distributed-deep-learning-part-1-an-introduction/), of which the author is also affiliated with `dist-keras`).
@@ -327,7 +327,7 @@ That's why I wouldn't recommend using Keras2DML today, unless you really know wh
 Combining important elements from TensorFlow with Apache Spark and Apache Hadoop, the TensorFlowOnSpark system that was created by Yahoo makes it possible to train your deep learning model in a distributed way on a GPU or CPU machine powered cluster (TensorFlowOnSpark, n.d.).
 
 > _TensorFlowOnSpark brings scalable deep learning to Apache Hadoop and Apache Spark clusters._
-> 
+>
 > (TensorFlowOnSpark, n.d.)
 
 According to the docs, it was created with TensorFlow compatibility in mind. The authors argue that it provides many benefits over other solutions used for training your deep learning model:

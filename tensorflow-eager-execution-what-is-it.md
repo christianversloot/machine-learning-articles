@@ -34,7 +34,7 @@ Are you ready? Let's go! 😎
 
 Suppose that we have three Tensors, which all three represent a constant number:
 
-```
+```python
 import tensorflow as tf
 one = tf.constant([12])
 two = tf.constant([3])
@@ -43,13 +43,13 @@ three = tf.constant([2])
 
 Our goal would be to multiply the first two Tensors - thus `one` and `two` - first, followed by a subtraction - the result of the multiplication minus `three`.
 
-```
+```python
 multres = tf.math.multiply(one, two)
 ```
 
 And subsequently, the substraction:
 
-```
+```python
 subres = multres - three
 ```
 
@@ -57,7 +57,7 @@ subres = multres - three
 
 Usually, you would write it down in a sequence, like this, so that once you run your Python script, it gets executed at once:
 
-```
+```python
 import tensorflow as tf
 one = tf.constant([12])
 two = tf.constant([3])
@@ -122,7 +122,7 @@ So, in short, eager execution provides **clear benefits** over graph mode: it's 
 
 All TensorFlow 2.x versions should come with eager execution enabled by default. If you are still running an 1.x version or want to find whether it's running eagerly anyway, you could execute this code to find out whether that's the case for your machine learning model:
 
-```
+```python
 import tensorflow as tf
 tf.executing_eagerly()
 ```

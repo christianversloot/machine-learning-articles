@@ -88,7 +88,7 @@ Fortunately, there is an escape.
 
 It's actually rather simple, too: first, open up a terminal, preferably the terminal where you have access to all the other dependencies (Python, Keras, and so on). Second, run this command:
 
-```
+```shell
 pip install https://github.com/raghakot/keras-vis/archive/master.zip
 ```
 
@@ -96,8 +96,8 @@ It still uses `pip` to install `keras-vis`, but simply installs the most recent 
 
 When you see this (or anything more recent than `0.5.0`, you've successfully installed `keras-vis`:
 
-```
->pip install https://github.com/raghakot/keras-vis/archive/master.zip
+```shell
+> pip install https://github.com/raghakot/keras-vis/archive/master.zip
 Collecting https://github.com/raghakot/keras-vis/archive/master.zip
   Downloading https://github.com/raghakot/keras-vis/archive/master.zip
      \ 58.1MB 819kB/s
@@ -141,7 +141,7 @@ To start, create a file in some directory, e.g. `activation_maximization_filters
 
 Open this file in the code editor of your choice, and write with me:
 
-```
+```python
 '''
   ConvNet filter visualization with Activation Maximization on exemplary VGG16 Keras model
 '''
@@ -164,14 +164,14 @@ These are the imports that you'll need for today's tutorial:
 
 Now, let's define the name of the folder which we'll be writing into:
 
-```
+```python
 # Define the folder name to save into
 folder_name = 'filter_visualizations'
 ```
 
 Then define the model:
 
-```
+```python
 # Define the model
 model = VGG16(weights='imagenet', include_top=True)
 ```
@@ -182,7 +182,7 @@ This initializes the `VGG16` model into the `model` variable, and initializes it
 
 Next, we can generate some visualizations!
 
-```
+```python
 # Iterate over multiple layers
 for layer_nm in ['block1_conv1', 'block2_conv1', 'block3_conv2', 'block4_conv1', 'block5_conv2']:
 ```
@@ -197,7 +197,7 @@ This part means that your code will iterate over an array that contains various 
 
 That is, it will generate visualizations for (a random selection of) the filters that are part of these blocks. In your case, you may choose any blocks. This, however, comes in to flavors. When using Keras pretrained models, you can look for the layer names in the code available for these models - such as for the VGG16 at Keras' GitHub (search for 'block1\_conv1' on [this page](https://github.com/keras-team/keras-applications/blob/master/keras_applications/vgg16.py), to give you an example). When you do however visualize the Conv filters of your own models, you'll have to name layers yourself when you stack the architecture:
 
-```
+```python
 model.add(Dense(no_classes, activation='softmax', name='dense_layer'))
 ```
 
@@ -205,14 +205,14 @@ When adding these names to the array above, you'll ensure that you're visualizin
 
 The following code is part of the iteration, which means that it runs every time the loop is activated (in our case, five times, for five layers):
 
-```
+```python
   # Find the particular layer
   layer_idx = utils.find_layer_idx(model, layer_nm)
 ```
 
 ...this `keras-vis` util finds the correct layer index for the name that we specify. `layer_nm`, in this case, is one of the layer names in the array, e.g. `block1_conv1`.
 
-```
+```python
   # Get the number of filters in this layer
   num_filters = get_num_filters(model.layers[layer_idx])
 ```
@@ -221,14 +221,14 @@ We then retrieve the number of filters in this layer. This is also done by apply
 
 Then, we select six filters randomly (with replacement, so there's a small chance that you visualize one or two filters twice - but I've found that this doesn't really happen given the large number of filters present in VGG16. For your own model, this may be different):
 
-```
+```python
   # Draw 6 filters randomly
   drawn_filters = random.choices(np.arange(num_filters), k=6)
 ```
 
 Finally, we visualize each filter drawn:
 
-```
+```python
   # Visualize each filter
   for filter_id in drawn_filters:
     img = visualize_activation(model, layer_idx, filter_indices=filter_id, input_modifiers=[Jitter(16)])

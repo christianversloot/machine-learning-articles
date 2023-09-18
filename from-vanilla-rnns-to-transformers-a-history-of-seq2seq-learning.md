@@ -1,10 +1,10 @@
 ---
 title: "From vanilla RNNs to Transformers: a history of Seq2Seq learning"
 date: "2020-12-21"
-categories: 
+categories:
   - "deep-learning"
   - "svms"
-tags: 
+tags:
   - "attention"
   - "backpropagation"
   - "deep-learning"
@@ -42,7 +42,7 @@ Let's take a look! 😎
 Natural Language Processing is a wide field and many techniques and algorithms have been used for interpreting text. If, however, we look at Machine Learning approaches closely, many of them have focused on **Sequence-to-Sequence learning**, or Seq2Seq. Here's how Wikipedia describes it:
 
 > Seq2seq turns one sequence into another sequence. It does so by use of a recurrent neural network (RNN) or more often [LSTM](https://www.machinecurve.com/index.php/2020/12/29/a-gentle-introduction-to-long-short-term-memory-networks-lstm/) or GRU to avoid the problem of vanishing gradient. The context for each item is the output from the previous step. The primary components are one encoder and one decoder network. The encoder turns each item into a corresponding hidden vector containing the item and its context. The decoder reverses the process, turning the vector into an output item, using the previous output as the input context.
-> 
+>
 > Wikipedia (2019)
 
 I can imagine that you have a few questions now and that it's still difficult to grasp the concept altogether.
@@ -147,7 +147,7 @@ In a 2017 article, Vaswani et al. introduce a new concept, based on the premise 
 Wikipedia describes Transformers as follows:
 
 > Like recurrent neural networks (RNNs), Transformers are designed to handle sequential data, such as natural language, for tasks such as translation and text summarization. However, unlike RNNs, Transformers do not require that the sequential data be processed in order. For example, if the input data is a natural language sentence, the Transformer does not need to process the beginning of it before the end.
-> 
+>
 > Wikipedia (2019)
 
 Aha! An interesting property.

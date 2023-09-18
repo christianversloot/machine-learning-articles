@@ -1,10 +1,10 @@
 ---
 title: "How does the Softmax activation function work?"
 date: "2020-01-08"
-categories: 
+categories:
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "activation-function"
   - "deep-learning"
   - "machine-learning"
@@ -84,13 +84,13 @@ To deepen our understanding of the problem above, we'll have to take a look at t
 According to Wikipedia (2001), this is a discrete probability distribution:
 
 > A **discrete probability distribution** is a probability distribution that can take on a countable number of values.
-> 
+>
 > Wikipedia (2001): Discrete probability distribution
 
 A continuous one, on the other hand:
 
 > A **continuous probability distribution** is a probability distribution with a cumulative distribution function that is [absolutely continuous](https://en.wikipedia.org/wiki/Absolute_continuity).
-> 
+>
 > Wikipedia (2001): Continuous probability distribution
 
 So, while a discrete distribution can take a certain amount of values - four, perhaps ;-) - and is therefore rather 'blocky' with one probability per value, a continuous distribution can take _any_ value, and probabilities are expressed as being in a range.
@@ -268,7 +268,7 @@ Time to open up your editor and start coding! 😎
 
 First, we'll define a few imports:
 
-```
+```python
 '''
   Keras model to demonstrate Softmax activation function.
 '''
@@ -285,7 +285,7 @@ Most importantly, we use Keras and a few of its modules to build the model. Unde
 
 Therefore, make sure that you have these dependencies installed before you run this model. In the simplest case, you can install them with `pip install`:
 
-```
+```shell
 pip install keras tensorflow matplotlib numpy scikit-learn
 ```
 
@@ -295,7 +295,7 @@ pip install keras tensorflow matplotlib numpy scikit-learn
 
 Next up is the model configuration. We define here how many samples we'll generate, how much of them are used for _testing_ the trained model (250), where in 2D space our clusters are located, how many clusters we've got and which loss function is to be used (indeed, as we expect with Softmax activation at our final layer, [categorical crossentropy loss](https://www.machinecurve.com/index.php/2019/10/22/how-to-use-binary-categorical-crossentropy-with-keras/)).
 
-```
+```python
 # Configuration options
 num_samples_total = 1000
 training_split = 250
@@ -308,7 +308,7 @@ loss_function_used = 'categorical_crossentropy'
 
 After configuring our model, it's time to generate some data. We use Scikit-Learn's `make_blobs` for this purpose, which allows us to generate clusters of samples as illustrated in the plot above. We generate them according to our config, i.e., based on the cluster centers, the number of samples to be generated in total and the number of classes we want.
 
-```
+```python
 # Generate data
 X, targets = make_blobs(n_samples = num_samples_total, centers = cluster_centers, n_features = num_classes, center_box=(0, 1), cluster_std = 1.5)
 categorical_targets = to_categorical(targets)
@@ -322,7 +322,7 @@ Once data has been generated, we can convert the targets into one-hot encoded ve
 
 Once this is done, we can set the shape of our input data, as we know this by now:
 
-```
+```python
 # Set shape based on data
 feature_vector_length = len(X_training[0])
 input_shape = (feature_vector_length,)
@@ -331,7 +331,7 @@ print(f'Feature shape: {input_shape}')
 
 We can also generate the visualization you saw earlier:
 
-```
+```python
 plt.scatter(X_training[:,0], X_training[:,1])
 plt.title('Nonlinear data')
 plt.xlabel('X1')
@@ -349,7 +349,7 @@ The second layer works similarly, but learns has an (8, ) output shape instead.
 
 The final layer, our output layer, learns `num_classes` outputs. As in our case, `num_classes = 4`, it aligns with the scenario we've been discussing throughout this blog post. What's more, rather than ReLU activation, it uses Softmax, so we'll end up with a multiclass probability distribution!
 
-```
+```python
 # Create the model
 model = Sequential()
 model.add(Dense(12, input_shape=input_shape, activation='relu', kernel_initializer='he_uniform'))
@@ -363,7 +363,7 @@ We can subsequently compile (i.e. configure) the model based on the [loss functi
 
 Then, we fit the training data to the model, train it for 30 iterations (epochs) and use a batch size of 5. 20% of the training data will be used for validation purposes and all output is shown on screen with verbosity mode set to True.
 
-```
+```python
 # Configure the model and start training
 model.compile(loss=loss_function_used, optimizer=keras.optimizers.adam(lr=0.001), metrics=['accuracy'])
 history = model.fit(X_training, Targets_training, epochs=30, batch_size=5, verbose=1, validation_split=0.2)
@@ -381,7 +381,7 @@ If desired, the `history` object can be used to [visualize the training process]
 
 Here's the full model code, if you wish to start playing around right away:
 
-```
+```python
 '''
   Keras model to demonstrate Softmax activation function.
 '''

@@ -1,9 +1,9 @@
 ---
 title: "Easy install of Jupyter Notebook with TensorFlow 2.0 and Docker"
 date: "2020-10-07"
-categories: 
+categories:
   - "frameworks"
-tags: 
+tags:
   - "docker"
   - "jupyter-notebook"
   - "machine-learning"
@@ -78,7 +78,7 @@ If Docker was setup successfully on your machine, it's really easy to install a 
 
 For our case, we want to run this command:
 
-```
+```shell
 docker run -v c:/notebook:/home/jovyan/notebooks -p 8888:8888 jupyter/tensorflow-notebook
 ```
 
@@ -90,7 +90,7 @@ It does the following:
     1. On a Linux or Mac based machine, you can map any folder to `/home/jovyan/notebooks`, e.g. `./hello:/home/jovyan/notebooks`. [This does not work like that on Windows](https://rominirani.com/docker-on-windows-mounting-host-directories-d96f3f056a2c). In Docker for Windows, you will have to make available a folder directly in `c:/`, enable volume mounts in your Docker settings, and mount like we did.
     2. As you will see when you start Jupyter for the first time, everything is stored in a folder called `notebooks`. This makes sense, because Jupyter itself starts from `/home/jovyan` - and `/home/jovyan/notebooks` simply represents a folder there. If we would mount our volume _directly_ to `/home/jovyan`, however, we would get a permissions error and our Python kernel would not start (see below). That's why we had to mount to a sub folder, so that kernel files generated _within the container_ and Notebooks _stored outside of the container_ are separated!
 
-```
+```shell
 Traceback (most recent call last):
   File "/opt/conda/lib/python3.8/site-packages/tornado/web.py", line 1703, in _execute
     result = await result
@@ -137,7 +137,7 @@ RuntimeError: Permissions assignment failed for secure file: '/home/jovyan/.loca
 
 After the Docker container has started, you will see log output in the console (use the `-d` flag if you want to run the container in `daemon` mode, i.e., in the back ground). Log output will look as follows:
 
-```
+```shell
     To access the notebook, open this file in a browser:
         file:///home/jovyan/.local/share/jupyter/runtime/nbserver-6-open.html
     Or copy and paste one of these URLs:
@@ -163,7 +163,7 @@ However, I've also added the code for a [simple MNIST classifier](https://www.ma
 
 ### Keras code that we used
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential, save_model

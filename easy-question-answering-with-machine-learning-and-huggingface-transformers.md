@@ -1,11 +1,11 @@
 ---
 title: "Question Answering with Python, HuggingFace Transformers and Machine Learning"
 date: "2020-12-21"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "bert"
   - "deep-learning"
   - "distilbert"
@@ -90,7 +90,7 @@ This is why many approaches have emerged to make computation lighter, just like 
 Here's the abstract for the work. If you would like to read about DistilBERT in more detail I'd suggest [clicking here](https://arxiv.org/abs/1910.01108) for the article, but from what the abstract suggests it was made 60% faster by performing a 40% size reduction while retaining 97% of its language understanding. This is a significant improvement and a great optimization with respect to traditional or 'vanilla' BERT.
 
 > As Transfer Learning from large-scale pre-trained models becomes more prevalent in Natural Language Processing (NLP), operating these large models in on-the-edge and/or under constrained computational training or inference budgets remains challenging. In this work, we propose a method to pre-train a smaller general-purpose language representation model, called DistilBERT, which can then be fine-tuned with good performances on a wide range of tasks like its larger counterparts. While most prior work investigated the use of distillation for building task-specific models, we leverage knowledge distillation during the pre-training phase and show that it is possible to reduce the size of a BERT model by 40%, while retaining 97% of its language understanding capabilities and being 60% faster. To leverage the inductive biases learned by larger models during pre-training, we introduce a triple loss combining language modeling, distillation and cosine-distance losses. Our smaller, faster and lighter model is cheaper to pre-train and we demonstrate its capabilities for on-device computations in a proof-of-concept experiment and a comparative on-device study.
-> 
+>
 > Sanh et al. (2019)
 
 ### Fine-tuning DistilBERT on SQuAD
@@ -98,7 +98,7 @@ Here's the abstract for the work. If you would like to read about DistilBERT in 
 DistilBERT was pretrained on the same datasets as BERT, being "a concatenation of English Wikipedia and Toronto Book Corpus" (Sanh et al., 2019; HuggingFace, n.d.). The general distilled version of BERT was subsequently fine-tuned using the SQuAD dataset, which stands for **Stanford Question Answering Dataset** (Stanford Question Answering Dataset, n.d.).
 
 > **S**tanford **Qu**estion **A**nswering **D**ataset (SQuAD) is a reading comprehension dataset, consisting of questions posed by crowdworkers on a set of Wikipedia articles, where the answer to every question is a segment of text, or _span_, from the corresponding reading passage, or the question might be unanswerable.
-> 
+>
 > Stanford Question Answering Dataset (n.d.)
 
 A few questions with corresponding answer from this dataset are as follows:
@@ -130,7 +130,7 @@ Here it is, the full model code for our Question Answering Pipeline with Hugging
 - We initialize the `question-answering` Pipeline allowing us to easily create the Question Answering pipeline, because it utilizes the [DistilBERT model](https://huggingface.co/distilbert-base-cased) fine-tuned to [SQuAD](https://huggingface.co/distilbert-base-cased-distilled-squad).
 - We then generate the answer from the context-based question, and print it on screen.
 
-```
+```python
 from transformers import pipeline
 
 # Open and read the article
@@ -148,13 +148,13 @@ print(f"Answer: '{answer['answer']}' with score {answer['score']}")
 
 With one of the recent versions of HuggingFace Transformers, you might run into this issue:
 
-```
+```shell
 RuntimeError: Expected tensor for argument #1 'indices' to have scalar type Long; but got torch.IntTensor instead (while checking arguments for embedding)
 ```
 
 The fix so far is to install the most recent `master` branch with `pip`:
 
-```
+```bash
 pip install git+https://github.com/huggingface/transformers
 ```
 

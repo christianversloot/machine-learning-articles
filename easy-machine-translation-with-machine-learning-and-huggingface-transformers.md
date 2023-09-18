@@ -1,11 +1,11 @@
 ---
 title: "Easy Machine Translation with Machine Learning and HuggingFace Transformers"
 date: "2021-02-15"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "huggingface"
   - "machine-translation"
   - "seq2seq"
@@ -46,7 +46,7 @@ If you want to understand what's happening under the hood in more detail, such a
 
 ### Example 1: easy out-of-the-box pipeline
 
-```
+```python
 from transformers import pipeline
 
 # Init translator
@@ -64,7 +64,7 @@ print(translation)
 
 _Note:_ this example requires you to run PyTorch.
 
-```
+```python
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
 # Initialize the tokenizer
@@ -150,7 +150,7 @@ Currently (February 2021), a `translation` pipeline is available within the Hugg
     - A T5 Base Transformer for English to German (`en-de`) translation tasks.
     - A T5 Base Transformer for English to Romanian (`en-ro`) translation tasks.
 
-```
+```python
     # This task is a special case as it's parametrized by SRC, TGT languages.
     "translation": {
         "impl": TranslationPipeline,
@@ -176,7 +176,7 @@ Let's take a look at how this can be done - it may surprise you, but these days 
 
 ### Machine Translation example code
 
-```
+```python
 from transformers import pipeline
 
 # Init translator
@@ -201,7 +201,7 @@ As you can see above, a series of steps are performed:
 
 Running the script for the first time requires that the pretrained model is downloaded:
 
-```
+```shell
 Downloading: 100%|█████████████████████████████████████████████████████████████████| 1.20k/1.20k [00:00<00:00, 240kB/s]
 Downloading:  39%|█████████████████████████▍                                        | 343M/892M [03:04<05:31, 1.65MB/s]
 ```
@@ -210,7 +210,7 @@ Downloading:  39%|████████████████████�
 
 Once this is complete, however, this is what you'll see:
 
-```
+```python
 [{'translation_text': 'Hallo liebe Freunde, wie geht es Ihnen heute?'}]
 ```
 
@@ -239,7 +239,7 @@ That's why here, you'll also learn how ot apply another pretrained model for tra
 
 The code for this looks as follows.
 
-```
+```python
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
 # Initialize the tokenizer
@@ -264,7 +264,7 @@ print(translated_text)
 
 Here too, we're facing a downloading step:
 
-```
+```shell
 Downloading: 100%|█████████████████████████████████████████████████████████████████| 1.13k/1.13k [00:00<00:00, 280kB/s]
 Downloading: 100%|███████████████████████████████████████████████████████████████████| 790k/790k [00:02<00:00, 378kB/s]
 Downloading: 100%|███████████████████████████████████████████████████████████████████| 814k/814k [00:01<00:00, 439kB/s]

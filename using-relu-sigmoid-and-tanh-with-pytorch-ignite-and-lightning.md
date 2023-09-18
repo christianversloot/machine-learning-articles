@@ -55,7 +55,7 @@ In classic PyTorch and PyTorch Ignite, you can choose from one of two options:
 
 The first is easier, the second gives you more freedom. Choose what works best for you!
 
-```
+```python
 
 import torch.nn.functional as F
 
@@ -88,7 +88,7 @@ In Lightning, too, you can choose from one of the two options:
 1. Add the activation functions to the neural network itself.
 2. Add the functional equivalents to the forward pass.
 
-```
+```python
 import torch
 from torch import nn
 import torch.nn.functional as F
@@ -194,7 +194,7 @@ Let's start with classic PyTorch.
 
 In classic PyTorch, the suggested way to create a neural network is using a class that utilizes `nn.Module`, the neural networks module provided by PyTorch.
 
-```
+```python
 class Model(nn.Module):
     def __init__(self):
         super(Model, self).__init__()
@@ -205,7 +205,7 @@ class Model(nn.Module):
 
 You can also choose to already stack the layers on top of each other, like this, using `nn.Sequential`:
 
-```
+```python
 import torch.nn.functional as F
 
 class Model(nn.Module):
@@ -224,7 +224,7 @@ As you can see, this way of working resembles that of the `tensorflow.keras.Sequ
 
 In a `nn.Module`, you can then add a `forward` definition for the forward pass. The implementation differs based on the choice of building your neural network from above:
 
-```
+```python
     # If stacked on top of each other
     def forward(self, x):
         return self.layers(x)
@@ -240,7 +240,7 @@ Adding **Sigmoid, Tanh or ReLU** to a classic PyTorch neural network is really e
 
 If instead you are specifying the layer composition in `forward` - similar to the Keras Functional API - then you must use `torch.nn.functional`, which we import as `F`. You can then wrap the layers with the activation function of your choice, whether that is `F.sigmoid()`, `F.tanh()` or `F.relu()`. Quite easy, isn't it? :D
 
-```
+```python
 
 import torch.nn.functional as F
 
@@ -274,7 +274,7 @@ In Lightning, you can pretty much repeat the classic PyTorch approach - i.e. use
 
 Here's an example of using ReLU, Sigmoid and Tanh when you stack all layers independently and configure data flow yourself in `forward`:
 
-```
+```python
 import torch
 from torch import nn
 import torch.nn.functional as F
@@ -322,7 +322,7 @@ UserWarning: nn.functional.tanh is deprecated. Use torch.tanh instead.
 
 The solution would be as follows. You can also choose to use `nn.Sequential` and add the activation functions to the model itself:
 
-```
+```python
 import torch
 from torch import nn
 import torch.nn.functional as F

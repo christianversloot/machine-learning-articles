@@ -1,11 +1,11 @@
 ---
 title: "Batch Normalization with PyTorch"
 date: "2021-03-29"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
   - "frameworks"
-tags: 
+tags:
   - "batch-normalization"
   - "covariance-shift"
   - "deep-learning"
@@ -34,7 +34,7 @@ Let's take a look! 🚀
 
 ## Full code example: Batch Normalization with PyTorch
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -143,7 +143,7 @@ And although it can learn to reverse to the more generic process over time, you 
 **Batch Normalization** is a normalization technique that can be applied at the layer level. Put simply, it normalizes "the inputs to each layer to a learnt representation likely close to \[latex\](\\mu = 0.0, \\sigma = 1.0)\[/latex\]. By consequence, all the layer inputs are normalized, and significant outliers are less likely to impact the training process in a negative way. And if they do, their impact will be much lower than without using Batch Normalization.
 
 > Training Deep Neural Networks is complicated by the fact that the distribution of each layer’s inputs changes during training, as the parameters of the previous layers change. This slows down the training by requiring lower learning rates and careful parameter initialization, and makes it notoriously hard to train models with saturating nonlinearities. We refer to this phenomenon as internal covariate shift, and address the problem by normalizing layer inputs. Our method draws its strength from making normalization a part of the model architecture and performing the normalization for each training mini-batch. Batch Normalization allows us to use much higher learning rates and be less careful about initialization, and in some cases eliminates the need for Dropout. Applied to a stateof-the-art image classification model, Batch Normalization achieves the same accuracy with 14 times fewer training steps, and beats the original model by a significant margin. Using an ensemble of batch-normalized networks, we improve upon the best published result on ImageNet classification: reaching 4.82% top-5 test error, exceeding the accuracy of human raters.
-> 
+>
 > The abstract from the [Batch Normalization paper](http://proceedings.mlr.press/v37/ioffe15.html) by Ioffe & Szegedy (2015)
 
 * * *
@@ -166,13 +166,13 @@ First of all, the differences between two-dimensional and one-dimensional Batch 
 One-dimensional Batch Normalization is defined as follows on the PyTorch website:
 
 > Applies Batch Normalization over a 2D or 3D input (a mini-batch of 1D inputs with optional additional channel dimension) (...)
-> 
+>
 > PyTorch (n.d.)
 
 ...this is how two-dimensional Batch Normalization is described:
 
 > Applies Batch Normalization over a 4D input (a mini-batch of 2D inputs with additional channel dimension) (…)
-> 
+>
 > PyTorch (n.d.)
 
 Let's summarize:
@@ -205,7 +205,7 @@ Now that we know what _type_ of Batch Normalization must be applied to each type
 Here's the advice of some Deep Learning experts:
 
 > Andrew Ng says that batch normalization should be applied immediately before the non-linearity of the current layer. The authors of the BN paper said that as well, but now according to François Chollet on the keras thread, the BN paper authors use BN after the activation layer. On the other hand, there are some benchmarks (…) that show BN performing better after the activation layers.
-> 
+>
 > StackOverflow (n.d.)
 
 There is thus no clear answer to this question. You will have to try experimentally what works best.
@@ -234,7 +234,7 @@ Firstly, we're going to state our imports.
 - All `torch` based imports are required for PyTorch: `torch` itself, the `nn` (a.k.a. neural network) module and the `DataLoader` for loading the dataset we're going to use in today's neural network.
 - From `torchvision`, we load the `CIFAR10` dataset - as well as some `transforms` (primarily image normalization) that we will apply on the dataset before training the neural network.
 
-```
+```python
 import os
 import torch
 from torch import nn
@@ -251,7 +251,7 @@ As you can see, we're applying `BatchNorm1d` here because we use densely-connect
 
 It clearly shows how Batch Normalization must be applied with PyTorch.
 
-```
+```python
 class MLP(nn.Module):
   '''
     Multilayer Perceptron.
@@ -288,7 +288,7 @@ However, to summarize briefly what happens, here you go:
 - This is followed by iterating over the epochs, where we set current loss to 0.0 and start iterating over the data loader. We set the gradients to zero, perform the forward pass, compute the loss, and perform the backwards pass followed by optimization. Indeed this is what happens in the supervised ML process.
 - We print statistics per mini batch fed forward through the model.
 
-```
+```python
 if __name__ == '__main__':
   
   # Set fixed random number seed
@@ -356,7 +356,7 @@ I can imagine why you want to get started immediately. It's always more fun to p
 
 These are the results after training our MLP for 5 epochs on the CIFAR-10 dataset, _with_ Batch Normalization:
 
-```
+```shell
 Starting epoch 5
 Loss after mini-batch   500: 1.573
 Loss after mini-batch  1000: 1.570
@@ -372,7 +372,7 @@ Loss after mini-batch  5000: 1.584
 
 The same, but then _without_ Batch Normalization:
 
-```
+```shell
 Starting epoch 5
 Loss after mini-batch   500: 1.650
 Loss after mini-batch  1000: 1.656

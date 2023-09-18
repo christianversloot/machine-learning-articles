@@ -1,9 +1,9 @@
 ---
 title: "Could chaotic neurons reduce machine learning data hunger?"
 date: "2019-06-01"
-categories: 
+categories:
   - "svms"
-tags: 
+tags:
   - "chaos-theory"
   - "machine-learning"
   - "mathematics"
@@ -89,7 +89,7 @@ According to the authors, one would classify new inputs as follows:
 
 In their work, the authors suggest that they achieve substantial classification performance on _really small sub samples_ of the well-known MNIST and Iris datasets. Those datasets are really standard-ish data sets when you're interested in playing around with machine learning models.
 
-And with substantial performance, I really mean substantial: **they claim that combining chaotic behavior with neurons allows one to get high performance with really small data sets**. For example, they achieved 70%+ accuracies on the MNIST data set with > 5 samples, and accuracies of  
+And with substantial performance, I really mean substantial: **they claim that combining chaotic behavior with neurons allows one to get high performance with really small data sets**. For example, they achieved 70%+ accuracies on the MNIST data set with > 5 samples, and accuracies of
 ≈ 80% with ≈ 20 samples. Note: the authors _do suggest that when the number of samples increase_, regular deep learning models will eventually perform better. But hey, let's see what we find for this type of model in small data scenarios.
 
 \[ad\]
@@ -178,9 +178,9 @@ Second, the MNIST dataset provides numbers that have been positioned in the rela
 
 We did however see that the chaos theory inspired neural architecture performs relatively well on the Iris dataset. In order to see how well it generalizes with respect to those kind of datasets (i.e., no images), I finally also tested it on the [Pima Indians Diabetes dataset](https://www.kaggle.com/kumargh/pimaindiansdiabetescsv). It is a CC0 dataset usable for getting experience with machine learning models and contains various medical measurements and a prediction about whether patients will haveto face diabetes:
 
->   
+>
 > This dataset describes the medical records for Pima Indians and whether or not each patient will have an onset of diabetes within ve years.
-> 
+>
 > Source: Pima Indians Diabetes Dataset
 
 The dataset is relatively imbalanced. Class 0, 'no diabetes', is present 500 times, whereas class 1, i.e. when one is predicted to get diabetes, is present only 267 times. Nevertheless, we should still have enough samples for training and testing.

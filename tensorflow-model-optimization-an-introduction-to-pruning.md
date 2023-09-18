@@ -142,7 +142,7 @@ For pruning, we'll be using the TensorFlow Model Optimization toolkit, which "mi
 
 You must first install it using `pip`, so that would be your first step to take:
 
-```
+```shell
 pip install --user --upgrade tensorflow-model-optimization
 ```
 
@@ -150,7 +150,7 @@ pip install --user --upgrade tensorflow-model-optimization
 
 In another blog post, we saw how to create a [Convolutional Neural Network with Keras](https://www.machinecurve.com/index.php/2019/09/17/how-to-create-a-cnn-classifier-with-keras/). Here, I'll re-use that code, for its sheer simplicity - it does nothing more than create a small CNN and train it with the MNIST dataset. It'll be the starting point of our pruning exercise. Here it is - if you wish to understand it in more detail, I'd recommend taking a look at the page we just linked to before:
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
@@ -220,8 +220,8 @@ print(f'Test loss: {score[0]} / Test accuracy: {score[1]}')
 
 Also make sure to store your model to a _temporary file_, so that you can compare the sizes of the original and the pruned model later:
 
-```
-# Store file 
+```python
+# Store file
 _, keras_file = tempfile.mkstemp('.h5')
 save_model(model, keras_file, include_optimizer=False)
 print(f'Baseline model saved: {keras_file}')
@@ -233,7 +233,7 @@ Time to add pruning functionality to our model code!
 
 We'll first add this:
 
-```
+```python
 # Load functionality for adding pruning wrappers
 prune_low_magnitude = tfmot.sparsity.keras.prune_low_magnitude
 ```
@@ -242,7 +242,7 @@ What it does is loading the `prune_low_magnitude` [functionality](https://www.te
 
 Upon loading the pruning wrappers, we will set pruning configuration:
 
-```
+```python
 # Finish pruning after 5 epochs
 pruning_epochs = 5
 num_images = input_train.shape[0] * (1 - validation_split)
@@ -272,7 +272,7 @@ Here, the following happens:
 
 After configuring the pruning process, we can actually recompile the model (this is necessary because we added pruning functionality), and start the pruning process. We must use the `UpdatePruningStep` callback here, because it propagates optimizer activities to the pruning process (Tfmot.sparsity.keras.UpdatePruningStep, n.d.).
 
-```
+```python
 # Recompile the model
 model_for_pruning.compile(loss=tensorflow.keras.losses.categorical_crossentropy,
               optimizer=tensorflow.keras.optimizers.Adam(),
@@ -301,7 +301,7 @@ Once pruning finishes, we must measure its effectiveness. We can do so in two wa
 
 We'll do so with the following lines of code:
 
-```
+```python
 # Generate generalization metrics
 score_pruned = model_for_pruning.evaluate(input_test, target_test, verbose=0)
 print(f'Pruned CNN - Test loss: {score_pruned[0]} / Test accuracy: {score_pruned[1]}')
@@ -312,7 +312,7 @@ Those ones are simple. They evaluate the pruned model with the testing data and 
 
 Next, we export it again - just like we did before - to ensure that we can compare it:
 
-```
+```python
 # Export the model
 model_for_export = tfmot.sparsity.keras.strip_pruning(model_for_pruning)
 _, pruned_keras_file = tempfile.mkstemp('.h5')
@@ -322,7 +322,7 @@ print(f'Pruned model saved: {keras_file}')
 
 Subsequently (thanks to Pruning Keras Example (n.d.)) we can compare the size of the Keras model. To illustrate the benefits of pruning, we must use a compression algorithm like `gzip`, after which we can compare the sizes of both models. Recall that pruning generates sparsity, and that sparse matrices can be saved very efficiently when compressed. That's why `gzip`s are useful for demonstration purposes. We first create a `def` that can be used for compression, and subsequently call it twice:
 
-```
+```python
 # Measuring the size of your pruned model
 # (source: https://www.tensorflow.org/model_optimization/guide/pruning/pruning_with_keras#fine-tune_pre-trained_model_with_pruning)
 
@@ -367,7 +367,7 @@ Pruning definitely made our model smaller - 2.35 times!
 
 If you wish to obtain the full model code at once - here you go:
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential, save_model
@@ -525,7 +525,7 @@ Let's now take a look how we can add quantization to a pruned TensorFlow model. 
 
 Adding quantization first requires you to add a `TFLite` converter. This converter converts your TensorFlow model into TensorFlow Lite equivalent, which is what quantization will run against. Converting the model into a Lite model allows us to specify a model optimizer - `DEFAULT` or dynamic range quantization, in our case. Finally, we `convert()` the model:
 
-```
+```python
 # Convert into TFLite model and convert with DEFAULT (dynamic range) quantization
 stripped_model = tfmot.sparsity.keras.strip_pruning(model_for_pruning)
 converter = tensorflow.lite.TFLiteConverter.from_keras_model(stripped_model)
@@ -535,7 +535,7 @@ tflite_model = converter.convert()
 
 Note that we must first strip the pruning wrappers from the model, creating a `stripped_model`. When the model has completed quantization, we can save it and print its size to see how much things have improved:
 
-```
+```python
 # Save quantized model
 _, quantized_and_pruned_tflite_file = tempfile.mkstemp('.tflite')
 
@@ -566,7 +566,7 @@ Almost 9 times smaller! 😎
 
 Should you wish to run the pruning and quantization code at once, here you go:
 
-```
+```python
 import tensorflow
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential, save_model

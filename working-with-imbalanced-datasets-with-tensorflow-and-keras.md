@@ -51,7 +51,7 @@ Make sure to download the dataset from Kaggle to a folder if you want to use the
 
 We use the following code snippet for visualizing the outcomes by means of a histogram.
 
-```
+```python
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
@@ -133,7 +133,7 @@ If we apply **undersampling** to our model, we effectively _reconstruct_ the dat
 
 We can perform undersampling as follows.
 
-```
+```python
 import pandas as pd
 
 # Read CSV
@@ -178,7 +178,7 @@ Class 1: 62601
 
 If we apply **oversampling** instead, we also reconstruct the dataset into a balanced one, but do it in such a way that all our classes find balance at `max(num_samples_per_class)`. While undersampling means discarding samples, here, we copy multiple samples instead to fill the classes that are imbalanced. Here, sampling also happens randomly.
 
-```
+```python
 import pandas as pd
 
 # Read CSV
@@ -233,7 +233,7 @@ Do note that applying class weights does not work adequately with [classic gradi
 
 We can first compute the weights with Scikit-learn's `compute_class_weight` function.
 
-```
+```python
 import pandas as pd
 import sklearn
 import numpy as np
@@ -258,7 +258,7 @@ print(weights)
 
 And then apply them in `model.fit`:
 
-```
+```python
 # Fit data to model
 model.fit(X, y,
           epochs=no_epochs,

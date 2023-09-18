@@ -133,7 +133,7 @@ We can thus conclude that while fixed learning rates benefit you in terms of _si
 
 This is the code that we used for our model, more speifically for our baseline setting. It uses the [Adam adaptive optimizer](https://www.machinecurve.com/index.php/2019/11/03/extensions-to-gradient-descent-from-momentum-to-adabound/) and its default learning rate of \[latex\]0.001\[/latex\]. Note that you can adapt the learning rate under 'Fit data to model'.
 
-```
+```python
 '''
   Problems with fixed and decaying Learning Rates:
   Fixed Learning Rate - Baseline Scenario
@@ -233,7 +233,7 @@ Decay schemes are thus a better idea than fixed learning rates, and there are ma
 
 **Linear decay**, well, decays your learning rate linearly. That is, it decreases with a fixed rate, until it reaches 0:
 
-```
+```python
 l_lr = initial_learning_rate
 def linear_decay(epoch):
   lr_decay = 0.00001
@@ -246,7 +246,7 @@ def linear_decay(epoch):
 
 **Step decay** allows you to drop the learning rates in exponentially smaller steps, every few epochs. In the case below, the learning rate drops step-wise every 15 epochs. The first drop is 0.5, the second 0.025, then 0.0125, and so on.
 
-```
+```python
 def step_decay(epoch):
   lr_drop_by = 0.5
   lr_drop_every = 15
@@ -259,13 +259,13 @@ def step_decay(epoch):
 
 **Time decay** decreases the learning rate overtime. Decay starts slowly at first, to ensure that the learning rate remains relatively large during the early phases of the training process. Subsequently, decay gets larger, but slows down towards the end. Compared with linear and step decay, time decay is smooth. This might reduce oscillation around your loss curve.
 
-```
+```python
 td_lr = initial_learning_rate
 def time_decay(epoch):
   lr_decay = 0.0000015
   global td_lr
   td_lr *= (1 / (1 + lr_decay * epoch))
-  return td_lr 
+  return td_lr
 ```
 
 [![](images/time_decay.png)](https://www.machinecurve.com/wp-content/uploads/2019/11/time_decay.png)

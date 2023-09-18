@@ -1,10 +1,10 @@
 ---
 title: "Generative Adversarial Networks, a gentle introduction"
 date: "2021-03-23"
-categories: 
+categories:
   - "buffer"
   - "deep-learning"
-tags: 
+tags:
   - "gan"
   - "gans"
   - "generative-adversarial-networks"
